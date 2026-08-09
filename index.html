@@ -1,64 +1,103 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Kelas XII IPA 1</title>
+  <title>X TJKT 4 — Official Class Site</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans min-h-screen">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-slate-200">
+
+  <!-- Navbar Minimalis -->
+  <nav class="sticky top-0 z-50 bg-slate-50/80 backdrop-blur-md border-b border-slate-200/80">
+    <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+      <span class="font-bold tracking-tight text-slate-900 text-lg">X TJKT 4</span>
+      <div class="space-x-6 text-sm font-medium text-slate-600">
+        <a href="#info" class="hover:text-slate-900 transition">Informasi</a>
+        <a href="#anggota" class="hover:text-slate-900 transition">Anggota</a>
+      </div>
+    </div>
+  </nav>
 
   <!-- Hero Section -->
-  <header class="text-center py-16 px-4 bg-gradient-to-b from-slate-800 to-slate-900 border-b border-slate-800">
-    <h1 class="text-4xl md:text-6xl font-extrabold text-blue-500 mb-2">CLASS OF 2026</h1>
-    <p class="text-slate-400 text-lg md:text-xl">Solidarity, Creativity, and Fun.</p>
+  <header class="max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">
+    <span class="text-xs font-semibold uppercase tracking-widest text-slate-400 bg-slate-200/60 px-3 py-1 rounded-full">Angkatan 2026</span>
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mt-4 mb-4">
+      Teknik Jaringan Komputer & Telekomunikasi 4
+    </h1>
+    <p class="text-slate-500 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+      Ruang dokumentasi, informasi harian, dan profil seluruh anggota kelas X TJKT 4.
+    </p>
   </header>
 
-  <!-- Jadwal & Info -->
-  <section class="max-w-5xl mx-auto my-12 px-4">
-    <h2 class="text-2xl font-bold text-center mb-8 border-b border-blue-500 pb-2 w-fit mx-auto">Informasi Kelas</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-        <h3 class="text-xl font-bold text-blue-400 mb-3">📍 Wali Kelas & Pengurus</h3>
-        <p class="text-slate-300"><strong>Wali Kelas:</strong> Pak Budi, M.Pd</p>
-        <p class="text-slate-300"><strong>Ketua Kelas:</strong> Alex</p>
-        <p class="text-slate-300"><strong>Wakil Ketua:</strong> Sarah</p>
+  <!-- Section Informasi Kelas -->
+  <section id="info" class="max-w-4xl mx-auto px-6 py-8">
+    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Informasi Utama</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Card Wali Kelas & Pengurus -->
+      <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+        <h3 class="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+          <span>📍</span> Pengurus Kelas
+        </h3>
+        <ul class="space-y-2 text-sm text-slate-600">
+          <li class="flex justify-between border-b border-slate-100 pb-2">
+            <span class="text-slate-400">Wali Kelas</span>
+            <span class="font-medium text-slate-800">Pak Budi, M.Pd</span>
+          </li>
+          <li class="flex justify-between border-b border-slate-100 pb-2">
+            <span class="text-slate-400">Ketua Kelas</span>
+            <span class="font-medium text-slate-800">Alex</span>
+          </li>
+          <li class="flex justify-between">
+            <span class="text-slate-400">Wakil Ketua</span>
+            <span class="font-medium text-slate-800">Sarah</span>
+          </li>
+        </ul>
       </div>
-      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-        <h3 class="text-xl font-bold text-blue-400 mb-3">📢 Pengumuman Penting</h3>
-        <p class="text-slate-300">Ujian Tengah Semester dimulai minggu depan. Jangan lupa siapkan dokumen tugas kelompok!</p>
+
+      <!-- Card Pengumuman -->
+      <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+        <h3 class="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+          <span>📢</span> Pengumuman
+        </h3>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Ujian Tengah Semester dimulai minggu depan. Pastikan seluruh berkas tugas praktikum jaringan sudah terkumpul di drive kelas.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Profil Anggota Kelas -->
-  <section class="max-w-5xl mx-auto my-12 px-4">
-    <h2 class="text-2xl font-bold text-center mb-8 border-b border-blue-500 pb-2 w-fit mx-auto">Anggota Kelas</h2>
+  <!-- Section Profil Anggota -->
+  <section id="anggota" class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Daftar Anggota</h2>
+
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       
-      <!-- Card Siswa -->
-      <div class="bg-slate-800 p-4 rounded-xl text-center border border-slate-700 hover:border-blue-500 transition">
-        <div class="w-20 h-20 bg-slate-700 rounded-full mx-auto mb-3 flex items-center justify-center text-2xl font-bold text-blue-400">
+      <!-- Card Siswa 1 -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:border-slate-400 hover:shadow-md transition text-center group">
+        <div class="w-16 h-16 bg-slate-100 rounded-full mx-auto mb-3 flex items-center justify-center font-bold text-slate-700 text-lg group-hover:bg-slate-900 group-hover:text-white transition">
           A
         </div>
-        <h3 class="font-semibold text-slate-200">Alex</h3>
-        <p class="text-xs text-slate-400 mt-1">"Tetap bernapas walau cape"</p>
+        <h3 class="font-semibold text-slate-900 text-sm">Alex</h3>
+        <p class="text-xs text-slate-400 mt-1">Network Admin</p>
       </div>
 
-      <div class="bg-slate-800 p-4 rounded-xl text-center border border-slate-700 hover:border-blue-500 transition">
-        <div class="w-20 h-20 bg-slate-700 rounded-full mx-auto mb-3 flex items-center justify-center text-2xl font-bold text-blue-400">
+      <!-- Card Siswa 2 -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:border-slate-400 hover:shadow-md transition text-center group">
+        <div class="w-16 h-16 bg-slate-100 rounded-full mx-auto mb-3 flex items-center justify-center font-bold text-slate-700 text-lg group-hover:bg-slate-900 group-hover:text-white transition">
           S
         </div>
-        <h3 class="font-semibold text-slate-200">Sarah</h3>
-        <p class="text-xs text-slate-400 mt-1">"Sleep all day, party all night"</p>
+        <h3 class="font-semibold text-slate-900 text-sm">Sarah</h3>
+        <p class="text-xs text-slate-400 mt-1">System Analyst</p>
       </div>
 
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="text-center py-6 border-t border-slate-800 text-slate-500 text-sm">
-    &copy; 2026 XII IPA 1. Built with HTML & Tailwind CSS.
+  <footer class="max-w-4xl mx-auto px-6 py-8 border-t border-slate-200 text-center text-xs text-slate-400">
+    &copy; 2026 X TJKT 4. Designed with simplicity in mind.
   </footer>
 
 </body>
