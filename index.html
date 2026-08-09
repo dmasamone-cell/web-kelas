@@ -392,6 +392,8 @@
     </a>
   </footer>
 
+  <!-- Script Logika Dark Mode & Counter API -->
+  <script>
     // 1. Logika Dark Mode
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
@@ -436,6 +438,7 @@
         .then(data => document.getElementById('like-count').innerText = data.count)
         .catch(err => console.log('Gagal update like:', err));
     });
+  </script>
 
 </body>
 </html>
