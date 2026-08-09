@@ -415,34 +415,29 @@
       themeIcon.innerText = '☀️';
     }
 
-    // 2. Logika Counter Views & Likes dengan API Key
+        // 2. Logika Counter Views & Likes
     const NAMESPACE = 'xtjkt4_official_2026';
     const API_KEY = 'Ut_AxQRS7ha7FKMhJEcmnOLHs7dvSk9HR5Ep5LhnZUw';
 
-    const headers = {
-      'Authorization': `Bearer ${API_KEY}`,
-      'Content-Type': 'application/json'
-    };
-
-    // Otomatis tambah 1 View
-    fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/views/up`, { headers })
+    // Update View (Otomatis)
+    fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/views/up?apikey=${API_KEY}`)
       .then(res => res.json())
       .then(data => document.getElementById('view-count').innerText = data.count || 0)
       .catch(() => document.getElementById('view-count').innerText = '0');
 
-    // Ambil total Like saat ini
-    fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/likes/`, { headers })
+    // Get Total Like
+    fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/likes/?apikey=${API_KEY}`)
       .then(res => res.json())
       .then(data => document.getElementById('like-count').innerText = data.count || 0)
       .catch(() => document.getElementById('like-count').innerText = '0');
 
-    // Tambah 1 Like pas diklik
+    // Tambah Like saat diklik
     document.getElementById('like-btn').addEventListener('click', () => {
-      fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/likes/up`, { headers })
+      fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/likes/up?apikey=${API_KEY}`)
         .then(res => res.json())
-        .then(data => document.getElementById('like-count').innerText = data.count);
+        .then(data => document.getElementById('like-count').innerText = data.count)
+        .catch(err => console.log('Gagal update like:', err));
     });
-  </script>
 
 </body>
 </html>
