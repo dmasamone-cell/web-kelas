@@ -13,6 +13,7 @@
     <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
       <span class="font-bold tracking-tight text-slate-900 text-lg">X TJKT 4</span>
       <div class="space-x-6 text-sm font-medium text-slate-600">
+        <a href="#walikelas" class="hover:text-slate-900 transition">Wali Kelas</a>
         <a href="#info" class="hover:text-slate-900 transition">Informasi</a>
         <a href="#anggota" class="hover:text-slate-900 transition">Anggota</a>
       </div>
@@ -27,7 +28,30 @@
     </h1>
   </header>
 
-  <!-- SECTION 1: Informasi Kelas -->
+  <!-- SECTION WALI KELAS (Unik, Foto Besar & Posisi Tengah) -->
+  <section id="walikelas" class="max-w-4xl mx-auto px-6 my-10">
+    <div class="max-w-md mx-auto bg-white p-8 rounded-3xl border border-blue-100 shadow-md hover:shadow-xl transition-all duration-300 text-center relative overflow-hidden group">
+      <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-100/60 rounded-full blur-2xl group-hover:bg-blue-200/60 transition-all"></div>
+      
+      <span class="inline-block text-[10px] font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200/60 mb-6">Wali Kelas</span>
+      
+      <!-- Foto Wali Kelas Besar & Centered -->
+      <div class="relative w-36 h-36 mx-auto mb-5">
+        <img src="https://files.catbox.moe/of3vv5.jpg" alt="Mulyana Taupik, S.Kom." class="w-full h-full rounded-full object-cover border-4 border-blue-500 shadow-lg group-hover:scale-105 transition-transform duration-300">
+      </div>
+
+      <h3 class="text-xl font-extrabold text-slate-900 tracking-tight">Mulyana Taupik, S.Kom.</h3>
+      <p class="text-xs font-semibold text-blue-500 uppercase tracking-widest mt-1">Pembimbing X TJKT 4</p>
+      
+      <div class="mt-5 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+        <p class="text-xs italic text-slate-600 leading-relaxed">
+          "Jadilah pembelajar sepanjang hayat dan teruslah berinovasi di bidang teknologi."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: Informasi Kelas & Pengurus -->
   <section id="info" class="max-w-4xl mx-auto px-6 mt-8 mb-12">
     <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Informasi Utama</h2>
     
@@ -35,13 +59,7 @@
       <!-- Card Pengurus Kelas -->
       <div class="relative bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl border border-blue-100 shadow-sm hover:shadow-md transition">
         <span class="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-widest text-blue-500 bg-blue-100/50 px-2 py-1 rounded-full">Core Team</span>
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xl">M</div>
-          <div>
-            <h3 class="font-bold text-slate-900">Mulyana Taupik, S.Kom.</h3>
-            <p class="text-xs text-blue-500 font-medium uppercase tracking-wider">Wali Kelas</p>
-          </div>
-        </div>
+        <h3 class="font-bold text-slate-900 mb-4 text-base">Pengurus Kelas</h3>
         <div class="space-y-3">
           <div class="flex justify-between items-center text-sm border-b border-blue-50 pb-2">
             <span class="text-slate-400">Ketua Kelas</span>
