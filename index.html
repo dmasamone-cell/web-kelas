@@ -415,47 +415,44 @@
       themeIcon.innerText = '☀️';
     }
 
-    // 2. Logika Counter Views & Likes
+    // 2. Logika Counter Views & Likes (Dengan Debug Pop-up HP)
     const NAMESPACE = 'xtjkt4_official_2026';
     const API_KEY = 'Ut_AxQRS7ha7FKMhJEcmnOLHs7dvSk9HR5Ep5LhnZUw';
 
-    // Update View (Otomatis)
+    // Cek Views
     fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/views/up?apikey=${API_KEY}`)
       .then(res => res.json())
       .then(data => {
-          const viewEl = document.getElementById('view-count');
-          if(viewEl) viewEl.innerText = data.count || 0;
+        document.getElementById('view-count').innerText = data.count ?? data.value ?? 'ERR';
       })
-      .catch(() => {
-          const viewEl = document.getElementById('view-count');
-          if(viewEl) viewEl.innerText = '0';
+      .catch(err => {
+        alert('Error View: ' + err.message);
       });
 
-    // Get Total Like
+    // Cek Likes
     fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/likes/?apikey=${API_KEY}`)
       .then(res => res.json())
       .then(data => {
-          const likeEl = document.getElementById('like-count');
-          if(likeEl) likeEl.innerText = data.count || 0;
+        // Tampilkan isi data yang dikirim server di layar HP kamu
+        if (!data.count && !data.value) {
+          alert('Respon Like dari server: ' + JSON.stringify(data));
+        }
+        document.getElementById('like-count').innerText = data.count ?? data.value ?? 0;
       })
-      .catch(() => {
-          const likeEl = document.getElementById('like-count');
-          if(likeEl) likeEl.innerText = '0';
+      .catch(err => {
+        alert('Error Like: ' + err.message);
       });
 
-    // Tambah Like saat diklik
-    const likeBtn = document.getElementById('like-btn');
-    if(likeBtn) {
-        likeBtn.addEventListener('click', () => {
-          fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/likes/up?apikey=${API_KEY}`)
-            .then(res => res.json())
-            .then(data => {
-                const likeEl = document.getElementById('like-count');
-                if(likeEl) likeEl.innerText = data.count;
-            })
-            .catch(err => console.log('Gagal update like:', err));
-        });
-    }
+    // Klik Like
+    document.getElementById('like-btn').addEventListener('click', () => {
+      fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/likes/up?apikey=${API_KEY}`)
+        .then(res => res.json())
+        .then(data => {
+            alert('Hasil Klik Like: ' + JSON.stringify(data));
+            document.getElementById('like-count').innerText = data.count ?? data.value ?? 0;
+        })
+        .catch(err => alert('Gagal Klik Like: ' + err.message));
+    });
   </script>
 
 </body>
