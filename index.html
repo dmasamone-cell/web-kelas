@@ -392,7 +392,7 @@
     </a>
   </footer>
 
-  <!-- Script Logika Dark Mode & Counter API -->
+  <!-- Script Logika Dark Mode & Counter API v2 -->
   <script>
     // 1. Logika Dark Mode
     const themeToggle = document.getElementById('theme-toggle');
@@ -415,44 +415,56 @@
       themeIcon.innerText = '☀️';
     }
 
-    // 2. Logika Counter Views & Likes (Dengan Debug Pop-up HP)
-    const NAMESPACE = 'xtjkt4_official_2026';
-    const API_KEY = 'Ut_AxQRS7ha7FKMhJEcmnOLHs7dvSk9HR5Ep5LhnZUw';
+    // 2. Logika Counter Views & Likes (CounterAPI v2)
+    const VIEWS_KEY = 'xtjkt4_official_2026_views';
+    const LIKES_KEY = 'Ut_AxQRS7ha7FKMhJEcmnOLHs7dvSk9HR5Ep5LhnZUw'; // API Key / Counter Key kamu
 
-    // Cek Views
-    fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/views/up?apikey=${API_KEY}`)
+    // Fungsi pembantu untuk mengambil angka dari respon v2
+    function getCountValue(res) {
+      if (!res) return 0;
+      if (res.data) {
+        return res.data.up ?? res.data.value ?? res.data.count ?? 0;
+      }
+      return res.count ?? res.value ?? 0;
+    }
+
+    // Update & Get View (v2)
+    fetch(`https://api.counterapi.dev/v2/counters/${VIEWS_KEY}/up`)
       .then(res => res.json())
-      .then(data => {
-        document.getElementById('view-count').innerText = data.count ?? data.value ?? 'ERR';
+      .then(res => {
+        const viewEl = document.getElementById('view-count');
+        if (viewEl) viewEl.innerText = getCountValue(res);
       })
-      .catch(err => {
-        alert('Error View: ' + err.message);
+      .catch(() => {
+        const viewEl = document.getElementById('view-count');
+        if (viewEl) viewEl.innerText = '0';
       });
 
-    // Cek Likes
-    fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/likes/?apikey=${API_KEY}`)
+    // Get Total Like (v2)
+    fetch(`https://api.counterapi.dev/v2/counters/${LIKES_KEY}`)
       .then(res => res.json())
-      .then(data => {
-        // Tampilkan isi data yang dikirim server di layar HP kamu
-        if (!data.count && !data.value) {
-          alert('Respon Like dari server: ' + JSON.stringify(data));
-        }
-        document.getElementById('like-count').innerText = data.count ?? data.value ?? 0;
+      .then(res => {
+        const likeEl = document.getElementById('like-count');
+        if (likeEl) likeEl.innerText = getCountValue(res);
       })
-      .catch(err => {
-        alert('Error Like: ' + err.message);
+      .catch(() => {
+        const likeEl = document.getElementById('like-count');
+        if (likeEl) likeEl.innerText = '0';
       });
 
-    // Klik Like
-    document.getElementById('like-btn').addEventListener('click', () => {
-      fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/likes/up?apikey=${API_KEY}`)
-        .then(res => res.json())
-        .then(data => {
-            alert('Hasil Klik Like: ' + JSON.stringify(data));
-            document.getElementById('like-count').innerText = data.count ?? data.value ?? 0;
-        })
-        .catch(err => alert('Gagal Klik Like: ' + err.message));
-    });
+    // Tambah Like saat diklik (v2)
+    const likeBtn = document.getElementById('like-btn');
+    if (likeBtn) {
+      likeBtn.addEventListener('click', () => {
+        fetch(`https://api.counterapi.dev/v2/counters/${LIKES_KEY}/up`)
+          .then(res => res.json())
+          .then(res => {
+            const likeEl = document.getElementById('like-count');
+            if (likeEl) likeEl.innerText = getCountValue(res);
+          })
+          .catch(err => console.log('Gagal update like:', err));
+      });
+    }
   </script>
 
 </body>
