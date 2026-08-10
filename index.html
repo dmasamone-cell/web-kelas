@@ -496,8 +496,16 @@
       </div>
 
       <!-- Informasi Foto/Anggota -->
-      <h3 id="modal-title" class="font-extrabold text-stone-900 dark:text-stone-100 text-lg tracking-tight"></h3>
-      <p id="modal-subtitle" class="text-xs font-medium text-stone-500 dark:text-stone-400 mt-0.5 mb-3"></p>
+      <div class="flex justify-between items-start">
+        <div>
+          <h3 id="modal-title" class="font-extrabold text-stone-900 dark:text-stone-100 text-lg tracking-tight"></h3>
+          <p id="modal-subtitle" class="text-xs font-medium text-stone-500 dark:text-stone-400 mt-0.5 mb-3"></p>
+        </div>
+        <!-- Tombol Reset Admin -->
+        <button onclick="resetPhotoData()" title="Reset Like & Komentar" class="px-2.5 py-1 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/20 text-[10px] font-bold transition active:scale-95">
+          🗑️ Reset
+        </button>
+      </div>
 
       <!-- Action Bar (Like & Count Status Realtime) -->
       <div class="flex items-center justify-between border-t border-b border-stone-300/60 dark:border-stone-700/60 py-2.5 my-3 text-xs">
@@ -582,7 +590,7 @@
     let activeUnsub = null;
     let activeId = null;
 
-    // FUNGSI BUKA MODAL DETAIL (Dapat Dipanggil Oleh Foto Manapun)
+    // FUNGSI BUKA MODAL DETAIL
     window.openDetailModal = (id, imgSrc, title, subtitle = '') => {
       activeId = id;
       document.getElementById('modal-img').src = imgSrc;
@@ -629,6 +637,34 @@
         activeUnsub = null;
       }
       activeId = null;
+    };
+
+    // LOGIKA RESET ADMIN DENGAN PIN 2212
+    window.resetPhotoData = async () => {
+      if (!activeId) return;
+
+      const ADMIN_PIN = "2212";
+      const inputPin = prompt("Masukkan PIN Admin untuk mereset Like & Komentar:");
+
+      if (inputPin !== ADMIN_PIN) {
+        if (inputPin !== null) alert("PIN salah! Akses ditolak.");
+        return;
+      }
+
+      const konfirmasi = confirm(`Yakin ingin mereset data untuk foto ini?`);
+      if (!konfirmasi) return;
+
+      const photoRef = doc(db, "photos", activeId);
+      try {
+        await updateDoc(photoRef, {
+          likes: 0,
+          comments: []
+        });
+        alert("Data Like dan Komentar berhasil direset ke 0!");
+      } catch (err) {
+        await setDoc(photoRef, { likes: 0, comments: [] }, { merge: true });
+        alert("Data Like dan Komentar berhasil direset ke 0!");
+      }
     };
 
     // LOGIKA LIKE MODAL REALTIME
