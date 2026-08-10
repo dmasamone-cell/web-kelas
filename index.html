@@ -101,33 +101,39 @@
           </div>
           <div class="flex justify-between items-center text-sm">
             <span class="text-slate-400 dark:text-slate-400">Wakil Ketua Kelas</span>
-            <span class="font-medium text-slate-800 dark:text-slate-200",>M.Muhtar Atarid</span>
+            <span class="font-medium text-slate-800 dark:text-slate-200">M.Muhtar Atarid</span>
           </div>
         </div>
       </div>
 
-      <!-- Card Pengumuman -->
+      <!-- Card Jadwal Piket -->
       <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700 shadow-sm hover:shadow-md transition">
-        <h3 class="font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
-          <span>📢</span> Pengumuman
+        <h3 class="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2 text-base">
+          <span>🧹</span> Jadwal Piket Kelas
         </h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-          MASIH DALAM PENGEMBANGAN
-        </p>
+        <div class="space-y-2.5 text-xs">
+          <div class="flex justify-between items-start border-b border-slate-100 dark:border-slate-700/60 pb-2">
+            <span class="font-bold text-blue-600 dark:text-blue-400 min-w-[50px]">Senin</span>
+            <span class="text-slate-600 dark:text-slate-300 text-right">Haris, Wandi, Kiya, Ainun</span>
+          </div>
+          <div class="flex justify-between items-start border-b border-slate-100 dark:border-slate-700/60 pb-2">
+            <span class="font-bold text-blue-600 dark:text-blue-400 min-w-[50px]">Selasa</span>
+            <span class="text-slate-600 dark:text-slate-300 text-right">Rafa, Gilang, Melisa, Astria</span>
+          </div>
+          <div class="flex justify-between items-start border-b border-slate-100 dark:border-slate-700/60 pb-2">
+            <span class="font-bold text-blue-600 dark:text-blue-400 min-w-[50px]">Rabu</span>
+            <span class="text-slate-600 dark:text-slate-300 text-right">Alvin, Fhidel, Fitri, Sania</span>
+          </div>
+          <div class="flex justify-between items-start border-b border-slate-100 dark:border-slate-700/60 pb-2">
+            <span class="font-bold text-blue-600 dark:text-blue-400 min-w-[50px]">Kamis</span>
+            <span class="text-slate-600 dark:text-slate-300 text-right">Rojul, Firli, Adelia, Dini</span>
+          </div>
+          <div class="flex justify-between items-start">
+            <span class="font-bold text-blue-600 dark:text-blue-400 min-w-[50px]">Jumat</span>
+            <span class="text-slate-600 dark:text-slate-300 text-right">Muhtar, Rahmi, Sri</span>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <!-- Widget Counter Views & Likes -->
-    <div class="flex items-center justify-center gap-4 mt-6">
-      <div class="bg-white dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200/80 dark:border-slate-700 shadow-sm flex items-center gap-2 text-xs font-semibold">
-        <span>👁️ Views:</span>
-        <span id="view-count" class="text-blue-500">...</span>
-      </div>
-
-      <button id="like-btn" class="bg-white dark:bg-slate-800 hover:bg-pink-50 dark:hover:bg-pink-950/30 px-4 py-2 rounded-xl border border-slate-200/80 dark:border-slate-700 shadow-sm flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-200 transition active:scale-95">
-        <span>❤️ Likes:</span>
-        <span id="like-count" class="text-pink-500">...</span>
-      </button>
     </div>
   </section>
 
@@ -313,7 +319,7 @@
       </div>
       <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700 shadow-sm hover:border-pink-300 dark:hover:border-pink-500 hover:shadow-md transition text-center group">
         <img src="https://files.catbox.moe/noo9ty.jpg" alt="Dini Indriani Kirana" class="w-16 h-16 rounded-full mx-auto mb-3 object-cover shadow-sm group-hover:scale-105 transition-transform duration-300">
-        <h3 class="font-semibold text-slate-900 dark:text-white text-sm">Dini Ibdriani Kirana</h3>Nu
+        <h3 class="font-semibold text-slate-900 dark:text-white text-sm">Dini Indriani Kirana</h3>
         <p class="text-xs text-slate-400 dark:text-slate-500 mt-1">Siswi</p>
       </div>
       <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700 shadow-sm hover:border-pink-300 dark:hover:border-pink-500 hover:shadow-md transition text-center group">
@@ -392,9 +398,8 @@
     </a>
   </footer>
 
-  <!-- Script Logika Dark Mode & Counter API v2 -->
+  <!-- Script Logika Dark Mode -->
   <script>
-    // 1. Logika Dark Mode
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
     const html = document.documentElement;
@@ -413,57 +418,6 @@
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       html.classList.add('dark');
       themeIcon.innerText = '☀️';
-    }
-
-    // 2. Logika Counter Views & Likes (CounterAPI v2)
-    const VIEWS_KEY = 'xtjkt4_official_2026_views';
-    const LIKES_KEY = 'Ut_AxQRS7ha7FKMhJEcmnOLHs7dvSk9HR5Ep5LhnZUw'; // API Key / Counter Key kamu
-
-    // Fungsi pembantu untuk mengambil angka dari respon v2
-    function getCountValue(res) {
-      if (!res) return 0;
-      if (res.data) {
-        return res.data.up ?? res.data.value ?? res.data.count ?? 0;
-      }
-      return res.count ?? res.value ?? 0;
-    }
-
-    // Update & Get View (v2)
-    fetch(`https://api.counterapi.dev/v2/counters/${VIEWS_KEY}/up`)
-      .then(res => res.json())
-      .then(res => {
-        const viewEl = document.getElementById('view-count');
-        if (viewEl) viewEl.innerText = getCountValue(res);
-      })
-      .catch(() => {
-        const viewEl = document.getElementById('view-count');
-        if (viewEl) viewEl.innerText = '0';
-      });
-
-    // Get Total Like (v2)
-    fetch(`https://api.counterapi.dev/v2/counters/${LIKES_KEY}`)
-      .then(res => res.json())
-      .then(res => {
-        const likeEl = document.getElementById('like-count');
-        if (likeEl) likeEl.innerText = getCountValue(res);
-      })
-      .catch(() => {
-        const likeEl = document.getElementById('like-count');
-        if (likeEl) likeEl.innerText = '0';
-      });
-
-    // Tambah Like saat diklik (v2)
-    const likeBtn = document.getElementById('like-btn');
-    if (likeBtn) {
-      likeBtn.addEventListener('click', () => {
-        fetch(`https://api.counterapi.dev/v2/counters/${LIKES_KEY}/up`)
-          .then(res => res.json())
-          .then(res => {
-            const likeEl = document.getElementById('like-count');
-            if (likeEl) likeEl.innerText = getCountValue(res);
-          })
-          .catch(err => console.log('Gagal update like:', err));
-      });
     }
   </script>
 
