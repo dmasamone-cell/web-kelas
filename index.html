@@ -64,11 +64,11 @@
     </h1>
   </header>
 
-  <!-- SECTION 3: COUNTDOWN DEADLINES & EVENT -->
+  <!-- SECTION 3: COUNTDOWN AGENDA MINGGUAN (SENIN TO MINGGU) -->
   <section class="max-w-4xl mx-auto px-6 my-6">
     <div class="bg-[#efe9dd] dark:bg-[#262522] p-5 rounded-3xl border border-stone-300 dark:border-stone-700 text-center shadow-sm">
-      <span class="text-[10px] font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400 border border-sky-500/30 px-3 py-1 rounded-full bg-sky-500/10">Liburan Mingguan</span>
-      <h2 class="text-sm sm:text-base font-extrabold text-stone-900 dark:text-stone-100 mt-2">⏳ Hitung Mundur Menuju Hari Libur Akhir Pekan (Minggu)</h2>
+      <span class="text-[10px] font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400 border border-sky-500/30 px-3 py-1 rounded-full bg-sky-500/10">Agenda Terdekat</span>
+      <h2 class="text-sm sm:text-base font-extrabold text-stone-900 dark:text-stone-100 mt-2">⏳ Hitung Mundur Hari: Senin ke Minggu</h2>
       <div class="grid grid-cols-4 gap-2 max-w-xs sm:max-w-sm mx-auto mt-4">
         <div class="bg-[#f7f3eb] dark:bg-[#1d1c1a] p-2 rounded-2xl border border-stone-300/70 dark:border-stone-700/70">
           <span id="cd-days" class="block text-lg sm:text-xl font-extrabold text-stone-900 dark:text-stone-100">00</span>
@@ -570,24 +570,25 @@
       themeIcon.innerText = '☀️';
     }
 
-    // LOGIKA COUNTDOWN TIMER (AUTOMATIC REPEAT EVERY WEEK)
-    function getNextWeeklyHoliday() {
+    // LOGIKA COUNTDOWN TIMER (SENIN KE MINGGU)
+    function getNextSundayTarget() {
       const now = new Date();
       const target = new Date(now);
-      const daysUntilSunday = (7 - now.getDay()) % 7 || 7;
+      const day = now.getDay(); // 0 = Minggu, 1 = Senin, ... 6 = Sabtu
+      const daysUntilSunday = (7 - day) % 7 || 7;
       target.setDate(now.getDate() + daysUntilSunday);
       target.setHours(0, 0, 0, 0);
       return target.getTime();
     }
 
-    let targetDate = getNextWeeklyHoliday();
+    let targetDate = getNextSundayTarget();
 
     setInterval(() => {
       const now = new Date().getTime();
       let diff = targetDate - now;
 
       if (diff <= 0) {
-        targetDate = getNextWeeklyHoliday();
+        targetDate = getNextSundayTarget();
         diff = targetDate - now;
       }
 
