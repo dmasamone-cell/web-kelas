@@ -34,6 +34,8 @@
         <div class="hidden sm:flex space-x-6 text-sm font-medium text-stone-600 dark:text-stone-400 mr-2">
           <a href="#walikelas" class="hover:text-stone-900 dark:hover:text-white transition">Wali Kelas</a>
           <a href="#info" class="hover:text-stone-900 dark:hover:text-white transition">Informasi</a>
+          <a href="#modul" class="hover:text-stone-900 dark:hover:text-white transition">Modul</a>
+          <a href="#menfess" class="hover:text-stone-900 dark:hover:text-white transition">Menfess</a>
           <a href="#berita" class="hover:text-stone-900 dark:hover:text-white transition">Berita</a>
           <a href="#fotobersama" class="hover:text-stone-900 dark:hover:text-white transition">Foto Bersama</a>
           <a href="#anggota" class="hover:text-stone-900 dark:hover:text-white transition">Anggota</a>
@@ -56,12 +58,38 @@
   </nav>
 
   <!-- Hero Header Paper Style -->
-  <header class="max-w-4xl mx-auto px-6 pt-12 pb-6 text-center">
+  <header class="max-w-4xl mx-auto px-6 pt-12 pb-4 text-center">
     <span class="text-xs font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 border border-stone-300 dark:border-stone-700 px-3 py-1 rounded-full bg-[#eee7db] dark:bg-[#262522]">Angkatan 2026/2029</span>
     <h1 class="text-3xl sm:text-4xl font-extrabold text-stone-900 dark:text-stone-100 tracking-tight mt-4">
       Teknik Jaringan Komputer & Telekomunikasi 4
     </h1>
   </header>
+
+  <!-- SECTION 3: COUNTDOWN DEADLINES & EVENT -->
+  <section class="max-w-4xl mx-auto px-6 my-6">
+    <div class="bg-[#efe9dd] dark:bg-[#262522] p-5 rounded-3xl border border-stone-300 dark:border-stone-700 text-center shadow-sm">
+      <span class="text-[10px] font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400 border border-sky-500/30 px-3 py-1 rounded-full bg-sky-500/10">Agenda Terdekat</span>
+      <h2 class="text-sm sm:text-base font-extrabold text-stone-900 dark:text-stone-100 mt-2">⏳ Ujian Praktikum Jaringan & Penilaian Semester</h2>
+      <div class="grid grid-cols-4 gap-2 max-w-xs sm:max-w-sm mx-auto mt-4">
+        <div class="bg-[#f7f3eb] dark:bg-[#1d1c1a] p-2 rounded-2xl border border-stone-300/70 dark:border-stone-700/70">
+          <span id="cd-days" class="block text-lg sm:text-xl font-extrabold text-stone-900 dark:text-stone-100">00</span>
+          <span class="text-[9px] sm:text-[10px] text-stone-500 dark:text-stone-400 uppercase font-semibold">Hari</span>
+        </div>
+        <div class="bg-[#f7f3eb] dark:bg-[#1d1c1a] p-2 rounded-2xl border border-stone-300/70 dark:border-stone-700/70">
+          <span id="cd-hours" class="block text-lg sm:text-xl font-extrabold text-stone-900 dark:text-stone-100">00</span>
+          <span class="text-[9px] sm:text-[10px] text-stone-500 dark:text-stone-400 uppercase font-semibold">Jam</span>
+        </div>
+        <div class="bg-[#f7f3eb] dark:bg-[#1d1c1a] p-2 rounded-2xl border border-stone-300/70 dark:border-stone-700/70">
+          <span id="cd-mins" class="block text-lg sm:text-xl font-extrabold text-stone-900 dark:text-stone-100">00</span>
+          <span class="text-[9px] sm:text-[10px] text-stone-500 dark:text-stone-400 uppercase font-semibold">Menit</span>
+        </div>
+        <div class="bg-[#f7f3eb] dark:bg-[#1d1c1a] p-2 rounded-2xl border border-stone-300/70 dark:border-stone-700/70">
+          <span id="cd-secs" class="block text-lg sm:text-xl font-extrabold text-stone-900 dark:text-stone-100">00</span>
+          <span class="text-[9px] sm:text-[10px] text-stone-500 dark:text-stone-400 uppercase font-semibold">Detik</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- SECTION WALI KELAS -->
   <section id="walikelas" class="max-w-4xl mx-auto px-6 my-10">
@@ -123,6 +151,55 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: MODUL PELAJARAN & CATATAN TJKT (DIGITAL LIBRARY) -->
+  <section id="modul" class="max-w-4xl mx-auto px-6 mb-12">
+    <h2 class="text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest mb-4 border-b border-stone-300 dark:border-stone-800 pb-2">📚 Modul Pelajaran & Catatan TJKT</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="bg-[#efe9dd] dark:bg-[#262522] p-4 rounded-2xl border border-stone-300 dark:border-stone-700 hover:border-sky-500 dark:hover:border-sky-400 transition-all active:scale-95 block shadow-sm group">
+        <span class="text-2xl">🌐</span>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-sm mt-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">IP Addressing</h3>
+        <p class="text-xs text-stone-500 dark:text-stone-400 mt-1 leading-relaxed">Subnetting IPv4, Classful, & VLSM</p>
+      </a>
+      <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="bg-[#efe9dd] dark:bg-[#262522] p-4 rounded-2xl border border-stone-300 dark:border-stone-700 hover:border-sky-500 dark:hover:border-sky-400 transition-all active:scale-95 block shadow-sm group">
+        <span class="text-2xl">🎛️</span>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-sm mt-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Dasar MikroTik</h3>
+        <p class="text-xs text-stone-500 dark:text-stone-400 mt-1 leading-relaxed">Konfigurasi RouterOS & Winbox</p>
+      </a>
+      <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="bg-[#efe9dd] dark:bg-[#262522] p-4 rounded-2xl border border-stone-300 dark:border-stone-700 hover:border-sky-500 dark:hover:border-sky-400 transition-all active:scale-95 block shadow-sm group">
+        <span class="text-2xl">💻</span>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-sm mt-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Cisco Packet Tracer</h3>
+        <p class="text-xs text-stone-500 dark:text-stone-400 mt-1 leading-relaxed">Simulasi Topologi Jaringan</p>
+      </a>
+      <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="bg-[#efe9dd] dark:bg-[#262522] p-4 rounded-2xl border border-stone-300 dark:border-stone-700 hover:border-sky-500 dark:hover:border-sky-400 transition-all active:scale-95 block shadow-sm group">
+        <span class="text-2xl">🛡️</span>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-sm mt-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">K3LH & Perkabelan</h3>
+        <p class="text-xs text-stone-500 dark:text-stone-400 mt-1 leading-relaxed">Keselamatan Kerja & Crimping RJ45</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- SECTION 1: MENFESS / PESAN ANONIM KELAS -->
+  <section id="menfess" class="max-w-4xl mx-auto px-6 mb-12">
+    <h2 class="text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest mb-4 border-b border-stone-300 dark:border-stone-800 pb-2">💬 Menfess Kelas (Pesan Anonim)</h2>
+    
+    <!-- Form Kirim Menfess -->
+    <form id="menfess-form" class="bg-[#efe9dd] dark:bg-[#262522] p-5 rounded-3xl border border-stone-300 dark:border-stone-700 space-y-3 mb-6 shadow-sm">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <input type="text" id="menfess-from" placeholder="Dari: (misal: Secret Admirer / Anonim)" class="bg-[#f7f3eb] dark:bg-[#1d1c1a] border border-stone-300 dark:border-stone-700 rounded-xl px-3 py-2 text-xs text-stone-900 dark:text-stone-100 focus:outline-none focus:border-stone-500">
+        <input type="text" id="menfess-to" placeholder="Untuk: (misal: Seseorang / Seluruh Kelas)" required class="bg-[#f7f3eb] dark:bg-[#1d1c1a] border border-stone-300 dark:border-stone-700 rounded-xl px-3 py-2 text-xs text-stone-900 dark:text-stone-100 focus:outline-none focus:border-stone-500">
+      </div>
+      <textarea id="menfess-text" rows="3" placeholder="Tulis pesan rahasia, ucapan, atau curhatan kamu di sini..." required class="w-full bg-[#f7f3eb] dark:bg-[#1d1c1a] border border-stone-300 dark:border-stone-700 rounded-xl p-3 text-xs text-stone-900 dark:text-stone-100 focus:outline-none focus:border-stone-500"></textarea>
+      <button type="submit" id="btn-send-menfess" class="w-full py-2.5 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 text-stone-100 dark:text-stone-900 font-bold text-xs rounded-xl transition active:scale-98">
+        🚀 Kirim Menfess Anonim
+      </button>
+    </form>
+
+    <!-- Container Feed Menfess -->
+    <div id="menfess-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <p class="text-xs text-stone-400 italic col-span-2 text-center py-4">Memuat pesan menfess...</p>
     </div>
   </section>
 
@@ -413,7 +490,15 @@
     </div>
   </section>
 
-  <!-- MODAL LIGHTBOX UNTUK FOTO BESAR, LIKE, KOMENTAR, GIF SEARCH & UPLOAD FOTO -->
+  <!-- SECTION 2: SPOTIFY CLASS PLAYLIST -->
+  <section id="spotify" class="max-w-4xl mx-auto px-6 mb-14">
+    <h2 class="text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest mb-4 border-b border-stone-300 dark:border-stone-800 pb-2">🎵 Spotify Class Playlist</h2>
+    <div class="bg-[#efe9dd] dark:bg-[#262522] p-3 rounded-3xl border border-stone-300 dark:border-stone-700 shadow-sm overflow-hidden">
+      <iframe style="border-radius:20px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- MODAL LIGHTBOX UNTUK FOTO BESAR, LIKE, KOMENTAR & GIF SEARCH -->
   <div id="image-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300" onclick="if(event.target === this) closeModal()">
     <div class="bg-[#efe9dd] dark:bg-[#262522] border border-stone-300 dark:border-stone-700 rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-2xl">
       
@@ -465,19 +550,11 @@
           </div>
         </div>
 
-        <!-- Hidden File Input untuk Unggah Foto -->
-        <input type="file" id="image-upload-input" accept="image/*" class="hidden">
-
         <!-- Form Input Komentar Modal -->
         <form id="modal-comment-form" class="flex gap-2 pt-1">
           <!-- Tombol Cari/Stiker GIF -->
           <button type="button" onclick="toggleStickerPicker()" class="px-2.5 py-2 bg-stone-300/70 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600 text-stone-800 dark:text-stone-200 rounded-xl text-xs transition active:scale-95" title="GIF">
             😊 GIF
-          </button>
-
-          <!-- Tombol Upload Foto -->
-          <button type="button" onclick="document.getElementById('image-upload-input').click()" id="upload-photo-btn" class="px-2.5 py-2 bg-stone-300/70 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600 text-stone-800 dark:text-stone-200 rounded-xl text-xs transition active:scale-95" title="Kirim Foto">
-            📷 Foto
           </button>
 
           <input type="text" id="modal-comment-input" placeholder="Tulis komentar..." required class="flex-1 bg-[#f7f3eb] dark:bg-[#1d1c1a] border border-stone-300 dark:border-stone-700 rounded-xl px-3 py-2 text-xs text-stone-900 dark:text-stone-100 focus:outline-none focus:border-stone-500">
@@ -520,12 +597,31 @@
       html.classList.add('dark');
       themeIcon.innerText = '☀️';
     }
+
+    // LOGIKA COUNTDOWN TIMER
+    const targetDate = new Date("2026-11-20T00:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+        document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('cd-mins').innerText = String(mins).padStart(2, '0');
+        document.getElementById('cd-secs').innerText = String(secs).padStart(2, '0');
+      }
+    }, 1000);
   </script>
 
-  <!-- Script Firebase Firestore & Fitur Kirim Foto/GIF -->
+  <!-- Script Firebase Firestore & Fitur Realtime -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, doc, onSnapshot, setDoc, updateDoc, arrayUnion, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, doc, collection, addDoc, deleteDoc, query, orderBy, onSnapshot, setDoc, updateDoc, arrayUnion, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAn5wWXD25t5VmJhGlcqSi7AgNGfRExkmo",
@@ -546,7 +642,90 @@
     // API KEY GIPHY
     const GIPHY_API_KEY = "5LH1haWcbeynWswBCKF02uErlR0xMZWf";
 
-    // FUNGSI TOGGLE STIKER PICKER
+    // ------------------- FITUR MENFESS REALTIME -------------------
+    const menfessCollection = collection(db, "menfess");
+    const menfessForm = document.getElementById('menfess-form');
+    const menfessContainer = document.getElementById('menfess-container');
+
+    // Kirim Menfess
+    menfessForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fromVal = document.getElementById('menfess-from').value.trim() || 'Anonim';
+      const toVal = document.getElementById('menfess-to').value.trim();
+      const textVal = document.getElementById('menfess-text').value.trim();
+
+      if (!toVal || !textVal) return;
+
+      const btnSubmit = document.getElementById('btn-send-menfess');
+      btnSubmit.innerText = '⏳ Mengirim...';
+      btnSubmit.disabled = true;
+
+      try {
+        await addDoc(menfessCollection, {
+          from: fromVal,
+          to: toVal,
+          text: textVal,
+          createdAt: serverTimestamp()
+        });
+        menfessForm.reset();
+      } catch (err) {
+        alert("Gagal mengirim menfess. Coba lagi.");
+      } finally {
+        btnSubmit.innerText = '🚀 Kirim Menfess Anonim';
+        btnSubmit.disabled = false;
+      }
+    });
+
+    // Realtime Render Feed Menfess
+    const qMenfess = query(menfessCollection, orderBy("createdAt", "desc"));
+    onSnapshot(qMenfess, (snapshot) => {
+      if (snapshot.empty) {
+        menfessContainer.innerHTML = '<p class="text-xs text-stone-400 italic col-span-2 text-center py-4">Belum ada menfess terkirim. Jadi yang pertama mengirim!</p>';
+        return;
+      }
+
+      menfessContainer.innerHTML = '';
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        const id = docSnap.id;
+
+        menfessContainer.innerHTML += `
+          <div class="bg-[#efe9dd] dark:bg-[#262522] p-4 rounded-2xl border border-stone-300 dark:border-stone-700 shadow-sm relative flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <span class="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider bg-sky-500/10 border border-sky-500/20 px-2 py-0.5 rounded-md">Untuk: ${escapeHtml(data.to)}</span>
+                <button onclick="deleteMenfess('${id}')" class="text-stone-400 hover:text-red-500 transition text-xs" title="Hapus (Khusus Admin)">🗑️</button>
+              </div>
+              <p class="text-xs text-stone-800 dark:text-stone-200 leading-relaxed font-medium my-2">"${escapeHtml(data.text)}"</p>
+            </div>
+            <div class="border-t border-stone-300/50 dark:border-stone-700/50 pt-2 mt-2 flex justify-between items-center text-[10px] text-stone-500 dark:text-stone-400 italic">
+              <span>Dari: ${escapeHtml(data.from)}</span>
+              <span>💌 Menfess X TJKT 4</span>
+            </div>
+          </div>
+        `;
+      });
+    });
+
+    // Hapus Menfess dengan PIN Admin
+    window.deleteMenfess = async (id) => {
+      const ADMIN_PIN = "2212";
+      const inputPin = prompt("Masukkan PIN Admin untuk menghapus menfess ini:");
+      if (inputPin !== ADMIN_PIN) {
+        if (inputPin !== null) alert("PIN Salah! Akses ditolak.");
+        return;
+      }
+
+      if (confirm("Yakin ingin menghapus menfess ini?")) {
+        try {
+          await deleteDoc(doc(db, "menfess", id));
+        } catch (err) {
+          alert("Gagal menghapus pesan.");
+        }
+      }
+    };
+
+    // ------------------- LOGIKA GIF GIPHY -------------------
     window.toggleStickerPicker = () => {
       const picker = document.getElementById('sticker-picker');
       picker.classList.toggle('hidden');
@@ -556,7 +735,6 @@
       }
     };
 
-    // FUNGSI CARI GIF DARI GIPHY
     window.searchGifs = async (customQuery) => {
       const input = document.getElementById('gif-search-input');
       const query = customQuery || input.value.trim() || 'funny';
@@ -586,7 +764,6 @@
       }
     };
 
-    // EVENT LISTENER SEARCH GIF
     const btnSearchGif = document.getElementById('btn-search-gif');
     if (btnSearchGif) {
       btnSearchGif.addEventListener('click', () => searchGifs());
@@ -602,50 +779,7 @@
       });
     }
 
-    // FUNGSI UNGGAH DAN KIRIM FOTO
-    document.getElementById('image-upload-input').addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (!file || !activeId) return;
-
-      let userName = localStorage.getItem('class_user_name');
-      if (!userName) {
-        userName = prompt("Masukkan nama kamu untuk berkomentar:", "Teman X TJKT 4");
-        if (!userName) userName = "Anonim";
-        localStorage.setItem('class_user_name', userName);
-      }
-
-      const uploadBtn = document.getElementById('upload-photo-btn');
-      uploadBtn.innerText = '⏳ Uploading...';
-      uploadBtn.disabled = true;
-
-      try {
-        const reader = new FileReader();
-        reader.onload = async (evt) => {
-          const base64Image = evt.target.result;
-          const photoRef = doc(db, "photos", activeId);
-          try {
-            await updateDoc(photoRef, {
-              comments: arrayUnion({ user: userName, text: base64Image, type: 'image' })
-            });
-          } catch (err) {
-            await setDoc(photoRef, {
-              likes: 0,
-              comments: [{ user: userName, text: base64Image, type: 'image' }]
-            }, { merge: true });
-          }
-          uploadBtn.innerText = '📷 Foto';
-          uploadBtn.disabled = false;
-          e.target.value = '';
-        };
-        reader.readAsDataURL(file);
-      } catch (err) {
-        alert('Gagal mengirim foto.');
-        uploadBtn.innerText = '📷 Foto';
-        uploadBtn.disabled = false;
-      }
-    });
-
-    // FUNGSI BUKA MODAL DETAIL
+    // ------------------- MODAL DETAIL & KOMENTAR REALTIME -------------------
     window.openDetailModal = (id, imgSrc, title, subtitle = '') => {
       activeId = id;
       document.getElementById('modal-img').src = imgSrc;
@@ -670,7 +804,7 @@
           } else {
             container.innerHTML = '';
             comments.forEach(c => {
-              const isMedia = c.type === 'gif' || c.type === 'image' || (c.text && (c.text.startsWith('data:image') || c.text.startsWith('http')));
+              const isMedia = c.type === 'gif' || (c.text && c.text.startsWith('http'));
               
               const textContent = isMedia 
                 ? `<img src="${escapeHtml(c.text)}" referrerpolicy="no-referrer" class="max-w-[200px] max-h-40 object-cover rounded-xl mt-1 border border-stone-300/80 dark:border-stone-700 bg-stone-200 dark:bg-stone-800">`
@@ -690,7 +824,6 @@
       });
     };
 
-    // FUNGSI TUTUP MODAL
     window.closeModal = () => {
       document.getElementById('image-modal').classList.add('hidden');
       document.getElementById('sticker-picker').classList.add('hidden');
@@ -701,7 +834,6 @@
       activeId = null;
     };
 
-    // LOGIKA KIRIM STIKER GIF
     window.sendSticker = async (gifUrl) => {
       if (!activeId) return;
 
@@ -727,7 +859,6 @@
       document.getElementById('sticker-picker').classList.add('hidden');
     };
 
-    // LOGIKA RESET ADMIN DENGAN PIN 2212
     window.resetPhotoData = async () => {
       if (!activeId) return;
 
@@ -744,10 +875,7 @@
 
       const photoRef = doc(db, "photos", activeId);
       try {
-        await updateDoc(photoRef, {
-          likes: 0,
-          comments: []
-        });
+        await updateDoc(photoRef, { likes: 0, comments: [] });
         alert("Data Like dan Komentar berhasil direset ke 0!");
       } catch (err) {
         await setDoc(photoRef, { likes: 0, comments: [] }, { merge: true });
@@ -755,7 +883,6 @@
       }
     };
 
-    // LOGIKA LIKE MODAL REALTIME
     document.getElementById('modal-like-btn').addEventListener('click', async () => {
       if (!activeId) return;
       const photoRef = doc(db, "photos", activeId);
@@ -766,7 +893,6 @@
       }
     });
 
-    // LOGIKA KOMENTAR TEXT MODAL
     document.getElementById('modal-comment-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!activeId) return;
