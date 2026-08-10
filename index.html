@@ -483,7 +483,7 @@
     </div>
   </section>
 
-  <!-- MODAL LIGHTBOX UNTUK FOTO BESAR, LIKE & KOMENTAR REALTIME -->
+  <!-- MODAL LIGHTBOX UNTUK FOTO BESAR, LIKE & KOMENTAR REALTIME + STIKER GIF -->
   <div id="image-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300" onclick="if(event.target === this) closeModal()">
     <div class="bg-[#efe9dd] dark:bg-[#262522] border border-stone-300 dark:border-stone-700 rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-2xl">
       
@@ -524,8 +524,25 @@
           <p class="text-stone-400 italic">Belum ada komentar...</p>
         </div>
 
+        <!-- STIKER GIF PICKER POPUP -->
+        <div id="sticker-picker" class="hidden grid grid-cols-4 gap-2 p-3 bg-[#f7f3eb] dark:bg-[#1d1c1a] border border-stone-300 dark:border-stone-700 rounded-2xl mb-2 max-h-48 overflow-y-auto shadow-inner">
+          <img src="https://media.tenor.com/g91C9pU2a5sAAAAC/cat-cat-meme.gif" onclick="sendSticker(this.src)" class="w-full h-16 object-cover rounded-lg cursor-pointer hover:scale-105 transition border border-stone-300 dark:border-stone-700" title="Cat Meme">
+          <img src="https://media.tenor.com/X2-O4ZqH2c0AAAAC/cat-dance.gif" onclick="sendSticker(this.src)" class="w-full h-16 object-cover rounded-lg cursor-pointer hover:scale-105 transition border border-stone-300 dark:border-stone-700" title="Cat Dance">
+          <img src="https://media.tenor.com/2U3x4cI2lSAAAAAC/thumbs-up-cat.gif" onclick="sendSticker(this.src)" class="w-full h-16 object-cover rounded-lg cursor-pointer hover:scale-105 transition border border-stone-300 dark:border-stone-700" title="Thumbs Up">
+          <img src="https://media.tenor.com/2A2-G1qZlS8AAAAC/crying-cat.gif" onclick="sendSticker(this.src)" class="w-full h-16 object-cover rounded-lg cursor-pointer hover:scale-105 transition border border-stone-300 dark:border-stone-700" title="Crying Cat">
+          <img src="https://media.tenor.com/1-l3-U0o524AAAAC/sponge-bob.gif" onclick="sendSticker(this.src)" class="w-full h-16 object-cover rounded-lg cursor-pointer hover:scale-105 transition border border-stone-300 dark:border-stone-700" title="Spongebob">
+          <img src="https://media.tenor.com/83p8O9f4fC0AAAAC/shocked-shock.gif" onclick="sendSticker(this.src)" class="w-full h-16 object-cover rounded-lg cursor-pointer hover:scale-105 transition border border-stone-300 dark:border-stone-700" title="Kaget">
+          <img src="https://media.tenor.com/YvVn7P3b8U4AAAAC/patrick-star.gif" onclick="sendSticker(this.src)" class="w-full h-16 object-cover rounded-lg cursor-pointer hover:scale-105 transition border border-stone-300 dark:border-stone-700" title="Patrick">
+          <img src="https://media.tenor.com/tH31G5sC20AAAAAC/mind-blown.gif" onclick="sendSticker(this.src)" class="w-full h-16 object-cover rounded-lg cursor-pointer hover:scale-105 transition border border-stone-300 dark:border-stone-700" title="Mind Blown">
+        </div>
+
         <!-- Form Input Komentar Modal -->
         <form id="modal-comment-form" class="flex gap-2 pt-1">
+          <!-- Tombol Buka Stiker GIF -->
+          <button type="button" onclick="toggleStickerPicker()" class="px-3 py-2 bg-stone-300/70 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600 text-stone-800 dark:text-stone-200 rounded-xl text-xs transition active:scale-95" title="Pilih Stiker GIF">
+            😊
+          </button>
+
           <input type="text" id="modal-comment-input" placeholder="Tulis komentar..." required class="flex-1 bg-[#f7f3eb] dark:bg-[#1d1c1a] border border-stone-300 dark:border-stone-700 rounded-xl px-3 py-2 text-xs text-stone-900 dark:text-stone-100 focus:outline-none focus:border-stone-500">
           <button type="submit" class="px-3.5 py-2 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600 text-stone-900 dark:text-stone-100 rounded-xl text-xs font-semibold transition active:scale-95">Kirim</button>
         </form>
@@ -569,7 +586,7 @@
     }
   </script>
 
-  <!-- Script Integrasi Realtime Firebase Firestore -->
+  <!-- Script Integrasi Realtime Firebase Firestore & Stiker GIF -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, doc, onSnapshot, setDoc, updateDoc, arrayUnion, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -590,6 +607,12 @@
     let activeUnsub = null;
     let activeId = null;
 
+    // FUNGSI TOGGLE STIKER PICKER
+    window.toggleStickerPicker = () => {
+      const picker = document.getElementById('sticker-picker');
+      picker.classList.toggle('hidden');
+    };
+
     // FUNGSI BUKA MODAL DETAIL
     window.openDetailModal = (id, imgSrc, title, subtitle = '') => {
       activeId = id;
@@ -597,6 +620,7 @@
       document.getElementById('modal-title').innerText = title;
       document.getElementById('modal-subtitle').innerText = subtitle;
       document.getElementById('image-modal').classList.remove('hidden');
+      document.getElementById('sticker-picker').classList.add('hidden');
 
       const photoRef = doc(db, "photos", id);
 
@@ -615,10 +639,16 @@
           } else {
             container.innerHTML = '';
             comments.forEach(c => {
+              // Cek apakah komentar merupakan Stiker GIF
+              const isGif = c.type === 'gif' || (c.text && (c.text.startsWith('http') && (c.text.endsWith('.gif') || c.text.includes('tenor.com'))));
+              const textContent = isGif 
+                ? `<img src="${escapeHtml(c.text)}" class="w-28 h-28 object-cover rounded-xl mt-1 border border-stone-300/80 dark:border-stone-700">`
+                : `<span class="text-stone-600 dark:text-stone-400">${escapeHtml(c.text)}</span>`;
+
               container.innerHTML += `
                 <div class="bg-[#f7f3eb] dark:bg-[#1d1c1a] p-2.5 rounded-xl border border-stone-300/50 dark:border-stone-700/50">
                   <span class="font-bold text-stone-900 dark:text-stone-200">${escapeHtml(c.user)}:</span>
-                  <span class="text-stone-600 dark:text-stone-400">${escapeHtml(c.text)}</span>
+                  ${textContent}
                 </div>`;
             });
             container.scrollTop = container.scrollHeight;
@@ -632,11 +662,38 @@
     // FUNGSI TUTUP MODAL
     window.closeModal = () => {
       document.getElementById('image-modal').classList.add('hidden');
+      document.getElementById('sticker-picker').classList.add('hidden');
       if (activeUnsub) {
         activeUnsub();
         activeUnsub = null;
       }
       activeId = null;
+    };
+
+    // LOGIKA KIRIM STIKER GIF
+    window.sendSticker = async (gifUrl) => {
+      if (!activeId) return;
+
+      let userName = localStorage.getItem('class_user_name');
+      if (!userName) {
+        userName = prompt("Masukkan nama kamu untuk berkomentar:", "Teman X TJKT 4");
+        if (!userName) userName = "Anonim";
+        localStorage.setItem('class_user_name', userName);
+      }
+
+      const photoRef = doc(db, "photos", activeId);
+      try {
+        await updateDoc(photoRef, {
+          comments: arrayUnion({ user: userName, text: gifUrl, type: 'gif' })
+        });
+      } catch (err) {
+        await setDoc(photoRef, {
+          likes: 0,
+          comments: [{ user: userName, text: gifUrl, type: 'gif' }]
+        }, { merge: true });
+      }
+
+      document.getElementById('sticker-picker').classList.add('hidden');
     };
 
     // LOGIKA RESET ADMIN DENGAN PIN 2212
