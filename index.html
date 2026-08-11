@@ -32,24 +32,26 @@
 </head>
 <body class="bg-[#f7f3eb] text-stone-900 font-sans antialiased selection:bg-stone-300/70 transition-colors duration-300 dark:bg-[#181715] dark:text-stone-100 min-h-screen pb-16">
 
-  <!-- Navbar E-Paper Minimalis Matte Blur -->
-  <nav class="sticky top-0 z-50 bg-[#f7f3eb]/70 dark:bg-[#181715]/70 backdrop-blur-xl border-b border-stone-300/60 dark:border-stone-800/70 transition-colors">
+  <!-- Navbar Minimalis dengan Tombol Menu Garis Tiga (Hamburger) -->
+  <nav class="sticky top-0 z-40 bg-[#f7f3eb]/80 dark:bg-[#181715]/80 backdrop-blur-xl border-b border-stone-300/60 dark:border-stone-800/70 transition-colors">
     <div class="max-w-5xl mx-auto px-6 py-3.5 flex justify-between items-center">
-      <a href="#" class="font-black tracking-tight text-stone-900 dark:text-stone-100 text-lg uppercase flex items-center gap-2">
-        <span class="w-2.5 h-2.5 rounded-full bg-sky-500 inline-block animate-pulse"></span>
-        X TJKT 4
-      </a>
-      <div class="flex items-center space-x-3 sm:space-x-5">
-        <div class="hidden md:flex space-x-6 text-xs font-bold uppercase tracking-wider text-stone-600 dark:text-stone-400">
-          <a href="#dashboard" class="hover:text-stone-900 dark:hover:text-white transition">Dashboard</a>
-          <a href="#spin-wheel" class="hover:text-stone-900 dark:hover:text-white transition">Spin Wheel</a>
-          <a href="#command-center" class="hover:text-stone-900 dark:hover:text-white transition">Terminal</a>
-          <a href="#menfess" class="hover:text-stone-900 dark:hover:text-white transition">Menfess</a>
-          <a href="#galeri" class="hover:text-stone-900 dark:hover:text-white transition">Galeri</a>
-          <a href="#anggota" class="hover:text-stone-900 dark:hover:text-white transition">Anggota</a>
-        </div>
+      
+      <!-- Tombol Hamburger Garis Tiga + Brand Header -->
+      <div class="flex items-center gap-3">
+        <button id="hamburger-btn" onclick="toggleDrawer()" class="p-2 rounded-xl bg-stone-200/50 dark:bg-stone-800/50 text-stone-800 dark:text-stone-200 border border-stone-300/60 dark:border-stone-700/60 hover:bg-stone-300/60 dark:hover:bg-stone-700/60 transition active:scale-95" title="Menu Navigasi Fitur">
+          <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
 
-        <!-- Link Instagram -->
+        <a href="#" onclick="switchPage('dashboard')" class="font-black tracking-tight text-stone-900 dark:text-stone-100 text-lg uppercase flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-sky-500 inline-block animate-pulse"></span>
+          X TJKT 4
+        </a>
+      </div>
+
+      <!-- Quick Actions Right (Instagram & Dark Mode) -->
+      <div class="flex items-center space-x-3">
         <a href="https://instagram.com/netro4.offficial" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-stone-200/40 dark:bg-stone-800/40 backdrop-blur-md text-stone-700 dark:text-stone-300 border border-stone-300/60 dark:border-stone-700/60 hover:border-stone-400 dark:hover:border-stone-500 hover:text-stone-900 dark:hover:text-white transition-all active:scale-95 flex items-center gap-2 text-xs font-bold">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -65,47 +67,119 @@
     </div>
   </nav>
 
+  <!-- DRAWER OVERLAY MENU FITUR (Garis Tiga Modal) -->
+  <div id="drawer-menu" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-md transition-opacity duration-300" onclick="if(event.target === this) toggleDrawer()">
+    <div class="bg-[#efe9dd]/95 dark:bg-[#1f1e1b]/95 border-r border-stone-300/80 dark:border-stone-700/80 w-72 h-full p-6 shadow-2xl flex flex-col justify-between">
+      <div>
+        <!-- Drawer Header -->
+        <div class="flex justify-between items-center pb-4 border-b border-stone-300/60 dark:border-stone-700/60 mb-6">
+          <span class="font-extrabold text-sm uppercase tracking-wider text-stone-900 dark:text-stone-100 flex items-center gap-2">
+            ⚙️ Menu Fitur
+          </span>
+          <button onclick="toggleDrawer()" class="text-stone-500 hover:text-stone-900 dark:hover:text-white font-bold text-sm p-1">✕</button>
+        </div>
+
+        <!-- Daftar Fitur / Navigasi Halaman -->
+        <nav class="space-y-1.5 text-xs font-bold uppercase tracking-wider">
+          <button onclick="switchPage('dashboard')" class="nav-item w-full text-left px-3.5 py-2.5 rounded-xl bg-stone-900 text-stone-100 dark:bg-stone-100 dark:text-stone-900 transition flex items-center gap-3">
+            <span>🏠</span> Dashboard
+          </button>
+          <button onclick="switchPage('spin-wheel')" class="nav-item w-full text-left px-3.5 py-2.5 rounded-xl text-stone-600 dark:text-stone-400 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 hover:text-stone-900 dark:hover:text-stone-100 transition flex items-center gap-3">
+            <span>🎡</span> Spin Wheel
+          </button>
+          <button onclick="switchPage('command-center')" class="nav-item w-full text-left px-3.5 py-2.5 rounded-xl text-stone-600 dark:text-stone-400 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 hover:text-stone-900 dark:hover:text-stone-100 transition flex items-center gap-3">
+            <span>🖥️</span> Terminal CLI
+          </button>
+          <button onclick="switchPage('menfess')" class="nav-item w-full text-left px-3.5 py-2.5 rounded-xl text-stone-600 dark:text-stone-400 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 hover:text-stone-900 dark:hover:text-stone-100 transition flex items-center gap-3">
+            <span>💬</span> Menfess Kelas
+          </button>
+          <button onclick="switchPage('karya')" class="nav-item w-full text-left px-3.5 py-2.5 rounded-xl text-stone-600 dark:text-stone-400 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 hover:text-stone-900 dark:hover:text-stone-100 transition flex items-center gap-3">
+            <span>🎨</span> Galeri Karya
+          </button>
+          <button onclick="switchPage('galeri')" class="nav-item w-full text-left px-3.5 py-2.5 rounded-xl text-stone-600 dark:text-stone-400 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 hover:text-stone-900 dark:hover:text-stone-100 transition flex items-center gap-3">
+            <span>📸</span> Dokumentasi Foto
+          </button>
+          <button onclick="switchPage('anggota')" class="nav-item w-full text-left px-3.5 py-2.5 rounded-xl text-stone-600 dark:text-stone-400 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 hover:text-stone-900 dark:hover:text-stone-100 transition flex items-center gap-3">
+            <span>👥</span> Anggota Kelas
+          </button>
+        </nav>
+      </div>
+
+      <!-- Drawer Footer -->
+      <div class="pt-4 border-t border-stone-300/60 dark:border-stone-700/60 text-[10px] text-stone-500 text-center">
+        X TJKT 4 Digital Hub &copy; 2026
+      </div>
+    </div>
+  </div>
+
   <!-- Hero Header -->
-  <header class="max-w-5xl mx-auto px-6 pt-10 pb-6 text-center">
+  <header class="max-w-5xl mx-auto px-6 pt-8 pb-4 text-center">
     <span class="text-[11px] font-bold uppercase tracking-widest text-stone-600 dark:text-stone-400 border border-stone-300/60 dark:border-stone-700/60 px-3.5 py-1 rounded-full bg-[#eee7db]/50 dark:bg-[#262522]/50 backdrop-blur-md">
       Angkatan 2026 / 2029
     </span>
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-stone-900 dark:text-stone-100 tracking-tight mt-4">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-stone-900 dark:text-stone-100 tracking-tight mt-3">
       Teknik Jaringan Komputer & Telekomunikasi 4
     </h1>
     <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-2 font-medium max-w-lg mx-auto">
-      Ruang digital resmi untuk informasi, agenda kegiatan, galeri momen, dan interaksi anonim kelas.
+      Ruang digital resmi untuk informasi, agenda kegiatan, karya siswa, dan interaksi kelas.
     </p>
   </header>
 
-  <!-- BENTO GRID SYSTEM: DASHBOARD UTAMA -->
-  <section id="dashboard" class="max-w-5xl mx-auto px-6 my-6">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
-      
-      <!-- BENTO 1: WALI KELAS (4 cols) -->
-      <div onclick="openDetailModal('walikelas', 'https://files.catbox.moe/of3vv5.jpg', 'Mulyana Taupik, S.Kom.', 'Wali Kelas X TJKT 4')" class="md:col-span-4 bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-6 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm hover:border-sky-500/50 transition-all duration-300 cursor-pointer group flex flex-col justify-between">
-        <div>
-          <div class="flex justify-between items-center mb-4">
-            <span class="text-[10px] font-bold uppercase tracking-widest text-stone-600 dark:text-stone-400 border border-stone-300/60 dark:border-stone-700/60 px-2.5 py-0.5 rounded-full bg-stone-200/30 dark:bg-stone-800/30">Wali Kelas</span>
-            <span class="text-xs text-sky-500 group-hover:translate-x-0.5 transition-transform">➔</span>
-          </div>
-          <div class="w-24 h-24 mx-auto my-2 overflow-hidden rounded-full border-2 border-stone-300 dark:border-stone-700 group-hover:border-sky-500 transition-colors shadow-inner">
-            <img src="https://files.catbox.moe/of3vv5.jpg" alt="Mulyana Taupik, S.Kom." class="w-full h-full object-cover">
-          </div>
-          <h3 class="text-base font-extrabold text-stone-900 dark:text-stone-100 text-center tracking-tight mt-3 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Mulyana Taupik, S.Kom.</h3>
-          <p class="text-[11px] font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wider text-center mt-0.5">Pembimbing X TJKT 4</p>
-        </div>
-        <div class="mt-4 p-3 bg-[#f7f3eb]/60 dark:bg-[#181715]/60 backdrop-blur-sm rounded-2xl border border-stone-300/40 dark:border-stone-700/40 text-center">
-          <p class="text-[11px] italic text-stone-600 dark:text-stone-300 leading-relaxed">"Jadilah pembelajar sepanjang hayat dan teruslah berinovasi."</p>
-        </div>
-      </div>
+  <!-- CONTAINER LAMAN MULTI-PAGE (PAGE SWITCHER) -->
 
-      <!-- BENTO 2: AGENDA COUNTDOWN & PENGURUS (8 cols) -->
-      <div class="md:col-span-8 grid grid-cols-1 gap-5">
+  <!-- ================= PAGE 1: DASHBOARD UTAMA + SIDEBAR BERITA ================= -->
+  <main id="page-dashboard" class="page-section max-w-5xl mx-auto px-6 my-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- KOLOM UTAMA (8 cols) -->
+      <div class="lg:col-span-8 space-y-6">
         
-        <!-- COUNTDOWN AGENDA -->
-        <div class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-6 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between">
+        <!-- BENTO WALI KELAS & CORE TEAM -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <!-- Wali Kelas -->
+          <div onclick="openDetailModal('walikelas', 'https://files.catbox.moe/of3vv5.jpg', 'Mulyana Taupik, S.Kom.', 'Wali Kelas X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-5 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm hover:border-sky-500/50 transition-all cursor-pointer group flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-stone-600 dark:text-stone-400 border border-stone-300/60 dark:border-stone-700/60 px-2 py-0.5 rounded-full bg-stone-200/30 dark:bg-stone-800/30">Wali Kelas</span>
+                <span class="text-xs text-sky-500 group-hover:translate-x-0.5 transition-transform">➔</span>
+              </div>
+              <div class="w-16 h-16 mx-auto my-2 overflow-hidden rounded-full border-2 border-stone-300 dark:border-stone-700 group-hover:border-sky-500 transition-colors shadow-inner">
+                <img src="https://files.catbox.moe/of3vv5.jpg" alt="Mulyana Taupik, S.Kom." class="w-full h-full object-cover">
+              </div>
+              <h3 class="text-sm font-extrabold text-stone-900 dark:text-stone-100 text-center tracking-tight mt-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Mulyana Taupik, S.Kom.</h3>
+            </div>
+            <p class="text-[10px] italic text-stone-500 dark:text-stone-400 text-center mt-3 leading-relaxed">"Jadilah pembelajar sepanjang hayat."</p>
+          </div>
+
+          <!-- Core Team & Piket -->
+          <div class="space-y-4">
+            <div class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500 dark:text-stone-400 block mb-2">Core Team</span>
+              <div class="space-y-1.5 text-xs">
+                <div class="flex justify-between items-center border-b border-stone-300/40 dark:border-stone-700/40 pb-1">
+                  <span class="text-stone-600 dark:text-stone-400">Ketua</span>
+                  <span class="font-bold text-stone-900 dark:text-stone-100">Wandi Sopandi</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-stone-600 dark:text-stone-400">Wakil</span>
+                  <span class="font-bold text-stone-900 dark:text-stone-100">M.Muhtar Atarid</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500 dark:text-stone-400 block mb-1">🧹 Piket Hari Ini</span>
+              <div id="piket-today" class="text-xs text-stone-800 dark:text-stone-200 font-medium">
+                <span class="text-stone-400 italic">Memuat...</span>
+              </div>
+              <button onclick="togglePiketModal()" class="mt-2 text-[10px] font-bold text-sky-600 dark:text-sky-400 hover:underline">Semua Hari ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- COUNTDOWN AGENDA MINGGUAN -->
+        <div class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-6 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-sky-500"></span>
               <h2 class="text-xs font-bold uppercase tracking-widest text-stone-600 dark:text-stone-400">Agenda Mingguan</h2>
@@ -113,7 +187,7 @@
             <span class="text-[10px] font-extrabold uppercase tracking-widest text-sky-600 dark:text-sky-400 border border-sky-500/30 px-3 py-0.5 rounded-full bg-sky-500/10">Senin ➔ Minggu</span>
           </div>
 
-          <div class="grid grid-cols-4 gap-3 my-4">
+          <div class="grid grid-cols-4 gap-3">
             <div class="bg-[#f7f3eb]/70 dark:bg-[#181715]/70 backdrop-blur-sm p-3 rounded-2xl border border-stone-300/50 dark:border-stone-700/50 text-center">
               <span id="cd-days" class="block text-2xl font-black text-stone-900 dark:text-stone-100">00</span>
               <span class="text-[9px] text-stone-500 dark:text-stone-400 uppercase font-bold tracking-wider">Hari</span>
@@ -131,68 +205,81 @@
               <span class="text-[9px] text-stone-500 dark:text-stone-400 uppercase font-bold tracking-wider">Detik</span>
             </div>
           </div>
-          <p class="text-[11px] text-stone-500 dark:text-stone-400 text-center">Hitung mundur otomatis menuju pergantian jadwal kegiatan kelas berikutnya.</p>
-        </div>
-
-        <!-- PENGURUS KELAS & PIKET (SUB-GRID) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <!-- Pengurus -->
-          <div class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-5 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm">
-            <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500 dark:text-stone-400 block mb-3">Core Team</span>
-            <div class="space-y-2.5 text-xs">
-              <div class="flex justify-between items-center border-b border-stone-300/40 dark:border-stone-700/40 pb-2">
-                <span class="text-stone-600 dark:text-stone-400">Ketua Kelas</span>
-                <span class="font-bold text-stone-900 dark:text-stone-100">Wandi Sopandi</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-stone-600 dark:text-stone-400">Wakil Ketua</span>
-                <span class="font-bold text-stone-900 dark:text-stone-100">M.Muhtar Atarid</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Jadwal Piket Ringkas -->
-          <div class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-5 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm flex flex-col justify-between">
-            <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500 dark:text-stone-400 block mb-2">🧹 Piket Hari Ini</span>
-            <div id="piket-today" class="text-xs text-stone-800 dark:text-stone-200 font-medium">
-              <!-- Rendered via Javascript -->
-              <span class="text-stone-400 italic">Memuat jadwal...</span>
-            </div>
-            <button onclick="togglePiketModal()" class="mt-3 text-[10px] font-bold text-sky-600 dark:text-sky-400 hover:underline text-left">Lihat Semua Hari ➔</button>
-          </div>
         </div>
 
       </div>
-    </div>
-  </section>
 
-  <!-- FITUR UNIK 1: SPIN THE WHEEL (ACAK SISWA / TUGAS / JAJAN) -->
-  <section id="spin-wheel" class="max-w-5xl mx-auto px-6 my-12">
+      <!-- KOLOM SIDEBAR BERITA & SOROTAN KELAS (4 cols) -->
+      <aside class="lg:col-span-4 bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-5 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm h-fit">
+        <div class="flex items-center justify-between pb-3 border-b border-stone-300/50 dark:border-stone-700/50 mb-4">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-stone-900 dark:text-stone-100 flex items-center gap-1.5">
+            📰 Sidebar Berita
+          </h2>
+          <span class="text-[9px] font-bold text-sky-600 dark:text-sky-400 uppercase bg-sky-500/10 px-2 py-0.5 rounded-full">Sorotan</span>
+        </div>
+
+        <div class="space-y-3.5">
+          <div onclick="openDetailModal('berita1', 'https://files.catbox.moe/vwyss4.jpg', 'TOP ORANG GANTENG', 'ORANG GANTENG • Agustus 2026')" class="flex gap-3 items-center p-2 rounded-2xl hover:bg-[#f7f3eb]/80 dark:hover:bg-[#181715]/80 transition cursor-pointer group">
+            <img src="https://files.catbox.moe/vwyss4.jpg" alt="Berita 1" class="w-16 h-14 object-cover rounded-xl border border-stone-300 dark:border-stone-700 flex-shrink-0">
+            <div>
+              <span class="text-[9px] font-bold text-sky-600 dark:text-sky-400 uppercase">Ganteng</span>
+              <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs line-clamp-1 group-hover:text-sky-500 transition">TOP ORANG GANTENG</h3>
+              <p class="text-[10px] text-stone-500">Agustus 2026</p>
+            </div>
+          </div>
+
+          <div onclick="openDetailModal('berita2', 'https://files.catbox.moe/772hlh.jpg', 'KIYA RACING', 'Praktikum • Agustus 2026')" class="flex gap-3 items-center p-2 rounded-2xl hover:bg-[#f7f3eb]/80 dark:hover:bg-[#181715]/80 transition cursor-pointer group">
+            <img src="https://files.catbox.moe/772hlh.jpg" alt="KIYA RACING" class="w-16 h-14 object-cover rounded-xl border border-stone-300 dark:border-stone-700 flex-shrink-0">
+            <div>
+              <span class="text-[9px] font-bold text-sky-600 dark:text-sky-400 uppercase">Praktikum</span>
+              <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs line-clamp-1 group-hover:text-sky-500 transition">KIYA RACING</h3>
+              <p class="text-[10px] text-stone-500">Agustus 2026</p>
+            </div>
+          </div>
+
+          <div onclick="openDetailModal('berita3', 'https://files.catbox.moe/j5ae08.jpg', 'Judul Berita 3', 'Orang dibuang • Agustus 2026')" class="flex gap-3 items-center p-2 rounded-2xl hover:bg-[#f7f3eb]/80 dark:hover:bg-[#181715]/80 transition cursor-pointer group">
+            <img src="https://files.catbox.moe/j5ae08.jpg" alt="Berita 3" class="w-16 h-14 object-cover rounded-xl border border-stone-300 dark:border-stone-700 flex-shrink-0">
+            <div>
+              <span class="text-[9px] font-bold text-sky-600 dark:text-sky-400 uppercase">Berita</span>
+              <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs line-clamp-1 group-hover:text-sky-500 transition">Judul Berita 3</h3>
+              <p class="text-[10px] text-stone-500">Agustus 2026</p>
+            </div>
+          </div>
+
+          <div onclick="openDetailModal('berita4', 'https://files.catbox.moe/rplpym.jpg', 'HARIS ZIGZAG', 'Prestasi • Agustus 2026')" class="flex gap-3 items-center p-2 rounded-2xl hover:bg-[#f7f3eb]/80 dark:hover:bg-[#181715]/80 transition cursor-pointer group">
+            <img src="https://files.catbox.moe/rplpym.jpg" alt="HARIS ZIGZAG" class="w-16 h-14 object-cover rounded-xl border border-stone-300 dark:border-stone-700 flex-shrink-0">
+            <div>
+              <span class="text-[9px] font-bold text-sky-600 dark:text-sky-400 uppercase">Prestasi</span>
+              <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs line-clamp-1 group-hover:text-sky-500 transition">HARIS ZIGZAG</h3>
+              <p class="text-[10px] text-stone-500">Agustus 2026</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- ================= PAGE 2: SPIN WHEEL ================= -->
+  <main id="page-spin-wheel" class="page-section hidden max-w-5xl mx-auto px-6 my-6">
     <div class="flex justify-between items-end mb-4 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
       <div>
         <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest block">Interactive Game</span>
         <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">🎡 Roda Acak TJKT 4 (Spin Wheel)</h2>
       </div>
-      <span class="text-[10px] font-bold text-amber-500 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-full uppercase tracking-wider">Random Picker</span>
     </div>
 
     <div class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-6 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-      
-      <!-- Visual Roda Canvas -->
       <div class="md:col-span-6 flex flex-col items-center relative">
-        <!-- Panah Penunjuk Top -->
         <div class="absolute -top-3 z-10 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[20px] border-t-red-500 drop-shadow-md"></div>
-        
         <div class="w-64 h-64 sm:w-72 sm:h-72 relative rounded-full border-4 border-stone-300 dark:border-stone-700 shadow-xl overflow-hidden bg-stone-900 flex items-center justify-center">
           <canvas id="wheel-canvas" width="300" height="300" class="w-full h-full"></canvas>
         </div>
-
         <button id="spin-btn" onclick="spinWheel()" class="mt-5 px-8 py-2.5 bg-amber-500 hover:bg-amber-600 text-stone-950 font-black text-xs uppercase tracking-widest rounded-2xl shadow-md transition active:scale-95 flex items-center gap-2">
           <span>🎯 SPARK THE WHEEL</span>
         </button>
       </div>
 
-      <!-- Control Panel & Pilihan Preset -->
       <div class="md:col-span-6 space-y-4">
         <div>
           <label class="text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider block mb-1">Pilih Mode Roda:</label>
@@ -209,29 +296,24 @@
           <button onclick="updateWheelFromCustom()" class="mt-1 text-[10px] font-bold text-amber-600 dark:text-amber-400 hover:underline">Apply Custom List ➔</button>
         </div>
 
-        <!-- Result Card Box -->
         <div id="wheel-result-card" class="bg-[#f7f3eb]/80 dark:bg-[#181715]/80 p-4 rounded-2xl border border-amber-500/40 text-center space-y-1">
           <span class="text-[10px] uppercase font-bold text-stone-400 tracking-widest block">Hasil Spin</span>
           <h3 id="wheel-winner" class="text-lg font-black text-amber-500 tracking-tight">Siap Diputar!</h3>
         </div>
       </div>
-
     </div>
-  </section>
+  </main>
 
-  <!-- FITUR UNIK 2: TJKT COMMAND CENTER (TERMINAL) -->
-  <section id="command-center" class="max-w-5xl mx-auto px-6 my-12">
+  <!-- ================= PAGE 3: TERMINAL CLI ================= -->
+  <main id="page-command-center" class="page-section hidden max-w-5xl mx-auto px-6 my-6">
     <div class="flex justify-between items-end mb-4 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
       <div>
-        <span class="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block">Fitur Unik</span>
+        <span class="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block">Interactive CLI</span>
         <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">🖥️ TJKT 4 Command Center</h2>
       </div>
-      <span class="text-[10px] font-bold text-emerald-500 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full uppercase tracking-wider">● Node Active</span>
     </div>
 
-    <!-- Terminal Box -->
     <div class="bg-[#121212] rounded-3xl border border-stone-800 shadow-xl overflow-hidden font-mono text-xs">
-      <!-- Terminal Header Bar -->
       <div class="bg-[#1e1e1e] px-4 py-3 flex items-center justify-between border-b border-stone-800">
         <div class="flex items-center gap-2">
           <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
@@ -242,7 +324,6 @@
         <span class="text-[10px] text-stone-500 font-semibold uppercase">Pterodactyl Node #1</span>
       </div>
 
-      <!-- Terminal Output Content -->
       <div class="p-5 space-y-3 text-stone-300 leading-relaxed">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-800/80 pb-3">
           <div>
@@ -276,7 +357,6 @@
           </div>
         </div>
 
-        <!-- Interactive CLI Simulator Input -->
         <div class="pt-3 border-t border-stone-800/80">
           <p class="text-stone-400 mb-2">$ Ketik perintah (<span class="text-amber-400">help</span>, <span class="text-amber-400">ping</span>, <span class="text-amber-400">walikelas</span>, <span class="text-amber-400">jadwal</span>, <span class="text-amber-400">clear</span>):</p>
           <form id="terminal-form" class="flex gap-2 items-center">
@@ -288,7 +368,244 @@
         </div>
       </div>
     </div>
-  </section>
+  </main>
+
+  <!-- ================= PAGE 4: MENFESS ================= -->
+  <main id="page-menfess" class="page-section hidden max-w-5xl mx-auto px-6 my-6">
+    <div class="flex justify-between items-end mb-4 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
+      <div>
+        <span class="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block">Interaktif</span>
+        <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">💬 Menfess Kelas (Pesan Anonim)</h2>
+      </div>
+    </div>
+    
+    <form id="menfess-form" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-5 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 space-y-3 mb-6 shadow-sm">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <input type="text" id="menfess-from" placeholder="Dari: (misal: Secret Admirer / Anonim)" class="bg-[#f7f3eb]/70 dark:bg-[#181715]/70 backdrop-blur-sm border border-stone-300/60 dark:border-stone-700/60 rounded-2xl px-3.5 py-2.5 text-xs text-stone-900 dark:text-stone-100 focus:outline-none">
+        <input type="text" id="menfess-to" placeholder="Untuk: (misal: Seseorang / Seluruh Kelas)" required class="bg-[#f7f3eb]/70 dark:bg-[#181715]/70 backdrop-blur-sm border border-stone-300/60 dark:border-stone-700/60 rounded-2xl px-3.5 py-2.5 text-xs text-stone-900 dark:text-stone-100 focus:outline-none">
+      </div>
+      <textarea id="menfess-text" rows="3" placeholder="Tulis pesan rahasia, ucapan, atau curhatan kamu di sini..." required class="w-full bg-[#f7f3eb]/70 dark:bg-[#181715]/70 backdrop-blur-sm border border-stone-300/60 dark:border-stone-700/60 rounded-2xl p-3.5 text-xs text-stone-900 dark:text-stone-100 focus:outline-none"></textarea>
+      <button type="submit" id="btn-send-menfess" class="w-full py-2.5 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 text-stone-100 dark:text-stone-900 font-bold text-xs rounded-2xl transition active:scale-98 shadow-sm">
+        🚀 Kirim Menfess Anonim
+      </button>
+    </form>
+
+    <div id="menfess-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <p class="text-xs text-stone-400 italic col-span-2 text-center py-4">Memuat pesan menfess...</p>
+    </div>
+  </main>
+
+  <!-- ================= PAGE 5: GALERI KARYA & PROJECT SHOWCASE (BARU) ================= -->
+  <main id="page-karya" class="page-section hidden max-w-5xl mx-auto px-6 my-6">
+    <div class="flex justify-between items-end mb-6 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
+      <div>
+        <span class="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest block">Project Showcase</span>
+        <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">🎨 Galeri Karya & Hasil Kreativitas Siswa</h2>
+      </div>
+      <span class="text-[10px] font-bold text-purple-500 bg-purple-500/10 border border-purple-500/20 px-2.5 py-1 rounded-full uppercase tracking-wider">Showcase Hub</span>
+    </div>
+
+    <!-- Grid Karya Digital Siswa -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+      
+      <!-- Kartu Karya 1: Logo Design Billy-Gen -->
+      <div class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm hover:border-purple-500/50 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-stone-300/50 dark:border-stone-700/50 bg-stone-900">
+            <img src="https://files.catbox.moe/vwyss4.jpg" alt="Logo Billy-Gen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">Logo Design</span>
+            <span class="text-[10px] text-stone-500 font-medium">PicsArt & AM</span>
+          </div>
+          <h3 class="font-extrabold text-stone-900 dark:text-stone-100 text-sm tracking-tight mt-1">Logo Character Anime "Billy - Gen"</h3>
+          <p class="text-xs text-stone-600 dark:text-stone-400 mt-1 leading-relaxed">Desain logo kustom bernuansa abu-abu modern dengan ilustrasi anime.</p>
+        </div>
+        <div class="border-t border-stone-300/40 dark:border-stone-700/40 pt-2.5 mt-3 flex justify-between items-center text-[10px]">
+          <span class="font-bold text-stone-700 dark:text-stone-300">By: Billy & Gen</span>
+          <span class="text-purple-600 dark:text-purple-400 font-semibold">★ Featured Work</span>
+        </div>
+      </div>
+
+      <!-- Kartu Karya 2: WhatsApp Multitasking Bot -->
+      <div class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm hover:border-emerald-500/50 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-stone-300/50 dark:border-stone-700/50 bg-stone-950 p-4 font-mono text-[10px] text-emerald-400 flex items-center justify-center">
+            <span>[Termux Node.js]<br>> bot-wa active...<br>> Multitasking system ready</span>
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">Bot Script</span>
+            <span class="text-[10px] text-stone-500 font-medium">Termux Node</span>
+          </div>
+          <h3 class="font-extrabold text-stone-900 dark:text-stone-100 text-sm tracking-tight mt-1">WhatsApp Automation & Multitasking Bot</h3>
+          <p class="text-xs text-stone-600 dark:text-stone-400 mt-1 leading-relaxed">Pengembangan skrip bot WA via Termux untuk otomasi tugas & pengelolaan server.</p>
+        </div>
+        <div class="border-t border-stone-300/40 dark:border-stone-700/40 pt-2.5 mt-3 flex justify-between items-center text-[10px]">
+          <span class="font-bold text-stone-700 dark:text-stone-300">By: Tim Dev TJKT 4</span>
+          <span class="text-emerald-600 dark:text-emerald-400 font-semibold">● Active Script</span>
+        </div>
+      </div>
+
+      <!-- Kartu Karya 3: Pterodactyl Server Management -->
+      <div class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm hover:border-sky-500/50 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-stone-300/50 dark:border-stone-700/50 bg-stone-900 p-4 font-mono text-[10px] text-sky-400 flex items-center justify-center">
+            <span>Pterodactyl Panel v1.11<br>RAM: 16GB | CPU: 800%<br>Node Status: Healthy</span>
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20">Server Panel</span>
+            <span class="text-[10px] text-stone-500 font-medium">Hosting</span>
+          </div>
+          <h3 class="font-extrabold text-stone-900 dark:text-stone-100 text-sm tracking-tight mt-1">Konfigurasi Server Pterodactyl Panel</h3>
+          <p class="text-xs text-stone-600 dark:text-stone-400 mt-1 leading-relaxed">Manajemen server hosting jaringan untuk mengelola berbagai bot dan node kelas.</p>
+        </div>
+        <div class="border-t border-stone-300/40 dark:border-stone-700/40 pt-2.5 mt-3 flex justify-between items-center text-[10px]">
+          <span class="font-bold text-stone-700 dark:text-stone-300">By: Kiya & Admin</span>
+          <span class="text-sky-600 dark:text-sky-400 font-semibold">🌐 Live Server</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= PAGE 6: DOKUMENTASI FOTO ================= -->
+  <main id="page-galeri" class="page-section hidden max-w-5xl mx-auto px-6 my-6">
+    <div class="flex justify-between items-end mb-6 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
+      <div>
+        <span class="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block">Dokumentasi</span>
+        <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">📸 Galeri Foto Bersama</h2>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div onclick="openDetailModal('photo1', 'https://files.catbox.moe/b74ele.jpg', 'Momen Sesudah Apel X TJKT 4', 'Dokumentasi momen kebersamaan seluruh siswa-siswi dan wali kelas.')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-5 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm hover:border-sky-500/50 transition-all cursor-pointer active:scale-98">
+        <div class="overflow-hidden rounded-2xl mb-4 aspect-video border border-stone-300/50 dark:border-stone-700/50">
+          <img src="https://files.catbox.moe/b74ele.jpg" alt="Foto Bersama 1" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-sm">Momen Sesudah Apel X TJKT 4</h3>
+        <p class="text-xs text-stone-500 dark:text-stone-400 mt-1 leading-relaxed">Klik untuk memperbesar, beri suka, atau menulis komentar.</p>
+      </div>
+
+      <div onclick="openDetailModal('photo2', 'https://files.catbox.moe/nyusai.jpg', 'Sesi Foto Bersama Miss Nurina', 'Suasana saat sesi foto kelas TJKT 4.')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-5 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm hover:border-sky-500/50 transition-all cursor-pointer active:scale-98">
+        <div class="overflow-hidden rounded-2xl mb-4 aspect-video border border-stone-300/50 dark:border-stone-700/50">
+          <img src="https://files.catbox.moe/nyusai.jpg" alt="Foto Bersama 2" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-sm">Sesi Foto Bersama Miss Nurina</h3>
+        <p class="text-xs text-stone-500 dark:text-stone-400 mt-1 leading-relaxed">Klik untuk memperbesar, beri suka, atau menulis komentar.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= PAGE 7: ANGGOTA KELAS ================= -->
+  <main id="page-anggota" class="page-section hidden max-w-5xl mx-auto px-6 my-6">
+    <div class="flex justify-between items-end mb-6 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
+      <div>
+        <span class="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block">Direktori</span>
+        <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">👥 Anggota Kelas X TJKT 4 (32 Siswa)</h2>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <!-- SISWA (14 Orang) -->
+      <div onclick="openDetailModal('siswa-kiya', 'https://files.catbox.moe/t9zhwi.jpg', 'Kiyaarsyad Ganishwara', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
+          <img src="https://files.catbox.moe/t9zhwi.jpg" alt="Kiyaarsyad Ganishwara" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 transition-colors">Kiyaarsyad Ganishwara</h3>
+        <p class="text-[10px] text-sky-600 font-semibold mt-0.5">Siswa</p>
+      </div>
+
+      <div onclick="openDetailModal('siswa-rafa', 'https://files.catbox.moe/lnzqfg.jpg', 'M.Brilliant Rafa Ridhoca', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
+          <img src="https://files.catbox.moe/lnzqfg.jpg" alt="M.Brilliant Rafa Ridhoca" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 transition-colors">M.Brilliant Rafa Ridhoca</h3>
+        <p class="text-[10px] text-sky-600 font-semibold mt-0.5">Siswa</p>
+      </div>
+
+      <div onclick="openDetailModal('siswa-gilang', 'https://files.catbox.moe/s2p4xp.jpg', 'M.Gilang Febriyan', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
+          <img src="https://files.catbox.moe/s2p4xp.jpg" alt="M.Gilang Febriyan" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 transition-colors">M.Gilang Febriyan</h3>
+        <p class="text-[10px] text-sky-600 font-semibold mt-0.5">Siswa</p>
+      </div>
+
+      <div onclick="openDetailModal('siswa-haris', 'https://files.catbox.moe/4dcf9o.jpg', 'Haris', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
+          <img src="https://files.catbox.moe/4dcf9o.jpg" alt="Haris" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 transition-colors">Haris</h3>
+        <p class="text-[10px] text-sky-600 font-semibold mt-0.5">Siswa</p>
+      </div>
+
+      <div onclick="openDetailModal('siswa-wandi', 'https://files.catbox.moe/65aumq.jpg', 'Wandi Sopiandi', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
+          <img src="https://files.catbox.moe/65aumq.jpg" alt="Wandi Sopiandi" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 transition-colors">Wandi Sopiandi</h3>
+        <p class="text-[10px] text-sky-600 font-semibold mt-0.5">Siswa</p>
+      </div>
+
+      <div onclick="openDetailModal('siswa-alvin', 'https://files.catbox.moe/3p4rc6.jpg', 'Alvin Jaya Sukmana', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
+          <img src="https://files.catbox.moe/3p4rc6.jpg" alt="Alvin Jaya Sukmana" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 transition-colors">Alvin Jaya Sukmana</h3>
+        <p class="text-[10px] text-sky-600 font-semibold mt-0.5">Siswa</p>
+      </div>
+
+      <div onclick="openDetailModal('siswa-fhidel', 'https://files.catbox.moe/d6eugw.jpg', 'Fhidel Favian Rasyad', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
+          <img src="https://files.catbox.moe/d6eugw.jpg" alt="Fhidel Favian Rasyad" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 transition-colors">Fhidel Favian Rasyad</h3>
+        <p class="text-[10px] text-sky-600 font-semibold mt-0.5">Siswa</p>
+      </div>
+
+      <div onclick="openDetailModal('siswa-rojul', 'https://files.catbox.moe/0wq9ti.jpg', 'Rojul Drajat', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
+          <img src="https://files.catbox.moe/0wq9ti.jpg" alt="Rojul Drajat" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 transition-colors">Rojul Drajat</h3>
+        <p class="text-[10px] text-sky-600 font-semibold mt-0.5">Siswa</p>
+      </div>
+
+      <!-- SISWI (18 Orang) -->
+      <div onclick="openDetailModal('siswi-ainun', 'https://files.catbox.moe/c71at2.jpg', 'Ainun Nisa Dristia Putri', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
+          <img src="https://files.catbox.moe/c71at2.jpg" alt="Ainun Nisa Dristia Putri" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 transition-colors">Ainun Nisa Dristia Putri</h3>
+        <p class="text-[10px] text-pink-600 font-semibold mt-0.5">Siswi</p>
+      </div>
+
+      <div onclick="openDetailModal('siswi-melisa', 'https://files.catbox.moe/jr65v8.jpg', 'Melisa Putri Oktaripana', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
+          <img src="https://files.catbox.moe/jr65v8.jpg" alt="Melisa Putri Oktaripana" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 transition-colors">Melisa Putri Oktaripana</h3>
+        <p class="text-[10px] text-pink-600 font-semibold mt-0.5">Siswi</p>
+      </div>
+
+      <div onclick="openDetailModal('siswi-astria', 'https://files.catbox.moe/hzln3i.jpg', 'Astria Felany', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
+          <img src="https://files.catbox.moe/hzln3i.jpg" alt="Astria Felany" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 transition-colors">Astria Felany</h3>
+        <p class="text-[10px] text-pink-600 font-semibold mt-0.5">Siswi</p>
+      </div>
+
+      <div onclick="openDetailModal('siswi-fitri', 'https://files.catbox.moe/oq3okq.jpg', 'Fitri Aulia', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group shadow-sm">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
+          <img src="https://files.catbox.moe/oq3okq.jpg" alt="Fitri Aulia" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 transition-colors">Fitri Aulia</h3>
+        <p class="text-[10px] text-pink-600 font-semibold mt-0.5">Siswi</p>
+      </div>
+
+    </div>
+  </main>
 
   <!-- MODAL JADWAL PIKET LENGKAP -->
   <div id="piket-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-md flex items-center justify-center p-4" onclick="if(event.target === this) togglePiketModal()">
@@ -320,400 +637,16 @@
     </div>
   </div>
 
-  <!-- SECTION: MENFESS / PESAN ANONIM -->
-  <section id="menfess" class="max-w-5xl mx-auto px-6 my-12">
-    <div class="flex justify-between items-end mb-4 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
-      <div>
-        <span class="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block">Interaktif</span>
-        <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">💬 Menfess Kelas (Pesan Anonim)</h2>
-      </div>
-    </div>
-    
-    <!-- Form Kirim Menfess -->
-    <form id="menfess-form" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-5 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 space-y-3 mb-6 shadow-sm">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <input type="text" id="menfess-from" placeholder="Dari: (misal: Secret Admirer / Anonim)" class="bg-[#f7f3eb]/70 dark:bg-[#181715]/70 backdrop-blur-sm border border-stone-300/60 dark:border-stone-700/60 rounded-2xl px-3.5 py-2.5 text-xs text-stone-900 dark:text-stone-100 focus:outline-none focus:border-stone-500">
-        <input type="text" id="menfess-to" placeholder="Untuk: (misal: Seseorang / Seluruh Kelas)" required class="bg-[#f7f3eb]/70 dark:bg-[#181715]/70 backdrop-blur-sm border border-stone-300/60 dark:border-stone-700/60 rounded-2xl px-3.5 py-2.5 text-xs text-stone-900 dark:text-stone-100 focus:outline-none focus:border-stone-500">
-      </div>
-      <textarea id="menfess-text" rows="3" placeholder="Tulis pesan rahasia, ucapan, atau curhatan kamu di sini..." required class="w-full bg-[#f7f3eb]/70 dark:bg-[#181715]/70 backdrop-blur-sm border border-stone-300/60 dark:border-stone-700/60 rounded-2xl p-3.5 text-xs text-stone-900 dark:text-stone-100 focus:outline-none focus:border-stone-500"></textarea>
-      <button type="submit" id="btn-send-menfess" class="w-full py-2.5 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 text-stone-100 dark:text-stone-900 font-bold text-xs rounded-2xl transition active:scale-98 shadow-sm">
-        🚀 Kirim Menfess Anonim
-      </button>
-    </form>
-
-    <!-- Container Feed Menfess -->
-    <div id="menfess-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <p class="text-xs text-stone-400 italic col-span-2 text-center py-4">Memuat pesan menfess...</p>
-    </div>
-  </section>
-
-  <!-- SECTION: GALERI & DOKUMENTASI (TABBED VIEW) -->
-  <section id="galeri" class="max-w-5xl mx-auto px-6 my-12">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
-      <div>
-        <span class="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block">Dokumentasi</span>
-        <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">📸 Galeri & Berita Kelas</h2>
-      </div>
-
-      <!-- TAB CONTROLLER -->
-      <div class="flex p-1 bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-md border border-stone-300/60 dark:border-stone-700/60 rounded-2xl text-xs font-bold self-start sm:self-auto">
-        <button id="tab-berita-btn" onclick="switchTab('berita')" class="px-4 py-1.5 rounded-xl bg-stone-900 text-stone-100 dark:bg-stone-100 dark:text-stone-900 transition-all shadow-sm">
-          Berita
-        </button>
-        <button id="tab-foto-btn" onclick="switchTab('foto')" class="px-4 py-1.5 rounded-xl text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-all">
-          Foto Bersama
-        </button>
-      </div>
-    </div>
-
-    <!-- TAB 1: BERITA & SOROTAN -->
-    <div id="tab-berita" class="block">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        <div onclick="openDetailModal('berita1', 'https://files.catbox.moe/vwyss4.jpg', 'TOP ORANG GANTENG', 'ORANG GANTENG • Agustus 2026')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-3.5 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 cursor-pointer active:scale-95 group shadow-sm">
-          <div class="overflow-hidden rounded-xl mb-3 aspect-video border border-stone-300/50 dark:border-stone-700/50">
-            <img src="https://files.catbox.moe/vwyss4.jpg" alt="Berita 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-          </div>
-          <span class="text-[9px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider">ORANG GANTENG</span>
-          <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs mt-0.5 line-clamp-1">TOP ORANG GANTENG</h3>
-          <p class="text-[10px] text-stone-500 dark:text-stone-400 mt-1">Agustus 2026</p>
-        </div>
-
-        <div onclick="openDetailModal('berita2', 'https://files.catbox.moe/772hlh.jpg', 'KIYA RACING', 'Praktikum • Agustus 2026')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-3.5 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 cursor-pointer active:scale-95 group shadow-sm">
-          <div class="overflow-hidden rounded-xl mb-3 aspect-video border border-stone-300/50 dark:border-stone-700/50">
-            <img src="https://files.catbox.moe/772hlh.jpg" alt="KIYA RACING" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-          </div>
-          <span class="text-[9px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider">Praktikum</span>
-          <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs mt-0.5 line-clamp-1">KIYA RACING</h3>
-          <p class="text-[10px] text-stone-500 dark:text-stone-400 mt-1">Agustus 2026</p>
-        </div>
-
-        <div onclick="openDetailModal('berita3', 'https://files.catbox.moe/j5ae08.jpg', 'Judul Berita 3', 'Orang dibuang • Agustus 2026')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-3.5 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 cursor-pointer active:scale-95 group shadow-sm">
-          <div class="overflow-hidden rounded-xl mb-3 aspect-video border border-stone-300/50 dark:border-stone-700/50">
-            <img src="https://files.catbox.moe/j5ae08.jpg" alt="Berita 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-          </div>
-          <span class="text-[9px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider">Orang dibuang</span>
-          <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs mt-0.5 line-clamp-1">Judul Berita 3</h3>
-          <p class="text-[10px] text-stone-500 dark:text-stone-400 mt-1">Agustus 2026</p>
-        </div>
-
-        <div onclick="openDetailModal('berita4', 'https://files.catbox.moe/rplpym.jpg', 'HARIS ZIGZAG', 'Prestasi • Agustus 2026')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-3.5 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 cursor-pointer active:scale-95 group shadow-sm">
-          <div class="overflow-hidden rounded-xl mb-3 aspect-video border border-stone-300/50 dark:border-stone-700/50">
-            <img src="https://files.catbox.moe/rplpym.jpg" alt="HARIS ZIGZAG" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-          </div>
-          <span class="text-[9px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider">Prestasi</span>
-          <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs mt-0.5 line-clamp-1">HARIS ZIGZAG</h3>
-          <p class="text-[10px] text-stone-500 dark:text-stone-400 mt-1">Agustus 2026</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 2: FOTO BERSAMA -->
-    <div id="tab-foto" class="hidden">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div onclick="openDetailModal('photo1', 'https://files.catbox.moe/b74ele.jpg', 'Momen Sesudah Apel X TJKT 4', 'Dokumentasi momen kebersamaan seluruh siswa-siswi dan wali kelas.')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-5 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm hover:border-sky-500/50 transition-all cursor-pointer active:scale-98">
-          <div class="overflow-hidden rounded-2xl mb-4 aspect-video border border-stone-300/50 dark:border-stone-700/50">
-            <img src="https://files.catbox.moe/b74ele.jpg" alt="Foto Bersama 1" class="w-full h-full object-cover">
-          </div>
-          <h3 class="font-bold text-stone-900 dark:text-stone-100 text-sm">Momen Sesudah Apel X TJKT 4</h3>
-          <p class="text-xs text-stone-500 dark:text-stone-400 mt-1 leading-relaxed">Klik untuk memperbesar, beri suka, atau menulis komentar.</p>
-        </div>
-
-        <div onclick="openDetailModal('photo2', 'https://files.catbox.moe/nyusai.jpg', 'Sesi Foto Bersama Miss Nurina', 'Suasana saat sesi foto kelas TJKT 4.')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-5 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm hover:border-sky-500/50 transition-all cursor-pointer active:scale-98">
-          <div class="overflow-hidden rounded-2xl mb-4 aspect-video border border-stone-300/50 dark:border-stone-700/50">
-            <img src="https://files.catbox.moe/nyusai.jpg" alt="Foto Bersama 2" class="w-full h-full object-cover">
-          </div>
-          <h3 class="font-bold text-stone-900 dark:text-stone-100 text-sm">Sesi Foto Bersama Miss Nurina</h3>
-          <p class="text-xs text-stone-500 dark:text-stone-400 mt-1 leading-relaxed">Klik untuk memperbesar, beri suka, atau menulis komentar.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION: DAFTAR ANGGOTA (GRID UNIFORM) -->
-  <section id="anggota" class="max-w-5xl mx-auto px-6 my-12">
-    <div class="flex justify-between items-end mb-6 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
-      <div>
-        <span class="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block">Direktori</span>
-        <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">👥 Anggota Kelas X TJKT 4</h2>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-
-      <!-- ================= SISWA (14 Orang) ================= -->
-      <div onclick="openDetailModal('siswa-kiya', 'https://files.catbox.moe/t9zhwi.jpg', 'Kiyaarsyad Ganishwara', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/t9zhwi.jpg" alt="Kiyaarsyad Ganishwara" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Kiyaarsyad Ganishwara</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-rafa', 'https://files.catbox.moe/lnzqfg.jpg', 'M.Brilliant Rafa Ridhoca', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/lnzqfg.jpg" alt="M.Brilliant Rafa Ridhoca" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">M.Brilliant Rafa Ridhoca</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-gilang', 'https://files.catbox.moe/s2p4xp.jpg', 'M.Gilang Febriyan', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/s2p4xp.jpg" alt="M.Gilang Febriyan" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">M.Gilang Febriyan</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-haris', 'https://files.catbox.moe/4dcf9o.jpg', 'Haris', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/4dcf9o.jpg" alt="Haris" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Haris</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-wandi', 'https://files.catbox.moe/65aumq.jpg', 'Wandi Sopiandi', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/65aumq.jpg" alt="Wandi Sopiandi" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Wandi Sopiandi</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-alvin', 'https://files.catbox.moe/3p4rc6.jpg', 'Alvin Jaya Sukmana', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/3p4rc6.jpg" alt="Alvin Jaya Sukmana" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Alvin Jaya Sukmana</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-fhidel', 'https://files.catbox.moe/d6eugw.jpg', 'Fhidel Favian Rasyad', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/d6eugw.jpg" alt="Fhidel Favian Rasyad" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Fhidel Favian Rasyad</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-rojul', 'https://files.catbox.moe/0wq9ti.jpg', 'Rojul Drajat', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/0wq9ti.jpg" alt="Rojul Drajat" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Rojul Drajat</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-firli', 'https://files.catbox.moe/tzv0s9.jpg', 'M.Firli Maulana', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/tzv0s9.jpg" alt="M.Firli Maulana" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">M.Firli Maulana</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('Afzal Bagas Herlambang', 'https://files.catbox.moe/x2zp3x.jpg', 'Afzal Bagas Herlambang', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/x2zp3x.jpg" alt="Afzal Bagas Herlambang" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Afzal Bagas Herlambang</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-11', 'https://files.catbox.moe/wadgzt.jpg', 'M.Muhtar Atarid', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/wadgzt.jpg" alt="M.Muhtar Atarid" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">M.Muhtar Atarid</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-12', 'https://files.catbox.moe/fktblg.jpg', 'M.Fadil Ariandy', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors">
-          <img src="https://files.catbox.moe/fktblg.jpg" alt="M.Fadil Ariandy" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">M.Fadil Ariandy</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-13', 'https://files.catbox.moe/default-boy.jpg', 'Siswa 13', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors bg-stone-300 dark:bg-stone-700 flex items-center justify-center">
-          <span class="text-xs font-bold text-stone-600 dark:text-stone-300">13</span>
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Siswa 13</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswa-14', 'https://files.catbox.moe/default-boy.jpg', 'Siswa 14', 'Siswa X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-sky-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-sky-500 transition-colors bg-stone-300 dark:bg-stone-700 flex items-center justify-center">
-          <span class="text-xs font-bold text-stone-600 dark:text-stone-300">14</span>
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Siswa 14</h3>
-        <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Siswa</p>
-      </div>
-
-      <!-- ================= SISWI (18 Orang) ================= -->
-      <div onclick="openDetailModal('siswi-ainun', 'https://files.catbox.moe/c71at2.jpg', 'Ainun Nisa Dristia Putri', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/c71at2.jpg" alt="Ainun Nisa Dristia Putri" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Ainun Nisa Dristia Putri</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-melisa', 'https://files.catbox.moe/jr65v8.jpg', 'Melisa Putri Oktaripana', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/jr65v8.jpg" alt="Melisa Putri Oktaripana" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Melisa Putri Oktaripana</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-astria', 'https://files.catbox.moe/hzln3i.jpg', 'Astria Felany', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/hzln3i.jpg" alt="Astria Felany" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Astria Felany</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-fitri', 'https://files.catbox.moe/oq3okq.jpg', 'Fitri Aulia', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/oq3okq.jpg" alt="Fitri Aulia" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Fitri Aulia</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-sania', 'https://files.catbox.moe/x8np2i.jpg', 'Sania Nur\'aeni Yunengsih', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/x8np2i.jpg" alt="Sania Nur'aeni Yunengsih" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Sania Nur'aeni Yunengsih</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-sri', 'https://files.catbox.moe/od7jna.jpg', 'Neng Sri Maolidda', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/od7jna.jpg" alt="Neng Sri Maolidda" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Neng Sri Maolidda</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-adelia', 'https://files.catbox.moe/0it3y3.jpg', 'Adelia Meyse', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/0it3y3.jpg" alt="Adelia Meyse" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Adelia Meyse</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-dini', 'https://files.catbox.moe/noo9ty.jpg', 'Dini Indriani Kirana', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/noo9ty.jpg" alt="Dini Indriani Kirana" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Dini Indriani Kirana</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-rahmi', 'https://files.catbox.moe/wjnpvx.jpg', 'Rahmi Nurul Fauziah', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/wjnpvx.jpg" alt="Rahmi Nurul Fauziah" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Rahmi Nurul Fauziah</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-salwa', 'https://files.catbox.moe/l4zazc.jpg', 'Salwa Maharani', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/l4zazc.jpg" alt="Salwa Maharani" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Salwa Maharani</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-11', 'https://files.catbox.moe/cgzrjt.jpg', 'Siti Alfahra Nurrisman', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/cgzrjt.jpg" alt="Siti Alfahra Nurrisman" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Siti Alfahra Nurrisman</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-12', 'https://files.catbox.moe/1dz5rx.jpg', 'Adelia', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/1dz5rx.jpg" alt="Adelia" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Adelia</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-13', 'https://files.catbox.moe/b6zusd.jpg', 'Gisni Nurul Karimah', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/b6zusd.jpg" alt="Gisni Nurul Karimah" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Gisni Nurul Karimah</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-14', 'https://files.catbox.moe/nkm7q7.jpg', 'Marisyha Melati Putri', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/nkm7q7.jpg" alt="Marisyha Melati Putri" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Marisyha Melati Putri</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-15', 'https://files.catbox.moe/ire5bc.jpg', 'Husna Kholifatul Ulya', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/ire5bc.jpg" alt="Husna Kholifatul Ulya" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Husna Kholifatul Ulya</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-16', 'https://files.catbox.moe/tltzpm.jpg', 'Mulia Dwi Yanti', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/tltzpm.jpg" alt="Mulia Dwi Yanti" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Mulia Dwi Yanti</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-17', 'https://files.catbox.moe/tltzpm.jpg', 'Mutiara Diana Putri', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors">
-          <img src="https://files.catbox.moe/tltzpm.jpg" alt="Mutiara Diana Putri" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Mutiara Diana Putri</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-18', 'https://files.catbox.moe/default-girl.jpg', 'Siswi 18', 'Siswi X TJKT 4')" class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-4 rounded-2xl border border-stone-300/60 dark:border-stone-700/60 hover:border-pink-500/50 transition-all duration-300 text-center cursor-pointer active:scale-95 group shadow-sm">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2.5 border border-stone-300/80 dark:border-stone-700 group-hover:border-pink-500 transition-colors bg-stone-300 dark:bg-stone-700 flex items-center justify-center">
-          <span class="text-xs font-bold text-stone-600 dark:text-stone-300">18</span>
-        </div>
-        <h3 class="font-bold text-stone-900 dark:text-stone-100 text-xs truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Siswi 18</h3>
-        <p class="text-[10px] text-pink-600 dark:text-pink-400 font-semibold mt-0.5">Siswi</p>
-      </div>
-
-    </div>
-  </section>
-
   <!-- MODAL LIGHTBOX DETAIL/PREVIEW & INTERAKSI KOMENTAR -->
   <div id="image-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-md flex items-center justify-center p-4 transition-all duration-300" onclick="if(event.target === this) closeModal()">
     <div class="bg-[#efe9dd]/90 dark:bg-[#262522]/90 backdrop-blur-2xl border border-stone-300/80 dark:border-stone-700/80 rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-2xl">
       
-      <!-- Tombol Close -->
       <button onclick="closeModal()" class="absolute top-4 right-4 text-stone-500 hover:text-stone-900 dark:hover:text-white text-lg font-bold p-1 z-10 transition">✕</button>
 
-      <!-- Foto Preview -->
       <div class="overflow-hidden rounded-2xl mb-4 aspect-square max-h-80 border border-stone-300/60 dark:border-stone-700/60 bg-black/10">
         <img id="modal-img" src="" alt="Detail Preview" class="w-full h-full object-contain">
       </div>
 
-      <!-- Info Header Modal -->
       <div class="flex justify-between items-start">
         <div>
           <h3 id="modal-title" class="font-extrabold text-stone-900 dark:text-stone-100 text-lg tracking-tight"></h3>
@@ -724,9 +657,8 @@
         </button>
       </div>
 
-      <!-- Action Status -->
       <div class="flex items-center justify-between border-t border-b border-stone-300/60 dark:border-stone-700/60 py-2.5 my-3 text-xs">
-        <button id="modal-like-btn" class="flex items-center gap-1.5 text-stone-600 dark:text-stone-400 hover:text-red-500 dark:hover:text-red-400 transition font-semibold">
+        <button id="modal-like-btn" class="flex items-center gap-1.5 text-stone-600 dark:text-stone-400 hover:text-red-500 transition font-semibold">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
           <span id="modal-like-count">0</span> Suka
         </button>
@@ -735,13 +667,11 @@
         </span>
       </div>
 
-      <!-- Feed Komentar Realtime -->
       <div class="space-y-3">
         <div id="modal-comments-container" class="space-y-2 max-h-40 overflow-y-auto pr-1 text-xs">
           <p class="text-stone-400 italic">Belum ada komentar...</p>
         </div>
 
-        <!-- GIF Picker Popup -->
         <div id="sticker-picker" class="hidden p-3 bg-[#f7f3eb]/80 dark:bg-[#181715]/80 backdrop-blur-md border border-stone-300/60 dark:border-stone-700/60 rounded-2xl mb-2 space-y-2">
           <div class="flex gap-2">
             <input type="text" id="gif-search-input" placeholder="Cari GIF (misal: cat, kaget, lucu)..." class="flex-1 bg-[#efe9dd]/80 dark:bg-[#262522]/80 border border-stone-300/60 dark:border-stone-700/60 rounded-xl px-3 py-1.5 text-xs text-stone-900 dark:text-stone-100 focus:outline-none">
@@ -752,7 +682,6 @@
           </div>
         </div>
 
-        <!-- Input Form Komentar -->
         <form id="modal-comment-form" class="flex gap-2 pt-1">
           <button type="button" onclick="toggleStickerPicker()" class="px-2.5 py-2 bg-stone-300/60 dark:bg-stone-700/60 hover:bg-stone-400 dark:hover:bg-stone-600 text-stone-800 dark:text-stone-200 rounded-xl text-xs transition active:scale-95" title="GIF">
             😊 GIF
@@ -776,8 +705,36 @@
     </a>
   </footer>
 
-  <!-- Script Logika UI, Dark Mode, & Dynamic Piket -->
+  <!-- Script Logika SPA Navigation, Dark Mode, & Wheel -->
   <script>
+    // LOGIKA SWITCH PAGE (SINGLE PAGE APPLICATION)
+    function switchPage(pageId) {
+      // Sembunyikan semua page-section
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(sec => sec.classList.add('hidden'));
+
+      // Tampilkan page yang dipilih
+      const targetPage = document.getElementById('page-' + pageId);
+      if (targetPage) {
+        targetPage.classList.remove('hidden');
+      }
+
+      // Update style tombol di drawer
+      const navButtons = document.querySelectorAll('#drawer-menu .nav-item');
+      navButtons.forEach(btn => {
+        btn.className = "nav-item w-full text-left px-3.5 py-2.5 rounded-xl text-stone-600 dark:text-stone-400 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 hover:text-stone-900 dark:hover:text-stone-100 transition flex items-center gap-3";
+      });
+
+      // Close drawer setelah memilih menu
+      document.getElementById('drawer-menu').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Toggle Drawer Menu
+    function toggleDrawer() {
+      document.getElementById('drawer-menu').classList.toggle('hidden');
+    }
+
     // Dark Mode Toggle
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
@@ -809,7 +766,6 @@
     let wheelItems = [...wheelDataPresets.semua];
     let currentDegree = 0;
     let isSpinning = false;
-
     const colors = ["#0284c7", "#f59e0b", "#10b981", "#ec4899", "#8b5cf6", "#f97316", "#14b8a6", "#6366f1"];
 
     function drawWheel() {
@@ -870,7 +826,7 @@
       spinBtn.disabled = true;
       spinBtn.classList.add('opacity-50');
 
-      const extraSpins = 5 + Math.floor(Math.random() * 5); // 5-10 spins
+      const extraSpins = 5 + Math.floor(Math.random() * 5);
       const randomDegree = Math.floor(Math.random() * 360);
       const totalDegrees = extraSpins * 360 + randomDegree;
 
@@ -927,40 +883,19 @@
       }
     });
 
-    // Tab Switcher Galeri
-    function switchTab(tabName) {
-      const tabBerita = document.getElementById('tab-berita');
-      const tabFoto = document.getElementById('tab-foto');
-      const btnBerita = document.getElementById('tab-berita-btn');
-      const btnFoto = document.getElementById('tab-foto-btn');
-
-      if (tabName === 'berita') {
-        tabBerita.classList.remove('hidden');
-        tabFoto.classList.add('hidden');
-        btnBerita.className = "px-4 py-1.5 rounded-xl bg-stone-900 text-stone-100 dark:bg-stone-100 dark:text-stone-900 transition-all shadow-sm";
-        btnFoto.className = "px-4 py-1.5 rounded-xl text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-all";
-      } else {
-        tabFoto.classList.remove('hidden');
-        tabBerita.classList.add('hidden');
-        btnFoto.className = "px-4 py-1.5 rounded-xl bg-stone-900 text-stone-100 dark:bg-stone-100 dark:text-stone-900 transition-all shadow-sm";
-        btnBerita.className = "px-4 py-1.5 rounded-xl text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-all";
-      }
-    }
-
-    // Modal Piket Toggle
     function togglePiketModal() {
       document.getElementById('piket-modal').classList.toggle('hidden');
     }
 
-    // Dynamic Render Jadwal Piket Hari Ini
+    // Dynamic Render Piket Today
     const piketSchedule = {
-      1: "Haris, Wandi, Kiya, Ainun",      // Senin
-      2: "Rafa, Gilang, Melisa, Astria",   // Selasa
-      3: "Alvin, Fhidel, Fitri, Sania",    // Rabu
-      4: "Rojul, Firli, Adelia, Dini",     // Kamis
-      5: "Muhtar, Rahmi, Sri",             // Jumat
-      0: "Libur Akhir Pekan 🎉",           // Minggu
-      6: "Libur Akhir Pekan 🎉"            // Sabtu
+      1: "Haris, Wandi, Kiya, Ainun",
+      2: "Rafa, Gilang, Melisa, Astria",
+      3: "Alvin, Fhidel, Fitri, Sania",
+      4: "Rojul, Firli, Adelia, Dini",
+      5: "Muhtar, Rahmi, Sri",
+      0: "Libur Akhir Pekan 🎉",
+      6: "Libur Akhir Pekan 🎉"
     };
     
     const dayToday = new Date().getDay();
@@ -970,7 +905,7 @@
       piketEl.innerHTML = `<span class="text-sky-600 dark:text-sky-400 font-bold block mb-0.5">${dayToday === 0 || dayToday === 6 ? 'Akhir Pekan' : 'Hari Ini:'}</span> ${names}`;
     }
 
-    // Countdown Timer (Senin to Minggu)
+    // Countdown Timer
     function getNextSundayTarget() {
       const now = new Date();
       const target = new Date(now);
@@ -1023,10 +958,9 @@
 
     let activeUnsub = null;
     let activeId = null;
-
     const GIPHY_API_KEY = "5LH1haWcbeynWswBCKF02uErlR0xMZWf";
 
-    // ------------------- FITUR MENFESS REALTIME -------------------
+    // MENFESS REALTIME
     const menfessCollection = collection(db, "menfess");
     const menfessForm = document.getElementById('menfess-form');
     const menfessContainer = document.getElementById('menfess-container');
@@ -1106,7 +1040,7 @@
       }
     };
 
-    // ------------------- LOGIKA GIF GIPHY -------------------
+    // LOGIKA GIF GIPHY
     window.toggleStickerPicker = () => {
       const picker = document.getElementById('sticker-picker');
       picker.classList.toggle('hidden');
@@ -1146,9 +1080,7 @@
     };
 
     const btnSearchGif = document.getElementById('btn-search-gif');
-    if (btnSearchGif) {
-      btnSearchGif.addEventListener('click', () => searchGifs());
-    }
+    if (btnSearchGif) btnSearchGif.addEventListener('click', () => searchGifs());
     
     const inputSearchGif = document.getElementById('gif-search-input');
     if (inputSearchGif) {
@@ -1160,7 +1092,7 @@
       });
     }
 
-    // ------------------- MODAL DETAIL & KOMENTAR REALTIME -------------------
+    // MODAL DETAIL & KOMENTAR REALTIME
     window.openDetailModal = (id, imgSrc, title, subtitle = '') => {
       activeId = id;
       document.getElementById('modal-img').src = imgSrc;
@@ -1186,7 +1118,6 @@
             container.innerHTML = '';
             comments.forEach(c => {
               const isMedia = c.type === 'gif' || (c.text && c.text.startsWith('http'));
-              
               const textContent = isMedia 
                 ? `<img src="${escapeHtml(c.text)}" referrerpolicy="no-referrer" class="max-w-[200px] max-h-40 object-cover rounded-xl mt-1 border border-stone-300/80 dark:border-stone-700 bg-stone-200 dark:bg-stone-800">`
                 : `<span class="text-stone-600 dark:text-stone-400">${escapeHtml(c.text)}</span>`;
