@@ -100,9 +100,6 @@
           <a href="#spin-wheel" onclick="toggleDrawer()" class="w-full text-left px-3.5 py-2.5 rounded-xl text-stone-700 dark:text-stone-300 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 hover:text-stone-900 dark:hover:text-stone-100 transition flex items-center gap-3">
             <span>🎡</span> Spin Wheel
           </a>
-          <a href="#command-center" onclick="toggleDrawer()" class="w-full text-left px-3.5 py-2.5 rounded-xl text-stone-700 dark:text-stone-300 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 hover:text-stone-900 dark:hover:text-stone-100 transition flex items-center gap-3">
-            <span>🖥️</span> Terminal CLI
-          </a>
           <a href="#menfess" onclick="toggleDrawer()" class="w-full text-left px-3.5 py-2.5 rounded-xl text-stone-700 dark:text-stone-300 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 hover:text-stone-900 dark:hover:text-stone-100 transition flex items-center gap-3">
             <span>💬</span> Menfess Kelas
           </a>
@@ -389,73 +386,7 @@
     </div>
   </section>
 
-  <!-- ================= SECTION 5: TERMINAL CLI ================= -->
-  <section id="command-center" class="max-w-5xl mx-auto px-6 my-10">
-    <div class="flex justify-between items-end mb-4 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
-      <div>
-        <span class="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block">Interactive CLI</span>
-        <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">🖥️ TJKT 4 Command Center</h2>
-      </div>
-    </div>
-
-    <div class="bg-[#121212] rounded-3xl border border-stone-800 shadow-xl overflow-hidden font-mono text-xs">
-      <div class="bg-[#1e1e1e] px-4 py-3 flex items-center justify-between border-b border-stone-800">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
-          <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
-          <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
-          <span class="text-stone-400 text-[11px] font-bold ml-2">root@tjkt4-server:~</span>
-        </div>
-        <span class="text-[10px] text-stone-500 font-semibold uppercase">Pterodactyl Node #1</span>
-      </div>
-
-      <div class="p-5 space-y-3 text-stone-300 leading-relaxed">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-800/80 pb-3">
-          <div>
-            <span class="text-emerald-400 font-bold">[SYSTEM STATUS]:</span>
-            <span class="text-stone-200"> All services operational. 32 Members synced.</span>
-          </div>
-          <div class="text-[10px] text-stone-400">
-            Uptime: <span class="text-sky-400 font-bold">100% Solid</span>
-          </div>
-        </div>
-
-        <div class="space-y-1.5 py-1">
-          <p class="text-stone-400">$ tjkt4-cli fetch --metrics</p>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            <div class="bg-[#1a1a1a] p-3 rounded-xl border border-stone-800">
-              <span class="text-[10px] text-stone-500 uppercase block">Total Siswa</span>
-              <span class="text-base font-bold text-sky-400">14 Putra</span>
-            </div>
-            <div class="bg-[#1a1a1a] p-3 rounded-xl border border-stone-800">
-              <span class="text-[10px] text-stone-500 uppercase block">Total Siswi</span>
-              <span class="text-base font-bold text-pink-400">18 Putri</span>
-            </div>
-            <div class="bg-[#1a1a1a] p-3 rounded-xl border border-stone-800">
-              <span class="text-[10px] text-stone-500 uppercase block">Kapasitas Kelas</span>
-              <span class="text-base font-bold text-emerald-400">32 / 32</span>
-            </div>
-            <div class="bg-[#1a1a1a] p-3 rounded-xl border border-stone-800">
-              <span class="text-[10px] text-stone-500 uppercase block">Status Jaringan</span>
-              <span class="text-base font-bold text-purple-400">Connected</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="pt-3 border-t border-stone-800/80">
-          <p class="text-stone-400 mb-2">$ Ketik perintah (<span class="text-amber-400">help</span>, <span class="text-amber-400">ping</span>, <span class="text-amber-400">walikelas</span>, <span class="text-amber-400">jadwal</span>, <span class="text-amber-400">clear</span>):</p>
-          <form id="terminal-form" class="flex gap-2 items-center">
-            <span class="text-emerald-400 font-bold">tjkt4@root:~$</span>
-            <input type="text" id="terminal-input" autocomplete="off" placeholder="Ketik command..." class="flex-1 bg-transparent text-stone-100 focus:outline-none font-mono text-xs">
-            <button type="submit" class="px-3 py-1 bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-lg text-[11px] font-bold transition">EXEC</button>
-          </form>
-          <div id="terminal-response" class="mt-3 text-sky-300 hidden p-3 bg-[#181818] rounded-xl border border-stone-800/60"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= SECTION 6: MENFESS ================= -->
+  <!-- ================= SECTION 5: MENFESS ================= -->
   <section id="menfess" class="max-w-5xl mx-auto px-6 my-10">
     <div class="flex justify-between items-end mb-4 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
       <div>
@@ -480,7 +411,7 @@
     </div>
   </section>
 
-  <!-- ================= SECTION 7: DOKUMENTASI FOTO BERSAMA ================= -->
+  <!-- ================= SECTION 6: DOKUMENTASI FOTO BERSAMA ================= -->
   <section id="galeri" class="max-w-5xl mx-auto px-6 my-10">
     <div class="flex justify-between items-end mb-6 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
       <div>
@@ -508,7 +439,7 @@
     </div>
   </section>
 
-  <!-- ================= SECTION 8: DIREKTORI ANGGOTA KELAS LENGKAP (32 MURID) ================= -->
+  <!-- ================= SECTION 7: DIREKTORI ANGGOTA KELAS LENGKAP (32 MURID) ================= -->
   <section id="anggota" class="max-w-5xl mx-auto px-6 my-10">
     <div class="flex justify-between items-end mb-6 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
       <div>
@@ -879,7 +810,7 @@
     </a>
   </footer>
 
-  <!-- Script Logika UI, Dark Mode, Spin Wheel & CLI -->
+  <!-- Script Logika UI, Dark Mode, & Spin Wheel -->
   <script>
     // Toggle Drawer Menu
     function toggleDrawer() {
@@ -907,7 +838,7 @@
       themeIcon.innerText = '☀️';
     }
 
-    // SPIN THE WHEEL ENGINE
+    // SPIN THE WHEEL ENGINE (FIXED MATH INDEX CALCULATOR)
     const wheelDataPresets = {
       semua: ["Kiya", "Rafa", "Gilang", "Haris", "Wandi", "Alvin", "Fhidel", "Rojul", "Firli", "Afzal", "Muhtar", "Fadil", "Ainun", "Melisa", "Astria", "Fitri", "Sania", "Sri", "Adelia", "Dini", "Rahmi", "Salwa", "Alfahra", "Gisni", "Marisyha", "Husna", "Mulia", "Mutiara"],
       pria: ["Kiya", "Rafa", "Gilang", "Haris", "Wandi", "Alvin", "Fhidel", "Rojul", "Firli", "Afzal", "Muhtar", "Fadil"],
@@ -990,9 +921,11 @@
         spinBtn.disabled = false;
         spinBtn.classList.remove('opacity-50');
 
-        const actualDegree = (360 - (currentDegree % 360)) % 360;
+        // Kalkulasi posisi jarum penunjuk di atas (jam 12 / 270 derajat)
+        const finalDegree = currentDegree % 360;
+        const wheelAngleAtPointer = (270 - finalDegree + 3600) % 360;
         const arcDegree = 360 / wheelItems.length;
-        const winnerIndex = Math.floor(actualDegree / arcDegree);
+        const winnerIndex = Math.floor(wheelAngleAtPointer / arcDegree) % wheelItems.length;
 
         const winner = wheelItems[winnerIndex] || "Terpilih!";
         document.getElementById('wheel-winner').innerText = "🎉 " + winner;
@@ -1000,39 +933,6 @@
     }
 
     window.addEventListener('load', () => drawWheel());
-
-    // CLI Terminal Engine
-    const termForm = document.getElementById('terminal-form');
-    const termInput = document.getElementById('terminal-input');
-    const termResp = document.getElementById('terminal-response');
-
-    const commands = {
-      'help': '📋 Available commands: ping, walikelas, jadwal, members, status, clear',
-      'ping': '🏓 Pong! Latency: 12ms (Network TJKT 4 is blazing fast 🔥)',
-      'walikelas': '👨‍🏫 Wali Kelas: Mulyana Taupik, S.Kom. ("Jadilah pembelajar sepanjang hayat")',
-      'jadwal': '🧹 Piket: Senin (Haris, Wandi, Kiya, Ainun) | Selasa (Rafa, Gilang, Melisa, Astria)...',
-      'members': '👥 Total Siswa: 32 (14 Laki-laki & 18 Perempuan)',
-      'status': '🟢 Node Status: ONLINE | Pterodactyl Panel Version: 1.11.x',
-    };
-
-    termForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const cmd = termInput.value.trim().toLowerCase();
-      termInput.value = '';
-
-      if (cmd === 'clear') {
-        termResp.classList.add('hidden');
-        termResp.innerText = '';
-        return;
-      }
-
-      termResp.classList.remove('hidden');
-      if (commands[cmd]) {
-        termResp.innerHTML = `<span class="text-emerald-400 font-bold">> ${cmd}</span><br>${commands[cmd]}`;
-      } else {
-        termResp.innerHTML = `<span class="text-red-400 font-bold">> ${cmd}</span>: Command not found. Type <span class="text-amber-400">help</span> for commands.`;
-      }
-    });
 
     function togglePiketModal() {
       document.getElementById('piket-modal').classList.toggle('hidden');
