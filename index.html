@@ -24,6 +24,11 @@
       }
     }
   </script>
+  <style>
+    #wheel-canvas {
+      transition: transform 4s cubic-bezier(0.15, 0.99, 0.15, 0.99);
+    }
+  </style>
 </head>
 <body class="bg-[#f7f3eb] text-stone-900 font-sans antialiased selection:bg-stone-300/70 transition-colors duration-300 dark:bg-[#181715] dark:text-stone-100 min-h-screen pb-16">
 
@@ -37,6 +42,7 @@
       <div class="flex items-center space-x-3 sm:space-x-5">
         <div class="hidden md:flex space-x-6 text-xs font-bold uppercase tracking-wider text-stone-600 dark:text-stone-400">
           <a href="#dashboard" class="hover:text-stone-900 dark:hover:text-white transition">Dashboard</a>
+          <a href="#spin-wheel" class="hover:text-stone-900 dark:hover:text-white transition">Spin Wheel</a>
           <a href="#command-center" class="hover:text-stone-900 dark:hover:text-white transition">Terminal</a>
           <a href="#menfess" class="hover:text-stone-900 dark:hover:text-white transition">Menfess</a>
           <a href="#galeri" class="hover:text-stone-900 dark:hover:text-white transition">Galeri</a>
@@ -160,7 +166,60 @@
     </div>
   </section>
 
-  <!-- FITUR UNIK: TJKT COMMAND CENTER (TERMINAL) -->
+  <!-- FITUR UNIK 1: SPIN THE WHEEL (ACAK SISWA / TUGAS / JAJAN) -->
+  <section id="spin-wheel" class="max-w-5xl mx-auto px-6 my-12">
+    <div class="flex justify-between items-end mb-4 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
+      <div>
+        <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest block">Interactive Game</span>
+        <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">🎡 Roda Acak TJKT 4 (Spin Wheel)</h2>
+      </div>
+      <span class="text-[10px] font-bold text-amber-500 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-full uppercase tracking-wider">Random Picker</span>
+    </div>
+
+    <div class="bg-[#efe9dd]/60 dark:bg-[#262522]/60 backdrop-blur-xl p-6 rounded-3xl border border-stone-300/60 dark:border-stone-700/60 shadow-sm grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      
+      <!-- Visual Roda Canvas -->
+      <div class="md:col-span-6 flex flex-col items-center relative">
+        <!-- Panah Penunjuk Top -->
+        <div class="absolute -top-3 z-10 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[20px] border-t-red-500 drop-shadow-md"></div>
+        
+        <div class="w-64 h-64 sm:w-72 sm:h-72 relative rounded-full border-4 border-stone-300 dark:border-stone-700 shadow-xl overflow-hidden bg-stone-900 flex items-center justify-center">
+          <canvas id="wheel-canvas" width="300" height="300" class="w-full h-full"></canvas>
+        </div>
+
+        <button id="spin-btn" onclick="spinWheel()" class="mt-5 px-8 py-2.5 bg-amber-500 hover:bg-amber-600 text-stone-950 font-black text-xs uppercase tracking-widest rounded-2xl shadow-md transition active:scale-95 flex items-center gap-2">
+          <span>🎯 SPARK THE WHEEL</span>
+        </button>
+      </div>
+
+      <!-- Control Panel & Pilihan Preset -->
+      <div class="md:col-span-6 space-y-4">
+        <div>
+          <label class="text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider block mb-1">Pilih Mode Roda:</label>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="setWheelPreset('semua')" class="px-3 py-2 bg-[#f7f3eb]/80 dark:bg-[#181715]/80 border border-stone-300/60 dark:border-stone-700/60 rounded-xl text-[11px] font-bold text-stone-800 dark:text-stone-200 hover:border-amber-500 transition active:scale-95">👥 Semua</button>
+            <button onclick="setWheelPreset('pria')" class="px-3 py-2 bg-[#f7f3eb]/80 dark:bg-[#181715]/80 border border-stone-300/60 dark:border-stone-700/60 rounded-xl text-[11px] font-bold text-stone-800 dark:text-stone-200 hover:border-amber-500 transition active:scale-95">👦 Siswa</button>
+            <button onclick="setWheelPreset('wanita')" class="px-3 py-2 bg-[#f7f3eb]/80 dark:bg-[#181715]/80 border border-stone-300/60 dark:border-stone-700/60 rounded-xl text-[11px] font-bold text-stone-800 dark:text-stone-200 hover:border-amber-500 transition active:scale-95">👧 Siswi</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider block mb-1">Opsi Kustom (Pisahkan koma):</label>
+          <textarea id="wheel-custom-input" rows="2" placeholder="Nama 1, Nama 2, Nama 3..." class="w-full bg-[#f7f3eb]/80 dark:bg-[#181715]/80 border border-stone-300/60 dark:border-stone-700/60 rounded-xl p-2.5 text-xs text-stone-900 dark:text-stone-100 focus:outline-none"></textarea>
+          <button onclick="updateWheelFromCustom()" class="mt-1 text-[10px] font-bold text-amber-600 dark:text-amber-400 hover:underline">Apply Custom List ➔</button>
+        </div>
+
+        <!-- Result Card Box -->
+        <div id="wheel-result-card" class="bg-[#f7f3eb]/80 dark:bg-[#181715]/80 p-4 rounded-2xl border border-amber-500/40 text-center space-y-1">
+          <span class="text-[10px] uppercase font-bold text-stone-400 tracking-widest block">Hasil Spin</span>
+          <h3 id="wheel-winner" class="text-lg font-black text-amber-500 tracking-tight">Siap Diputar!</h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FITUR UNIK 2: TJKT COMMAND CENTER (TERMINAL) -->
   <section id="command-center" class="max-w-5xl mx-auto px-6 my-12">
     <div class="flex justify-between items-end mb-4 border-b border-stone-300/60 dark:border-stone-800/60 pb-3">
       <div>
@@ -740,6 +799,101 @@
       themeIcon.innerText = '☀️';
     }
 
+    // LOGIKA SPIN THE WHEEL CANVAS ENGINE
+    const wheelDataPresets = {
+      semua: ["Kiya", "Rafa", "Gilang", "Haris", "Wandi", "Alvin", "Fhidel", "Rojul", "Firli", "Afzal", "Muhtar", "Fadil", "Ainun", "Melisa", "Astria", "Fitri", "Sania", "Sri", "Adelia", "Dini", "Rahmi", "Salwa", "Alfahra", "Gisni", "Marisyha", "Husna", "Mulia", "Mutiara"],
+      pria: ["Kiya", "Rafa", "Gilang", "Haris", "Wandi", "Alvin", "Fhidel", "Rojul", "Firli", "Afzal", "Muhtar", "Fadil"],
+      wanita: ["Ainun", "Melisa", "Astria", "Fitri", "Sania", "Sri", "Adelia", "Dini", "Rahmi", "Salwa", "Alfahra", "Gisni", "Marisyha", "Husna", "Mulia", "Mutiara"]
+    };
+
+    let wheelItems = [...wheelDataPresets.semua];
+    let currentDegree = 0;
+    let isSpinning = false;
+
+    const colors = ["#0284c7", "#f59e0b", "#10b981", "#ec4899", "#8b5cf6", "#f97316", "#14b8a6", "#6366f1"];
+
+    function drawWheel() {
+      const canvas = document.getElementById('wheel-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const numItems = wheelItems.length;
+      const arc = (2 * Math.PI) / numItems;
+      const radius = canvas.width / 2;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < numItems; i++) {
+        const angle = i * arc;
+        ctx.beginPath();
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.moveTo(radius, radius);
+        ctx.arc(radius, radius, radius, angle, angle + arc);
+        ctx.lineTo(radius, radius);
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(radius, radius);
+        ctx.rotate(angle + arc / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 11px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(wheelItems[i], radius - 15, 4);
+        ctx.restore();
+      }
+    }
+
+    function setWheelPreset(type) {
+      if (isSpinning) return;
+      wheelItems = [...wheelDataPresets[type]];
+      drawWheel();
+      document.getElementById('wheel-winner').innerText = "Mode: " + type.toUpperCase();
+    }
+
+    function updateWheelFromCustom() {
+      if (isSpinning) return;
+      const val = document.getElementById('wheel-custom-input').value;
+      const list = val.split(',').map(s => s.trim()).filter(s => s.length > 0);
+      if (list.length >= 2) {
+        wheelItems = list;
+        drawWheel();
+        document.getElementById('wheel-winner').innerText = "Custom List Ready!";
+      } else {
+        alert("Masukkan minimal 2 nama/item yang dipisahkan koma!");
+      }
+    }
+
+    function spinWheel() {
+      if (isSpinning || wheelItems.length === 0) return;
+      isSpinning = true;
+
+      const spinBtn = document.getElementById('spin-btn');
+      spinBtn.disabled = true;
+      spinBtn.classList.add('opacity-50');
+
+      const extraSpins = 5 + Math.floor(Math.random() * 5); // 5-10 spins
+      const randomDegree = Math.floor(Math.random() * 360);
+      const totalDegrees = extraSpins * 360 + randomDegree;
+
+      currentDegree += totalDegrees;
+      const canvas = document.getElementById('wheel-canvas');
+      canvas.style.transform = `rotate(${currentDegree}deg)`;
+
+      setTimeout(() => {
+        isSpinning = false;
+        spinBtn.disabled = false;
+        spinBtn.classList.remove('opacity-50');
+
+        const actualDegree = (360 - (currentDegree % 360)) % 360;
+        const arcDegree = 360 / wheelItems.length;
+        const winnerIndex = Math.floor(actualDegree / arcDegree);
+
+        const winner = wheelItems[winnerIndex] || "Terpilih!";
+        document.getElementById('wheel-winner').innerText = "🎉 " + winner;
+      }, 4000);
+    }
+
+    window.addEventListener('load', () => drawWheel());
+
     // Terminal Command CLI Engine
     const termForm = document.getElementById('terminal-form');
     const termInput = document.getElementById('terminal-input');
@@ -1071,7 +1225,7 @@
         localStorage.setItem('class_user_name', userName);
       }
 
-      const photoRef = doc(doc(db, "photos", activeId));
+      const photoRef = doc(db, "photos", activeId);
       try {
         await updateDoc(photoRef, {
           comments: arrayUnion({ user: userName, text: gifUrl, type: 'gif' })
@@ -1159,4 +1313,3 @@
 
 </body>
 </html>
-
