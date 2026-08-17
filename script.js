@@ -85,6 +85,12 @@ function updateWheelFromCustom() {
 
 function spinWheel() {
   if (isSpinning || wheelItems.length === 0) return;
+  
+  // Jika tersisa 1 nama, beri peringatan
+  if (wheelItems.length === 1) {
+    alert("Tersisa 1 nama lagi di dalam roda!");
+  }
+
   isSpinning = true;
 
   const spinBtn = document.getElementById('spin-btn');
@@ -109,61 +115,20 @@ function spinWheel() {
     const arcDegree = 360 / wheelItems.length;
     const winnerIndex = Math.floor(wheelAngleAtPointer / arcDegree) % wheelItems.length;
 
-    const winner = wheelItems[winnerIndex] || "Terpilih!";
-    document.getElementById('wheel-winner').innerText = "🎉 " + winner;
+    const winner = wheelItems[winnerIndex];
+    document.getElementById('wheel-winner').innerText = "🎉 " + winner + " (Telah Dihapus)";
+
+    // Hapus nama terpilih dari array wheelItems
+    wheelItems.splice(winnerIndex, 1);
+
+    // Gambar ulang roda dengan sisa nama yang ada
+    if (wheelItems.length > 0) {
+      drawWheel();
+    } else {
+      // Jika semua nama sudah habis terpilih
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      document.getElementById('wheel-winner').innerText = "🏁 Semua nama sudah terpilih!";
+    }
   }, 4000);
 }
-
-window.addEventListener('load', () => drawWheel());
-
-function togglePiketModal() {
-  document.getElementById('piket-modal').classList.toggle('hidden');
-}
-
-const piketSchedule = {
-  1: "Haris, Wandi, Kiya, Ainun",
-  2: "Rafa, Gilang, Melisa, Astria",
-  3: "Alvin, Fhidel, Fitri, Sania",
-  4: "Rojul, Firli, Adelia, Dini",
-  5: "Muhtar, Rahmi, Sri",
-  0: "Libur Akhir Pekan 🎉",
-  6: "Libur Akhir Pekan 🎉"
-};
-
-const dayToday = new Date().getDay();
-const piketEl = document.getElementById('piket-today');
-if (piketEl) {
-  const names = piketSchedule[dayToday];
-  piketEl.innerHTML = `<span class="text-sky-600 dark:text-sky-400 font-bold block mb-0.5">${dayToday === 0 || dayToday === 6 ? 'Akhir Pekan' : 'Hari Ini:'}</span> ${names}`;
-}
-
-function getNextSundayTarget() {
-  const now = new Date();
-  const target = new Date(now);
-  const day = now.getDay();
-  const daysUntilSunday = (7 - day) % 7 || 7;
-  target.setDate(now.getDate() + daysUntilSunday);
-  target.setHours(0, 0, 0, 0);
-  return target.getTime();
-}
-
-let targetDate = getNextSundayTarget();
-setInterval(() => {
-  const now = new Date().getTime();
-  let diff = targetDate - now;
-
-  if (diff <= 0) {
-    targetDate = getNextSundayTarget();
-    diff = targetDate - now;
-  }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-  document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
-  document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
-  document.getElementById('cd-mins').innerText = String(mins).padStart(2, '0');
-  document.getElementById('cd-secs').innerText = String(secs).padStart(2, '0');
-}, 1000);
