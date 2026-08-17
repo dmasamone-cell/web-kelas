@@ -1147,6 +1147,15 @@
       document.getElementById('image-modal').classList.remove('hidden');
       document.getElementById('sticker-picker').classList.add('hidden');
 
+      // Indikator status Like dari localStorage
+      const likedPhotos = JSON.parse(localStorage.getItem('liked_photos') || '[]');
+      const btnLikeEl = document.getElementById('modal-like-btn');
+      if (likedPhotos.includes(id)) {
+        btnLikeEl.classList.add('text-red-500');
+      } else {
+        btnLikeEl.classList.remove('text-red-500');
+      }
+
       const photoRef = doc(db, "photos", id);
       if (activeUnsub) activeUnsub();
 
@@ -1251,16 +1260,28 @@
       }
     };
 
+    // BATASAN 1 KALI LIKE PER PERANGKAT (LOCALSTORAGE)
     const btnLike = document.getElementById('modal-like-btn');
     if (btnLike) {
       btnLike.addEventListener('click', async () => {
         if (!activeId) return;
+
+        let likedPhotos = JSON.parse(localStorage.getItem('liked_photos') || '[]');
+        if (likedPhotos.includes(activeId)) {
+          alert("Kamu sudah menyukai foto/kartu ini!");
+          return;
+        }
+
         const photoRef = doc(db, "photos", activeId);
         try {
           await updateDoc(photoRef, { likes: increment(1) });
         } catch (err) {
           await setDoc(photoRef, { likes: 1, comments: [] }, { merge: true });
         }
+
+        likedPhotos.push(activeId);
+        localStorage.setItem('liked_photos', JSON.stringify(likedPhotos));
+        btnLike.classList.add('text-red-500');
       });
     }
 
