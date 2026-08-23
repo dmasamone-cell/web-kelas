@@ -33,7 +33,7 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     
-    /* Ambient Liquid Background FX - Pekat Hitam */
+    /* Ambient Liquid Background FX */
     .glass-canvas {
       background-color: #f2f2f7;
       background-image: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.12), transparent 40%),
@@ -214,177 +214,6 @@
     </div>
   </section>
 
-  <!-- Berita -->
-  <section id="berita" class="max-w-5xl mx-auto px-6 my-12">
-    <div class="flex items-center justify-between pb-3 border-b border-black/10 dark:border-white/10 mb-6">
-      <div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest block">Informasi Terbaru</span>
-        <h2 class="text-lg font-extrabold text-neutral-900 dark:text-white tracking-tight">Berita & Sorotan Kelas</h2>
-      </div>
-      <span class="text-[9px] text-neutral-400 font-bold uppercase tracking-widest">Geser →</span>
-    </div>
-
-    <div class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 pt-1 no-scrollbar">
-      <div onclick="openDetailModal('berita1', 'https://files.catbox.moe/vwyss4.jpg', 'TOP ORANG GANTENG', 'ORANG GANTENG • Agustus 2026')" class="w-[280px] sm:w-[340px] flex-shrink-0 snap-start liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer group">
-        <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/vwyss4.jpg" alt="Berita 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-        </div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">Sorotan</span>
-        <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mt-2.5 group-hover:text-sky-500 transition line-clamp-1">TOP ORANG GANTENG</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-normal leading-relaxed">Momen kejutan dan apresiasi siswa terfavorit di kelas X TJKT 4.</p>
-        <span class="text-[9px] text-neutral-400 font-semibold uppercase tracking-widest block mt-3">Agustus 2026</span>
-      </div>
-
-      <div onclick="openDetailModal('berita2', 'https://files.catbox.moe/772hlh.jpg', 'KIYA RACING', 'Praktikum • Agustus 2026')" class="w-[280px] sm:w-[340px] flex-shrink-0 snap-start liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer group">
-        <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/772hlh.jpg" alt="KIYA RACING" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-        </div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">Praktikum</span>
-        <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mt-2.5 group-hover:text-sky-500 transition line-clamp-1">KIYA RACING</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-normal leading-relaxed">Keseruan praktikum kelistrikan dan perakitan node jaringan.</p>
-        <span class="text-[9px] text-neutral-400 font-semibold uppercase tracking-widest block mt-3">Agustus 2026</span>
-      </div>
-
-      <div onclick="openDetailModal('berita3', 'https://files.catbox.moe/j5ae08.jpg', 'Judul Berita 3', 'Orang dibuang • Agustus 2026')" class="w-[280px] sm:w-[340px] flex-shrink-0 snap-start liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer group">
-        <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/j5ae08.jpg" alt="Berita 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-        </div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">Kegiatan</span>
-        <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mt-2.5 group-hover:text-sky-500 transition line-clamp-1">Judul Berita 3</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-normal leading-relaxed">Dokumentasi humoristis kegiatan santai saat jam istirahat kelas.</p>
-        <span class="text-[9px] text-neutral-400 font-semibold uppercase tracking-widest block mt-3">Agustus 2026</span>
-      </div>
-
-      <div onclick="openDetailModal('berita4', 'https://files.catbox.moe/rplpym.jpg', 'HARIS ZIGZAG', 'Prestasi • Agustus 2026')" class="w-[280px] sm:w-[340px] flex-shrink-0 snap-start liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer group">
-        <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/rplpym.jpg" alt="HARIS ZIGZAG" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-        </div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">Prestasi</span>
-        <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mt-2.5 group-hover:text-sky-500 transition line-clamp-1">HARIS ZIGZAG</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-normal leading-relaxed">Aksi lincah Haris memenangkan perlombaan olahraga antar siswa.</p>
-        <span class="text-[9px] text-neutral-400 font-semibold uppercase tracking-widest block mt-3">Agustus 2026</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Jadwal Pelajaran -->
-  <section id="jadwal" class="max-w-5xl mx-auto px-6 my-12">
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 border-b border-black/10 dark:border-white/10 pb-3 gap-3">
-      <div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest block">Akademik</span>
-        <h2 class="text-lg font-extrabold text-neutral-900 dark:text-white tracking-tight">Jadwal Pelajaran X TJKT 4</h2>
-      </div>
-
-      <div class="flex p-1 liquid-glass rounded-full text-xs font-semibold">
-        <button id="btn-normatif" onclick="switchJadwalTab('normatif')" class="px-5 py-1.5 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 transition shadow-sm">
-          Normatif
-        </button>
-        <button id="btn-produktif" onclick="switchJadwalTab('produktif')" class="px-5 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition">
-          Produktif
-        </button>
-      </div>
-    </div>
-
-    <div id="jadwal-cards-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
-      <!-- Diisi otomatis dari JavaScript -->
-    </div>
-  </section>
-
-  <!-- Spin Wheel -->
-  <section id="spin-wheel" class="max-w-5xl mx-auto px-6 my-12">
-    <div class="flex justify-between items-end mb-6 border-b border-black/10 dark:border-white/10 pb-3">
-      <div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest block">Interactive Module</span>
-        <h2 class="text-lg font-extrabold text-neutral-900 dark:text-white tracking-tight">Roda Acak TJKT 4 (Spin Wheel)</h2>
-      </div>
-    </div>
-
-    <div class="liquid-glass p-8 rounded-3xl shadow-glass dark:shadow-glass-dark grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-      <div class="md:col-span-6 flex flex-col items-center relative">
-        <div class="absolute -top-3 z-10 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[18px] border-t-sky-500 drop-shadow-md"></div>
-        <div class="w-64 h-64 sm:w-72 sm:h-72 relative rounded-full border-4 border-white/40 dark:border-white/10 shadow-2xl overflow-hidden bg-black flex items-center justify-center">
-          <canvas id="wheel-canvas" width="300" height="300" class="w-full h-full"></canvas>
-        </div>
-        <button id="spin-btn" onclick="spinWheel()" class="mt-6 px-8 py-3 bg-neutral-900 dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-100 text-white dark:text-neutral-900 font-extrabold text-xs uppercase tracking-widest rounded-full shadow-lg transition active:scale-95">
-          Putar Roda
-        </button>
-      </div>
-
-      <div class="md:col-span-6 space-y-5">
-        <div>
-          <label class="text-xs font-bold text-neutral-700 dark:text-neutral-300 uppercase tracking-wider block mb-2">Pilih Mode Roda:</label>
-          <div class="grid grid-cols-3 gap-2">
-            <button onclick="setWheelPreset('semua')" class="px-3 py-2.5 liquid-glass-subtle rounded-2xl text-xs font-bold text-neutral-800 dark:text-neutral-200 hover:border-sky-500 transition active:scale-95">Semua</button>
-            <button onclick="setWheelPreset('pria')" class="px-3 py-2.5 liquid-glass-subtle rounded-2xl text-xs font-bold text-neutral-800 dark:text-neutral-200 hover:border-sky-500 transition active:scale-95">Siswa</button>
-            <button onclick="setWheelPreset('wanita')" class="px-3 py-2.5 liquid-glass-subtle rounded-2xl text-xs font-bold text-neutral-800 dark:text-neutral-200 hover:border-sky-500 transition active:scale-95">Siswi</button>
-          </div>
-        </div>
-
-        <div>
-          <label class="text-xs font-bold text-neutral-700 dark:text-neutral-300 uppercase tracking-wider block mb-2">Opsi Kustom (Pisahkan koma):</label>
-          <textarea id="wheel-custom-input" rows="2" placeholder="Nama 1, Nama 2, Nama 3..." class="w-full liquid-glass-subtle rounded-2xl p-3 text-xs text-neutral-900 dark:text-white focus:outline-none focus:border-sky-500 transition"></textarea>
-          <button onclick="updateWheelFromCustom()" class="mt-2 text-[10px] font-bold text-sky-500 hover:underline uppercase tracking-wider">Apply Custom List →</button>
-        </div>
-
-        <div id="wheel-result-card" class="liquid-glass-subtle p-5 rounded-2xl border border-sky-500/30 text-center space-y-1">
-          <span class="text-[9px] uppercase font-bold text-neutral-400 tracking-widest block">Hasil Spin</span>
-          <h3 id="wheel-winner" class="text-base font-black text-sky-500 tracking-tight">Siap Diputar</h3>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Menfess -->
-  <section id="menfess" class="max-w-5xl mx-auto px-6 my-12">
-    <div class="flex justify-between items-end mb-6 border-b border-black/10 dark:border-white/10 pb-3">
-      <div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest block">Interaktif</span>
-        <h2 class="text-lg font-extrabold text-neutral-900 dark:text-white tracking-tight">Menfess Kelas (Pesan Anonim)</h2>
-      </div>
-    </div>
-    
-    <form id="menfess-form" class="liquid-glass p-6 rounded-3xl shadow-glass dark:shadow-glass-dark space-y-4 mb-6">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <input type="text" id="menfess-from" placeholder="Dari: (misal: Secret Admirer / Anonim)" class="liquid-glass-subtle rounded-2xl px-4 py-3 text-xs text-neutral-900 dark:text-white focus:outline-none focus:border-sky-500 transition">
-        <input type="text" id="menfess-to" placeholder="Untuk: (misal: Seseorang / Seluruh Kelas)" required class="liquid-glass-subtle rounded-2xl px-4 py-3 text-xs text-neutral-900 dark:text-white focus:outline-none focus:border-sky-500 transition">
-      </div>
-      <textarea id="menfess-text" rows="3" placeholder="Tulis pesan rahasia, ucapan, atau curhatan kamu di sini..." required class="w-full liquid-glass-subtle rounded-2xl p-4 text-xs text-neutral-900 dark:text-white focus:outline-none focus:border-sky-500 transition"></textarea>
-      <button type="submit" id="btn-send-menfess" class="w-full py-3 bg-neutral-900 dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-100 text-white dark:text-neutral-900 font-extrabold text-xs uppercase tracking-widest rounded-2xl transition active:scale-98 shadow-md">Kirim Menfess Anonim</button>
-    </form>
-
-    <div id="menfess-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <p class="text-xs text-neutral-400 italic col-span-2 text-center py-4">Memuat pesan menfess...</p>
-    </div>
-  </section>
-
-  <!-- Galeri Foto -->
-  <section id="galeri" class="max-w-5xl mx-auto px-6 my-12">
-    <div class="flex justify-between items-end mb-6 border-b border-black/10 dark:border-white/10 pb-3">
-      <div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest block">Dokumentasi</span>
-        <h2 class="text-lg font-extrabold text-neutral-900 dark:text-white tracking-tight">Galeri Foto Bersama</h2>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div onclick="openDetailModal('photo1', 'https://files.catbox.moe/b74ele.jpg', 'Momen Sesudah Apel X TJKT 4', 'Dokumentasi momen kebersamaan seluruh siswa-siswi dan wali kelas.')" class="liquid-glass p-5 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer active:scale-98">
-        <div class="overflow-hidden rounded-2xl mb-4 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/b74ele.jpg" alt="Foto Bersama 1" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-sm">Momen Sesudah Apel X TJKT 4</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">Klik untuk memperbesar, beri suka, atau menulis komentar.</p>
-      </div>
-
-      <div onclick="openDetailModal('photo2', 'https://files.catbox.moe/nyusai.jpg', 'Sesi Foto Bersama Miss Nurina', 'Suasana saat sesi foto kelas TJKT 4.')" class="liquid-glass p-5 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer active:scale-98">
-        <div class="overflow-hidden rounded-2xl mb-4 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/nyusai.jpg" alt="Foto Bersama 2" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-sm">Sesi Foto Bersama Miss Nurina</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">Klik untuk memperbesar, beri suka, atau menulis komentar.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- Anggota Kelas -->
   <section id="anggota" class="max-w-5xl mx-auto px-6 my-12">
     <div class="flex justify-between items-end mb-6 border-b border-black/10 dark:border-white/10 pb-3">
@@ -392,10 +221,15 @@
         <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest block">Direktori Lengkap</span>
         <h2 class="text-lg font-extrabold text-neutral-900 dark:text-white tracking-tight">Anggota Kelas X TJKT 4 (32 Siswa)</h2>
       </div>
-      <span class="text-[9px] font-bold text-sky-500 bg-sky-500/10 border border-sky-500/20 px-3 py-1 rounded-full uppercase tracking-wider">14 Siswa • 18 Siswi</span>
+      <div class="flex items-center gap-1.5">
+        <span class="text-[9px] font-bold text-sky-500 bg-sky-500/10 border border-sky-500/20 px-3 py-1 rounded-full uppercase tracking-wider">14 Siswa</span>
+        <span class="text-[9px] font-bold text-pink-500 bg-pink-500/10 border border-pink-500/20 px-3 py-1 rounded-full uppercase tracking-wider">18 Siswi</span>
+      </div>
     </div>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+    <!-- SISWA (PUTRA) -->
+    <h3 class="text-xs font-extrabold uppercase tracking-widest text-sky-500 mb-3">Daftar Siswa (Putra)</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
       <div onclick="openDetailModal('siswa-kiya', 'https://files.catbox.moe/t9zhwi.jpg', 'Kiyaarsyad Ganishwara', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/t9zhwi.jpg" alt="Kiyaarsyad Ganishwara" class="w-full h-full object-cover">
@@ -468,7 +302,7 @@
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
       </div>
 
-      <div onclick="openDetailModal('Afzal Bagas Herlambang', 'https://files.catbox.moe/x2zp3x.jpg', 'Afzal Bagas Herlambang', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+      <div onclick="openDetailModal('siswa-afzal', 'https://files.catbox.moe/x2zp3x.jpg', 'Afzal Bagas Herlambang', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/x2zp3x.jpg" alt="Afzal Bagas Herlambang" class="w-full h-full object-cover">
         </div>
@@ -476,7 +310,7 @@
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
       </div>
 
-      <div onclick="openDetailModal('siswa-11', 'https://files.catbox.moe/wadgzt.jpg', 'M.Muhtar Atarid', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+      <div onclick="openDetailModal('siswa-muhtar', 'https://files.catbox.moe/wadgzt.jpg', 'M.Muhtar Atarid', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/wadgzt.jpg" alt="M.Muhtar Atarid" class="w-full h-full object-cover">
         </div>
@@ -484,7 +318,7 @@
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
       </div>
 
-      <div onclick="openDetailModal('siswa-12', 'https://files.catbox.moe/fktblg.jpg', 'M.Fadil Ariandy', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+      <div onclick="openDetailModal('siswa-fadil', 'https://files.catbox.moe/fktblg.jpg', 'M.Fadil Ariandy', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/fktblg.jpg" alt="M.Fadil Ariandy" class="w-full h-full object-cover">
         </div>
@@ -492,880 +326,163 @@
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
       </div>
 
-      <div onclick="openDetailModal('siswa-13', 'https://files.catbox.moe/4se36g.jpg', 'M. Fazry Pratama', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+      <div onclick="openDetailModal('siswa-fazry', 'https://files.catbox.moe/4se36g.jpg', 'M. Fazry Pratama', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/4se36g.jpg" alt="M. Fazry Pratama" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">M. Fazry Pratama</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
       </div>
+    </div>
 
-      <div onclick="openDetailModal('siswa-14', 'https://files.catbox.moe/default-boy.jpg', 'Siswa 14', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors bg-black/5 dark:bg-white/5 flex items-center justify-center font-mono text-xs font-bold">14</div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Siswa 14</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
-      </div>
-
-      <div onclick="openDetailModal('siswi-ainun', 'https://files.catbox.moe/c71at2.jpg', 'Ainun Nisa Dristia Putri', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+    <!-- SISWI (PUTRI) -->
+    <h3 class="text-xs font-extrabold uppercase tracking-widest text-pink-500 mb-3">Daftar Siswi (Putri)</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <div onclick="openDetailModal('siswi-ainun', 'https://files.catbox.moe/c71at2.jpg', 'Ainun Nisa Dristia Putri', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/c71at2.jpg" alt="Ainun Nisa Dristia Putri" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Ainun Nisa Dristia Putri</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Ainun Nisa Dristia Putri</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-melisa', 'https://files.catbox.moe/jr65v8.jpg', 'Melisa Putri Oktaripana', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-melisa', 'https://files.catbox.moe/jr65v8.jpg', 'Melisa Putri Oktaripana', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/jr65v8.jpg" alt="Melisa Putri Oktaripana" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Melisa Putri Oktaripana</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Melisa Putri Oktaripana</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-astria', 'https://files.catbox.moe/hzln3i.jpg', 'Astria Felany', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-astria', 'https://files.catbox.moe/hzln3i.jpg', 'Astria Felany', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/hzln3i.jpg" alt="Astria Felany" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Astria Felany</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Astria Felany</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-fitri', 'https://files.catbox.moe/oq3okq.jpg', 'Fitri Aulia', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-fitri', 'https://files.catbox.moe/oq3okq.jpg', 'Fitri Aulia', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/oq3okq.jpg" alt="Fitri Aulia" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Fitri Aulia</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Fitri Aulia</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-sania', 'https://files.catbox.moe/x8np2i.jpg', 'Sania Nur\'aeni Yunengsih', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-sania', 'https://files.catbox.moe/x8np2i.jpg', 'Sania Nur\'aeni Yunengsih', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/x8np2i.jpg" alt="Sania Nur'aeni Yunengsih" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Sania Nur'aeni Yunengsih</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Sania Nur'aeni Yunengsih</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-sri', 'https://files.catbox.moe/od7jna.jpg', 'Neng Sri Maolidda', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-sri', 'https://files.catbox.moe/od7jna.jpg', 'Neng Sri Maolidda', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/od7jna.jpg" alt="Neng Sri Maolidda" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Neng Sri Maolidda</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Neng Sri Maolidda</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-adelia', 'https://files.catbox.moe/0it3y3.jpg', 'Adelia Meyse', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-adelia-m', 'https://files.catbox.moe/0it3y3.jpg', 'Adelia Meyse', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/0it3y3.jpg" alt="Adelia Meyse" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Adelia Meyse</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Adelia Meyse</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-dini', 'https://files.catbox.moe/noo9ty.jpg', 'Dini Indriani Kirana', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-dini', 'https://files.catbox.moe/noo9ty.jpg', 'Dini Indriani Kirana', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/noo9ty.jpg" alt="Dini Indriani Kirana" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Dini Indriani Kirana</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Dini Indriani Kirana</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-rahmi', 'https://files.catbox.moe/wjnpvx.jpg', 'Rahmi Nurul Fauziah', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-rahmi', 'https://files.catbox.moe/wjnpvx.jpg', 'Rahmi Nurul Fauziah', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/wjnpvx.jpg" alt="Rahmi Nurul Fauziah" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Rahmi Nurul Fauziah</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Rahmi Nurul Fauziah</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-salwa', 'https://files.catbox.moe/l4zazc.jpg', 'Salwa Maharani', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-salwa', 'https://files.catbox.moe/l4zazc.jpg', 'Salwa Maharani', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/l4zazc.jpg" alt="Salwa Maharani" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Salwa Maharani</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Salwa Maharani</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-11', 'https://files.catbox.moe/cgzrjt.jpg', 'Siti Alfahra Nurrisman', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-alfahra', 'https://files.catbox.moe/cgzrjt.jpg', 'Siti Alfahra Nurrisman', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/cgzrjt.jpg" alt="Siti Alfahra Nurrisman" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Siti Alfahra Nurrisman</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Siti Alfahra Nurrisman</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-12', 'https://files.catbox.moe/1dz5rx.jpg', 'Adelia', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-adelia', 'https://files.catbox.moe/1dz5rx.jpg', 'Adelia', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/1dz5rx.jpg" alt="Adelia" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Adelia</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Adelia</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-13', 'https://files.catbox.moe/b6zusd.jpg', 'Gisni Nurul Karimah', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-gisni', 'https://files.catbox.moe/b6zusd.jpg', 'Gisni Nurul Karimah', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/b6zusd.jpg" alt="Gisni Nurul Karimah" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Gisni Nurul Karimah</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Gisni Nurul Karimah</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-14', 'https://files.catbox.moe/nkm7q7.jpg', 'Marisyha Melati Putri', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-marisyha', 'https://files.catbox.moe/nkm7q7.jpg', 'Marisyha Melati Putri', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/nkm7q7.jpg" alt="Marisyha Melati Putri" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Marisyha Melati Putri</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Marisyha Melati Putri</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-15', 'https://files.catbox.moe/ire5bc.jpg', 'Husna Kholifatul Ulya', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-husna', 'https://files.catbox.moe/ire5bc.jpg', 'Husna Kholifatul Ulya', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/ire5bc.jpg" alt="Husna Kholifatul Ulya" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Husna Kholifatul Ulya</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Husna Kholifatul Ulya</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-16', 'https://files.catbox.moe/tltzpm.jpg', 'Mulia Dwi Yanti', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <div onclick="openDetailModal('siswi-mulia', 'https://files.catbox.moe/tltzpm.jpg', 'Mulia Dwi Yanti', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
           <img src="https://files.catbox.moe/tltzpm.jpg" alt="Mulia Dwi Yanti" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Mulia Dwi Yanti</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Mulia Dwi Yanti</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-17', 'https://files.catbox.moe/tltzpm.jpg', 'Mutiara Diana Putri', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/tltzpm.jpg" alt="Mutiara Diana Putri" class="w-full h-full object-cover">
+      <div onclick="openDetailModal('siswi-mutiara', 'https://files.catbox.moe/l0vww1.jpg', 'Mutiara Diana Putri', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
+          <img src="https://files.catbox.moe/l0vww1.jpg" alt="Mutiara Diana Putri" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Mutiara Diana Putri</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Mutiara Diana Putri</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
 
-      <div onclick="openDetailModal('siswi-18', 'https://files.catbox.moe/l0vww1.jpg', 'Siti Aminah', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/l0vww1.jpg" alt="Siti Aminah" class="w-full h-full object-cover">
+      <div onclick="openDetailModal('siswi-aminah', 'https://files.catbox.moe/c71at2.jpg', 'Siti Aminah', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
+          <img src="https://files.catbox.moe/c71at2.jpg" alt="Siti Aminah" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Siti Aminah</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Siti Aminah</h3>
+        <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
       </div>
     </div>
   </section>
 
-  <!-- Modal Piket -->
-  <div id="piket-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xl flex items-center justify-center p-4" onclick="if(event.target === this) togglePiketModal()">
-    <div class="liquid-glass rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
-      <button onclick="togglePiketModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-neutral-900 dark:hover:text-white font-bold text-xs uppercase tracking-wider">Close</button>
-      <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mb-5 uppercase tracking-wider">Jadwal Piket Lengkap</h3>
-      <div class="space-y-3 text-xs">
-        <div class="flex justify-between items-start border-b border-black/5 dark:border-white/5 pb-2">
-          <span class="font-bold text-neutral-800 dark:text-neutral-200 min-w-[60px]">Senin</span>
-          <span class="text-neutral-500 dark:text-neutral-400 text-right">Haris, Wandi, Kiya, Ainun</span>
-        </div>
-        <div class="flex justify-between items-start border-b border-black/5 dark:border-white/5 pb-2">
-          <span class="font-bold text-neutral-800 dark:text-neutral-200 min-w-[60px]">Selasa</span>
-          <span class="text-neutral-500 dark:text-neutral-400 text-right">Rafa, Gilang, Melisa, Astria</span>
-        </div>
-        <div class="flex justify-between items-start border-b border-black/5 dark:border-white/5 pb-2">
-          <span class="font-bold text-neutral-800 dark:text-neutral-200 min-w-[60px]">Rabu</span>
-          <span class="text-neutral-500 dark:text-neutral-400 text-right">Alvin, Fhidel, Fitri, Sania</span>
-        </div>
-        <div class="flex justify-between items-start border-b border-black/5 dark:border-white/5 pb-2">
-          <span class="font-bold text-neutral-800 dark:text-neutral-200 min-w-[60px]">Kamis</span>
-          <span class="text-neutral-500 dark:text-neutral-400 text-right">Rojul, Firli, Adelia, Dini</span>
-        </div>
-        <div class="flex justify-between items-start">
-          <span class="font-bold text-neutral-800 dark:text-neutral-200 min-w-[60px]">Jumat</span>
-          <span class="text-neutral-500 dark:text-neutral-400 text-right">Muhtar, Rahmi, Sri</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Detail & Komentar -->
-  <div id="image-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-300" onclick="if(event.target === this) closeModal()">
-    <div class="liquid-glass rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-2xl">
-      <button onclick="closeModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-neutral-900 dark:hover:text-white text-xs font-bold uppercase tracking-wider transition">Close</button>
-
-      <div class="overflow-hidden rounded-2xl mb-4 aspect-square max-h-72 border border-white/20 dark:border-white/10 bg-black/10">
-        <img id="modal-img" src="" alt="Detail Preview" class="w-full h-full object-contain">
-      </div>
-
-      <div class="flex justify-between items-start">
-        <div>
-          <h3 id="modal-title" class="font-extrabold text-neutral-900 dark:text-white text-base tracking-tight"></h3>
-          <p id="modal-subtitle" class="text-xs font-medium text-neutral-500 dark:text-neutral-400 mt-0.5 mb-4"></p>
-        </div>
-        <button onclick="resetPhotoData()" title="Reset Like & Komentar" class="px-3 py-1 rounded-full bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 text-[9px] font-bold tracking-wider uppercase transition active:scale-95">Reset</button>
-      </div>
-
-      <div class="flex items-center justify-between border-t border-b border-black/5 dark:border-white/5 py-3 my-3 text-xs">
-        <button id="modal-like-btn" class="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400 hover:text-red-500 transition font-bold uppercase tracking-wider">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-          <span id="modal-like-count">0</span> Suka
-        </button>
-        <span class="text-neutral-500 dark:text-neutral-400 font-semibold uppercase tracking-wider"><span id="modal-comment-count">0</span> Komentar</span>
-      </div>
-
-      <div class="space-y-4">
-        <div id="modal-comments-container" class="space-y-2 max-h-40 overflow-y-auto pr-1 text-xs">
-          <p class="text-neutral-400 italic">Belum ada komentar...</p>
-        </div>
-
-        <div id="sticker-picker" class="hidden p-3 liquid-glass-subtle rounded-2xl mb-2 space-y-2">
-          <div class="flex gap-2">
-            <input type="text" id="gif-search-input" placeholder="Cari GIF..." class="flex-1 liquid-glass-subtle rounded-xl px-3 py-1.5 text-xs text-neutral-900 dark:text-white focus:outline-none">
-            <button type="button" id="btn-search-gif" class="px-3 py-1.5 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-xl text-xs font-semibold">Cari</button>
-          </div>
-          <div id="gif-results" class="grid grid-cols-4 gap-2 max-h-40 overflow-y-auto pr-1">
-            <p class="col-span-4 text-center text-xs text-neutral-400 py-4">Ketik kata kunci di atas...</p>
-          </div>
-        </div>
-
-        <form id="modal-comment-form" class="flex gap-2 pt-1">
-          <button type="button" onclick="toggleStickerPicker()" class="px-3 py-2 liquid-glass-subtle hover:bg-black/10 dark:hover:bg-white/10 text-neutral-800 dark:text-neutral-200 rounded-xl text-xs font-bold transition active:scale-95">GIF</button>
-          <input type="text" id="modal-comment-input" placeholder="Tulis komentar..." required class="flex-1 liquid-glass-subtle rounded-xl px-3.5 py-2 text-xs text-neutral-900 dark:text-white focus:outline-none">
-          <button type="submit" class="px-4 py-2 bg-neutral-900 dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-100 text-white dark:text-neutral-900 rounded-xl text-xs font-bold transition active:scale-95">Kirim</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="max-w-5xl mx-auto px-6 py-8 border-t border-black/5 dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-neutral-400">
-    <p>&copy; 2026 X TJKT 4. Official Class Site.</p>
-    <a href="https://instagram.com/netro4.offficial" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-neutral-900 dark:hover:text-white transition font-medium">
-      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-      </svg>
-      <span>@netro4.offficial</span>
-    </a>
-  </footer>
-
-  <!-- SCRIPT UTAMA UI & LOGIKA REGULER -->
-  <script>
-    function toggleDrawer() {
-      document.getElementById('drawer-menu').classList.toggle('hidden');
-    }
-
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const html = document.documentElement;
-
-    if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        html.classList.toggle('dark');
-        if (html.classList.contains('dark')) {
-          themeIcon.innerText = 'LIGHT';
-          localStorage.setItem('theme', 'dark');
-        } else {
-          themeIcon.innerText = 'DARK';
-          localStorage.setItem('theme', 'light');
-        }
-      });
-    }
-
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      html.classList.add('dark');
-      if (themeIcon) themeIcon.innerText = 'LIGHT';
-    }
-
-    // ================= JADWAL PELAJARAN =================
-    const dataJadwal = {
-      normatif: {
-        Senin: ["Seni", "Sejarah", "PJOK", "B. Indonesia"],
-        Selasa: ["PJOK", "Sejarah", "PABP"],
-        Rabu: ["B. Sunda", "BK", "Seni", "IPAS"],
-        Kamis: ["B. Indonesia", "IPAS", "PP"],
-        Jumat: ["PABP", "PP", "IPAS"]
-      },
-      produktif: {
-        Senin: ["B. Inggris", "DPK 1", "DPK 2"],
-        Selasa: ["DPK 1", "Informatika", "DPK 2"],
-        Rabu: ["DPK 1", "B. Inggris", "MTK"],
-        Kamis: ["MTK", "DPK 2"],
-        Jumat: ["Informatika", "DPK 1"]
-      }
-    };
-
-    let currentJadwalCategory = 'normatif';
-
-    function renderJadwal() {
-      const container = document.getElementById('jadwal-cards-container');
-      if (!container) return;
-
-      const schedule = dataJadwal[currentJadwalCategory];
-      const days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
-      const dayNamesIndo = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-      const todayName = dayNamesIndo[new Date().getDay()];
-
-      container.innerHTML = '';
-
-      days.forEach(day => {
-        const isToday = day === todayName;
-        const mapels = schedule[day] || [];
-
-        const mapelListHtml = mapels.map(m => `
-          <li class="flex items-center gap-2 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-            <span class="w-1.5 h-1.5 rounded-full ${isToday ? 'bg-sky-500' : 'bg-neutral-400 dark:bg-neutral-600'}"></span>
-            ${m}
-          </li>
-        `).join('');
-
-        container.innerHTML += `
-          <div class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark ${isToday ? 'border-sky-500/80 ring-2 ring-sky-500/20' : ''} transition-all">
-            <div class="flex justify-between items-center mb-3 border-b border-black/5 dark:border-white/5 pb-2">
-              <h4 class="font-extrabold text-xs uppercase tracking-wider text-neutral-900 dark:text-white">${day}</h4>
-              ${isToday ? '<span class="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-500 text-white">Hari Ini</span>' : ''}
-            </div>
-            <ul class="space-y-2">
-              ${mapelListHtml}
-            </ul>
-          </div>
-        `;
-      });
-    }
-
-    function switchJadwalTab(type) {
-      currentJadwalCategory = type;
-      const btnNormatif = document.getElementById('btn-normatif');
-      const btnProduktif = document.getElementById('btn-produktif');
-
-      if (type === 'normatif') {
-        btnNormatif.className = "px-5 py-1.5 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 transition shadow-sm";
-        btnProduktif.className = "px-5 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition";
-      } else {
-        btnProduktif.className = "px-5 py-1.5 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 transition shadow-sm";
-        btnNormatif.className = "px-5 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition";
-      }
-
-      renderJadwal();
-    }
-
-    // ================= SPIN WHEEL (AUTO ELIMINASI NAMA) =================
-    const wheelDataPresets = {
-      semua: ["Kiya", "Rafa", "Gilang", "Haris", "Wandi", "Alvin", "Fhidel", "Rojul", "Firli", "Afzal", "Muhtar", "Fadil", "Ainun", "Melisa", "Astria", "Fitri", "Sania", "Sri", "Adelia", "Dini", "Rahmi", "Salwa", "Alfahra", "Gisni", "Marisyha", "Husna", "Mulia", "Mutiara"],
-      pria: ["Kiya", "Rafa", "Gilang", "Haris", "Wandi", "Alvin", "Fhidel", "Rojul", "Firli", "Afzal", "Muhtar", "Fadil"],
-      wanita: ["Ainun", "Melisa", "Astria", "Fitri", "Sania", "Sri", "Adelia", "Dini", "Rahmi", "Salwa", "Alfahra", "Gisni", "Marisyha", "Husna", "Mulia", "Mutiara"]
-    };
-
-    let wheelItems = [...wheelDataPresets.semua];
-    let currentDegree = 0;
-    let isSpinning = false;
-    const colors = ["#0284c7", "#38bdf8", "#6366f1", "#8b5cf6", "#ec4899", "#14b8a6", "#f59e0b", "#06b6d4"];
-
-    function drawWheel() {
-      const canvas = document.getElementById('wheel-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const numItems = wheelItems.length;
-
-      if (numItems === 0) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        return;
-      }
-
-      const arc = (2 * Math.PI) / numItems;
-      const radius = canvas.width / 2;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      for (let i = 0; i < numItems; i++) {
-        const angle = i * arc;
-        ctx.beginPath();
-        ctx.fillStyle = colors[i % colors.length];
-        ctx.moveTo(radius, radius);
-        ctx.arc(radius, radius, radius, angle, angle + arc);
-        ctx.lineTo(radius, radius);
-        ctx.fill();
-
-        ctx.save();
-        ctx.translate(radius, radius);
-        ctx.rotate(angle + arc / 2);
-        ctx.textAlign = "right";
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 11px 'Plus Jakarta Sans', sans-serif";
-        ctx.fillText(wheelItems[i], radius - 15, 4);
-        ctx.restore();
-      }
-    }
-
-    function setWheelPreset(type) {
-      if (isSpinning) return;
-      wheelItems = [...wheelDataPresets[type]];
-      drawWheel();
-      document.getElementById('wheel-winner').innerText = "Mode: " + type.toUpperCase();
-    }
-
-    function updateWheelFromCustom() {
-      if (isSpinning) return;
-      const val = document.getElementById('wheel-custom-input').value;
-      const list = val.split(',').map(s => s.trim()).filter(s => s.length > 0);
-      if (list.length >= 2) {
-        wheelItems = list;
-        drawWheel();
-        document.getElementById('wheel-winner').innerText = "Custom List Ready";
-      } else {
-        alert("Masukkan minimal 2 nama/item yang dipisahkan koma.");
-      }
-    }
-
-    function spinWheel() {
-      if (isSpinning || wheelItems.length === 0) return;
-
-      if (wheelItems.length === 1) {
-        alert("Tersisa 1 nama lagi di dalam roda.");
-      }
-
-      isSpinning = true;
-
-      const spinBtn = document.getElementById('spin-btn');
-      spinBtn.disabled = true;
-      spinBtn.classList.add('opacity-50');
-
-      const extraSpins = 5 + Math.floor(Math.random() * 5);
-      const randomDegree = Math.floor(Math.random() * 360);
-      const totalDegrees = extraSpins * 360 + randomDegree;
-
-      currentDegree += totalDegrees;
-      const canvas = document.getElementById('wheel-canvas');
-      canvas.style.transform = `rotate(${currentDegree}deg)`;
-
-      setTimeout(() => {
-        isSpinning = false;
-        spinBtn.disabled = false;
-        spinBtn.classList.remove('opacity-50');
-
-        const finalDegree = currentDegree % 360;
-        const wheelAngleAtPointer = (270 - finalDegree + 3600) % 360;
-        const arcDegree = 360 / wheelItems.length;
-        const winnerIndex = Math.floor(wheelAngleAtPointer / arcDegree) % wheelItems.length;
-
-        const winner = wheelItems[winnerIndex];
-        document.getElementById('wheel-winner').innerText = winner + " (Terhapus)";
-
-        // Hapus nama terpilih
-        wheelItems.splice(winnerIndex, 1);
-
-        // Gambar ulang roda
-        if (wheelItems.length > 0) {
-          drawWheel();
-        } else {
-          const ctx = canvas.getContext('2d');
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          document.getElementById('wheel-winner').innerText = "Semua nama telah terpilih";
-        }
-      }, 4000);
-    }
-
-    // ================= PIKET & COUNTDOWN =================
-    function togglePiketModal() {
-      document.getElementById('piket-modal').classList.toggle('hidden');
-    }
-
-    const piketSchedule = {
-      1: "Haris, Wandi, Kiya, Ainun",
-      2: "Rafa, Gilang, Melisa, Astria",
-      3: "Alvin, Fhidel, Fitri, Sania",
-      4: "Rojul, Firli, Adelia, Dini",
-      5: "Muhtar, Rahmi, Sri",
-      0: "Libur Akhir Pekan",
-      6: "Libur Akhir Pekan"
-    };
-
-    const dayToday = new Date().getDay();
-    const piketEl = document.getElementById('piket-today');
-    if (piketEl) {
-      const names = piketSchedule[dayToday];
-      piketEl.innerHTML = `<span class="text-sky-500 font-bold uppercase tracking-wider block mb-0.5">${dayToday === 0 || dayToday === 6 ? 'Akhir Pekan' : 'Hari Ini:'}</span> ${names}`;
-    }
-
-    function getNextSundayTarget() {
-      const now = new Date();
-      const target = new Date(now);
-      const day = now.getDay();
-      const daysUntilSunday = (7 - day) % 7 || 7;
-      target.setDate(now.getDate() + daysUntilSunday);
-      target.setHours(0, 0, 0, 0);
-      return target.getTime();
-    }
-
-    let targetDate = getNextSundayTarget();
-    setInterval(() => {
-      const cdDays = document.getElementById('cd-days');
-      if (!cdDays) return;
-
-      const now = new Date().getTime();
-      let diff = targetDate - now;
-
-      if (diff <= 0) {
-        targetDate = getNextSundayTarget();
-        diff = targetDate - now;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-      cdDays.innerText = String(days).padStart(2, '0');
-      document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
-      document.getElementById('cd-mins').innerText = String(mins).padStart(2, '0');
-      document.getElementById('cd-secs').innerText = String(secs).padStart(2, '0');
-    }, 1000);
-
-    window.addEventListener('load', () => {
-      drawWheel();
-      renderJadwal();
-    });
-  </script>
-
-  <!-- SCRIPT MODULE FIREBASE REALTIME FIRESTORE -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, doc, collection, addDoc, deleteDoc, query, orderBy, onSnapshot, setDoc, updateDoc, arrayUnion, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAn5wWXD25t5VmJhGlcqSi7AgNGfRExkmo",
-      authDomain: "billy-90047.firebaseapp.com",
-      projectId: "billy-90047",
-      storageBucket: "billy-90047.firebasestorage.app",
-      messagingSenderId: "923982691334",
-      appId: "1:923982691334:web:e6d9db25c4671b0d85d787",
-      measurementId: "G-YYD9RFELFZ"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    let activeUnsub = null;
-    let activeId = null;
-    const GIPHY_API_KEY = "5LH1haWcbeynWswBCKF02uErlR0xMZWf";
-
-    // MENFESS REALTIME
-    const menfessCollection = collection(db, "menfess");
-    const menfessForm = document.getElementById('menfess-form');
-    const menfessContainer = document.getElementById('menfess-container');
-
-    if (menfessForm) {
-      menfessForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const fromVal = document.getElementById('menfess-from').value.trim() || 'Anonim';
-        const toVal = document.getElementById('menfess-to').value.trim();
-        const textVal = document.getElementById('menfess-text').value.trim();
-
-        if (!toVal || !textVal) return;
-
-        const btnSubmit = document.getElementById('btn-send-menfess');
-        btnSubmit.innerText = 'Mengirim...';
-        btnSubmit.disabled = true;
-
-        try {
-          await addDoc(menfessCollection, {
-            from: fromVal,
-            to: toVal,
-            text: textVal,
-            createdAt: serverTimestamp()
-          });
-          menfessForm.reset();
-        } catch (err) {
-          alert("Gagal mengirim menfess. Coba lagi.");
-        } finally {
-          btnSubmit.innerText = 'Kirim Menfess Anonim';
-          btnSubmit.disabled = false;
-        }
-      });
-    }
-
-    const qMenfess = query(menfessCollection, orderBy("createdAt", "desc"));
-    onSnapshot(qMenfess, (snapshot) => {
-      if (snapshot.empty) {
-        menfessContainer.innerHTML = '<p class="text-xs text-neutral-400 italic col-span-2 text-center py-4">Belum ada menfess terkirim. Jadi yang pertama mengirim!</p>';
-        return;
-      }
-
-      menfessContainer.innerHTML = '';
-      snapshot.forEach((docSnap) => {
-        const data = docSnap.data();
-        const id = docSnap.id;
-
-        menfessContainer.innerHTML += `
-          <div class="liquid-glass p-5 rounded-3xl shadow-glass dark:shadow-glass-dark relative flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-start mb-2">
-                <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 border border-sky-500/20 px-2.5 py-0.5 rounded-full">Untuk: ${escapeHtml(data.to)}</span>
-                <button onclick="deleteMenfess('${id}')" class="text-neutral-400 hover:text-red-500 transition text-xs font-bold uppercase tracking-wider" title="Hapus (Khusus Admin)">Delete</button>
-              </div>
-              <p class="text-xs text-neutral-800 dark:text-neutral-200 leading-relaxed font-medium my-3">"${escapeHtml(data.text)}"</p>
-            </div>
-            <div class="border-t border-black/5 dark:border-white/5 pt-2 mt-2 flex justify-between items-center text-[10px] text-neutral-400">
-              <span>Dari: ${escapeHtml(data.from)}</span>
-              <span class="uppercase tracking-widest font-mono">Menfess X TJKT 4</span>
-            </div>
-          </div>
-        `;
-      });
-    });
-
-    window.deleteMenfess = async (id) => {
-      const ADMIN_PIN = "2212";
-      const inputPin = prompt("Masukkan PIN Admin untuk menghapus menfess ini:");
-      if (inputPin !== ADMIN_PIN) {
-        if (inputPin !== null) alert("PIN Salah! Akses ditolak.");
-        return;
-      }
-
-      if (confirm("Yakin ingin menghapus menfess ini?")) {
-        try {
-          await deleteDoc(doc(db, "menfess", id));
-        } catch (err) {
-          alert("Gagal menghapus pesan.");
-        }
-      }
-    };
-
-    // STICKER / GIF GIPHY
-    window.toggleStickerPicker = () => {
-      const picker = document.getElementById('sticker-picker');
-      picker.classList.toggle('hidden');
-      if (!picker.classList.contains('hidden')) {
-        const query = document.getElementById('gif-search-input').value.trim();
-        searchGifs(query || 'funny');
-      }
-    };
-
-    window.searchGifs = async (customQuery) => {
-      const input = document.getElementById('gif-search-input');
-      const query = customQuery || input.value.trim() || 'funny';
-      const resultsContainer = document.getElementById('gif-results');
-      resultsContainer.innerHTML = '<p class="col-span-4 text-center text-xs text-neutral-400 py-4">Mencari GIF...</p>';
-
-      try {
-        const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodeURIComponent(query)}&limit=12&rating=g`);
-        const data = await response.json();
-
-        if (data.data && data.data.length > 0) {
-          resultsContainer.innerHTML = '';
-          data.data.forEach(gif => {
-            const gifUrl = gif.images.fixed_height.url;
-            const imgEl = document.createElement('img');
-            imgEl.src = gifUrl;
-            imgEl.referrerPolicy = 'no-referrer';
-            imgEl.className = 'w-full h-16 object-cover rounded-xl cursor-pointer hover:scale-105 transition border border-white/20 dark:border-white/10 bg-neutral-200 dark:bg-neutral-800';
-            imgEl.onclick = () => window.sendSticker(gifUrl);
-            resultsContainer.appendChild(imgEl);
-          });
-        } else {
-          resultsContainer.innerHTML = '<p class="col-span-4 text-center text-xs text-neutral-400 py-4">GIF tidak ditemukan.</p>';
-        }
-      } catch (error) {
-        resultsContainer.innerHTML = '<p class="col-span-4 text-center text-xs text-red-400 py-4">Gagal memuat GIF.</p>';
-      }
-    };
-
-    const btnSearchGif = document.getElementById('btn-search-gif');
-    if (btnSearchGif) btnSearchGif.addEventListener('click', () => searchGifs());
-
-    const inputSearchGif = document.getElementById('gif-search-input');
-    if (inputSearchGif) {
-      inputSearchGif.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          searchGifs();
-        }
-      });
-    }
-
-    // MODAL DETAIL & REALTIME COMMENTS
-    window.openDetailModal = (id, imgSrc, title, subtitle = '') => {
-      activeId = id;
-      
-      if (id === 'walikelas') {
-        subtitle = 'Wali Kelas X TJKT 4 • Lead Developer • Manusia Unggul';
-      }
-
-      document.getElementById('modal-img').src = imgSrc;
-      document.getElementById('modal-title').innerText = title;
-      document.getElementById('modal-subtitle').innerText = subtitle;
-      document.getElementById('image-modal').classList.remove('hidden');
-      document.getElementById('sticker-picker').classList.add('hidden');
-
-      // Indikator status Like dari localStorage
-      const likedPhotos = JSON.parse(localStorage.getItem('liked_photos') || '[]');
-      const btnLikeEl = document.getElementById('modal-like-btn');
-      if (likedPhotos.includes(id)) {
-        btnLikeEl.classList.add('text-red-500');
-      } else {
-        btnLikeEl.classList.remove('text-red-500');
-      }
-
-      const photoRef = doc(db, "photos", id);
-      if (activeUnsub) activeUnsub();
-
-      activeUnsub = onSnapshot(photoRef, (docSnap) => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          document.getElementById('modal-like-count').innerText = data.likes || 0;
-          const comments = data.comments || [];
-          document.getElementById('modal-comment-count').innerText = comments.length;
-
-          const container = document.getElementById('modal-comments-container');
-          if (comments.length === 0) {
-            container.innerHTML = '<p class="text-neutral-400 italic">Belum ada komentar...</p>';
-          } else {
-            container.innerHTML = '';
-            comments.forEach(c => {
-              const isMedia = c.type === 'gif' || (c.text && c.text.startsWith('http'));
-              const textContent = isMedia 
-                ? `<img src="${escapeHtml(c.text)}" referrerpolicy="no-referrer" class="max-w-[200px] max-h-40 object-cover rounded-xl mt-1.5 border border-white/20 dark:border-white/10 bg-neutral-200 dark:bg-neutral-800">`
-                : `<span class="text-neutral-600 dark:text-neutral-400 block mt-0.5">${escapeHtml(c.text)}</span>`;
-
-              const userNameLower = (c.user || '').toLowerCase();
-              const isDev = userNameLower.includes('billy') || userNameLower.includes('developer') || userNameLower.includes('mulyana') || userNameLower.includes('dev') || userNameLower.includes('wali kelas');
-              
-              const devBadge = isDev 
-                ? `<span class="bg-sky-500/10 text-sky-500 font-bold text-[8px] px-2 py-0.5 rounded-full border border-sky-500/20 inline-flex items-center tracking-wider uppercase">Developer</span>`
-                : '';
-
-              container.innerHTML += `
-                <div class="liquid-glass-subtle p-3 rounded-2xl">
-                  <div class="flex items-center gap-2 flex-wrap">
-                    <span class="font-bold text-neutral-900 dark:text-white">${escapeHtml(c.user)}</span>
-                    ${devBadge}
-                  </div>
-                  ${textContent}
-                </div>`;
-            });
-            container.scrollTop = container.scrollHeight;
-          }
-        } else {
-          setDoc(photoRef, { likes: 0, comments: [] });
-        }
-      });
-    };
-
-    window.closeModal = () => {
-      document.getElementById('image-modal').classList.add('hidden');
-      document.getElementById('sticker-picker').classList.add('hidden');
-      if (activeUnsub) {
-        activeUnsub();
-        activeUnsub = null;
-      }
-      activeId = null;
-    };
-
-    window.sendSticker = async (gifUrl) => {
-      if (!activeId) return;
-
-      let userName = localStorage.getItem('class_user_name');
-      if (!userName) {
-        userName = prompt("Masukkan nama kamu untuk berkomentar:", "Teman X TJKT 4");
-        if (!userName) userName = "Anonim";
-        localStorage.setItem('class_user_name', userName);
-      }
-
-      const photoRef = doc(db, "photos", activeId);
-      try {
-        await updateDoc(photoRef, {
-          comments: arrayUnion({ user: userName, text: gifUrl, type: 'gif' })
-        });
-      } catch (err) {
-        await setDoc(photoRef, {
-          likes: 0,
-          comments: [{ user: userName, text: gifUrl, type: 'gif' }]
-        }, { merge: true });
-      }
-
-      document.getElementById('sticker-picker').classList.add('hidden');
-    };
-
-    window.resetPhotoData = async () => {
-      if (!activeId) return;
-
-      const ADMIN_PIN = "2212";
-      const inputPin = prompt("Masukkan PIN Admin untuk mereset Like & Komentar:");
-
-      if (inputPin !== ADMIN_PIN) {
-        if (inputPin !== null) alert("PIN salah! Akses ditolak.");
-        return;
-      }
-
-      const konfirmasi = confirm(`Yakin ingin mereset data untuk foto ini?`);
-      if (!konfirmasi) return;
-
-      const photoRef = doc(db, "photos", activeId);
-      try {
-        await updateDoc(photoRef, { likes: 0, comments: [] });
-        alert("Data Like dan Komentar berhasil direset ke 0.");
-      } catch (err) {
-        await setDoc(photoRef, { likes: 0, comments: [] }, { merge: true });
-        alert("Data Like dan Komentar berhasil direset ke 0.");
-      }
-    };
-
-    // BATASAN 1 KALI LIKE PER PERANGKAT (LOCALSTORAGE)
-    const btnLike = document.getElementById('modal-like-btn');
-    if (btnLike) {
-      btnLike.addEventListener('click', async () => {
-        if (!activeId) return;
-
-        let likedPhotos = JSON.parse(localStorage.getItem('liked_photos') || '[]');
-        if (likedPhotos.includes(activeId)) {
-          alert("Kamu sudah menyukai foto/kartu ini.");
-          return;
-        }
-
-        const photoRef = doc(db, "photos", activeId);
-        try {
-          await updateDoc(photoRef, { likes: increment(1) });
-        } catch (err) {
-          await setDoc(photoRef, { likes: 1, comments: [] }, { merge: true });
-        }
-
-        likedPhotos.push(activeId);
-        localStorage.setItem('liked_photos', JSON.stringify(likedPhotos));
-        btnLike.classList.add('text-red-500');
-      });
-    }
-
-    const formComment = document.getElementById('modal-comment-form');
-    if (formComment) {
-      formComment.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        if (!activeId) return;
-
-        const input = document.getElementById('modal-comment-input');
-        const val = input.value.trim();
-        if (!val) return;
-
-        let userName = localStorage.getItem('class_user_name');
-        if (!userName) {
-          userName = prompt("Masukkan nama kamu untuk berkomentar:", "Teman X TJKT 4");
-          if (!userName) userName = "Anonim";
-          localStorage.setItem('class_user_name', userName);
-        }
-
-        const photoRef = doc(db, "photos", activeId);
-        try {
-          await updateDoc(photoRef, {
-            comments: arrayUnion({ user: userName, text: val, type: 'text' })
-          });
-        } catch (err) {
-          await setDoc(photoRef, {
-            likes: 0,
-            comments: [{ user: userName, text: val, type: 'text' }]
-          }, { merge: true });
-        }
-
-        input.value = '';
-      });
-    }
-
-    function escapeHtml(text) {
-      return String(text).replace(/[&<>"']/g, function(m) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
-      });
-    }
-  </script>
 </body>
 </html>
