@@ -159,9 +159,30 @@
       30% { transform: translate(45px, 10px) rotate(12deg); z-index: 3; }
       60% { transform: translate(0px, 0px) rotate(0deg); z-index: 2; }
     }
+
+    /* CONFETTI ANIMATION */
+    .confetti-particle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      z-index: 999;
+      pointer-events: none;
+      animation: fall 3s linear forwards;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body class="bg-[#f2f2f7] text-neutral-900 font-sans antialiased selection:bg-sky-500/20 dark:bg-[#030712] dark:text-neutral-100 min-h-screen pb-20 glass-canvas transition-colors duration-500">
+
+  <!-- RUNNING BROADCAST ALERT -->
+  <div id="dev-broadcast-banner" class="hidden bg-sky-500/90 text-white text-[11px] font-extrabold uppercase tracking-widest py-2 px-4 text-center sticky top-0 z-50 backdrop-blur-md border-b border-sky-400/30">
+    <span id="broadcast-text">📢 PENGUMUMAN DEVELOPER</span>
+  </div>
 
   <!-- ANIMASI REFRESH PAGE LOADER KARTU POKER DIKOCOK (HITAM PUTIH) -->
   <div id="page-loader">
@@ -260,7 +281,7 @@
       <!-- GRID KANAN (SPOTIFY EMBED, AGENDA, CORE TEAM & PIKET) -->
       <div class="md:col-span-8 space-y-5">
         
-        <!-- WIDGET SPOTIFY EMBED (UPDATED DENGAN PLAYLIST ID: 5kCOrWlh2F7nwTStYSvEPw) -->
+        <!-- WIDGET SPOTIFY EMBED -->
         <div class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark">
           <div class="flex items-center justify-between mb-3 px-1">
             <div class="flex items-center gap-2">
@@ -526,12 +547,19 @@
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
       </div>
 
-      <div onclick="openDetailModal('siswa-rafa', 'https://files.catbox.moe/lnzqfg.jpg', 'M.Brilliant Rafa Ridhoca', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
-        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
+      <!-- KARTU EKSKLUSIF DEVELOPER RAFA -->
+      <div onclick="openDetailModal('siswa-rafa', 'https://files.catbox.moe/lnzqfg.jpg', 'M.Brilliant Rafa Ridhoca', 'Core Developer • System Administrator')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark border border-sky-500/40 hover:border-sky-400 transition-all text-center cursor-pointer active:scale-95 group relative overflow-hidden">
+        <span class="absolute top-2 right-2 text-[8px] font-black uppercase tracking-widest text-sky-400 bg-sky-500/20 border border-sky-500/40 px-2 py-0.5 rounded-full animate-pulse">DEV</span>
+        <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2 border-2 border-sky-500/60 group-hover:border-sky-400 transition-colors shadow-lg">
           <img src="https://files.catbox.moe/lnzqfg.jpg" alt="M.Brilliant Rafa Ridhoca" class="w-full h-full object-cover">
         </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">M.Brilliant Rafa Ridhoca</h3>
-        <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
+        <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-400 transition-colors">M.Brilliant Rafa Ridhoca</h3>
+        <p id="rafa-custom-title" class="text-[9px] text-sky-400 font-extrabold mt-0.5 uppercase tracking-wider">Lead System Dev</p>
+        
+        <!-- TOMBOL KHUSUS MASUK KE PORTAL DEV -->
+        <button onclick="event.stopPropagation(); openDevPortalModal()" class="mt-2.5 w-full py-1 bg-sky-500/20 hover:bg-sky-500/40 text-sky-300 border border-sky-500/40 rounded-xl text-[9px] font-extrabold uppercase tracking-wider transition active:scale-95 flex items-center justify-center gap-1">
+          ⚡ Open Dev Portal
+        </button>
       </div>
 
       <div onclick="openDetailModal('siswa-gilang', 'https://files.catbox.moe/s2p4xp.jpg', 'M.Gilang Febriyan', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
@@ -772,6 +800,85 @@
     </div>
   </section>
 
+  <!-- MODAL / RUANG DEV TOOLS (TERPROTEKSI PIN) -->
+  <div id="dev-portal-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-2xl flex items-center justify-center p-4" onclick="if(event.target === this) closeDevPortalModal()">
+    <div class="liquid-glass rounded-3xl max-w-md w-full p-6 shadow-2xl relative border border-sky-500/40">
+      <button onclick="closeDevPortalModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white font-bold text-xs uppercase tracking-wider">Close</button>
+
+      <!-- VERIFIKASI PIN FORM -->
+      <div id="dev-pin-view" class="text-center py-4 space-y-4">
+        <div class="w-12 h-12 rounded-full bg-sky-500/20 border border-sky-500/40 flex items-center justify-center mx-auto text-sky-400 font-black text-lg">
+          🔒
+        </div>
+        <div>
+          <h3 class="font-black text-white text-base tracking-tight uppercase">Developer Authorization</h3>
+          <p class="text-xs text-neutral-400 mt-1">Masukkan PIN Developer untuk membuka ruang kontrol Rafa.</p>
+        </div>
+        <form onsubmit="verifyDevPin(event)" class="space-y-3 pt-2">
+          <input type="password" id="dev-pin-input" maxlength="6" placeholder="Masukkan PIN..." autofocus class="w-full text-center tracking-widest font-mono text-lg liquid-glass-subtle rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition">
+          <button type="submit" class="w-full py-3 bg-sky-500 hover:bg-sky-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition active:scale-95 shadow-lg">
+            Unlock Portal →
+          </button>
+        </form>
+      </div>
+
+      <!-- RUANG DEVELOPER TOOLS (AKAN MUNCUL SETELAH PIN BENAR) -->
+      <div id="dev-tools-view" class="hidden space-y-5">
+        <div class="flex items-center justify-between border-b border-white/10 pb-3">
+          <div>
+            <span class="text-[9px] font-black uppercase tracking-widest text-sky-400 block">Restricted Area</span>
+            <h3 class="font-extrabold text-white text-sm">⚡ Rafa's Developer Control Panel</h3>
+          </div>
+          <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">ONLINE</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <!-- Tool 1: Broadcast -->
+          <button onclick="devBroadcastAlert()" class="p-3 bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 border border-sky-500/30 rounded-2xl text-left transition active:scale-95">
+            <span class="text-base block mb-1">📢</span>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Broadcast Alert</span>
+            <span class="text-[8px] text-neutral-400">Kirim teks pesan running di paling atas</span>
+          </button>
+
+          <!-- Tool 2: Glitch Effect -->
+          <button onclick="triggerGlitchEffect()" class="p-3 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-2xl text-left transition active:scale-95">
+            <span class="text-base block mb-1">👾</span>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Cyber Glitch</span>
+            <span class="text-[8px] text-neutral-400">Efek kustom mode neon visual</span>
+          </button>
+
+          <!-- Tool 3: Live Status -->
+          <button onclick="updateRafaStatus()" class="p-3 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-2xl text-left transition active:scale-95">
+            <span class="text-base block mb-1">🔄</span>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Ganti Status Live</span>
+            <span class="text-[8px] text-neutral-400">Ubah status aktivitas live kamu</span>
+          </button>
+
+          <!-- Tool 4: Confetti Party -->
+          <button onclick="triggerConfetti()" class="p-3 bg-pink-500/10 hover:bg-pink-500/20 text-pink-300 border border-pink-500/30 rounded-2xl text-left transition active:scale-95">
+            <span class="text-base block mb-1">🎉</span>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Party Confetti</span>
+            <span class="text-[8px] text-neutral-400">Hujan kembang api / confetti</span>
+          </button>
+
+          <!-- Tool 5: Change Title Tag -->
+          <button onclick="changeRafaTitle()" class="p-3 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-2xl text-left transition active:scale-95">
+            <span class="text-base block mb-1">🏷️</span>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Ubah Title Tag</span>
+            <span class="text-[8px] text-neutral-400">Ganti julukan di kartu namamu</span>
+          </button>
+
+          <!-- Tool 6: Clear Menfess -->
+          <button onclick="devClearSpam()" class="p-3 bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/30 rounded-2xl text-left transition active:scale-95">
+            <span class="text-base block mb-1">🧹</span>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Sapu Pesan Spam</span>
+            <span class="text-[8px] text-neutral-400">Pembersih menfess spam</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal Piket -->
   <div id="piket-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xl flex items-center justify-center p-4" onclick="if(event.target === this) togglePiketModal()">
     <div class="liquid-glass rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
@@ -862,7 +969,7 @@
     </a>
   </footer>
 
-  <!-- SCRIPT THREE.JS SHADER WEBGL DENGAN PARAMS DARI GIT JSON -->
+  <!-- SCRIPT THREE.JS SHADER WEBGL -->
   <script>
     const glassConfig = {
       refThickness: 20,
@@ -911,7 +1018,6 @@
       varying vec3 vNormal;
       varying vec3 vViewPosition;
 
-      // Noise Function untuk Fluid Distortion
       vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
       vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
       vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
@@ -944,23 +1050,19 @@
         vec2 st = gl_FragCoord.xy / u_resolution.xy;
         float noise = snoise(st * 2.5 + u_time * 0.15);
 
-        // Simulasi Refraksi Kaca (Distorsi Indeks Bias u_refFactor & u_refThickness)
         float refrDistort = (u_refFactor - 1.0) * (u_refThickness / 200.0) * noise;
         vec2 refractedUv = st + vec2(refrDistort);
 
-        // Chromatic Aberration Dispersion (u_refDispersion)
         float dispOffset = u_refDispersion * 0.0008;
         float r = sin(refractedUv.x * 3.1415 + u_time + dispOffset) * 0.5 + 0.5;
         float g = sin(refractedUv.y * 3.1415 + u_time) * 0.5 + 0.5;
         float b = sin((refractedUv.x + refractedUv.y) * 3.1415 + u_time - dispOffset) * 0.5 + 0.5;
         vec3 baseColor = vec3(r, g, b) * 0.15;
 
-        // Glare Angle Calculation (-45 deg)
         float rad = u_glareAngle * (3.14159 / 180.0);
         vec2 glareDir = vec2(cos(rad), sin(rad));
         float glare = pow(max(0.0, dot(st - 0.5, glareDir) + noise * 0.2), 3.0) * (u_glareFactor / 100.0);
 
-        // Fresnel Rim Lighting
         vec3 normal = vNormal;
         vec3 viewDir = normalize(vViewPosition);
         float fresnel = pow(1.0 - max(0.0, dot(normal, viewDir)), 3.0);
@@ -1008,9 +1110,96 @@
     });
   </script>
 
+  <!-- SCRIPT LOGIKA DEV PORTAL & UTILS -->
+  <script>
+    const DEV_PIN = "2212";
+
+    function openDevPortalModal() {
+      const modal = document.getElementById('dev-portal-modal');
+      const pinView = document.getElementById('dev-pin-view');
+      const toolsView = document.getElementById('dev-tools-view');
+      
+      pinView.classList.remove('hidden');
+      toolsView.classList.add('hidden');
+      document.getElementById('dev-pin-input').value = '';
+      
+      modal.classList.remove('hidden');
+    }
+
+    function closeDevPortalModal() {
+      document.getElementById('dev-portal-modal').classList.add('hidden');
+    }
+
+    function verifyDevPin(e) {
+      e.preventDefault();
+      const input = document.getElementById('dev-pin-input').value;
+      if (input === DEV_PIN) {
+        document.getElementById('dev-pin-view').classList.add('hidden');
+        document.getElementById('dev-tools-view').classList.remove('hidden');
+      } else {
+        alert("PIN SALAH! Akses ditolak.");
+      }
+    }
+
+    // 1. Broadcast Alert
+    function devBroadcastAlert() {
+      const msg = prompt("Masukkan pesan pengumuman broadcast:", "📢 X TJKT 4 Digital Portal Updated!");
+      if (msg) {
+        const banner = document.getElementById('dev-broadcast-banner');
+        document.getElementById('broadcast-text').innerText = msg;
+        banner.classList.remove('hidden');
+      }
+    }
+
+    // 2. Cyber Glitch Effect
+    function triggerGlitchEffect() {
+      document.body.classList.toggle('invert');
+      setTimeout(() => document.body.classList.toggle('invert'), 1000);
+    }
+
+    // 3. Live Status Update
+    function updateRafaStatus() {
+      const status = prompt("Masukkan status aktivitas live baru kamu:", "🟢 Live Coding Bot");
+      if (status) {
+        const titleEl = document.getElementById('rafa-custom-title');
+        if (titleEl) titleEl.innerText = status;
+      }
+    }
+
+    // 4. Confetti Effect
+    function triggerConfetti() {
+      const colors = ['#0284c7', '#ec4899', '#f59e0b', '#10b981', '#6366f1'];
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'confetti-particle';
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = (Math.random() * 2 + 1) + 's';
+        document.body.appendChild(particle);
+
+        setTimeout(() => particle.remove(), 3000);
+      }
+    }
+
+    // 5. Change Title Tag
+    function changeRafaTitle() {
+      const title = prompt("Masukkan title tag baru untuk kartu namamu:", "Bot Specialist");
+      if (title) {
+        const el = document.getElementById('rafa-custom-title');
+        if (el) el.innerText = title;
+      }
+    }
+
+    // 6. Sapu Pesan Spam
+    function devClearSpam() {
+      if (confirm("Yakin ingin membersihkan pesan menfess teratas? (Aksi cepat Admin)")) {
+        alert("Akses Admin dikonfirmasi. Gunakan tombol delete pada kartu menfess spesifik.");
+      }
+    }
+  </script>
+
   <!-- SCRIPT UTAMA UI & LOGIKA REGULER -->
   <script>
-    // LOGIKA ANIMASI REFRESH PAGE LOADER
     window.addEventListener('load', () => {
       const loader = document.getElementById('page-loader');
       if (loader) {
@@ -1120,7 +1309,7 @@
       renderJadwal();
     }
 
-    // ================= SPIN WHEEL (AUTO ELIMINASI NAMA) =================
+    // ================= SPIN WHEEL =================
     const wheelDataPresets = {
       semua: ["Kiya", "Rafa", "Gilang", "Haris", "Wandi", "Alvin", "Fhidel", "Rojul", "Firli", "Afzal", "Muhtar", "Fadil", "Ainun", "Melisa", "Astria", "Fitri", "Sania", "Sri", "Adelia", "Dini", "Rahmi", "Salwa", "Alfahra", "Gisni", "Marisyha", "Husna", "Mulia", "Mutiara"],
       pria: ["Kiya", "Rafa", "Gilang", "Haris", "Wandi", "Alvin", "Fhidel", "Rojul", "Firli", "Afzal", "Muhtar", "Fadil"],
@@ -1491,7 +1680,7 @@
                 : `<span class="text-neutral-600 dark:text-neutral-400 block mt-0.5">${escapeHtml(c.text)}</span>`;
 
               const userNameLower = (c.user || '').toLowerCase();
-              const isDev = userNameLower.includes('billy') || userNameLower.includes('developer') || userNameLower.includes('mulyana') || userNameLower.includes('dev') || userNameLower.includes('wali kelas');
+              const isDev = userNameLower.includes('billy') || userNameLower.includes('developer') || userNameLower.includes('mulyana') || userNameLower.includes('dev') || userNameLower.includes('rafa');
               
               const devBadge = isDev 
                 ? `<span class="bg-sky-500/10 text-sky-500 font-bold text-[8px] px-2 py-0.5 rounded-full border border-sky-500/20 inline-flex items-center tracking-wider uppercase">Developer</span>`
