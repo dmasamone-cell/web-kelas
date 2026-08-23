@@ -87,36 +87,75 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* ANIMASI REFRESH / PAGE LOADER */
+    /* ANIMASI REFRESH / PAGE LOADER - KARTU POKER KOCOK */
     #page-loader {
       position: fixed;
       inset: 0;
       z-index: 100;
-      background-color: #f2f2f7;
+      background-color: #0f172a;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       transition: opacity 0.6s ease, visibility 0.6s ease;
     }
-    .dark #page-loader {
-      background-color: #030712;
-    }
     #page-loader.fade-out {
       opacity: 0;
       visibility: hidden;
+    }
+
+    /* CSS ANIMATION CARD SHUFFLE */
+    .poker-deck {
+      position: relative;
+      width: 70px;
+      height: 100px;
+    }
+    .poker-card {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      border: 2px solid #ffffff;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      color: white;
+    }
+    .card-1 { animation: shuffle1 1.2s infinite ease-in-out; z-index: 3; }
+    .card-2 { animation: shuffle2 1.2s infinite ease-in-out; z-index: 2; }
+    .card-3 { animation: shuffle3 1.2s infinite ease-in-out; z-index: 1; }
+
+    @keyframes shuffle1 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      30% { transform: translate(-50px, -10px) rotate(-15deg); z-index: 1; }
+      60% { transform: translate(10px, 5px) rotate(5deg); z-index: 1; }
+    }
+    @keyframes shuffle2 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      30% { transform: translate(0px, 0px) rotate(0deg); }
+      60% { transform: translate(-45px, -8px) rotate(-10deg); z-index: 3; }
+    }
+    @keyframes shuffle3 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      30% { transform: translate(45px, 10px) rotate(12deg); z-index: 3; }
+      60% { transform: translate(0px, 0px) rotate(0deg); z-index: 2; }
     }
   </style>
 </head>
 <body class="bg-[#f2f2f7] text-neutral-900 font-sans antialiased selection:bg-sky-500/20 dark:bg-[#030712] dark:text-neutral-100 min-h-screen pb-20 glass-canvas transition-colors duration-500">
 
-  <!-- ANIMASI REFRESH PAGE LOADER -->
+  <!-- ANIMASI REFRESH PAGE LOADER KARTU POKER DIKOCOK -->
   <div id="page-loader">
-    <div class="relative flex items-center justify-center">
-      <div class="w-16 h-16 rounded-full border-4 border-sky-500/20 border-t-sky-500 animate-spin"></div>
-      <span class="absolute font-black text-[10px] tracking-tighter text-sky-500">TJKT 4</span>
+    <div class="poker-deck">
+      <div class="poker-card card-1">♠</div>
+      <div class="poker-card card-2">♥</div>
+      <div class="poker-card card-3">♦</div>
     </div>
-    <p class="mt-4 text-xs font-extrabold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 animate-pulse">Memuat Hub Digital...</p>
+    <p class="mt-6 text-xs font-extrabold uppercase tracking-widest text-sky-400 animate-pulse">Mengocok Kartu...</p>
   </div>
 
   <!-- WEBGL LIQUID GLASS SHADER CONTAINER -->
@@ -183,13 +222,18 @@
 
   <!-- Dashboard & Spotify Embed Section -->
   <section id="dashboard" class="max-w-5xl mx-auto px-6 my-6 relative z-10">
-    <!-- WIDGET SPOTIFY EMBED -->
+    <!-- WIDGET SPOTIFY EMBED (DENGAN RECOVERY LINK & STYLING TEBAL) -->
     <div class="mb-6 liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark">
-      <div class="flex items-center gap-2 mb-3 px-1">
-        <svg class="w-4 h-4 fill-emerald-500" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.18-.1.2-1.2-.418-.18-.6.179-1.2.6-1.38 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        <span class="text-[10px] font-extrabold uppercase tracking-widest text-neutral-800 dark:text-neutral-200">Playlist Kelas X TJKT 4</span>
+      <div class="flex items-center justify-between mb-3 px-1">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 fill-emerald-500" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.18-.1.2-1.2-.418-.18-.6.179-1.2.6-1.38 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          <span class="text-[10px] font-extrabold uppercase tracking-widest text-neutral-800 dark:text-neutral-200">Playlist Resmi Kelas X TJKT 4</span>
+        </div>
+        <a href="https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M" target="_blank" rel="noopener noreferrer" class="text-[9px] font-bold text-emerald-500 hover:underline uppercase tracking-wider">Buka di Spotify App ↗</a>
       </div>
-      <iframe style="border-radius:18px" src="https://open.spotify.com/embed/playlist/nbWPEjc?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="w-full overflow-hidden rounded-2xl bg-black/20">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
@@ -953,7 +997,7 @@
       if (loader) {
         setTimeout(() => {
           loader.classList.add('fade-out');
-        }, 500);
+        }, 1200);
       }
       drawWheel();
       renderJadwal();
