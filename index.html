@@ -10,6 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Three.js Library untuk Shader WebGL Liquid Glass -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -33,11 +36,15 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     
-    /* ANIMATED LIQUID BLOBS BACKGROUND */
-    @keyframes blob-bounce {
-      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      33% { transform: translate(40px, -60px) scale(1.15) rotate(120deg); }
-      66% { transform: translate(-30px, 30px) scale(0.85) rotate(240deg); }
+    /* WEBGL SHADER CANVAS CONTAINER */
+    #webgl-glass-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
     }
 
     .glass-canvas {
@@ -48,23 +55,6 @@
     .dark .glass-canvas {
       background-color: #030712;
     }
-
-    .liquid-blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      z-index: 0;
-      pointer-events: none;
-      animation: blob-bounce 12s infinite ease-in-out;
-    }
-
-    .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: rgba(56, 189, 248, 0.25); }
-    .blob-2 { top: 40%; right: -10%; width: 45vw; height: 45vw; background: rgba(139, 92, 246, 0.20); animation-delay: -4s; }
-    .blob-3 { bottom: -10%; left: 20%; width: 50vw; height: 50vw; background: rgba(236, 72, 153, 0.18); animation-delay: -8s; }
-
-    .dark .blob-1 { background: rgba(56, 189, 248, 0.12); }
-    .dark .blob-2 { background: rgba(139, 92, 246, 0.10); }
-    .dark .blob-3 { background: rgba(236, 72, 153, 0.08); }
 
     /* ADVANCED LIQUID GLASS SURFACE */
     .liquid-glass {
@@ -100,10 +90,8 @@
 </head>
 <body class="bg-[#f2f2f7] text-neutral-900 font-sans antialiased selection:bg-sky-500/20 dark:bg-[#030712] dark:text-neutral-100 min-h-screen pb-20 glass-canvas transition-colors duration-500">
 
-  <!-- ANIMATED BACKGROUND BLOBS -->
-  <div class="liquid-blob blob-1"></div>
-  <div class="liquid-blob blob-2"></div>
-  <div class="liquid-blob blob-3"></div>
+  <!-- WEBGL LIQUID GLASS SHADER CONTAINER -->
+  <div id="webgl-glass-bg"></div>
 
   <!-- Navbar Navigation -->
   <nav class="sticky top-4 z-40 max-w-5xl mx-auto px-4">
@@ -772,6 +760,152 @@
       <span>@netro4.offficial</span>
     </a>
   </footer>
+
+  <!-- SCRIPT THREE.JS SHADER WEBGL DENGAN PARAMS DARI GIT JSON -->
+  <script>
+    const glassConfig = {
+      refThickness: 20,
+      refFactor: 1.4,
+      refDispersion: 7,
+      refFresnelFactor: 20,
+      glareHardness: 20,
+      glareFactor: 90,
+      glareAngle: -45,
+      blurRadius: 1
+    };
+
+    const container = document.getElementById('webgl-glass-bg');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const vertexShader = `
+      varying vec2 vUv;
+      varying vec3 vNormal;
+      varying vec3 vViewPosition;
+
+      void main() {
+        vUv = uv;
+        vNormal = normalize(normalMatrix * normal);
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        vViewPosition = -mvPosition.xyz;
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    `;
+
+    const fragmentShader = `
+      uniform vec2 u_resolution;
+      uniform float u_time;
+      uniform float u_refThickness;
+      uniform float u_refFactor;
+      uniform float u_refDispersion;
+      uniform float u_glareFactor;
+      uniform float u_glareAngle;
+      
+      varying vec2 vUv;
+      varying vec3 vNormal;
+      varying vec3 vViewPosition;
+
+      // Noise Function untuk Fluid Distortion
+      vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+      vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+      vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
+
+      float snoise(vec2 v) {
+        const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+        vec2 i  = floor(v + dot(v, C.yy) );
+        vec2 x0 = v -   i + dot(i, C.xx);
+        vec2 i1;
+        i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+        vec4 x12 = x0.xyxy + C.xxzz;
+        x12.xy -= i1;
+        i = mod289(i);
+        vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 )) + i.x + vec3(0.0, i1.x, 1.0 ));
+        vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+        m = m*m ;
+        m = m*m ;
+        vec3 x = 2.0 * fract(p * C.www) - 1.0;
+        vec3 h = abs(x) - 0.5;
+        vec3 ox = floor(x + 0.5);
+        vec3 a0 = x - ox;
+        m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+        vec3 g;
+        g.x  = a0.x  * x0.x  + h.x  * x0.y;
+        g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+        return 130.0 * dot(m, g);
+      }
+
+      void main() {
+        vec2 st = gl_FragCoord.xy / u_resolution.xy;
+        float noise = snoise(st * 2.5 + u_time * 0.15);
+
+        // Simulasi Refraksi Kaca (Distorsi Indeks Bias u_refFactor & u_refThickness)
+        float refrDistort = (u_refFactor - 1.0) * (u_refThickness / 200.0) * noise;
+        vec2 refractedUv = st + vec2(refrDistort);
+
+        // Chromatic Aberration Dispersion (u_refDispersion)
+        float dispOffset = u_refDispersion * 0.0008;
+        float r = sin(refractedUv.x * 3.1415 + u_time + dispOffset) * 0.5 + 0.5;
+        float g = sin(refractedUv.y * 3.1415 + u_time) * 0.5 + 0.5;
+        float b = sin((refractedUv.x + refractedUv.y) * 3.1415 + u_time - dispOffset) * 0.5 + 0.5;
+        vec3 baseColor = vec3(r, g, b) * 0.15;
+
+        // Glare Angle Calculation (-45 deg)
+        float rad = u_glareAngle * (3.14159 / 180.0);
+        vec2 glareDir = vec2(cos(rad), sin(rad));
+        float glare = pow(max(0.0, dot(st - 0.5, glareDir) + noise * 0.2), 3.0) * (u_glareFactor / 100.0);
+
+        // Fresnel Rim Lighting
+        vec3 normal = vNormal;
+        vec3 viewDir = normalize(vViewPosition);
+        float fresnel = pow(1.0 - max(0.0, dot(normal, viewDir)), 3.0);
+
+        vec3 finalColor = baseColor + vec3(glare) + vec3(fresnel * 0.15);
+        gl_FragColor = vec4(finalColor, 0.22);
+      }
+    `;
+
+    const geometry = new THREE.PlaneGeometry(12, 12, 32, 32);
+    const material = new THREE.ShaderMaterial({
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+      uniforms: {
+        u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+        u_time: { value: 0.0 },
+        u_refThickness: { value: glassConfig.refThickness },
+        u_refFactor: { value: glassConfig.refFactor },
+        u_refDispersion: { value: glassConfig.refDispersion },
+        u_glareFactor: { value: glassConfig.glareFactor },
+        u_glareAngle: { value: glassConfig.glareAngle }
+      },
+      transparent: true,
+      depthWrite: false
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+    camera.position.z = 5;
+
+    const clock = new THREE.Clock();
+    function animateWebGL() {
+      requestAnimationFrame(animateWebGL);
+      material.uniforms.u_time.value = clock.getElapsedTime();
+      mesh.rotation.z = Math.sin(clock.getElapsedTime() * 0.1) * 0.05;
+      renderer.render(scene, camera);
+    }
+    animateWebGL();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+    });
+  </script>
 
   <!-- SCRIPT UTAMA UI & LOGIKA REGULER -->
   <script>
