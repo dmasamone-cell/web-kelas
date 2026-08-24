@@ -87,7 +87,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* ANIMASI REFRESH / PAGE LOADER - KARTU POKER KOCOK (HITAM PUTIH) */
+    /* ANIMASI REFRESH / PAGE LOADER */
     #page-loader {
       position: fixed;
       inset: 0;
@@ -104,7 +104,6 @@
       visibility: hidden;
     }
 
-    /* CSS ANIMATION CARD SHUFFLE (HITAM PUTIH) */
     .poker-deck {
       position: relative;
       width: 70px;
@@ -123,26 +122,9 @@
       font-weight: 800;
       font-size: 22px;
     }
-    /* Kartu Hitam & Putih Monokrom */
-    .card-1 { 
-      background: #000000; 
-      color: #ffffff; 
-      animation: shuffle1 1.2s infinite ease-in-out; 
-      z-index: 3; 
-    }
-    .card-2 { 
-      background: #ffffff; 
-      color: #000000; 
-      border-color: #000000;
-      animation: shuffle2 1.2s infinite ease-in-out; 
-      z-index: 2; 
-    }
-    .card-3 { 
-      background: #18181b; 
-      color: #ffffff; 
-      animation: shuffle3 1.2s infinite ease-in-out; 
-      z-index: 1; 
-    }
+    .card-1 { background: #000000; color: #ffffff; animation: shuffle1 1.2s infinite ease-in-out; z-index: 3; }
+    .card-2 { background: #ffffff; color: #000000; border-color: #000000; animation: shuffle2 1.2s infinite ease-in-out; z-index: 2; }
+    .card-3 { background: #18181b; color: #ffffff; animation: shuffle3 1.2s infinite ease-in-out; z-index: 1; }
 
     @keyframes shuffle1 {
       0%, 100% { transform: translate(0, 0) rotate(0deg); }
@@ -160,20 +142,19 @@
       60% { transform: translate(0px, 0px) rotate(0deg); z-index: 2; }
     }
 
-    /* CONFETTI ANIMATION */
+    /* CONFETTI ANIMATION FIXED */
     .confetti-particle {
       position: fixed;
-      width: 8px;
-      height: 8px;
-      z-index: 999;
+      top: -10px;
+      width: 10px;
+      height: 10px;
+      z-index: 9999;
       pointer-events: none;
-      animation: fall 3s linear forwards;
+      animation: fall linear forwards;
     }
     @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
     }
   </style>
 </head>
@@ -184,7 +165,7 @@
     <span id="broadcast-text">📢 PENGUMUMAN DEVELOPER</span>
   </div>
 
-  <!-- ANIMASI REFRESH PAGE LOADER KARTU POKER DIKOCOK (HITAM PUTIH) -->
+  <!-- ANIMASI REFRESH PAGE LOADER KARTU POKER -->
   <div id="page-loader">
     <div class="poker-deck">
       <div class="poker-card card-1">♠</div>
@@ -278,10 +259,9 @@
         <p class="text-[11px] font-normal text-neutral-500 dark:text-neutral-400 text-center mt-4 leading-relaxed liquid-glass-subtle p-3 rounded-2xl">"Jadilah pembelajar sepanjang hayat dan generasi Manusia Unggul."</p>
       </div>
 
-      <!-- GRID KANAN (SPOTIFY EMBED, AGENDA, CORE TEAM & PIKET) -->
+      <!-- GRID KANAN -->
       <div class="md:col-span-8 space-y-5">
-        
-        <!-- WIDGET SPOTIFY EMBED -->
+        <!-- SPOTIFY -->
         <div class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark">
           <div class="flex items-center justify-between mb-3 px-1">
             <div class="flex items-center gap-2">
@@ -424,8 +404,7 @@
       </div>
     </div>
 
-    <div id="jadwal-cards-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
-    </div>
+    <div id="jadwal-cards-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4"></div>
   </section>
 
   <!-- Spin Wheel -->
@@ -547,7 +526,7 @@
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
       </div>
 
-      <!-- KARTU EKSKLUSIF DEVELOPER RAFA -->
+      <!-- KARTU EKSKLUSIF DEVELOPER RAFA (KARTU MURNI BERSIH, TOMBOL ADA DI DALAM MODAL) -->
       <div onclick="openDetailModal('siswa-rafa', 'https://files.catbox.moe/lnzqfg.jpg', 'M.Brilliant Rafa Ridhoca', 'Core Developer • System Administrator')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark border border-sky-500/40 hover:border-sky-400 transition-all text-center cursor-pointer active:scale-95 group relative overflow-hidden">
         <span class="absolute top-2 right-2 text-[8px] font-black uppercase tracking-widest text-sky-400 bg-sky-500/20 border border-sky-500/40 px-2 py-0.5 rounded-full animate-pulse">DEV</span>
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2 border-2 border-sky-500/60 group-hover:border-sky-400 transition-colors shadow-lg">
@@ -555,11 +534,6 @@
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-400 transition-colors">M.Brilliant Rafa Ridhoca</h3>
         <p id="rafa-custom-title" class="text-[9px] text-sky-400 font-extrabold mt-0.5 uppercase tracking-wider">Lead System Dev</p>
-        
-        <!-- TOMBOL KHUSUS MASUK KE PORTAL DEV -->
-        <button onclick="event.stopPropagation(); openDevPortalModal()" class="mt-2.5 w-full py-1 bg-sky-500/20 hover:bg-sky-500/40 text-sky-300 border border-sky-500/40 rounded-xl text-[9px] font-extrabold uppercase tracking-wider transition active:scale-95 flex items-center justify-center gap-1">
-          ⚡ Open Dev Portal
-        </button>
       </div>
 
       <div onclick="openDetailModal('siswa-gilang', 'https://files.catbox.moe/s2p4xp.jpg', 'M.Gilang Febriyan', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
@@ -822,9 +796,9 @@
         </form>
       </div>
 
-      <!-- RUANG DEVELOPER TOOLS (AKAN MUNCUL SETELAH PIN BENAR) -->
-      <div id="dev-tools-view" class="hidden space-y-5">
-        <div class="flex items-center justify-between border-b border-white/10 pb-3">
+      <!-- RUANG DEVELOPER TOOLS LENGKAP TOMBOL ON/OFF -->
+      <div id="dev-tools-view" class="hidden space-y-5 max-h-[80vh] overflow-y-auto pr-1">
+        <div class="flex items-center justify-between border-b border-white/10 pb-3 sticky top-0 bg-neutral-900/90 backdrop-blur-md z-10 pt-1">
           <div>
             <span class="text-[9px] font-black uppercase tracking-widest text-sky-400 block">Restricted Area</span>
             <h3 class="font-extrabold text-white text-sm">⚡ Rafa's Developer Control Panel</h3>
@@ -832,48 +806,67 @@
           <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">ONLINE</span>
         </div>
 
-        <div class="grid grid-cols-2 gap-2.5">
-          <!-- Tool 1: Broadcast -->
-          <button onclick="devBroadcastAlert()" class="p-3 bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 border border-sky-500/30 rounded-2xl text-left transition active:scale-95">
-            <span class="text-base block mb-1">📢</span>
-            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Broadcast Alert</span>
-            <span class="text-[8px] text-neutral-400">Kirim teks pesan running di paling atas</span>
-          </button>
+        <div class="space-y-3">
+          <!-- Tool 1: Broadcast Alert (ON/OFF & SET TEXT) -->
+          <div class="p-3.5 bg-sky-500/10 border border-sky-500/30 rounded-2xl flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-sky-300 uppercase tracking-wider flex items-center gap-1.5">📢 Broadcast Alert</span>
+              <button id="btn-toggle-broadcast" onclick="toggleBroadcastBanner()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/30">
+                OFF
+              </button>
+            </div>
+            <p class="text-[9px] text-neutral-400">Tampilkan atau sembunyikan running text pengumuman atas.</p>
+            <button onclick="devEditBroadcastText()" class="w-full py-1.5 bg-sky-500/20 hover:bg-sky-500/30 text-sky-200 border border-sky-500/30 rounded-xl text-[9px] font-bold uppercase tracking-wider transition">
+              ✏️ Edit Teks Broadcast
+            </button>
+          </div>
 
-          <!-- Tool 2: Glitch Effect -->
-          <button onclick="triggerGlitchEffect()" class="p-3 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-2xl text-left transition active:scale-95">
-            <span class="text-base block mb-1">👾</span>
-            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Cyber Glitch</span>
-            <span class="text-[8px] text-neutral-400">Efek kustom mode neon visual</span>
-          </button>
+          <!-- Tool 2: Cyber Glitch Mode (ON/OFF) -->
+          <div class="p-3.5 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-between">
+            <div>
+              <span class="text-xs font-extrabold text-emerald-300 uppercase tracking-wider block">👾 Cyber Glitch</span>
+              <span class="text-[9px] text-neutral-400">Invert warna visual mode cyberpunk</span>
+            </div>
+            <button id="btn-toggle-glitch" onclick="toggleGlitchEffect()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10">
+              OFF
+            </button>
+          </div>
 
-          <!-- Tool 3: Live Status -->
-          <button onclick="updateRafaStatus()" class="p-3 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-2xl text-left transition active:scale-95">
-            <span class="text-base block mb-1">🔄</span>
-            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Ganti Status Live</span>
-            <span class="text-[8px] text-neutral-400">Ubah status aktivitas live kamu</span>
-          </button>
+          <!-- Tool 3: Party Confetti (START / STOP) -->
+          <div class="p-3.5 bg-pink-500/10 border border-pink-500/30 rounded-2xl flex items-center justify-between">
+            <div>
+              <span class="text-xs font-extrabold text-pink-300 uppercase tracking-wider block">🎉 Party Confetti</span>
+              <span class="text-[9px] text-neutral-400">Efek hujan kembang api meriah</span>
+            </div>
+            <button id="btn-toggle-confetti" onclick="toggleConfetti()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-pink-500/20 text-pink-300 border border-pink-500/30">
+              Mulai Hujan 🎉
+            </button>
+          </div>
 
-          <!-- Tool 4: Confetti Party -->
-          <button onclick="triggerConfetti()" class="p-3 bg-pink-500/10 hover:bg-pink-500/20 text-pink-300 border border-pink-500/30 rounded-2xl text-left transition active:scale-95">
-            <span class="text-base block mb-1">🎉</span>
-            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Party Confetti</span>
-            <span class="text-[8px] text-neutral-400">Hujan kembang api / confetti</span>
-          </button>
+          <!-- Tool 4: Live Status Title Tag -->
+          <div class="p-3.5 bg-indigo-500/10 border border-indigo-500/30 rounded-2xl flex flex-col gap-2">
+            <span class="text-xs font-extrabold text-indigo-300 uppercase tracking-wider">🏷️ Ubah Title Tag Rafa</span>
+            <span class="text-[9px] text-neutral-400">Ubah teks status/julukan di kartu namamu.</span>
+            <div class="flex gap-2">
+              <button onclick="changeRafaTitle()" class="flex-1 py-1.5 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-200 border border-indigo-500/30 rounded-xl text-[9px] font-bold uppercase tracking-wider transition">
+                Ganti Title Tag
+              </button>
+              <button onclick="resetRafaTitle()" class="px-3 py-1.5 bg-red-500/20 text-red-300 border border-red-500/30 rounded-xl text-[9px] font-bold uppercase tracking-wider transition">
+                Reset
+              </button>
+            </div>
+          </div>
 
-          <!-- Tool 5: Change Title Tag -->
-          <button onclick="changeRafaTitle()" class="p-3 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-2xl text-left transition active:scale-95">
-            <span class="text-base block mb-1">🏷️</span>
-            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Ubah Title Tag</span>
-            <span class="text-[8px] text-neutral-400">Ganti julukan di kartu namamu</span>
-          </button>
-
-          <!-- Tool 6: Clear Menfess -->
-          <button onclick="devClearSpam()" class="p-3 bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/30 rounded-2xl text-left transition active:scale-95">
-            <span class="text-base block mb-1">🧹</span>
-            <span class="text-[10px] font-extrabold uppercase tracking-wider block">Sapu Pesan Spam</span>
-            <span class="text-[8px] text-neutral-400">Pembersih menfess spam</span>
-          </button>
+          <!-- Tool 5: Clear Menfess -->
+          <div class="p-3.5 bg-red-500/10 border border-red-500/30 rounded-2xl flex items-center justify-between">
+            <div>
+              <span class="text-xs font-extrabold text-red-300 uppercase tracking-wider block">🧹 Admin Menfess</span>
+              <span class="text-[9px] text-neutral-400">Pembersih pesan menfess teratas</span>
+            </div>
+            <button onclick="devClearSpam()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-red-500/20 text-red-300 border border-red-500/30">
+              Sapu Spam
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -921,9 +914,16 @@
       <div class="flex justify-between items-start">
         <div>
           <h3 id="modal-title" class="font-extrabold text-neutral-900 dark:text-white text-base tracking-tight"></h3>
-          <p id="modal-subtitle" class="text-xs font-medium text-neutral-500 dark:text-neutral-400 mt-0.5 mb-4"></p>
+          <p id="modal-subtitle" class="text-xs font-medium text-neutral-500 dark:text-neutral-400 mt-0.5 mb-2"></p>
         </div>
         <button onclick="resetPhotoData()" title="Reset Like & Komentar" class="px-3 py-1 rounded-full bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 text-[9px] font-bold tracking-wider uppercase transition active:scale-95">Reset</button>
+      </div>
+
+      <!-- TOMBOL AKSES DEV PORTAL HANYA TERSEDIA DI MODAL DETAIL RAFA -->
+      <div id="modal-dev-portal-btn-container" class="hidden mb-3">
+        <button onclick="closeModal(); openDevPortalModal()" class="w-full py-2 bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 border border-sky-500/40 rounded-2xl text-xs font-black uppercase tracking-wider transition active:scale-95 flex items-center justify-center gap-2">
+          ⚡ Buka Developer Control Panel (PIN Protected)
+        </button>
       </div>
 
       <div class="flex items-center justify-between border-t border-b border-black/5 dark:border-white/5 py-3 my-3 text-xs">
@@ -969,7 +969,7 @@
     </a>
   </footer>
 
-  <!-- SCRIPT THREE.JS SHADER WEBGL -->
+  <!-- THREE.JS SHADER WEBGL -->
   <script>
     const glassConfig = {
       refThickness: 20,
@@ -1110,9 +1110,12 @@
     });
   </script>
 
-  <!-- SCRIPT LOGIKA DEV PORTAL & UTILS -->
+  <!-- LOGIKA DEV PORTAL & KONTROL FUNGSI LENGKAP -->
   <script>
     const DEV_PIN = "2212";
+    let isGlitchActive = false;
+    let isBroadcastActive = false;
+    let confettiInterval = null;
 
     function openDevPortalModal() {
       const modal = document.getElementById('dev-portal-modal');
@@ -1141,64 +1144,100 @@
       }
     }
 
-    // 1. Broadcast Alert
-    function devBroadcastAlert() {
-      const msg = prompt("Masukkan pesan pengumuman broadcast:", "📢 X TJKT 4 Digital Portal Updated!");
-      if (msg) {
-        const banner = document.getElementById('dev-broadcast-banner');
-        document.getElementById('broadcast-text').innerText = msg;
+    // 1. Broadcast Control (ON / OFF)
+    function toggleBroadcastBanner() {
+      const banner = document.getElementById('dev-broadcast-banner');
+      const btn = document.getElementById('btn-toggle-broadcast');
+      isBroadcastActive = !isBroadcastActive;
+
+      if (isBroadcastActive) {
         banner.classList.remove('hidden');
+        btn.innerText = "ON";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+      } else {
+        banner.classList.add('hidden');
+        btn.innerText = "OFF";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/30";
       }
     }
 
-    // 2. Cyber Glitch Effect
-    function triggerGlitchEffect() {
-      document.body.classList.toggle('invert');
-      setTimeout(() => document.body.classList.toggle('invert'), 1000);
-    }
-
-    // 3. Live Status Update
-    function updateRafaStatus() {
-      const status = prompt("Masukkan status aktivitas live baru kamu:", "🟢 Live Coding Bot");
-      if (status) {
-        const titleEl = document.getElementById('rafa-custom-title');
-        if (titleEl) titleEl.innerText = status;
+    function devEditBroadcastText() {
+      const msg = prompt("Masukkan pesan pengumuman broadcast baru:", document.getElementById('broadcast-text').innerText);
+      if (msg) {
+        document.getElementById('broadcast-text').innerText = msg;
+        if (!isBroadcastActive) toggleBroadcastBanner();
       }
     }
 
-    // 4. Confetti Effect
-    function triggerConfetti() {
-      const colors = ['#0284c7', '#ec4899', '#f59e0b', '#10b981', '#6366f1'];
-      for (let i = 0; i < 50; i++) {
+    // 2. Cyber Glitch Control (ON / OFF)
+    function toggleGlitchEffect() {
+      const btn = document.getElementById('btn-toggle-glitch');
+      isGlitchActive = !isGlitchActive;
+      document.body.classList.toggle('invert', isGlitchActive);
+
+      if (isGlitchActive) {
+        btn.innerText = "ON";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+      } else {
+        btn.innerText = "OFF";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10";
+      }
+    }
+
+    // 3. Party Confetti Control (MULAI / STOP)
+    function toggleConfetti() {
+      const btn = document.getElementById('btn-toggle-confetti');
+      if (confettiInterval) {
+        clearInterval(confettiInterval);
+        confettiInterval = null;
+        btn.innerText = "Mulai Hujan 🎉";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-pink-500/20 text-pink-300 border border-pink-500/30";
+      } else {
+        btn.innerText = "Stop Hujan 🛑";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/30";
+        
+        spawnConfettiBatch();
+        confettiInterval = setInterval(spawnConfettiBatch, 1500);
+      }
+    }
+
+    function spawnConfettiBatch() {
+      const colors = ['#0284c7', '#ec4899', '#f59e0b', '#10b981', '#6366f1', '#ffffff'];
+      for (let i = 0; i < 35; i++) {
         const particle = document.createElement('div');
         particle.className = 'confetti-particle';
         particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         particle.style.left = Math.random() * 100 + 'vw';
-        particle.style.animationDuration = (Math.random() * 2 + 1) + 's';
+        particle.style.width = (Math.random() * 8 + 6) + 'px';
+        particle.style.height = (Math.random() * 8 + 6) + 'px';
+        particle.style.animationDuration = (Math.random() * 2.5 + 2) + 's';
         document.body.appendChild(particle);
 
-        setTimeout(() => particle.remove(), 3000);
+        setTimeout(() => particle.remove(), 4500);
       }
     }
 
-    // 5. Change Title Tag
+    // 4. Change & Reset Title Tag
     function changeRafaTitle() {
-      const title = prompt("Masukkan title tag baru untuk kartu namamu:", "Bot Specialist");
+      const title = prompt("Masukkan title tag baru untuk kartu Rafa:", "Lead System Dev");
       if (title) {
         const el = document.getElementById('rafa-custom-title');
         if (el) el.innerText = title;
       }
     }
 
-    // 6. Sapu Pesan Spam
+    function resetRafaTitle() {
+      const el = document.getElementById('rafa-custom-title');
+      if (el) el.innerText = "Lead System Dev";
+    }
+
+    // 5. Sapu Pesan Spam
     function devClearSpam() {
-      if (confirm("Yakin ingin membersihkan pesan menfess teratas? (Aksi cepat Admin)")) {
-        alert("Akses Admin dikonfirmasi. Gunakan tombol delete pada kartu menfess spesifik.");
-      }
+      alert("Akses Admin dikonfirmasi. Gunakan tombol Delete pada masing-masing kartu menfess spesifik.");
     }
   </script>
 
-  <!-- SCRIPT UTAMA UI & LOGIKA REGULER -->
+  <!-- UTAMA UI & LOGIKA REGULER -->
   <script>
     window.addEventListener('load', () => {
       const loader = document.getElementById('page-loader');
@@ -1480,7 +1519,7 @@
     }, 1000);
   </script>
 
-  <!-- SCRIPT MODULE FIREBASE REALTIME FIRESTORE -->
+  <!-- FIREBASE REALTIME FIRESTORE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, doc, collection, addDoc, deleteDoc, query, orderBy, onSnapshot, setDoc, updateDoc, arrayUnion, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -1649,6 +1688,14 @@
       document.getElementById('modal-subtitle').innerText = subtitle;
       document.getElementById('image-modal').classList.remove('hidden');
       document.getElementById('sticker-picker').classList.add('hidden');
+
+      // TAMPILKAN TOMBOL AKSES DEV PORTAL HANYA APABILA CARD KELAS DARI RAFA YANG DIBUKA
+      const devBtnContainer = document.getElementById('modal-dev-portal-btn-container');
+      if (id === 'siswa-rafa') {
+        devBtnContainer.classList.remove('hidden');
+      } else {
+        devBtnContainer.classList.add('hidden');
+      }
 
       const likedPhotos = JSON.parse(localStorage.getItem('liked_photos') || '[]');
       const btnLikeEl = document.getElementById('modal-like-btn');
