@@ -22,6 +22,15 @@
             sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
           },
+          colors: {
+            brand: {
+              50: 'var(--brand-50, #f0f9ff)',
+              100: 'var(--brand-100, #e0f2fe)',
+              400: 'var(--brand-400, #38bdf8)',
+              500: 'var(--brand-500, #0284c7)',
+              600: 'var(--brand-600, #0284c7)',
+            }
+          },
           boxShadow: {
             'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.4)',
             'glass-hover': '0 20px 48px 0 rgba(0, 0, 0, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.6)',
@@ -32,6 +41,10 @@
     }
   </script>
   <style>
+    :root {
+      --brand-main: #0284c7;
+      --brand-glow: rgba(2, 132, 199, 0.4);
+    }
     #wheel-canvas { transition: transform 4s cubic-bezier(0.15, 0.99, 0.15, 0.99); }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -45,6 +58,17 @@
       height: 100vh;
       z-index: 0;
       pointer-events: none;
+    }
+
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      display: none;
     }
 
     .glass-canvas {
@@ -142,23 +166,51 @@
       60% { transform: translate(0px, 0px) rotate(0deg); z-index: 2; }
     }
 
-    /* CONFETTI ANIMATION FIXED */
-    .confetti-particle {
+    /* CONFETTI & SNOW ANIMATIONS */
+    .confetti-particle, .snow-particle {
       position: fixed;
       top: -10px;
-      width: 10px;
-      height: 10px;
       z-index: 9999;
       pointer-events: none;
       animation: fall linear forwards;
+    }
+    .snow-particle {
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      box-shadow: 0 0 5px rgba(255,255,255,0.8);
     }
     @keyframes fall {
       0% { transform: translateY(0) rotate(0deg); opacity: 1; }
       100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
     }
+
+    /* MAINTENANCE OVERLAY */
+    #maintenance-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #030712;
+      color: #00ff66;
+      font-family: 'JetBrains Mono', monospace;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
   </style>
 </head>
 <body class="bg-[#f2f2f7] text-neutral-900 font-sans antialiased selection:bg-sky-500/20 dark:bg-[#030712] dark:text-neutral-100 min-h-screen pb-20 glass-canvas transition-colors duration-500">
+
+  <!-- SYSTEM MAINTENANCE LOCK SCREEN -->
+  <div id="maintenance-screen">
+    <div class="w-16 h-16 rounded-full border-2 border-[#00ff66] flex items-center justify-center text-2xl mb-4 animate-pulse">🔒</div>
+    <h1 class="text-2xl sm:text-3xl font-black uppercase tracking-widest text-white mb-2">System Maintenance</h1>
+    <p class="text-xs text-neutral-400 max-w-md mb-6 leading-relaxed">Website sedang diuji coba dan dikunci oleh Lead Developer (Rafa). Silakan kembali beberapa saat lagi.</p>
+    <span class="text-[10px] font-mono border border-[#00ff66]/40 px-3 py-1 rounded-full bg-[#00ff66]/10 text-[#00ff66]">SYS_STATUS: MAINTENANCE_ACTIVE</span>
+  </div>
 
   <!-- RUNNING BROADCAST ALERT -->
   <div id="dev-broadcast-banner" class="hidden bg-sky-500/90 text-white text-[11px] font-extrabold uppercase tracking-widest py-2 px-4 text-center sticky top-0 z-50 backdrop-blur-md border-b border-sky-400/30">
@@ -175,8 +227,9 @@
     <p class="mt-6 text-xs font-extrabold uppercase tracking-widest text-neutral-300 animate-pulse">Mengocok Kartu...</p>
   </div>
 
-  <!-- WEBGL LIQUID GLASS SHADER CONTAINER -->
+  <!-- WEBGL LIQUID GLASS SHADER & MATRIX CANVAS CONTAINER -->
   <div id="webgl-glass-bg"></div>
+  <canvas id="matrix-canvas"></canvas>
 
   <!-- Navbar Navigation -->
   <nav class="sticky top-4 z-40 max-w-5xl mx-auto px-4">
@@ -232,7 +285,16 @@
 
   <!-- Header -->
   <header class="max-w-5xl mx-auto px-6 pt-12 pb-6 text-center relative z-10">
-    <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 border border-black/10 dark:border-white/10 px-4 py-1.5 rounded-full liquid-glass-subtle inline-block">Angkatan 2026 / 2029</span>
+    <div class="flex flex-wrap items-center justify-center gap-2 mb-2">
+      <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 border border-black/10 dark:border-white/10 px-4 py-1.5 rounded-full liquid-glass-subtle inline-block">Angkatan 2026 / 2029</span>
+      
+      <!-- PUBLIC VISITOR COUNTER WIDGET -->
+      <div id="public-visitor-widget" class="flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border border-sky-500/30 text-[10px] font-mono font-bold text-sky-500" title="Total Pengunjung Web">
+        <svg class="w-3.5 h-3.5 fill-current animate-pulse" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        <span id="visitor-count-number">...</span>
+      </div>
+    </div>
+
     <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 dark:text-white tracking-tight mt-4">Teknik Jaringan Komputer & Telekomunikasi 4</h1>
     <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-3 font-normal max-w-lg mx-auto leading-relaxed">Ruang digital resmi untuk informasi, agenda kegiatan, karya siswa, dan interaksi kelas.</p>
   </header>
@@ -526,7 +588,7 @@
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
       </div>
 
-      <!-- KARTU EKSKLUSIF DEVELOPER RAFA (KARTU MURNI BERSIH, TOMBOL ADA DI DALAM MODAL) -->
+      <!-- KARTU EKSKLUSIF DEVELOPER RAFA -->
       <div onclick="openDetailModal('siswa-rafa', 'https://files.catbox.moe/lnzqfg.jpg', 'M.Brilliant Rafa Ridhoca', 'Core Developer • System Administrator')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark border border-sky-500/40 hover:border-sky-400 transition-all text-center cursor-pointer active:scale-95 group relative overflow-hidden">
         <span class="absolute top-2 right-2 text-[8px] font-black uppercase tracking-widest text-sky-400 bg-sky-500/20 border border-sky-500/40 px-2 py-0.5 rounded-full animate-pulse">DEV</span>
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2 border-2 border-sky-500/60 group-hover:border-sky-400 transition-colors shadow-lg">
@@ -789,14 +851,14 @@
           <p class="text-xs text-neutral-400 mt-1">Masukkan PIN Developer untuk membuka ruang kontrol Rafa.</p>
         </div>
         <form onsubmit="verifyDevPin(event)" class="space-y-3 pt-2">
-          <input type="password" id="dev-pin-input" maxlength="6" placeholder="Masukkan PIN..." autofocus class="w-full text-center tracking-widest font-mono text-lg liquid-glass-subtle rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition">
+          <input type="password" id="dev-pin-input" maxlength="8" placeholder="Masukkan PIN..." autofocus class="w-full text-center tracking-widest font-mono text-lg liquid-glass-subtle rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition">
           <button type="submit" class="w-full py-3 bg-sky-500 hover:bg-sky-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition active:scale-95 shadow-lg">
             Unlock Portal →
           </button>
         </form>
       </div>
 
-      <!-- RUANG DEVELOPER TOOLS LENGKAP TOMBOL ON/OFF -->
+      <!-- RUANG DEVELOPER TOOLS LENGKAP -->
       <div id="dev-tools-view" class="hidden space-y-5 max-h-[80vh] overflow-y-auto pr-1">
         <div class="flex items-center justify-between border-b border-white/10 pb-3 sticky top-0 bg-neutral-900/90 backdrop-blur-md z-10 pt-1">
           <div>
@@ -807,7 +869,64 @@
         </div>
 
         <div class="space-y-3">
-          <!-- Tool 1: Broadcast Alert (ON/OFF & SET TEXT) -->
+          <!-- 1. Ganti PIN Portal -->
+          <div class="p-3.5 bg-sky-500/10 border border-sky-500/30 rounded-2xl flex items-center justify-between">
+            <div>
+              <span class="text-xs font-extrabold text-sky-300 uppercase tracking-wider block">🔑 Ganti PIN Portal</span>
+              <span class="text-[9px] text-neutral-400">Ubah PIN keamanan dev panel ini.</span>
+            </div>
+            <button onclick="changeDevPin()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-sky-500/20 text-sky-300 border border-sky-500/30 hover:bg-sky-500/30">
+              Ganti PIN
+            </button>
+          </div>
+
+          <!-- 2. Maintenance / System Lock Switch -->
+          <div class="p-3.5 bg-red-500/10 border border-red-500/30 rounded-2xl flex items-center justify-between">
+            <div>
+              <span class="text-xs font-extrabold text-red-300 uppercase tracking-wider block">🚨 System Maintenance Lock</span>
+              <span class="text-[9px] text-neutral-400">Kunci seluruh tampilan web untuk publik</span>
+            </div>
+            <button id="btn-toggle-maintenance" onclick="toggleMaintenanceMode()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10">
+              OFF
+            </button>
+          </div>
+
+          <!-- 3. Dynamic Theme Accent Switcher -->
+          <div class="p-3.5 bg-indigo-500/10 border border-indigo-500/30 rounded-2xl space-y-2">
+            <span class="text-xs font-extrabold text-indigo-300 uppercase tracking-wider block">🎨 Dynamic Theme Accent</span>
+            <span class="text-[9px] text-neutral-400">Ubah warna aksen utama website secara langsung</span>
+            <div class="flex gap-1.5 pt-1">
+              <button onclick="setThemeAccent('cyan')" class="w-6 h-6 rounded-full bg-sky-500 border border-white/40 shadow-sm" title="Cyan"></button>
+              <button onclick="setThemeAccent('emerald')" class="w-6 h-6 rounded-full bg-emerald-500 border border-white/40 shadow-sm" title="Neon Green"></button>
+              <button onclick="setThemeAccent('crimson')" class="w-6 h-6 rounded-full bg-red-500 border border-white/40 shadow-sm" title="Crimson Red"></button>
+              <button onclick="setThemeAccent('purple')" class="w-6 h-6 rounded-full bg-purple-500 border border-white/40 shadow-sm" title="Purple Synthwave"></button>
+              <button onclick="setThemeAccent('amber')" class="w-6 h-6 rounded-full bg-amber-500 border border-white/40 shadow-sm" title="Gold Sunset"></button>
+            </div>
+          </div>
+
+          <!-- 4. Matrix Code Rain Effect -->
+          <div class="p-3.5 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-between">
+            <div>
+              <span class="text-xs font-extrabold text-emerald-300 uppercase tracking-wider block">🟩 Matrix Code Rain</span>
+              <span class="text-[9px] text-neutral-400">Ganti background jadi animasi hujan kode Matrix</span>
+            </div>
+            <button id="btn-toggle-matrix" onclick="toggleMatrixRain()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10">
+              OFF
+            </button>
+          </div>
+
+          <!-- 5. Snow Effect Switch -->
+          <div class="p-3.5 bg-cyan-500/10 border border-cyan-500/30 rounded-2xl flex items-center justify-between">
+            <div>
+              <span class="text-xs font-extrabold text-cyan-300 uppercase tracking-wider block">❄️ Snow / Winter Effect</span>
+              <span class="text-[9px] text-neutral-400">Tampilkan efek salju lembut berguguran</span>
+            </div>
+            <button id="btn-toggle-snow" onclick="toggleSnowEffect()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10">
+              OFF
+            </button>
+          </div>
+
+          <!-- 6. Broadcast Alert (ON/OFF & SET TEXT) -->
           <div class="p-3.5 bg-sky-500/10 border border-sky-500/30 rounded-2xl flex flex-col gap-2">
             <div class="flex items-center justify-between">
               <span class="text-xs font-extrabold text-sky-300 uppercase tracking-wider flex items-center gap-1.5">📢 Broadcast Alert</span>
@@ -815,41 +934,28 @@
                 OFF
               </button>
             </div>
-            <p class="text-[9px] text-neutral-400">Tampilkan atau sembunyikan running text pengumuman atas.</p>
             <button onclick="devEditBroadcastText()" class="w-full py-1.5 bg-sky-500/20 hover:bg-sky-500/30 text-sky-200 border border-sky-500/30 rounded-xl text-[9px] font-bold uppercase tracking-wider transition">
               ✏️ Edit Teks Broadcast
             </button>
           </div>
 
-          <!-- Tool 2: Cyber Glitch Mode (ON/OFF) -->
-          <div class="p-3.5 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-between">
-            <div>
-              <span class="text-xs font-extrabold text-emerald-300 uppercase tracking-wider block">👾 Cyber Glitch</span>
-              <span class="text-[9px] text-neutral-400">Invert warna visual mode cyberpunk</span>
-            </div>
-            <button id="btn-toggle-glitch" onclick="toggleGlitchEffect()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10">
-              OFF
-            </button>
-          </div>
-
-          <!-- Tool 3: Party Confetti (START / STOP) -->
+          <!-- 7. Party Confetti -->
           <div class="p-3.5 bg-pink-500/10 border border-pink-500/30 rounded-2xl flex items-center justify-between">
             <div>
               <span class="text-xs font-extrabold text-pink-300 uppercase tracking-wider block">🎉 Party Confetti</span>
-              <span class="text-[9px] text-neutral-400">Efek hujan kembang api meriah</span>
+              <span class="text-[9px] text-neutral-400">Efek kembang api meriah</span>
             </div>
             <button id="btn-toggle-confetti" onclick="toggleConfetti()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-pink-500/20 text-pink-300 border border-pink-500/30">
-              Mulai Hujan 🎉
+              Mulai 🎉
             </button>
           </div>
 
-          <!-- Tool 4: Live Status Title Tag -->
+          <!-- 8. Title Tag Rafa -->
           <div class="p-3.5 bg-indigo-500/10 border border-indigo-500/30 rounded-2xl flex flex-col gap-2">
-            <span class="text-xs font-extrabold text-indigo-300 uppercase tracking-wider">🏷️ Ubah Title Tag Rafa</span>
-            <span class="text-[9px] text-neutral-400">Ubah teks status/julukan di kartu namamu.</span>
+            <span class="text-xs font-extrabold text-indigo-300 uppercase tracking-wider">🏷️ Title Tag Rafa</span>
             <div class="flex gap-2">
               <button onclick="changeRafaTitle()" class="flex-1 py-1.5 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-200 border border-indigo-500/30 rounded-xl text-[9px] font-bold uppercase tracking-wider transition">
-                Ganti Title Tag
+                Ganti Title
               </button>
               <button onclick="resetRafaTitle()" class="px-3 py-1.5 bg-red-500/20 text-red-300 border border-red-500/30 rounded-xl text-[9px] font-bold uppercase tracking-wider transition">
                 Reset
@@ -857,15 +963,16 @@
             </div>
           </div>
 
-          <!-- Tool 5: Clear Menfess -->
-          <div class="p-3.5 bg-red-500/10 border border-red-500/30 rounded-2xl flex items-center justify-between">
-            <div>
-              <span class="text-xs font-extrabold text-red-300 uppercase tracking-wider block">🧹 Admin Menfess</span>
-              <span class="text-[9px] text-neutral-400">Pembersih pesan menfess teratas</span>
+          <!-- 9. Dev CLI Mini Terminal -->
+          <div class="p-3.5 bg-black/60 border border-emerald-500/40 rounded-2xl space-y-2 font-mono">
+            <span class="text-xs font-extrabold text-emerald-400 uppercase tracking-wider block">💻 Dev Mini Terminal</span>
+            <div id="terminal-logs" class="bg-black/80 text-[10px] text-emerald-400 p-2.5 rounded-xl h-24 overflow-y-auto leading-relaxed border border-emerald-500/20">
+              <div>System initialized. Type 'help' for commands.</div>
             </div>
-            <button onclick="devClearSpam()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-red-500/20 text-red-300 border border-red-500/30">
-              Sapu Spam
-            </button>
+            <form onsubmit="runDevCommand(event)" class="flex gap-2">
+              <input type="text" id="terminal-input" placeholder="> ketik perintah..." class="flex-1 bg-black/60 border border-emerald-500/30 rounded-xl px-3 py-1.5 text-[11px] text-emerald-400 focus:outline-none">
+              <button type="submit" class="px-3 py-1.5 bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase rounded-xl border border-emerald-500/30">Run</button>
+            </form>
           </div>
         </div>
       </div>
@@ -1110,12 +1217,16 @@
     });
   </script>
 
-  <!-- LOGIKA DEV PORTAL & KONTROL FUNGSI LENGKAP -->
+  <!-- LOGIKA DEV PORTAL & FITUR BARU LENGKAP -->
   <script>
-    const DEV_PIN = "2212";
-    let isGlitchActive = false;
+    let devPin = localStorage.getItem('rafa_dev_pin') || "2212";
     let isBroadcastActive = false;
+    let isMaintenanceActive = false;
+    let isMatrixActive = false;
+    let isSnowActive = false;
     let confettiInterval = null;
+    let snowInterval = null;
+    let matrixInterval = null;
 
     function openDevPortalModal() {
       const modal = document.getElementById('dev-portal-modal');
@@ -1136,15 +1247,156 @@
     function verifyDevPin(e) {
       e.preventDefault();
       const input = document.getElementById('dev-pin-input').value;
-      if (input === DEV_PIN) {
+      if (input === devPin) {
         document.getElementById('dev-pin-view').classList.add('hidden');
         document.getElementById('dev-tools-view').classList.remove('hidden');
+        logTerminal("Akses berhasil disetujui.");
       } else {
         alert("PIN SALAH! Akses ditolak.");
       }
     }
 
-    // 1. Broadcast Control (ON / OFF)
+    // 1. Fitur Ganti PIN
+    function changeDevPin() {
+      const newPin = prompt("Masukkan PIN baru (angka 4-8 digit):");
+      if (newPin && newPin.trim().length >= 4) {
+        devPin = newPin.trim();
+        localStorage.setItem('rafa_dev_pin', devPin);
+        alert("PIN Developer berhasil diperbarui!");
+        logTerminal("PIN diperbarui.");
+      } else if (newPin) {
+        alert("PIN minimal 4 digit.");
+      }
+    }
+
+    // 2. System Maintenance Switch
+    function toggleMaintenanceMode() {
+      const btn = document.getElementById('btn-toggle-maintenance');
+      const screen = document.getElementById('maintenance-screen');
+      isMaintenanceActive = !isMaintenanceActive;
+
+      if (isMaintenanceActive) {
+        screen.style.display = 'flex';
+        btn.innerText = "ON";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/30";
+        logTerminal("Maintenance mode: ACTIVE");
+      } else {
+        screen.style.display = 'none';
+        btn.innerText = "OFF";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10";
+        logTerminal("Maintenance mode: OFF");
+      }
+    }
+
+    // 3. Dynamic Theme Accent Switcher
+    function setThemeAccent(colorName) {
+      const colorsMap = {
+        cyan: '#0284c7',
+        emerald: '#10b981',
+        crimson: '#ef4444',
+        purple: '#a855f7',
+        amber: '#f59e0b'
+      };
+      const chosenColor = colorsMap[colorName] || colorsMap.cyan;
+      document.documentElement.style.setProperty('--brand-main', chosenColor);
+      
+      const elementsToColor = document.querySelectorAll('.text-sky-500, .text-sky-400');
+      elementsToColor.forEach(el => el.style.color = chosenColor);
+
+      logTerminal("Theme color set to: " + colorName);
+    }
+
+    // 4. Matrix Code Rain
+    function toggleMatrixRain() {
+      const btn = document.getElementById('btn-toggle-matrix');
+      const canvas = document.getElementById('matrix-canvas');
+      const webglBg = document.getElementById('webgl-glass-bg');
+
+      isMatrixActive = !isMatrixActive;
+
+      if (isMatrixActive) {
+        canvas.style.display = 'block';
+        webglBg.style.display = 'none';
+        btn.innerText = "ON";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+        startMatrixAnimation();
+        logTerminal("Matrix Rain: STARTED");
+      } else {
+        canvas.style.display = 'none';
+        webglBg.style.display = 'block';
+        btn.innerText = "OFF";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10";
+        if (matrixInterval) clearInterval(matrixInterval);
+        logTerminal("Matrix Rain: STOPPED");
+      }
+    }
+
+    function startMatrixAnimation() {
+      const canvas = document.getElementById('matrix-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const chars = "01X-TJKT4-RAFA-DEV-SYSTEM-ROUTER-IP-NETRO";
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+      const drops = Array.from({ length: columns }, () => 1);
+
+      function drawMatrix() {
+        ctx.fillStyle = "rgba(3, 7, 18, 0.08)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#00ff66";
+        ctx.font = fontSize + "px monospace";
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = chars[Math.floor(Math.random() * chars.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+      if (matrixInterval) clearInterval(matrixInterval);
+      matrixInterval = setInterval(drawMatrix, 40);
+    }
+
+    // 5. Snow Effect Switch
+    function toggleSnowEffect() {
+      const btn = document.getElementById('btn-toggle-snow');
+      isSnowActive = !isSnowActive;
+
+      if (isSnowActive) {
+        btn.innerText = "ON";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/30";
+        spawnSnowBatch();
+        snowInterval = setInterval(spawnSnowBatch, 1000);
+        logTerminal("Snow effect: ON");
+      } else {
+        btn.innerText = "OFF";
+        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10";
+        if (snowInterval) clearInterval(snowInterval);
+        logTerminal("Snow effect: OFF");
+      }
+    }
+
+    function spawnSnowBatch() {
+      for (let i = 0; i < 8; i++) {
+        const flake = document.createElement('div');
+        flake.className = 'snow-particle';
+        const size = Math.random() * 5 + 3;
+        flake.style.width = size + 'px';
+        flake.style.height = size + 'px';
+        flake.style.left = Math.random() * 100 + 'vw';
+        flake.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        document.body.appendChild(flake);
+
+        setTimeout(() => flake.remove(), 7000);
+      }
+    }
+
+    // 6. Broadcast Control
     function toggleBroadcastBanner() {
       const banner = document.getElementById('dev-broadcast-banner');
       const btn = document.getElementById('btn-toggle-broadcast');
@@ -1166,36 +1418,21 @@
       if (msg) {
         document.getElementById('broadcast-text').innerText = msg;
         if (!isBroadcastActive) toggleBroadcastBanner();
+        logTerminal("Broadcast text updated.");
       }
     }
 
-    // 2. Cyber Glitch Control (ON / OFF)
-    function toggleGlitchEffect() {
-      const btn = document.getElementById('btn-toggle-glitch');
-      isGlitchActive = !isGlitchActive;
-      document.body.classList.toggle('invert', isGlitchActive);
-
-      if (isGlitchActive) {
-        btn.innerText = "ON";
-        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
-      } else {
-        btn.innerText = "OFF";
-        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10";
-      }
-    }
-
-    // 3. Party Confetti Control (MULAI / STOP)
+    // 7. Confetti
     function toggleConfetti() {
       const btn = document.getElementById('btn-toggle-confetti');
       if (confettiInterval) {
         clearInterval(confettiInterval);
         confettiInterval = null;
-        btn.innerText = "Mulai Hujan 🎉";
+        btn.innerText = "Mulai 🎉";
         btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-pink-500/20 text-pink-300 border border-pink-500/30";
       } else {
-        btn.innerText = "Stop Hujan 🛑";
+        btn.innerText = "Stop 🛑";
         btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/30";
-        
         spawnConfettiBatch();
         confettiInterval = setInterval(spawnConfettiBatch, 1500);
       }
@@ -1203,7 +1440,7 @@
 
     function spawnConfettiBatch() {
       const colors = ['#0284c7', '#ec4899', '#f59e0b', '#10b981', '#6366f1', '#ffffff'];
-      for (let i = 0; i < 35; i++) {
+      for (let i = 0; i < 30; i++) {
         const particle = document.createElement('div');
         particle.className = 'confetti-particle';
         particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
@@ -1217,12 +1454,13 @@
       }
     }
 
-    // 4. Change & Reset Title Tag
+    // 8. Title Tag
     function changeRafaTitle() {
       const title = prompt("Masukkan title tag baru untuk kartu Rafa:", "Lead System Dev");
       if (title) {
         const el = document.getElementById('rafa-custom-title');
         if (el) el.innerText = title;
+        logTerminal("Title tag updated.");
       }
     }
 
@@ -1231,9 +1469,46 @@
       if (el) el.innerText = "Lead System Dev";
     }
 
-    // 5. Sapu Pesan Spam
-    function devClearSpam() {
-      alert("Akses Admin dikonfirmasi. Gunakan tombol Delete pada masing-masing kartu menfess spesifik.");
+    // 9. Dev Mini Terminal Engine
+    function logTerminal(msg) {
+      const logs = document.getElementById('terminal-logs');
+      if (logs) {
+        const line = document.createElement('div');
+        line.innerText = `> ${msg}`;
+        logs.appendChild(line);
+        logs.scrollTop = logs.scrollHeight;
+      }
+    }
+
+    function runDevCommand(e) {
+      e.preventDefault();
+      const input = document.getElementById('terminal-input');
+      const cmd = input.value.trim().toLowerCase();
+      input.value = '';
+
+      if (!cmd) return;
+      logTerminal(cmd);
+
+      if (cmd === 'help') {
+        logTerminal("Available commands: help, status, ping, matrix, snow, lock, theme <cyan/emerald/crimson/purple/amber>, clear");
+      } else if (cmd === 'status') {
+        logTerminal(`System: ONLINE | Maintenance: ${isMaintenanceActive} | Matrix: ${isMatrixActive}`);
+      } else if (cmd === 'ping') {
+        logTerminal("Pong! Latency: 12ms");
+      } else if (cmd === 'matrix') {
+        toggleMatrixRain();
+      } else if (cmd === 'snow') {
+        toggleSnowEffect();
+      } else if (cmd === 'lock') {
+        toggleMaintenanceMode();
+      } else if (cmd.startsWith('theme ')) {
+        const col = cmd.replace('theme ', '').trim();
+        setThemeAccent(col);
+      } else if (cmd === 'clear') {
+        document.getElementById('terminal-logs').innerHTML = '';
+      } else {
+        logTerminal(`Command not found: '${cmd}'. Type 'help' for options.`);
+      }
     }
   </script>
 
@@ -1541,6 +1816,24 @@
     let activeId = null;
     const GIPHY_API_KEY = "5LH1haWcbeynWswBCKF02uErlR0xMZWf";
 
+    // PUBLIC VISITOR COUNTER LOGIC
+    const visitorDocRef = doc(db, "stats", "visitors");
+    async function trackVisitor() {
+      try {
+        await updateDoc(visitorDocRef, { count: increment(1) });
+      } catch (e) {
+        await setDoc(visitorDocRef, { count: 1 }, { merge: true });
+      }
+
+      onSnapshot(visitorDocRef, (snap) => {
+        if (snap.exists()) {
+          const val = snap.data().count || 0;
+          document.getElementById('visitor-count-number').innerText = val.toLocaleString();
+        }
+      });
+    }
+    trackVisitor();
+
     // MENFESS REALTIME
     const menfessCollection = collection(db, "menfess");
     const menfessForm = document.getElementById('menfess-form');
@@ -1593,7 +1886,6 @@
             <div>
               <div class="flex justify-between items-start mb-2">
                 <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 border border-sky-500/20 px-2.5 py-0.5 rounded-full">Untuk: ${escapeHtml(data.to)}</span>
-                <button onclick="deleteMenfess('${id}')" class="text-neutral-400 hover:text-red-500 transition text-xs font-bold uppercase tracking-wider" title="Hapus (Khusus Admin)">Delete</button>
               </div>
               <p class="text-xs text-neutral-800 dark:text-neutral-200 leading-relaxed font-medium my-3">"${escapeHtml(data.text)}"</p>
             </div>
@@ -1605,23 +1897,6 @@
         `;
       });
     });
-
-    window.deleteMenfess = async (id) => {
-      const ADMIN_PIN = "2212";
-      const inputPin = prompt("Masukkan PIN Admin untuk menghapus menfess ini:");
-      if (inputPin !== ADMIN_PIN) {
-        if (inputPin !== null) alert("PIN Salah! Akses ditolak.");
-        return;
-      }
-
-      if (confirm("Yakin ingin menghapus menfess ini?")) {
-        try {
-          await deleteDoc(doc(db, "menfess", id));
-        } catch (err) {
-          alert("Gagal menghapus pesan.");
-        }
-      }
-    };
 
     // STICKER / GIF GIPHY
     window.toggleStickerPicker = () => {
@@ -1788,10 +2063,10 @@
     window.resetPhotoData = async () => {
       if (!activeId) return;
 
-      const ADMIN_PIN = "2212";
-      const inputPin = prompt("Masukkan PIN Admin untuk mereset Like & Komentar:");
+      const inputPin = prompt("Masukkan PIN Developer untuk mereset Like & Komentar:");
+      const currentPin = localStorage.getItem('rafa_dev_pin') || "2212";
 
-      if (inputPin !== ADMIN_PIN) {
+      if (inputPin !== currentPin) {
         if (inputPin !== null) alert("PIN salah! Akses ditolak.");
         return;
       }
