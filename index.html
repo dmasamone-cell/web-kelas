@@ -832,7 +832,7 @@
             <!-- FORM UPLOAD BERITA -->
             <form id="cms-berita-form" class="space-y-3">
               <div>
-                <label class="text-[10px] text-neutral-300 font-bold uppercase block mb-1">Pilih Foto dari Galeri:</label>
+                <label class="text-[10px] text-neutral-300 font-bold uppercase block mb-1">Pilih Foto dari Galeri HP/Laptop:</label>
                 <input type="file" id="cms-berita-file" accept="image/*" required class="text-xs text-neutral-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[10px] file:font-extrabold file:bg-sky-500/20 file:text-sky-300 hover:file:bg-sky-500/30 cursor-pointer">
               </div>
               <input type="text" id="cms-berita-title" placeholder="Judul Berita Baru..." required class="w-full liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500">
@@ -851,7 +851,7 @@
             <!-- FORM UPLOAD GALERI -->
             <form id="cms-galeri-form" class="space-y-3 hidden">
               <div>
-                <label class="text-[10px] text-neutral-300 font-bold uppercase block mb-1">Pilih Foto dari Galeri:</label>
+                <label class="text-[10px] text-neutral-300 font-bold uppercase block mb-1">Pilih Foto dari Galeri HP/Laptop:</label>
                 <input type="file" id="cms-galeri-file" accept="image/*" required class="text-xs text-neutral-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[10px] file:font-extrabold file:bg-sky-500/20 file:text-sky-300 hover:file:bg-sky-500/30 cursor-pointer">
               </div>
               <input type="text" id="cms-galeri-title" placeholder="Judul Foto Galeri..." required class="w-full liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500">
@@ -1215,7 +1215,7 @@
     });
   </script>
 
-  <!-- LOGIKA DEV PORTAL & FITUR BARU LENGKAP -->
+  <!-- LOGIKA DEV PORTAL & FITUR KONTROL DEVELOPER -->
   <script>
     let devPin = localStorage.getItem('rafa_dev_pin') || "2212";
     let isBroadcastActive = false;
@@ -1862,7 +1862,7 @@
     }
     trackVisitor();
 
-    // ================= REALTIME BERITA FROM FIRESTORE & STATIS =================
+    // ================= INTEGRASI UTUH REALTIME BERITA =================
     const beritaCollection = collection(db, "news");
     const qBerita = query(beritaCollection, orderBy("createdAt", "desc"));
     const beritaContainer = document.getElementById('berita-container');
@@ -1870,7 +1870,7 @@
     const defaultBeritaList = [
       { id: 'berita1', img: 'https://files.catbox.moe/vwyss4.jpg', title: 'TOP ORANG GANTENG', cat: 'Sorotan', date: 'Agustus 2026', desc: 'Momen kejutan dan apresiasi siswa terfavorit di kelas X TJKT 4.' },
       { id: 'berita2', img: 'https://files.catbox.moe/772hlh.jpg', title: 'KIYA RACING', cat: 'Praktikum', date: 'Agustus 2026', desc: 'Keseruan praktikum kelistrikan dan perakitan node jaringan.' },
-      { id: 'berita3', img: 'https://files.catbox.moe/j5ae08.jpg', title: 'Judul Berita 3', cat: 'Kegiatan', date: 'Agustus 2026', desc: 'Dokumentasi humoristis kegiatan santai saat jam istirahat kelas.' },
+      { id: 'berita3', img: 'https://files.catbox.moe/j5ae08.jpg', title: 'Moment Santai X TJKT 4', cat: 'Kegiatan', date: 'Agustus 2026', desc: 'Dokumentasi humoristis kegiatan santai saat jam istirahat kelas.' },
       { id: 'berita4', img: 'https://files.catbox.moe/rplpym.jpg', title: 'HARIS ZIGZAG', cat: 'Prestasi', date: 'Agustus 2026', desc: 'Aksi lincah Haris memenangkan perlombaan olahraga antar siswa.' }
     ];
 
@@ -1892,7 +1892,7 @@
         });
       }
 
-      // Gabungkan berita Firestore dengan berita bawaan statis
+      // Gabungkan berita Firestore (Terbaru) dengan Berita Statis
       const finalBerita = [...list, ...defaultBeritaList];
 
       finalBerita.forEach(b => {
@@ -1910,7 +1910,7 @@
       });
     });
 
-    // ================= REALTIME GALERI FROM FIRESTORE & STATIS =================
+    // ================= INTEGRASI UTUH REALTIME GALERI =================
     const galeriCollection = collection(db, "gallery");
     const qGaleri = query(galeriCollection, orderBy("createdAt", "desc"));
     const galeriContainer = document.getElementById('galeri-container');
@@ -1936,7 +1936,7 @@
         });
       }
 
-      // Gabungkan foto Firestore dengan galeri bawaan statis
+      // Gabungkan Foto Firestore (Terbaru) dengan Foto Statis
       const finalGaleri = [...list, ...defaultGaleriList];
 
       finalGaleri.forEach(g => {
