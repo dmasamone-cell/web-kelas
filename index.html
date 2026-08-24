@@ -794,7 +794,7 @@
       <div id="dev-tools-view" class="hidden space-y-5 max-h-[80vh] overflow-y-auto pr-1">
         <div class="flex items-center justify-between border-b border-white/10 pb-3 sticky top-0 bg-neutral-900/90 backdrop-blur-md z-10 pt-1">
           <div>
-            <span class="text-[9px] font-black uppercase tracking-widest text-sky-400 block">Restricted Area (CORS Proxy + Catbox Connected)</span>
+            <span class="text-[9px] font-black uppercase tracking-widest text-sky-400 block">Restricted Area (Free CORS Proxy Connected)</span>
             <h3 class="font-extrabold text-white text-sm">⚡ Rafa's Developer Control Panel</h3>
           </div>
           <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">ONLINE</span>
@@ -935,7 +935,7 @@
           <div class="p-3.5 bg-black/60 border border-emerald-500/40 rounded-2xl space-y-2 font-mono">
             <span class="text-xs font-extrabold text-emerald-400 uppercase tracking-wider block">💻 Dev Mini Terminal</span>
             <div id="terminal-logs" class="bg-black/80 text-[10px] text-emerald-400 p-2.5 rounded-xl h-24 overflow-y-auto leading-relaxed border border-emerald-500/20">
-              <div>System initialized. CORS Proxy & Catbox Connected. Type 'help' for commands.</div>
+              <div>System initialized. Free Proxy Connected. Type 'help' for commands.</div>
             </div>
             <form onsubmit="runDevCommand(event)" class="flex gap-2">
               <input type="text" id="terminal-input" placeholder="> ketik perintah..." class="flex-1 bg-black/60 border border-emerald-500/30 rounded-xl px-3 py-1.5 text-[11px] text-emerald-400 focus:outline-none">
@@ -1776,7 +1776,7 @@
     }, 1000);
   </script>
 
-  <!-- FIREBASE & CATBOX CORS PROXY INTEGRATION -->
+  <!-- FIREBASE & CORS PROXY FREEMIUM INTEGRATION -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, doc, collection, addDoc, deleteDoc, query, orderBy, onSnapshot, setDoc, updateDoc, arrayUnion, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -1905,14 +1905,15 @@
       });
     });
 
-    // HELPER FUNCTION: UPLOAD KE CATBOX.MOE DENGAN CORS PROXY (MENGATASI FAILED TO FETCH)
+    // HELPER FUNCTION: UPLOAD KE CATBOX MENGGUNAKAN CORS PROXY GRATIS (ALLORIGINS - TANPA API KEY)
     async function uploadToCatbox(file) {
       const formData = new FormData();
       formData.append("reqtype", "fileupload");
       formData.append("userhash", CATBOX_USERHASH);
       formData.append("fileToUpload", file);
 
-      const proxyUrl = "https://corsproxy.io/?" + encodeURIComponent("https://catbox.moe/user/api.php");
+      // Menggunakan AllOrigins Proxy (100% Gratis, Tanpa Akun, Tanpa API Key)
+      const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent("https://catbox.moe/user/api.php");
 
       const response = await fetch(proxyUrl, {
         method: "POST",
@@ -1920,7 +1921,7 @@
       });
 
       const resultUrl = await response.text();
-      if (!resultUrl.startsWith("http")) {
+      if (!resultUrl || !resultUrl.includes("http")) {
         throw new Error("Catbox upload error: " + resultUrl);
       }
       return resultUrl.trim();
@@ -1956,7 +1957,7 @@
             createdAt: serverTimestamp()
           });
 
-          alert("Berita berhasil di-upload super cepat via Catbox dan dipublikasikan!");
+          alert("Berita berhasil di-upload dan dipublikasikan!");
           cmsBeritaForm.reset();
         } catch (err) {
           console.error(err);
@@ -1994,7 +1995,7 @@
             createdAt: serverTimestamp()
           });
 
-          alert("Foto berhasil ditambahkan ke Galeri via Catbox!");
+          alert("Foto berhasil ditambahkan ke Galeri!");
           cmsGaleriForm.reset();
         } catch (err) {
           console.error(err);
