@@ -405,46 +405,8 @@
       <span class="text-[9px] text-neutral-400 font-bold uppercase tracking-widest">Geser →</span>
     </div>
 
-    <div class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 pt-1 no-scrollbar">
-      <div onclick="openDetailModal('berita1', 'https://files.catbox.moe/vwyss4.jpg', 'TOP ORANG GANTENG', 'ORANG GANTENG • Agustus 2026')" class="w-[280px] sm:w-[340px] flex-shrink-0 snap-start liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer group">
-        <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/vwyss4.jpg" alt="Berita 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-        </div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">Sorotan</span>
-        <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mt-2.5 group-hover:text-sky-500 transition line-clamp-1">TOP ORANG GANTENG</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-normal leading-relaxed">Momen kejutan dan apresiasi siswa terfavorit di kelas X TJKT 4.</p>
-        <span class="text-[9px] text-neutral-400 font-semibold uppercase tracking-widest block mt-3">Agustus 2026</span>
-      </div>
-
-      <div onclick="openDetailModal('berita2', 'https://files.catbox.moe/772hlh.jpg', 'KIYA RACING', 'Praktikum • Agustus 2026')" class="w-[280px] sm:w-[340px] flex-shrink-0 snap-start liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer group">
-        <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/772hlh.jpg" alt="KIYA RACING" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-        </div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">Praktikum</span>
-        <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mt-2.5 group-hover:text-sky-500 transition line-clamp-1">KIYA RACING</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-normal leading-relaxed">Keseruan praktikum kelistrikan dan perakitan node jaringan.</p>
-        <span class="text-[9px] text-neutral-400 font-semibold uppercase tracking-widest block mt-3">Agustus 2026</span>
-      </div>
-
-      <div onclick="openDetailModal('berita3', 'https://files.catbox.moe/j5ae08.jpg', 'Judul Berita 3', 'Orang dibuang • Agustus 2026')" class="w-[280px] sm:w-[340px] flex-shrink-0 snap-start liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer group">
-        <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/j5ae08.jpg" alt="Berita 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-        </div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">Kegiatan</span>
-        <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mt-2.5 group-hover:text-sky-500 transition line-clamp-1">Judul Berita 3</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-normal leading-relaxed">Dokumentasi humoristis kegiatan santai saat jam istirahat kelas.</p>
-        <span class="text-[9px] text-neutral-400 font-semibold uppercase tracking-widest block mt-3">Agustus 2026</span>
-      </div>
-
-      <div onclick="openDetailModal('berita4', 'https://files.catbox.moe/rplpym.jpg', 'HARIS ZIGZAG', 'Prestasi • Agustus 2026')" class="w-[280px] sm:w-[340px] flex-shrink-0 snap-start liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer group">
-        <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/rplpym.jpg" alt="HARIS ZIGZAG" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-        </div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">Prestasi</span>
-        <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mt-2.5 group-hover:text-sky-500 transition line-clamp-1">HARIS ZIGZAG</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-normal leading-relaxed">Aksi lincah Haris memenangkan perlombaan olahraga antar siswa.</p>
-        <span class="text-[9px] text-neutral-400 font-semibold uppercase tracking-widest block mt-3">Agustus 2026</span>
-      </div>
+    <div id="berita-container" class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 pt-1 no-scrollbar">
+      <p class="text-xs text-neutral-400 italic py-4">Memuat berita kelas...</p>
     </div>
   </section>
 
@@ -545,22 +507,8 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div onclick="openDetailModal('photo1', 'https://files.catbox.moe/b74ele.jpg', 'Momen Sesudah Apel X TJKT 4', 'Dokumentasi momen kebersamaan seluruh siswa-siswi dan wali kelas.')" class="liquid-glass p-5 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer active:scale-98">
-        <div class="overflow-hidden rounded-2xl mb-4 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/b74ele.jpg" alt="Foto Bersama 1" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-sm">Momen Sesudah Apel X TJKT 4</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">Klik untuk memperbesar, beri suka, atau menulis komentar.</p>
-      </div>
-
-      <div onclick="openDetailModal('photo2', 'https://files.catbox.moe/nyusai.jpg', 'Sesi Foto Bersama Miss Nurina', 'Suasana saat sesi foto kelas TJKT 4.')" class="liquid-glass p-5 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer active:scale-98">
-        <div class="overflow-hidden rounded-2xl mb-4 aspect-video border border-white/20 dark:border-white/10">
-          <img src="https://files.catbox.moe/nyusai.jpg" alt="Foto Bersama 2" class="w-full h-full object-cover">
-        </div>
-        <h3 class="font-bold text-neutral-900 dark:text-white text-sm">Sesi Foto Bersama Miss Nurina</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">Klik untuk memperbesar, beri suka, atau menulis komentar.</p>
-      </div>
+    <div id="galeri-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <p class="text-xs text-neutral-400 italic col-span-2 text-center py-4">Memuat foto galeri...</p>
     </div>
   </section>
 
@@ -836,9 +784,9 @@
     </div>
   </section>
 
-  <!-- MODAL / RUANG DEV TOOLS (TERPROTEKSI PIN) -->
+  <!-- MODAL / RUANG DEV TOOLS (TERPROTEKSI PIN + CMS) -->
   <div id="dev-portal-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-2xl flex items-center justify-center p-4" onclick="if(event.target === this) closeDevPortalModal()">
-    <div class="liquid-glass rounded-3xl max-w-md w-full p-6 shadow-2xl relative border border-sky-500/40">
+    <div class="liquid-glass rounded-3xl max-w-xl w-full p-6 shadow-2xl relative border border-sky-500/40">
       <button onclick="closeDevPortalModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white font-bold text-xs uppercase tracking-wider">Close</button>
 
       <!-- VERIFIKASI PIN FORM -->
@@ -858,7 +806,7 @@
         </form>
       </div>
 
-      <!-- RUANG DEVELOPER TOOLS LENGKAP -->
+      <!-- RUANG DEVELOPER TOOLS LENGKAP & CMS -->
       <div id="dev-tools-view" class="hidden space-y-5 max-h-[80vh] overflow-y-auto pr-1">
         <div class="flex items-center justify-between border-b border-white/10 pb-3 sticky top-0 bg-neutral-900/90 backdrop-blur-md z-10 pt-1">
           <div>
@@ -868,7 +816,57 @@
           <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">ONLINE</span>
         </div>
 
-        <div class="space-y-3">
+        <div class="space-y-4">
+
+          <!-- SECTION: SYSTEM MANAGEMENT KONTEN (CMS) -->
+          <div class="p-4 bg-sky-500/10 border border-sky-500/30 rounded-2xl space-y-4">
+            <span class="text-xs font-black text-sky-300 uppercase tracking-wider block">📰 CMS: MANAGEMENT BERITA & GALERI</span>
+
+            <!-- TAB CMS MODE -->
+            <div class="flex gap-2 border-b border-white/10 pb-2">
+              <button type="button" onclick="switchCmsTab('berita')" id="tab-cms-berita" class="px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase bg-sky-500 text-white">Upload Berita</button>
+              <button type="button" onclick="switchCmsTab('galeri')" id="tab-cms-galeri" class="px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase bg-neutral-800 text-neutral-400">Upload Galeri</button>
+              <button type="button" onclick="switchCmsTab('kelola')" id="tab-cms-kelola" class="px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase bg-neutral-800 text-neutral-400">Kelola / Hapus</button>
+            </div>
+
+            <!-- FORM UPLOAD BERITA -->
+            <form id="cms-berita-form" class="space-y-3">
+              <div>
+                <label class="text-[10px] text-neutral-300 font-bold uppercase block mb-1">Pilih Foto dari Galeri:</label>
+                <input type="file" id="cms-berita-file" accept="image/*" required class="text-xs text-neutral-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[10px] file:font-extrabold file:bg-sky-500/20 file:text-sky-300 hover:file:bg-sky-500/30 cursor-pointer">
+              </div>
+              <input type="text" id="cms-berita-title" placeholder="Judul Berita Baru..." required class="w-full liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500">
+              <select id="cms-berita-category" class="w-full liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white bg-neutral-900 focus:outline-none focus:border-sky-500">
+                <option value="Sorotan">Sorotan</option>
+                <option value="Praktikum">Praktikum</option>
+                <option value="Kegiatan">Kegiatan</option>
+                <option value="Prestasi">Prestasi</option>
+              </select>
+              <textarea id="cms-berita-desc" rows="2" placeholder="Deskripsi ringkas berita..." required class="w-full liquid-glass-subtle rounded-xl p-3 text-xs text-white focus:outline-none focus:border-sky-500"></textarea>
+              <button type="submit" id="btn-upload-berita" class="w-full py-2 bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md">
+                Publish Berita Ke Web
+              </button>
+            </form>
+
+            <!-- FORM UPLOAD GALERI -->
+            <form id="cms-galeri-form" class="space-y-3 hidden">
+              <div>
+                <label class="text-[10px] text-neutral-300 font-bold uppercase block mb-1">Pilih Foto dari Galeri:</label>
+                <input type="file" id="cms-galeri-file" accept="image/*" required class="text-xs text-neutral-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[10px] file:font-extrabold file:bg-sky-500/20 file:text-sky-300 hover:file:bg-sky-500/30 cursor-pointer">
+              </div>
+              <input type="text" id="cms-galeri-title" placeholder="Judul Foto Galeri..." required class="w-full liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500">
+              <textarea id="cms-galeri-desc" rows="2" placeholder="Deskripsi foto..." required class="w-full liquid-glass-subtle rounded-xl p-3 text-xs text-white focus:outline-none focus:border-sky-500"></textarea>
+              <button type="submit" id="btn-upload-galeri" class="w-full py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md">
+                Tambah Foto Galeri
+              </button>
+            </form>
+
+            <!-- DAFTAR KELOLA / HAPUS KONTEN -->
+            <div id="cms-kelola-list" class="space-y-2 hidden max-h-48 overflow-y-auto pr-1 text-xs">
+              <p class="text-neutral-400 italic">Memuat daftar konten...</p>
+            </div>
+          </div>
+
           <!-- 1. Ganti PIN Portal -->
           <div class="p-3.5 bg-sky-500/10 border border-sky-500/30 rounded-2xl flex items-center justify-between">
             <div>
@@ -1510,6 +1508,34 @@
         logTerminal(`Command not found: '${cmd}'. Type 'help' for options.`);
       }
     }
+
+    // CMS SWITCHER TAB
+    function switchCmsTab(mode) {
+      const btnB = document.getElementById('tab-cms-berita');
+      const btnG = document.getElementById('tab-cms-galeri');
+      const btnK = document.getElementById('tab-cms-kelola');
+      const formB = document.getElementById('cms-berita-form');
+      const formG = document.getElementById('cms-galeri-form');
+      const listK = document.getElementById('cms-kelola-list');
+
+      btnB.className = "px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase " + (mode === 'berita' ? 'bg-sky-500 text-white' : 'bg-neutral-800 text-neutral-400');
+      btnG.className = "px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase " + (mode === 'galeri' ? 'bg-emerald-500 text-white' : 'bg-neutral-800 text-neutral-400');
+      btnK.className = "px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase " + (mode === 'kelola' ? 'bg-red-500 text-white' : 'bg-neutral-800 text-neutral-400');
+
+      if (mode === 'berita') {
+        formB.classList.remove('hidden');
+        formG.classList.add('hidden');
+        listK.classList.add('hidden');
+      } else if (mode === 'galeri') {
+        formB.classList.add('hidden');
+        formG.classList.remove('hidden');
+        listK.classList.add('hidden');
+      } else {
+        formB.classList.add('hidden');
+        formG.classList.add('hidden');
+        listK.classList.remove('hidden');
+      }
+    }
   </script>
 
   <!-- UTAMA UI & LOGIKA REGULER -->
@@ -1794,10 +1820,11 @@
     }, 1000);
   </script>
 
-  <!-- FIREBASE REALTIME FIRESTORE -->
+  <!-- FIREBASE REALTIME FIRESTORE & FIREBASE STORAGE INTEGRATION -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, doc, collection, addDoc, deleteDoc, query, orderBy, onSnapshot, setDoc, updateDoc, arrayUnion, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAn5wWXD25t5VmJhGlcqSi7AgNGfRExkmo",
@@ -1811,6 +1838,7 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const storage = getStorage(app);
 
     let activeUnsub = null;
     let activeId = null;
@@ -1833,6 +1861,250 @@
       });
     }
     trackVisitor();
+
+    // ================= REALTIME BERITA FROM FIRESTORE =================
+    const beritaCollection = collection(db, "news");
+    const qBerita = query(beritaCollection, orderBy("createdAt", "desc"));
+    const beritaContainer = document.getElementById('berita-container');
+
+    const defaultBeritaList = [
+      { id: 'berita1', img: 'https://files.catbox.moe/vwyss4.jpg', title: 'TOP ORANG GANTENG', cat: 'Sorotan', date: 'Agustus 2026', desc: 'Momen kejutan dan apresiasi siswa terfavorit di kelas X TJKT 4.' },
+      { id: 'berita2', img: 'https://files.catbox.moe/772hlh.jpg', title: 'KIYA RACING', cat: 'Praktikum', date: 'Agustus 2026', desc: 'Keseruan praktikum kelistrikan dan perakitan node jaringan.' },
+      { id: 'berita3', img: 'https://files.catbox.moe/j5ae08.jpg', title: 'Judul Berita 3', cat: 'Kegiatan', date: 'Agustus 2026', desc: 'Dokumentasi humoristis kegiatan santai saat jam istirahat kelas.' },
+      { id: 'berita4', img: 'https://files.catbox.moe/rplpym.jpg', title: 'HARIS ZIGZAG', cat: 'Prestasi', date: 'Agustus 2026', desc: 'Aksi lincah Haris memenangkan perlombaan olahraga antar siswa.' }
+    ];
+
+    onSnapshot(qBerita, (snapshot) => {
+      beritaContainer.innerHTML = '';
+      let list = [];
+
+      if (!snapshot.empty) {
+        snapshot.forEach(docSnap => {
+          const d = docSnap.data();
+          list.push({
+            id: docSnap.id,
+            img: d.imgUrl,
+            title: d.title,
+            cat: d.category || 'Berita',
+            date: d.date || 'Terbaru',
+            desc: d.description || ''
+          });
+        });
+      }
+
+      // Gabungkan berita Firestore dengan default jika Firestore kosong
+      const finalBerita = list.length > 0 ? list : defaultBeritaList;
+
+      finalBerita.forEach(b => {
+        beritaContainer.innerHTML += `
+          <div onclick="openDetailModal('${b.id}', '${b.img}', '${escapeHtml(b.title)}', '${escapeHtml(b.cat)} • ${escapeHtml(b.date)}')" class="w-[280px] sm:w-[340px] flex-shrink-0 snap-start liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer group">
+            <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-white/20 dark:border-white/10">
+              <img src="${b.img}" alt="${escapeHtml(b.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">${escapeHtml(b.cat)}</span>
+            <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mt-2.5 group-hover:text-sky-500 transition line-clamp-1">${escapeHtml(b.title)}</h3>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-normal leading-relaxed line-clamp-2">${escapeHtml(b.desc)}</p>
+            <span class="text-[9px] text-neutral-400 font-semibold uppercase tracking-widest block mt-3">${escapeHtml(b.date)}</span>
+          </div>
+        `;
+      });
+    });
+
+    // ================= REALTIME GALERI FROM FIRESTORE =================
+    const galeriCollection = collection(db, "gallery");
+    const qGaleri = query(galeriCollection, orderBy("createdAt", "desc"));
+    const galeriContainer = document.getElementById('galeri-container');
+
+    const defaultGaleriList = [
+      { id: 'photo1', img: 'https://files.catbox.moe/b74ele.jpg', title: 'Momen Sesudah Apel X TJKT 4', desc: 'Dokumentasi momen kebersamaan seluruh siswa-siswi dan wali kelas.' },
+      { id: 'photo2', img: 'https://files.catbox.moe/nyusai.jpg', title: 'Sesi Foto Bersama Miss Nurina', desc: 'Suasana saat sesi foto kelas TJKT 4.' }
+    ];
+
+    onSnapshot(qGaleri, (snapshot) => {
+      galeriContainer.innerHTML = '';
+      let list = [];
+
+      if (!snapshot.empty) {
+        snapshot.forEach(docSnap => {
+          const d = docSnap.data();
+          list.push({
+            id: docSnap.id,
+            img: d.imgUrl,
+            title: d.title,
+            desc: d.description || ''
+          });
+        });
+      }
+
+      const finalGaleri = list.length > 0 ? list : defaultGaleriList;
+
+      finalGaleri.forEach(g => {
+        galeriContainer.innerHTML += `
+          <div onclick="openDetailModal('${g.id}', '${g.img}', '${escapeHtml(g.title)}', '${escapeHtml(g.desc)}')" class="liquid-glass p-5 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer active:scale-98">
+            <div class="overflow-hidden rounded-2xl mb-4 aspect-video border border-white/20 dark:border-white/10">
+              <img src="${g.img}" alt="${escapeHtml(g.title)}" class="w-full h-full object-cover">
+            </div>
+            <h3 class="font-bold text-neutral-900 dark:text-white text-sm">${escapeHtml(g.title)}</h3>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">${escapeHtml(g.desc)}</p>
+          </div>
+        `;
+      });
+    });
+
+    // ================= CMS: UPLOAD BERITA BARU (FIREBASE STORAGE) =================
+    const cmsBeritaForm = document.getElementById('cms-berita-form');
+    if (cmsBeritaForm) {
+      cmsBeritaForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fileInput = document.getElementById('cms-berita-file');
+        const titleInput = document.getElementById('cms-berita-title').value.trim();
+        const catInput = document.getElementById('cms-berita-category').value;
+        const descInput = document.getElementById('cms-berita-desc').value.trim();
+        const btn = document.getElementById('btn-upload-berita');
+
+        if (!fileInput.files[0] || !titleInput) return;
+
+        btn.innerText = "Uploading Foto...";
+        btn.disabled = true;
+
+        try {
+          const file = fileInput.files[0];
+          const fileName = `berita_${Date.now()}_${file.name}`;
+          const storageRef = ref(storage, `berita/${fileName}`);
+
+          await uploadBytes(storageRef, file);
+          const downloadUrl = await getDownloadURL(storageRef);
+
+          const monthYear = new Date().toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+
+          await addDoc(beritaCollection, {
+            title: titleInput,
+            category: catInput,
+            description: descInput,
+            imgUrl: downloadUrl,
+            storagePath: `berita/${fileName}`,
+            date: monthYear,
+            createdAt: serverTimestamp()
+          });
+
+          alert("Berita berhasil di-upload dan dipublikasikan ke website!");
+          cmsBeritaForm.reset();
+        } catch (err) {
+          console.error(err);
+          alert("Gagal upload berita: " + err.message);
+        } finally {
+          btn.innerText = "Publish Berita Ke Web";
+          btn.disabled = false;
+        }
+      });
+    }
+
+    // ================= CMS: UPLOAD FOTO GALERI (FIREBASE STORAGE) =================
+    const cmsGaleriForm = document.getElementById('cms-galeri-form');
+    if (cmsGaleriForm) {
+      cmsGaleriForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fileInput = document.getElementById('cms-galeri-file');
+        const titleInput = document.getElementById('cms-galeri-title').value.trim();
+        const descInput = document.getElementById('cms-galeri-desc').value.trim();
+        const btn = document.getElementById('btn-upload-galeri');
+
+        if (!fileInput.files[0] || !titleInput) return;
+
+        btn.innerText = "Uploading Foto...";
+        btn.disabled = true;
+
+        try {
+          const file = fileInput.files[0];
+          const fileName = `galeri_${Date.now()}_${file.name}`;
+          const storageRef = ref(storage, `galeri/${fileName}`);
+
+          await uploadBytes(storageRef, file);
+          const downloadUrl = await getDownloadURL(storageRef);
+
+          await addDoc(galeriCollection, {
+            title: titleInput,
+            description: descInput,
+            imgUrl: downloadUrl,
+            storagePath: `galeri/${fileName}`,
+            createdAt: serverTimestamp()
+          });
+
+          alert("Foto berhasil ditambahkan ke Galeri!");
+          cmsGaleriForm.reset();
+        } catch (err) {
+          console.error(err);
+          alert("Gagal upload foto galeri: " + err.message);
+        } finally {
+          btn.innerText = "Tambah Foto Galeri";
+          btn.disabled = false;
+        }
+      });
+    }
+
+    // ================= CMS: KELOLA & HAPUS KONTEN =================
+    const cmsKelolaList = document.getElementById('cms-kelola-list');
+
+    function renderCmsKelolaList() {
+      if (!cmsKelolaList) return;
+      cmsKelolaList.innerHTML = '';
+
+      onSnapshot(qBerita, (snapB) => {
+        cmsKelolaList.innerHTML = '<span class="font-extrabold text-sky-400 block mb-1 uppercase">Daftar Berita Firestore:</span>';
+
+        if (snapB.empty) {
+          cmsKelolaList.innerHTML += '<p class="text-neutral-400 italic mb-3">Belum ada berita tersimpan di Firestore.</p>';
+        } else {
+          snapB.forEach(docSnap => {
+            const data = docSnap.data();
+            cmsKelolaList.innerHTML += `
+              <div class="flex items-center justify-between p-2 bg-black/40 rounded-xl mb-1.5 border border-white/10">
+                <span class="truncate max-w-[200px] text-white font-medium">${escapeHtml(data.title)}</span>
+                <button onclick="deleteCmsItem('news', '${docSnap.id}', '${data.storagePath || ''}')" class="px-2 py-1 bg-red-500/20 text-red-400 border border-red-500/30 rounded-lg text-[9px] font-bold hover:bg-red-500/40">Hapus</button>
+              </div>
+            `;
+          });
+        }
+
+        onSnapshot(qGaleri, (snapG) => {
+          cmsKelolaList.innerHTML += '<span class="font-extrabold text-emerald-400 block mt-3 mb-1 uppercase">Daftar Galeri Firestore:</span>';
+
+          if (snapG.empty) {
+            cmsKelolaList.innerHTML += '<p class="text-neutral-400 italic">Belum ada galeri tersimpan di Firestore.</p>';
+          } else {
+            snapG.forEach(docSnap => {
+              const data = docSnap.data();
+              cmsKelolaList.innerHTML += `
+                <div class="flex items-center justify-between p-2 bg-black/40 rounded-xl mb-1.5 border border-white/10">
+                  <span class="truncate max-w-[200px] text-white font-medium">${escapeHtml(data.title)}</span>
+                  <button onclick="deleteCmsItem('gallery', '${docSnap.id}', '${data.storagePath || ''}')" class="px-2 py-1 bg-red-500/20 text-red-400 border border-red-500/30 rounded-lg text-[9px] font-bold hover:bg-red-500/40">Hapus</button>
+                </div>
+              `;
+            });
+          }
+        });
+      });
+    }
+
+    renderCmsKelolaList();
+
+    window.deleteCmsItem = async (colName, id, storagePath) => {
+      const confirmDelete = confirm("Yakin ingin menghapus item ini permanen?");
+      if (!confirmDelete) return;
+
+      try {
+        await deleteDoc(doc(db, colName, id));
+
+        if (storagePath) {
+          const fileRef = ref(storage, storagePath);
+          await deleteObject(fileRef).catch(() => {});
+        }
+
+        alert("Item berhasil dihapus!");
+      } catch (err) {
+        alert("Gagal menghapus: " + err.message);
+      }
+    };
 
     // MENFESS REALTIME
     const menfessCollection = collection(db, "menfess");
@@ -1879,7 +2151,6 @@
       menfessContainer.innerHTML = '';
       snapshot.forEach((docSnap) => {
         const data = docSnap.data();
-        const id = docSnap.id;
 
         menfessContainer.innerHTML += `
           <div class="liquid-glass p-5 rounded-3xl shadow-glass dark:shadow-glass-dark relative flex flex-col justify-between">
@@ -1964,7 +2235,6 @@
       document.getElementById('image-modal').classList.remove('hidden');
       document.getElementById('sticker-picker').classList.add('hidden');
 
-      // TAMPILKAN TOMBOL AKSES DEV PORTAL HANYA APABILA CARD KELAS DARI RAFA YANG DIBUKA
       const devBtnContainer = document.getElementById('modal-dev-portal-btn-container');
       if (id === 'siswa-rafa') {
         devBtnContainer.classList.remove('hidden');
