@@ -1862,7 +1862,7 @@
     }
     trackVisitor();
 
-    // ================= REALTIME BERITA FROM FIRESTORE =================
+    // ================= REALTIME BERITA FROM FIRESTORE & STATIS =================
     const beritaCollection = collection(db, "news");
     const qBerita = query(beritaCollection, orderBy("createdAt", "desc"));
     const beritaContainer = document.getElementById('berita-container');
@@ -1892,8 +1892,8 @@
         });
       }
 
-      // Gabungkan berita Firestore dengan default jika Firestore kosong
-      const finalBerita = list.length > 0 ? list : defaultBeritaList;
+      // Gabungkan berita Firestore dengan berita bawaan statis
+      const finalBerita = [...list, ...defaultBeritaList];
 
       finalBerita.forEach(b => {
         beritaContainer.innerHTML += `
@@ -1910,7 +1910,7 @@
       });
     });
 
-    // ================= REALTIME GALERI FROM FIRESTORE =================
+    // ================= REALTIME GALERI FROM FIRESTORE & STATIS =================
     const galeriCollection = collection(db, "gallery");
     const qGaleri = query(galeriCollection, orderBy("createdAt", "desc"));
     const galeriContainer = document.getElementById('galeri-container');
@@ -1936,7 +1936,8 @@
         });
       }
 
-      const finalGaleri = list.length > 0 ? list : defaultGaleriList;
+      // Gabungkan foto Firestore dengan galeri bawaan statis
+      const finalGaleri = [...list, ...defaultGaleriList];
 
       finalGaleri.forEach(g => {
         galeriContainer.innerHTML += `
