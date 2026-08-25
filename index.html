@@ -27,8 +27,8 @@
               50: 'var(--brand-50, #f0f9ff)',
               100: 'var(--brand-100, #e0f2fe)',
               400: 'var(--brand-400, #38bdf8)',
-              500: 'var(--brand-500, #0284c7)',
-              600: 'var(--brand-600, #0284c7)',
+              500: 'var(--brand-main, #0284c7)',
+              600: 'var(--brand-main, #0284c7)',
             }
           },
           boxShadow: {
@@ -45,6 +45,10 @@
       --brand-main: #0284c7;
       --brand-glow: rgba(2, 132, 199, 0.4);
     }
+    .text-sky-500, .text-sky-400 { color: var(--brand-main) !important; }
+    .bg-sky-500 { background-color: var(--brand-main) !important; }
+    .border-sky-500 { border-color: var(--brand-main) !important; }
+    
     #wheel-canvas { transition: transform 4s cubic-bezier(0.15, 0.99, 0.15, 0.99); }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -204,13 +208,10 @@
     <div class="w-16 h-16 rounded-full border-2 border-[#00ff66] flex items-center justify-center text-2xl mb-4 animate-pulse">🔒</div>
     <h1 class="text-2xl sm:text-3xl font-black uppercase tracking-widest text-white mb-2">System Maintenance</h1>
     <p class="text-xs text-neutral-400 max-w-md mb-6 leading-relaxed">Website sedang diuji coba dan dikunci oleh Lead Developer (Rafa). Silakan kembali beberapa saat lagi.</p>
-    
-    <!-- Tombol Khusus Unlock/Matikan Maintenance dari Screen -->
-    <button onclick="toggleMaintenanceMode()" class="px-5 py-2.5 rounded-2xl bg-[#00ff66]/20 text-[#00ff66] border border-[#00ff66]/40 hover:bg-[#00ff66]/30 transition text-xs font-bold uppercase tracking-widest mb-4">
-      🔓 Turn Off Maintenance Mode
-    </button>
-    
     <span class="text-[10px] font-mono border border-[#00ff66]/40 px-3 py-1 rounded-full bg-[#00ff66]/10 text-[#00ff66]">SYS_STATUS: MAINTENANCE_ACTIVE</span>
+
+    <!-- Akses tersembunyi KHUSUS DEVELOPER (PIN Protected) -->
+    <button onclick="devUnlockMaintenance()" class="absolute bottom-4 right-4 text-[9px] font-mono text-neutral-700 hover:text-[#00ff66] transition uppercase tracking-widest">dev access</button>
   </div>
 
   <!-- RUNNING BROADCAST ALERT -->
@@ -293,8 +294,8 @@
         <span id="visitor-count-number">...</span>
       </div>
 
-      <!-- Quick Toggle Maintenance Control Button -->
-      <button id="quick-maintenance-toggle" onclick="toggleMaintenanceMode()" class="flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border border-emerald-500/30 text-[10px] font-mono font-bold text-emerald-400 hover:border-emerald-500 transition active:scale-95">
+      <!-- Quick Toggle Maintenance Control Button (Hidden by default until Dev PIN Authed) -->
+      <button id="quick-maintenance-toggle" onclick="toggleMaintenanceMode()" class="hidden flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border border-emerald-500/30 text-[10px] font-mono font-bold text-emerald-400 hover:border-emerald-500 transition active:scale-95">
         <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
         <span id="quick-maintenance-text">MAINTENANCE: OFF</span>
       </button>
@@ -872,7 +873,7 @@
           <div class="p-3.5 bg-red-500/10 border border-red-500/30 rounded-2xl flex items-center justify-between">
             <div>
               <span class="text-xs font-extrabold text-red-300 uppercase tracking-wider block">🚨 System Maintenance Lock</span>
-              <span class="text-[9px] text-neutral-400">Kunci seluruh tampilan web untuk publik</span>
+              <span class="text-[9px] text-neutral-400">Kunci seluruh tampilan web untuk publik (Global Sync)</span>
             </div>
             <button id="btn-toggle-maintenance" onclick="toggleMaintenanceMode()" class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10 transition-all flex items-center gap-2">
               <span id="m-indicator" class="w-2 h-2 rounded-full bg-neutral-500"></span>
@@ -1209,9 +1210,75 @@
     let snowInterval = null;
     let matrixInterval = null;
 
+    window.__devAuthed = false;
+
+    // ====== MAINTENANCE SYSTEM (GLOBAL VIA FIRESTORE) ======
+
+    // Dipanggil oleh onSnapshot Firestore / fallback lokal
+    window.__applyMaintenanceState = function(active) {
+      isMaintenanceActive = active;
+      localStorage.setItem('sys_maintenance_active', String(active));
+      updateMaintenanceUI();
+    };
+
+    function toggleMaintenanceMode() {
+      const next = !isMaintenanceActive;
+      if (typeof window.__fsSetMaintenance === 'function') {
+        window.__fsSetMaintenance(next); // tulis ke server -> semua browser ikut
+      } else {
+        window.__applyMaintenanceState(next); // fallback kalau modul Firebase belum siap
+      }
+    }
+
+    // Pintu darurat di layar lock (khusus developer, PIN protected)
+    function devUnlockMaintenance() {
+      const pin = prompt('Masukkan PIN Developer untuk mematikan maintenance:');
+      if (pin === null) return;
+      const currentPin = localStorage.getItem('rafa_dev_pin') || '2212';
+      if (pin === currentPin) {
+        toggleMaintenanceMode();
+        alert('Maintenance dimatikan. Web sudah bisa diakses publik.');
+      } else {
+        alert('PIN salah! Akses ditolak.');
+      }
+    }
+
+    function updateMaintenanceUI(silent = false) {
+      const btnDev = document.getElementById('btn-toggle-maintenance');
+      const mText = document.getElementById('m-text');
+      const mIndicator = document.getElementById('m-indicator');
+      const screen = document.getElementById('maintenance-screen');
+      const qBtnText = document.getElementById('quick-maintenance-text');
+      const qBtn = document.getElementById('quick-maintenance-toggle');
+
+      const baseDevBtn = "px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all flex items-center gap-2";
+      const baseQuick = "flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border text-[10px] font-mono font-bold transition active:scale-95";
+
+      if (isMaintenanceActive) {
+        if (screen) screen.style.display = 'flex';
+        if (mText) mText.innerText = 'ON';
+        if (mIndicator) mIndicator.className = 'w-2 h-2 rounded-full bg-red-400 animate-pulse';
+        if (btnDev) btnDev.className = baseDevBtn + ' bg-red-500/20 text-red-400 border border-red-500/40';
+        if (qBtnText) qBtnText.innerText = 'MAINTENANCE: ON';
+        if (qBtn) qBtn.className = baseQuick + ' border-red-500/40 text-red-400 hover:border-red-500';
+        if (!silent) logTerminal('Maintenance mode: ACTIVE');
+      } else {
+        if (screen) screen.style.display = 'none';
+        if (mText) mText.innerText = 'OFF';
+        if (mIndicator) mIndicator.className = 'w-2 h-2 rounded-full bg-neutral-500';
+        if (btnDev) btnDev.className = baseDevBtn + ' bg-neutral-800 text-neutral-400 border border-white/10';
+        if (qBtnText) qBtnText.innerText = 'MAINTENANCE: OFF';
+        if (qBtn) qBtn.className = baseQuick + ' border-emerald-500/30 text-emerald-400 hover:border-emerald-500';
+        if (!silent) logTerminal('Maintenance mode: OFF');
+      }
+
+      // Tombol cepat cuma muncul setelah dev login (PIN benar)
+      if (qBtn) qBtn.classList.toggle('hidden', !window.__devAuthed);
+    }
+
     // Inisialisasi status maintenance saat pertama kali dimuat
     document.addEventListener("DOMContentLoaded", () => {
-      updateMaintenanceUI();
+      updateMaintenanceUI(true);
     });
 
     function openDevPortalModal() {
@@ -1234,8 +1301,10 @@
       e.preventDefault();
       const input = document.getElementById('dev-pin-input').value;
       if (input === devPin) {
+        window.__devAuthed = true;
         document.getElementById('dev-pin-view').classList.add('hidden');
         document.getElementById('dev-tools-view').classList.remove('hidden');
+        document.getElementById('quick-maintenance-toggle').classList.remove('hidden');
         logTerminal("Akses berhasil disetujui.");
       } else {
         alert("PIN SALAH! Akses ditolak.");
@@ -1254,46 +1323,6 @@
       }
     }
 
-    // FUNGSI UTAMA TOGGLE MAINTENANCE ON / OFF
-    function toggleMaintenanceMode() {
-      isMaintenanceActive = !isMaintenanceActive;
-      localStorage.setItem('sys_maintenance_active', isMaintenanceActive);
-      updateMaintenanceUI();
-    }
-
-    function updateMaintenanceUI() {
-      const btnDev = document.getElementById('btn-toggle-maintenance');
-      const mText = document.getElementById('m-text');
-      const mIndicator = document.getElementById('m-indicator');
-      const screen = document.getElementById('maintenance-screen');
-      const qBtnText = document.getElementById('quick-maintenance-text');
-      const qBtn = document.getElementById('quick-maintenance-toggle');
-
-      if (isMaintenanceActive) {
-        screen.style.display = 'flex';
-        
-        if (mText) mText.innerText = "ON";
-        if (mIndicator) mIndicator.className = "w-2 h-2 rounded-full bg-red-400 animate-pulse";
-        if (btnDev) btnDev.className = "px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/40 transition-all flex items-center gap-2";
-        
-        if (qBtnText) qBtnText.innerText = "MAINTENANCE: ON";
-        if (qBtn) qBtn.className = "flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border border-red-500/40 text-[10px] font-mono font-bold text-red-400 hover:border-red-500 transition active:scale-95";
-
-        logTerminal("Maintenance mode: ACTIVE");
-      } else {
-        screen.style.display = 'none';
-        
-        if (mText) mText.innerText = "OFF";
-        if (mIndicator) mIndicator.className = "w-2 h-2 rounded-full bg-neutral-500";
-        if (btnDev) btnDev.className = "px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10 transition-all flex items-center gap-2";
-        
-        if (qBtnText) qBtnText.innerText = "MAINTENANCE: OFF";
-        if (qBtn) qBtn.className = "flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border border-emerald-500/30 text-[10px] font-mono font-bold text-emerald-400 hover:border-emerald-500 transition active:scale-95";
-
-        logTerminal("Maintenance mode: OFF");
-      }
-    }
-
     function setThemeAccent(colorName) {
       const colorsMap = {
         cyan: '#0284c7',
@@ -1304,10 +1333,8 @@
       };
       const chosenColor = colorsMap[colorName] || colorsMap.cyan;
       document.documentElement.style.setProperty('--brand-main', chosenColor);
+      document.documentElement.style.setProperty('--brand-glow', chosenColor + '66');
       
-      const elementsToColor = document.querySelectorAll('.text-sky-500, .text-sky-400');
-      elementsToColor.forEach(el => el.style.color = chosenColor);
-
       logTerminal("Theme color set to: " + colorName);
     }
 
@@ -1835,18 +1862,48 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    // ====== SINKRONISASI GLOBAL STATUS MAINTENANCE ======
+    const systemSettingsRef = doc(db, "settings", "system");
+
+    // Dipanggil saat dev toggle maintenance (tulis ke server)
+    window.__fsSetMaintenance = async (active) => {
+      try {
+        await setDoc(systemSettingsRef, {
+          maintenanceActive: active,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+        logTerminal(active ? "Server: maintenance ACTIVE disebar." : "Server: maintenance dimatikan.");
+      } catch (err) {
+        console.error("Gagal menulis status maintenance:", err);
+        logTerminal("Gagal konek server, pakai fallback lokal.");
+        window.__applyMaintenanceState(active);
+      }
+    };
+
+    // Pantau perubahan realtime — semua pengunjung otomatis ikut
+    onSnapshot(systemSettingsRef, (snap) => {
+      const active = snap.exists() ? (snap.data().maintenanceActive === true) : false;
+      window.__applyMaintenanceState(active);
+    }, (err) => {
+      console.warn("Gagal memantau status maintenance:", err.message);
+    });
+
     const CATBOX_USERHASH = "961239e1a882aa41f147633f6";
     let activeUnsub = null;
     let activeId = null;
     const GIPHY_API_KEY = "5LH1haWcbeynWswBCKF02uErlR0xMZWf";
 
-    // VISITOR COUNTER
+    // VISITOR COUNTER FIX (Menggunakan sessionStorage agar tidak bertambah saat refresh)
     const visitorDocRef = doc(db, "stats", "visitors");
     async function trackVisitor() {
-      try {
-        await updateDoc(visitorDocRef, { count: increment(1) });
-      } catch (e) {
-        await setDoc(visitorDocRef, { count: 1 }, { merge: true });
+      const hasVisited = sessionStorage.getItem('visited_session');
+      if (!hasVisited) {
+        try {
+          await updateDoc(visitorDocRef, { count: increment(1) });
+        } catch (e) {
+          await setDoc(visitorDocRef, { count: 1 }, { merge: true });
+        }
+        sessionStorage.setItem('visited_session', 'true');
       }
 
       onSnapshot(visitorDocRef, (snap) => {
@@ -1946,7 +2003,7 @@
       });
     });
 
-    // HELPER FUNCTION: UPLOAD KE CATBOX MENGGUNAKAN CORS PROXY GRATIS (ALLORIGINS - TANPA API KEY)
+    // HELPER FUNCTION: UPLOAD KE CATBOX MENGGUNAKAN CORS PROXY GRATIS (ALLORIGINS)
     async function uploadToCatbox(file) {
       const formData = new FormData();
       formData.append("reqtype", "fileupload");
@@ -2047,51 +2104,57 @@
       });
     }
 
-    // CMS: KELOLA & HAPUS KONTEN
+    // CMS: KELOLA & HAPUS KONTEN (PENYEMPURNAAN REAKSI TANPA NESTED LISTENERS / MEMORY LEAK)
     const cmsKelolaList = document.getElementById('cms-kelola-list');
+    let cacheBeritaDocs = [];
+    let cacheGaleriDocs = [];
 
-    function renderCmsKelolaList() {
+    function renderCmsKelolaUI() {
       if (!cmsKelolaList) return;
       cmsKelolaList.innerHTML = '';
 
-      onSnapshot(qBerita, (snapB) => {
-        cmsKelolaList.innerHTML = '<span class="font-extrabold text-sky-400 block mb-1 uppercase">Daftar Berita Firestore:</span>';
-
-        if (snapB.empty) {
-          cmsKelolaList.innerHTML += '<p class="text-neutral-400 italic mb-3">Belum ada berita tersimpan di Firestore.</p>';
-        } else {
-          snapB.forEach(docSnap => {
-            const data = docSnap.data();
-            cmsKelolaList.innerHTML += `
-              <div class="flex items-center justify-between p-2 bg-black/40 rounded-xl mb-1.5 border border-white/10">
-                <span class="truncate max-w-[200px] text-white font-medium">${escapeHtml(data.title)}</span>
-                <button onclick="deleteCmsItem('news', '${docSnap.id}')" class="px-2 py-1 bg-red-500/20 text-red-400 border border-red-500/30 rounded-lg text-[9px] font-bold hover:bg-red-500/40">Hapus</button>
-              </div>
-            `;
-          });
-        }
-
-        onSnapshot(qGaleri, (snapG) => {
-          cmsKelolaList.innerHTML += '<span class="font-extrabold text-emerald-400 block mt-3 mb-1 uppercase">Daftar Galeri Firestore:</span>';
-
-          if (snapG.empty) {
-            cmsKelolaList.innerHTML += '<p class="text-neutral-400 italic">Belum ada galeri tersimpan di Firestore.</p>';
-          } else {
-            snapG.forEach(docSnap => {
-              const data = docSnap.data();
-              cmsKelolaList.innerHTML += `
-                <div class="flex items-center justify-between p-2 bg-black/40 rounded-xl mb-1.5 border border-white/10">
-                  <span class="truncate max-w-[200px] text-white font-medium">${escapeHtml(data.title)}</span>
-                  <button onclick="deleteCmsItem('gallery', '${docSnap.id}')" class="px-2 py-1 bg-red-500/20 text-red-400 border border-red-500/30 rounded-lg text-[9px] font-bold hover:bg-red-500/40">Hapus</button>
-                </div>
-              `;
-            });
-          }
+      let html = '<span class="font-extrabold text-sky-400 block mb-1 uppercase">Daftar Berita Firestore:</span>';
+      if (cacheBeritaDocs.length === 0) {
+        html += '<p class="text-neutral-400 italic mb-3">Belum ada berita tersimpan di Firestore.</p>';
+      } else {
+        cacheBeritaDocs.forEach(item => {
+          html += `
+            <div class="flex items-center justify-between p-2 bg-black/40 rounded-xl mb-1.5 border border-white/10">
+              <span class="truncate max-w-[200px] text-white font-medium">${escapeHtml(item.title)}</span>
+              <button onclick="deleteCmsItem('news', '${item.id}')" class="px-2 py-1 bg-red-500/20 text-red-400 border border-red-500/30 rounded-lg text-[9px] font-bold hover:bg-red-500/40">Hapus</button>
+            </div>
+          `;
         });
-      });
+      }
+
+      html += '<span class="font-extrabold text-emerald-400 block mt-3 mb-1 uppercase">Daftar Galeri Firestore:</span>';
+      if (cacheGaleriDocs.length === 0) {
+        html += '<p class="text-neutral-400 italic">Belum ada galeri tersimpan di Firestore.</p>';
+      } else {
+        cacheGaleriDocs.forEach(item => {
+          html += `
+            <div class="flex items-center justify-between p-2 bg-black/40 rounded-xl mb-1.5 border border-white/10">
+              <span class="truncate max-w-[200px] text-white font-medium">${escapeHtml(item.title)}</span>
+              <button onclick="deleteCmsItem('gallery', '${item.id}')" class="px-2 py-1 bg-red-500/20 text-red-400 border border-red-500/30 rounded-lg text-[9px] font-bold hover:bg-red-500/40">Hapus</button>
+            </div>
+          `;
+        });
+      }
+
+      cmsKelolaList.innerHTML = html;
     }
 
-    renderCmsKelolaList();
+    onSnapshot(qBerita, (snapB) => {
+      cacheBeritaDocs = [];
+      snapB.forEach(d => cacheBeritaDocs.push({ id: d.id, ...d.data() }));
+      renderCmsKelolaUI();
+    });
+
+    onSnapshot(qGaleri, (snapG) => {
+      cacheGaleriDocs = [];
+      snapG.forEach(d => cacheGaleriDocs.push({ id: d.id, ...d.data() }));
+      renderCmsKelolaUI();
+    });
 
     window.deleteCmsItem = async (colName, id) => {
       const confirmDelete = confirm("Yakin ingin menghapus item ini dari database?");
