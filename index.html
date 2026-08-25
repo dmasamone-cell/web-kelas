@@ -40,7 +40,7 @@
       }
     }
   </script>
-  <style>
+  <style id="custom-injected-style">
     :root {
       --brand-main: #0284c7;
       --brand-glow: rgba(2, 132, 199, 0.4);
@@ -78,6 +78,7 @@
       background-color: #f2f2f7;
       position: relative;
       overflow-x: hidden;
+      transition: background 0.3s ease;
     }
     .dark .glass-canvas {
       background-color: #030712;
@@ -116,7 +117,6 @@
         0 12px 32px -8px rgba(0, 0, 0, 0.6);
     }
 
-    /* Kilau hover dipelankan */
     .liquid-glass::after {
       content: '';
       position: absolute;
@@ -136,7 +136,6 @@
     }
     .liquid-glass:hover::after { opacity: 1; }
 
-    /* Subtle Standalone (Badge Header) */
     .liquid-glass-subtle {
       background: rgba(255, 255, 255, 0.45);
       backdrop-filter: blur(8px);
@@ -145,7 +144,6 @@
       box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.65);
     }
 
-    /* Subtle Nested di dalam Liquid Glass Card */
     .liquid-glass .liquid-glass-subtle {
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
@@ -163,7 +161,6 @@
       background: rgba(255, 255, 255, 0.075);
     }
 
-    /* Lazy Render Khusus Section Panjang */
     #galeri, #anggota {
       content-visibility: auto;
       contain-intrinsic-size: auto 600px;
@@ -260,6 +257,16 @@
       text-align: center;
       padding: 2rem;
     }
+
+    /* Styling Mading Digital Sticky Notes */
+    #mading-board {
+      min-height: 160px;
+      background: rgba(15, 23, 42, 0.4);
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 12px;
+      margin-top: 12px;
+    }
   </style>
 </head>
 <body class="bg-[#f2f2f7] text-neutral-900 font-sans antialiased selection:bg-sky-500/20 dark:bg-[#030712] dark:text-neutral-100 min-h-screen pb-20 glass-canvas transition-colors duration-500">
@@ -268,7 +275,7 @@
   <div id="maintenance-screen">
     <div class="w-16 h-16 rounded-full border-2 border-[#00ff66] flex items-center justify-center text-2xl mb-4 animate-pulse">🔒</div>
     <h1 class="text-2xl sm:text-3xl font-black uppercase tracking-widest text-white mb-2">System Maintenance</h1>
-    <p class="text-xs text-neutral-400 max-w-md mb-6 leading-relaxed">Website sedang diuji coba dan dikunci oleh Lead Developer (Billy). Silakan kembali beberapa saat lagi.</p>
+    <p id="maint-screen-desc" class="text-xs text-neutral-400 max-w-md mb-6 leading-relaxed">Website sedang dalam perbaikan. Kembali lagi nanti!</p>
     <span class="text-[10px] font-mono border border-[#00ff66]/40 px-3 py-1 rounded-full bg-[#00ff66]/10 text-[#00ff66]">SYS_STATUS: MAINTENANCE_ACTIVE</span>
 
     <button onclick="devUnlockMaintenance()" class="absolute bottom-4 right-4 text-[9px] font-mono text-neutral-700 hover:text-[#00ff66] transition uppercase tracking-widest">dev access</button>
@@ -332,6 +339,7 @@
         </div>
         <nav class="space-y-1.5 text-xs font-semibold uppercase tracking-wider">
           <a href="#dashboard" onclick="toggleDrawer()" class="w-full text-left px-4 py-3 rounded-2xl text-neutral-700 dark:text-neutral-300 hover:bg-black/5 dark:hover:bg-white/10 transition block">Beranda & Dashboard</a>
+          <a href="#mading-section" onclick="toggleDrawer()" class="w-full text-left px-4 py-3 rounded-2xl text-neutral-700 dark:text-neutral-300 hover:bg-black/5 dark:hover:bg-white/10 transition block">Mading Digital Kelas</a>
           <a href="#berita" onclick="toggleDrawer()" class="w-full text-left px-4 py-3 rounded-2xl text-neutral-700 dark:text-neutral-300 hover:bg-black/5 dark:hover:bg-white/10 transition block">Berita & Sorotan</a>
           <a href="#jadwal" onclick="toggleDrawer()" class="w-full text-left px-4 py-3 rounded-2xl text-neutral-700 dark:text-neutral-300 hover:bg-black/5 dark:hover:bg-white/10 transition block">Jadwal Pelajaran</a>
           <a href="#spin-wheel" onclick="toggleDrawer()" class="w-full text-left px-4 py-3 rounded-2xl text-neutral-700 dark:text-neutral-300 hover:bg-black/5 dark:hover:bg-white/10 transition block">Spin Wheel</a>
@@ -456,6 +464,39 @@
     </div>
   </section>
 
+  <!-- FITUR 13: MADING DIGITAL & STICKY NOTES SECTION -->
+  <section id="mading-section" class="max-w-5xl mx-auto px-6 my-12 relative z-10">
+    <div class="liquid-glass p-6 rounded-3xl shadow-glass dark:shadow-glass-dark">
+      <div class="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-3 mb-4">
+        <div>
+          <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest block">Fitur Publik Interaktif</span>
+          <h2 class="text-lg font-extrabold text-neutral-900 dark:text-white tracking-tight">📌 Mading Digital Kelas & Guestbook</h2>
+        </div>
+        <span class="text-[9px] font-mono text-neutral-400 bg-black/5 dark:bg-white/5 px-3 py-1 rounded-full border border-white/10">DEVICE BOUND</span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-2 mb-4">
+        <input type="text" id="sticky-input" placeholder="Tuliskan catatan atau ucapan di mading digital..." class="flex-1 liquid-glass-subtle rounded-2xl px-4 py-3 text-xs text-neutral-900 dark:text-white focus:outline-none focus:border-sky-500 transition">
+        <select id="sticky-color" class="liquid-glass-subtle rounded-2xl px-3 py-3 text-xs text-neutral-900 dark:text-white bg-transparent focus:outline-none focus:border-sky-500">
+          <option value="#fef08a" class="text-black">Kuning</option>
+          <option value="#fbcfe8" class="text-black">Pink</option>
+          <option value="#bae6fd" class="text-black">Biru</option>
+          <option value="#bbf7d0" class="text-black">Hijau</option>
+        </select>
+        <button onclick="addStickyNoteFromUI()" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-2xl transition active:scale-95 shadow-md">
+          Tempel Note
+        </button>
+      </div>
+
+      <div id="mading-board" class="flex flex-wrap gap-3 items-start">
+        <div class="p-3 bg-[#fef08a] text-black rounded-xl shadow-md w-36 font-sans text-xs border border-black/10">
+          <span class="text-[9px] opacity-60 block font-mono">Device: DEMO</span>
+          <p class="mt-1 font-semibold">Selamat datang di Mading Digital X TJKT 4!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Berita -->
   <section id="berita" class="max-w-5xl mx-auto px-6 my-12 relative z-10">
     <div class="flex items-center justify-between pb-3 border-b border-black/10 dark:border-white/10 mb-6">
@@ -536,11 +577,11 @@
     </div>
   </section>
 
-  <!-- Menfess -->
+  <!-- FITUR 12: Menfess & Komentar Publik dengan Device ID Binding -->
   <section id="menfess" class="max-w-5xl mx-auto px-6 my-12 relative z-10">
     <div class="flex justify-between items-end mb-6 border-b border-black/10 dark:border-white/10 pb-3">
       <div>
-        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest block">Interaktif</span>
+        <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest block">Interaktif & Public Binding</span>
         <h2 class="text-lg font-extrabold text-neutral-900 dark:text-white tracking-tight">Menfess Kelas (Pesan Anonim)</h2>
       </div>
     </div>
@@ -596,6 +637,7 @@
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
       </div>
 
+      <!-- FITUR 2: Profil Rafa dengan Tombol Dev Ringkas -->
       <div onclick="openDetailModal('siswa-rafa', 'https://files.catbox.moe/lnzqfg.jpg', 'M.Brilliant Rafa Ridhoca', 'Core Developer • System Administrator')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark border border-sky-500/40 hover:border-sky-400 transition-all text-center cursor-pointer active:scale-95 group relative overflow-hidden">
         <span class="absolute top-2 right-2 text-[8px] font-black uppercase tracking-widest text-sky-400 bg-sky-500/20 border border-sky-500/40 px-2 py-0.5 rounded-full animate-pulse">DEV</span>
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2 border-2 border-sky-500/60 group-hover:border-sky-400 transition-colors shadow-lg">
@@ -603,6 +645,11 @@
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-400 transition-colors">M.Brilliant Rafa Ridhoca</h3>
         <p id="billy-custom-title" class="text-[9px] text-sky-400 font-extrabold mt-0.5 uppercase tracking-wider">Lead System Dev</p>
+        
+        <!-- Tombol Dev Portal Minimalis -->
+        <button id="dev-trigger-btn" onclick="event.stopPropagation(); toggleDevPortal()" style="background: transparent; border: 1px dashed rgba(255,255,255,0.3); padding: 3px 6px; font-size: 9px; border-radius: 6px; color: #888; cursor: pointer; margin-top: 6px;">
+          ⚙️ Dev Portal
+        </button>
       </div>
 
       <div onclick="openDetailModal('siswa-gilang', 'https://files.catbox.moe/s2p4xp.jpg', 'M.Gilang Febriyan', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
@@ -842,7 +889,7 @@
     </div>
   </section>
 
-  <!-- MODAL DEV TOOLS & IMGBB CMS -->
+  <!-- MODAL DEV TOOLS & CONTROL PANEL MODULAR -->
   <div id="dev-portal-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-2xl flex items-center justify-center p-4" onclick="if(event.target === this) closeDevPortalModal()">
     <div class="liquid-glass rounded-3xl max-w-xl w-full p-6 shadow-2xl relative border border-sky-500/40">
       <button onclick="closeDevPortalModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white font-bold text-xs uppercase tracking-wider">Close</button>
@@ -866,7 +913,7 @@
       <div id="dev-tools-view" class="hidden space-y-5 max-h-[80vh] overflow-y-auto pr-1">
         <div class="flex items-center justify-between border-b border-white/10 pb-3 sticky top-0 bg-neutral-900/90 backdrop-blur-md z-10 pt-1">
           <div>
-            <span class="text-[9px] font-black uppercase tracking-widest text-sky-400 block">Restricted Area (ImgBB Native API Connected)</span>
+            <span class="text-[9px] font-black uppercase tracking-widest text-sky-400 block">Restricted Area (Dev Suite Active)</span>
             <h3 class="font-extrabold text-white text-sm">⚡ Billy's Developer Control Panel</h3>
           </div>
           <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">ONLINE</span>
@@ -874,8 +921,56 @@
 
         <div class="space-y-4">
 
+          <!-- FITUR 4, 5, 6, 7, 8, 9, 11 FITUR DEV DITERAPKAN DI CONTROL PANEL -->
+          <div class="p-4 bg-sky-500/10 border border-sky-500/30 rounded-2xl space-y-3">
+            <span class="text-xs font-black text-sky-300 uppercase tracking-wider block">🎨 Theme & Panic Controls</span>
+            
+            <div class="flex gap-2">
+              <button onclick="setTheme('kemerdekaan')" class="flex-1 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-[10px] font-bold uppercase transition">🇮🇩 Kemerdekaan</button>
+              <button onclick="setTheme('default')" class="flex-1 py-1.5 bg-neutral-700 hover:bg-neutral-600 text-white rounded-xl text-[10px] font-bold uppercase transition">🔄 Reset Default</button>
+            </div>
+
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-[10px] text-neutral-300 font-bold uppercase">Custom Hex Picker:</span>
+              <input type="color" id="hexThemePicker" onchange="setCustomHexTheme(this.value)" class="bg-transparent border-0 cursor-pointer w-8 h-8">
+            </div>
+
+            <hr class="border-white/10 my-2">
+
+            <!-- FITUR 6: System Panic Button -->
+            <button onclick="triggerPanicButton()" class="w-full py-2 bg-red-500 hover:bg-red-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md">
+              🚨 System Panic Button (DOM Wipe)
+            </button>
+
+            <!-- FITUR 7: Mock User View -->
+            <button onclick="toggleMockMode()" id="mock-btn" class="w-full py-2 bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md">
+              👁️ Toggle Mock User View (Off)
+            </button>
+          </div>
+
+          <div class="p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl space-y-3">
+            <span class="text-xs font-black text-amber-300 uppercase tracking-wider block">🛠️ Maintenance & Injector</span>
+            
+            <!-- FITUR 9: Maintenance Message Customizer -->
+            <input type="text" id="maint-msg-input" placeholder="Isi pesan maintenance khusus..." class="w-full liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500">
+            <button onclick="updateMaintenanceMsg()" class="w-full py-1.5 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-[10px] uppercase tracking-wider rounded-xl transition">Simpan Pesan Maintenance</button>
+
+            <!-- FITUR 8: Custom CSS Injector -->
+            <textarea id="custom-css-input" rows="2" placeholder="/* Inject kode Custom CSS langsung */" class="w-full liquid-glass-subtle rounded-xl p-3 text-xs text-sky-300 font-mono focus:outline-none focus:border-amber-500"></textarea>
+            <button onclick="applyCustomCSS()" class="w-full py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-[10px] uppercase tracking-wider rounded-xl transition">Inject CSS Ke Web</button>
+          </div>
+
+          <!-- FITUR 11: Inspect Log Trap Box -->
+          <div class="p-3 bg-neutral-900/90 border border-emerald-500/30 rounded-2xl space-y-2">
+            <span class="text-xs font-black text-emerald-400 uppercase tracking-wider block">📊 DevLogs & Inspect Trap</span>
+            <div id="inspect-log-box" class="bg-black/90 p-2.5 rounded-xl h-20 overflow-y-auto text-[10px] font-mono text-emerald-400 leading-relaxed border border-emerald-500/20">
+              [Log System Ready...]
+            </div>
+          </div>
+
+          <!-- CMS IMGBB SECTION -->
           <div class="p-4 bg-sky-500/10 border border-sky-500/30 rounded-2xl space-y-4">
-            <span class="text-xs font-black text-sky-300 uppercase tracking-wider block">📰 CMS: IMGBB FAST UPLOAD (BERITA, GALERI & FOTO ANGGOTA)</span>
+            <span class="text-xs font-black text-sky-300 uppercase tracking-wider block">📰 CMS: IMGBB FAST UPLOAD</span>
 
             <div class="flex gap-2 border-b border-white/10 pb-2 flex-wrap">
               <button type="button" onclick="switchCmsTab('berita')" id="tab-cms-berita" class="px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase bg-sky-500 text-white">Upload Berita</button>
@@ -918,7 +1013,6 @@
               <p class="text-neutral-400 italic">Memuat daftar konten...</p>
             </div>
 
-            <!-- FORM GANTI FOTO ANGGOTA -->
             <form id="cms-foto-form" class="space-y-3 hidden">
               <div>
                 <label class="text-[10px] text-neutral-300 font-bold uppercase block mb-1">Pilih Siswa/Siswi:</label>
@@ -1296,35 +1390,72 @@
     });
   </script>
 
-  <!-- LOGIKA DEV PORTAL & FITUR KONTROL DEVELOPER -->
+  <!-- LOGIKA LENGKAP DEV PORTAL & SELURUH FITUR ANTREAN SYSTEM -->
   <script>
     let devPin = localStorage.getItem('rafa_dev_pin') || "2212";
     let isBroadcastActive = false;
     let isMaintenanceActive = localStorage.getItem('sys_maintenance_active') === 'true';
     let isMatrixActive = localStorage.getItem('sys_matrix_active') === 'true';
     let isSnowActive = localStorage.getItem('sys_snow_active') === 'true';
+    let maintenanceMessage = "Web sedang dalam perbaikan. Kembali lagi nanti!";
+    let isMockUser = false;
     let confettiInterval = null;
     let snowInterval = null;
     let matrixInterval = null;
 
     window.__devAuthed = false;
 
-    // Pause animasi saat tab di background
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        if (matrixInterval) { clearInterval(matrixInterval); matrixInterval = null; }
-        if (snowInterval) { clearInterval(snowInterval); snowInterval = null; }
-      } else {
-        if (isMatrixActive && !matrixInterval) startMatrixAnimation();
-        if (isSnowActive && !snowInterval) snowInterval = setInterval(spawnSnowBatch, 1000);
+    /* FITUR 12: Device Fingerprint Tracking */
+    if (!localStorage.getItem('user_device_id')) {
+      localStorage.setItem('user_device_id', 'DEV-' + Math.random().toString(36).substr(2, 9));
+    }
+    const DEVICE_ID = localStorage.getItem('user_device_id');
+
+    /* FITUR 1: Secret URL Auto-Bypass & Shortcut Keyboard */
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('dev') === 'true') {
+      localStorage.setItem('dev_authenticated', 'true');
+    }
+
+    function isDevMode() {
+      return (localStorage.getItem('dev_authenticated') === 'true' || window.__devAuthed) && !isMockUser;
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        toggleDevPortal();
       }
     });
 
+    function toggleDevPortal(show = null) {
+      const modal = document.getElementById('dev-portal-modal');
+      if (!modal) return;
+      if (show === null) {
+        modal.classList.toggle('hidden');
+      } else {
+        if (show) modal.classList.remove('hidden');
+        else modal.classList.add('hidden');
+      }
+    }
+
+    /* FITUR 3 & 9: Bypass Maintenance & Message Customizer */
     window.__applyMaintenanceState = function(active) {
       isMaintenanceActive = active;
       localStorage.setItem('sys_maintenance_active', String(active));
       updateMaintenanceUI();
     };
+
+    function updateMaintenanceMsg() {
+      const msg = document.getElementById('maint-msg-input').value;
+      if (msg) {
+        maintenanceMessage = msg;
+        const descEl = document.getElementById('maint-screen-desc');
+        if (descEl) descEl.innerText = msg;
+        alert('Pesan Maintenance diperbarui!');
+        logTerminal("Pesan Maintenance diganti.");
+      }
+    }
 
     function toggleMaintenanceMode() {
       const next = !isMaintenanceActive;
@@ -1355,28 +1486,133 @@
       const qBtnText = document.getElementById('quick-maintenance-text');
       const qBtn = document.getElementById('quick-maintenance-toggle');
 
-      const baseDevBtn = "px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all flex items-center gap-2";
-      const baseQuick = "flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border text-[10px] font-mono font-bold transition active:scale-95";
-
-      if (isMaintenanceActive) {
+      if (isMaintenanceActive && !isDevMode()) {
         if (screen) screen.style.display = 'flex';
-        if (mText) mText.innerText = 'ON';
-        if (mIndicator) mIndicator.className = 'w-2 h-2 rounded-full bg-red-400 animate-pulse';
-        if (btnDev) btnDev.className = baseDevBtn + ' bg-red-500/20 text-red-400 border border-red-500/40';
-        if (qBtnText) qBtnText.innerText = 'MAINTENANCE: ON';
-        if (qBtn) qBtn.className = baseQuick + ' border-red-500/40 text-red-400 hover:border-red-500';
-        if (!silent) logTerminal('Maintenance mode: ACTIVE');
       } else {
         if (screen) screen.style.display = 'none';
+      }
+
+      if (isMaintenanceActive) {
+        if (mText) mText.innerText = 'ON';
+        if (mIndicator) mIndicator.className = 'w-2 h-2 rounded-full bg-red-400 animate-pulse';
+        if (qBtnText) qBtnText.innerText = 'MAINTENANCE: ON';
+      } else {
         if (mText) mText.innerText = 'OFF';
         if (mIndicator) mIndicator.className = 'w-2 h-2 rounded-full bg-neutral-500';
-        if (btnDev) btnDev.className = baseDevBtn + ' bg-neutral-800 text-neutral-400 border border-white/10';
         if (qBtnText) qBtnText.innerText = 'MAINTENANCE: OFF';
-        if (qBtn) qBtn.className = baseQuick + ' border-emerald-500/30 text-emerald-400 hover:border-emerald-500';
-        if (!silent) logTerminal('Maintenance mode: OFF');
       }
 
       if (qBtn) qBtn.classList.toggle('hidden', !window.__devAuthed);
+    }
+
+    /* FITUR 4 & 5: Theme Kemerdekaan, Reset & Custom Hex Picker */
+    function setTheme(type) {
+      if (type === 'kemerdekaan') {
+        document.body.style.background = "linear-gradient(180deg, #dc2626 50%, #ffffff 50%)";
+        document.body.style.color = "#000000";
+        logTerminal("Tema Kemerdekaan aktif.");
+      } else if (type === 'default') {
+        document.body.style.background = "";
+        document.body.style.color = "";
+        logTerminal("Tema Reset Default.");
+      }
+    }
+
+    function setCustomHexTheme(hexColor) {
+      document.body.style.backgroundColor = hexColor;
+      logTerminal("Custom Hex Theme: " + hexColor);
+    }
+
+    /* FITUR 6: System Panic Button (DOM Wipe) */
+    function triggerPanicButton() {
+      document.body.innerHTML = `
+        <div style="background:#ffffff; color:#000000; font-family:Arial, sans-serif; height:100vh; padding:40px; box-sizing:border-box;">
+          <h1 style="font-size:24px;">404 Not Found</h1>
+          <p style="font-size:14px; color:#333;">The requested URL was not found on this server.</p>
+          <hr style="border:0; border-top:1px solid #ccc;">
+          <address style="font-size:12px; color:#666;">Apache/2.4.52 (Ubuntu) Server at Port 80</address>
+        </div>`;
+    }
+
+    /* FITUR 7: Mock User View / Profile Impersonator */
+    function toggleMockMode() {
+      isMockUser = !isMockUser;
+      const btn = document.getElementById('mock-btn');
+      if (btn) {
+        btn.innerText = `👁️ Toggle Mock User View (${isMockUser ? 'ON' : 'OFF'})`;
+        btn.className = `w-full py-2 ${isMockUser ? 'bg-red-500' : 'bg-sky-500'} text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md`;
+      }
+      closeDevPortalModal();
+      updateMaintenanceUI();
+      logTerminal("Mock User View: " + (isMockUser ? "ACTIVE" : "OFF"));
+    }
+
+    /* FITUR 8: Custom CSS Injector */
+    function applyCustomCSS() {
+      const cssCode = document.getElementById('custom-css-input').value;
+      const injectedEl = document.getElementById('custom-injected-style');
+      if (injectedEl) {
+        injectedEl.innerHTML += cssCode;
+        alert("Custom CSS berhasil di-inject ke website!");
+        logTerminal("Custom CSS injected.");
+      }
+    }
+
+    /* FITUR 10: Console Watermark & ASCII Art */
+    console.log("%c  DEV PORTAL ACTIVE  ", "background: #22c55e; color: #000; font-size: 16px; font-weight: bold; border-radius: 4px;");
+    console.log(`
+     ██████╗ ███████╗██╗   ██╗██████╗ ██████╗ ███████╗████████╗
+    ██╔════╝ ██╔════╝██║   ██║██╔══██╗██╔══██╗██╔════╝╚══██╔══╝
+    ██║  ███╗█████╗  ██║   ██║██████╔╝██████╔╝█████╗     ██║   
+    ██║   ██║██╔══╝  ██║   ██║██╔═══╝ ██╔══██╗██╔══╝     ██║   
+    ╚██████╔╝███████╗╚██████╔╝██║     ██║  ██║███████╗   ██║   
+     ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚══════╝   ╚═╝   
+    Powered by Dev Portal - Registered Device: ${DEVICE_ID}
+    `);
+
+    /* FITUR 11: Inspect Element Tracker / Trap */
+    let devtoolsOpen = false;
+    const threshold = 160;
+    setInterval(() => {
+      const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+      const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+      if ((widthThreshold || heightThreshold) && !devtoolsOpen) {
+        devtoolsOpen = true;
+        logInspectTrap();
+      } else if (!widthThreshold && !heightThreshold) {
+        devtoolsOpen = false;
+      }
+    }, 1000);
+
+    function logInspectTrap() {
+      const logBox = document.getElementById('inspect-log-box');
+      const time = new Date().toLocaleTimeString();
+      if (logBox) {
+        logBox.innerHTML += `<br>[${time}] ⚠️ Inspect Element Detected! Device ID: ${DEVICE_ID}`;
+        logBox.scrollTop = logBox.scrollHeight;
+      }
+    }
+
+    /* FITUR 13: Mading Digital & Sticky Notes Logic */
+    function addStickyNoteFromUI() {
+      const input = document.getElementById('sticky-input');
+      const colorSelect = document.getElementById('sticky-color');
+      const text = input.value.trim();
+      const color = colorSelect.value;
+
+      if (!text) return alert('Tuliskan sesuatu untuk mading!');
+
+      const board = document.getElementById('mading-board');
+      const note = document.createElement('div');
+      note.className = "p-3 text-black rounded-xl shadow-md w-36 font-sans text-xs border border-black/10 transition-transform hover:scale-105";
+      note.style.backgroundColor = color;
+      note.innerHTML = `
+        <span class="text-[9px] opacity-60 block font-mono">Device: ${DEVICE_ID.slice(-4)}</span>
+        <p class="mt-1 font-semibold break-words">${escapeHtml(text)}</p>
+      `;
+
+      board.appendChild(note);
+      input.value = '';
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -1706,7 +1942,6 @@
 
   <!-- UTAMA UI & LOGIKA REGULER -->
   <script>
-    /* ===== FIX PAGE LOADER STUCK ===== */
     function hidePageLoader() {
       const loader = document.getElementById('page-loader');
       if (loader && !loader.classList.contains('fade-out')) {
@@ -1714,14 +1949,12 @@
       }
     }
 
-    // Direct DOM ready listener
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(hidePageLoader, 400);
       drawWheel();
       renderJadwal();
     });
 
-    // Fallback timer jika koneksi sangat lambat
     setTimeout(hidePageLoader, 800);
 
     window.addEventListener('load', () => {
@@ -2012,7 +2245,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // SYSTEM SETTINGS (GLOBAL FIRESTORE SYNC)
     const systemSettingsRef = doc(db, "settings", "system");
 
     window.__fsSetMaintenance = async (active) => {
@@ -2071,7 +2303,6 @@
     let activeId = null;
     const GIPHY_API_KEY = "5LH1haWcbeynWswBCKF02uErlR0xMZWf";
 
-    // VISITOR COUNTER GUARD (sessionStorage)
     const visitorDocRef = doc(db, "stats", "visitors");
     async function trackVisitor() {
       const hasVisited = sessionStorage.getItem('visited_session');
@@ -2181,7 +2412,6 @@
       });
     });
 
-    // UPLOAD IMGBB NATIVE FUNCTION WITH PROGRESS BAR %
     function uploadImageWithProgress(file, statusEl) {
       return new Promise((resolve, reject) => {
         const formData = new FormData();
@@ -2215,7 +2445,6 @@
       });
     }
 
-    // MANAJEMEN FOTO ANGGOTA VIA FIRESTORE
     const memberCollection = collection(db, "members");
     const memberPhotoOverrides = {};
 
@@ -2300,7 +2529,6 @@
       });
     }
 
-    // CMS: UPLOAD BERITA VIA IMGBB
     const cmsBeritaForm = document.getElementById('cms-berita-form');
     if (cmsBeritaForm) {
       cmsBeritaForm.addEventListener('submit', async (e) => {
@@ -2342,7 +2570,6 @@
       });
     }
 
-    // CMS: UPLOAD GALERI VIA IMGBB
     const cmsGaleriForm = document.getElementById('cms-galeri-form');
     if (cmsGaleriForm) {
       cmsGaleriForm.addEventListener('submit', async (e) => {
@@ -2380,7 +2607,6 @@
       });
     }
 
-    // CMS: KELOLA & HAPUS KONTEN
     const cmsKelolaList = document.getElementById('cms-kelola-list');
     let cacheBeritaDocs = [];
     let cacheGaleriDocs = [];
@@ -2467,6 +2693,7 @@
             from: fromVal,
             to: toVal,
             text: textVal,
+            deviceId: DEVICE_ID, // Tracking ID Terikat Perangkat
             createdAt: serverTimestamp()
           });
           menfessForm.reset();
@@ -2489,11 +2716,13 @@
       menfessContainer.innerHTML = '';
       snapshot.forEach((docSnap) => {
         const data = docSnap.data();
+        const devTag = data.deviceId ? `<span class="text-[8px] font-mono opacity-50">ID: ${escapeHtml(data.deviceId.slice(-4))}</span>` : '';
         menfessContainer.innerHTML += `
           <div class="liquid-glass p-5 rounded-3xl shadow-glass dark:shadow-glass-dark relative flex flex-col justify-between">
             <div>
               <div class="flex justify-between items-start mb-2">
                 <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 border border-sky-500/20 px-2.5 py-0.5 rounded-full">Untuk: ${escapeHtml(data.to)}</span>
+                ${devTag}
               </div>
               <p class="text-xs text-neutral-800 dark:text-neutral-200 leading-relaxed font-medium my-3">"${escapeHtml(data.text)}"</p>
             </div>
@@ -2615,11 +2844,16 @@
                 ? `<span class="bg-sky-500/10 text-sky-500 font-bold text-[8px] px-2 py-0.5 rounded-full border border-sky-500/20 inline-flex items-center tracking-wider uppercase">Developer</span>`
                 : '';
 
+              const devBindingTag = c.deviceId ? `<span class="text-[8px] font-mono text-neutral-400">ID: ${escapeHtml(c.deviceId.slice(-4))}</span>` : '';
+
               container.innerHTML += `
                 <div class="liquid-glass-subtle p-3 rounded-2xl">
-                  <div class="flex items-center gap-2 flex-wrap">
-                    <span class="font-bold text-neutral-900 dark:text-white">${escapeHtml(c.user)}</span>
-                    ${devBadge}
+                  <div class="flex items-center justify-between flex-wrap">
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-neutral-900 dark:text-white">${escapeHtml(c.user)}</span>
+                      ${devBadge}
+                    </div>
+                    ${devBindingTag}
                   </div>
                   ${textContent}
                 </div>`;
@@ -2655,12 +2889,12 @@
       const photoRef = doc(db, "photos", activeId);
       try {
         await updateDoc(photoRef, {
-          comments: arrayUnion({ user: userName, text: gifUrl, type: 'gif' })
+          comments: arrayUnion({ user: userName, text: gifUrl, type: 'gif', deviceId: DEVICE_ID })
         });
       } catch (err) {
         await setDoc(photoRef, {
           likes: 0,
-          comments: [{ user: userName, text: gifUrl, type: 'gif' }]
+          comments: [{ user: userName, text: gifUrl, type: 'gif', deviceId: DEVICE_ID }]
         }, { merge: true });
       }
 
@@ -2735,12 +2969,12 @@
         const photoRef = doc(db, "photos", activeId);
         try {
           await updateDoc(photoRef, {
-            comments: arrayUnion({ user: userName, text: val, type: 'text' })
+            comments: arrayUnion({ user: userName, text: val, type: 'text', deviceId: DEVICE_ID })
           });
         } catch (err) {
           await setDoc(photoRef, {
             likes: 0,
-            comments: [{ user: userName, text: val, type: 'text' }]
+            comments: [{ user: userName, text: val, type: 'text', deviceId: DEVICE_ID }]
           }, { merge: true });
         }
 
