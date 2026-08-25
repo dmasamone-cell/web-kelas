@@ -783,7 +783,7 @@
     </div>
   </section>
 
-  <!-- MODAL DEV TOOLS & CATBOX CMS -->
+  <!-- MODAL DEV TOOLS & IMGBB CMS -->
   <div id="dev-portal-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-2xl flex items-center justify-center p-4" onclick="if(event.target === this) closeDevPortalModal()">
     <div class="liquid-glass rounded-3xl max-w-xl w-full p-6 shadow-2xl relative border border-sky-500/40">
       <button onclick="closeDevPortalModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white font-bold text-xs uppercase tracking-wider">Close</button>
@@ -807,7 +807,7 @@
       <div id="dev-tools-view" class="hidden space-y-5 max-h-[80vh] overflow-y-auto pr-1">
         <div class="flex items-center justify-between border-b border-white/10 pb-3 sticky top-0 bg-neutral-900/90 backdrop-blur-md z-10 pt-1">
           <div>
-            <span class="text-[9px] font-black uppercase tracking-widest text-sky-400 block">Restricted Area (Free CORS Proxy Connected)</span>
+            <span class="text-[9px] font-black uppercase tracking-widest text-sky-400 block">Restricted Area (ImgBB Native API Connected)</span>
             <h3 class="font-extrabold text-white text-sm">⚡ Rafa's Developer Control Panel</h3>
           </div>
           <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">ONLINE</span>
@@ -816,7 +816,7 @@
         <div class="space-y-4">
 
           <div class="p-4 bg-sky-500/10 border border-sky-500/30 rounded-2xl space-y-4">
-            <span class="text-xs font-black text-sky-300 uppercase tracking-wider block">📰 CMS: CATBOX FAST UPLOAD (BERITA & GALERI)</span>
+            <span class="text-xs font-black text-sky-300 uppercase tracking-wider block">📰 CMS: IMGBB FAST UPLOAD (BERITA & GALERI)</span>
 
             <div class="flex gap-2 border-b border-white/10 pb-2">
               <button type="button" onclick="switchCmsTab('berita')" id="tab-cms-berita" class="px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase bg-sky-500 text-white">Upload Berita</button>
@@ -838,7 +838,7 @@
               </select>
               <textarea id="cms-berita-desc" rows="2" placeholder="Deskripsi ringkas berita..." required class="w-full liquid-glass-subtle rounded-xl p-3 text-xs text-white focus:outline-none focus:border-sky-500"></textarea>
               <button type="submit" id="btn-upload-berita" class="w-full py-2 bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md">
-                Publish via Catbox → Web
+                Publish via ImgBB → Web
               </button>
             </form>
 
@@ -850,7 +850,7 @@
               <input type="text" id="cms-galeri-title" placeholder="Judul Foto Galeri..." required class="w-full liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500">
               <textarea id="cms-galeri-desc" rows="2" placeholder="Deskripsi foto..." required class="w-full liquid-glass-subtle rounded-xl p-3 text-xs text-white focus:outline-none focus:border-sky-500"></textarea>
               <button type="submit" id="btn-upload-galeri" class="w-full py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md">
-                Tambah Galeri via Catbox → Web
+                Tambah Galeri via ImgBB → Web
               </button>
             </form>
 
@@ -882,8 +882,8 @@
           </div>
 
           <div class="p-3.5 bg-indigo-500/10 border border-indigo-500/30 rounded-2xl space-y-2">
-            <span class="text-xs font-extrabold text-indigo-300 uppercase tracking-wider block">🎨 Dynamic Theme Accent</span>
-            <span class="text-[9px] text-neutral-400">Ubah warna aksen utama website secara langsung</span>
+            <span class="text-xs font-extrabold text-indigo-300 uppercase tracking-wider block">🎨 Dynamic Theme Accent (Global Sync)</span>
+            <span class="text-[9px] text-neutral-400">Ubah warna aksen utama website secara langsung untuk semua user</span>
             <div class="flex gap-1.5 pt-1">
               <button onclick="setThemeAccent('cyan')" class="w-6 h-6 rounded-full bg-sky-500 border border-white/40 shadow-sm" title="Cyan"></button>
               <button onclick="setThemeAccent('emerald')" class="w-6 h-6 rounded-full bg-emerald-500 border border-white/40 shadow-sm" title="Neon Green"></button>
@@ -896,7 +896,7 @@
           <div class="p-3.5 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-between">
             <div>
               <span class="text-xs font-extrabold text-emerald-300 uppercase tracking-wider block">🟩 Matrix Code Rain</span>
-              <span class="text-[9px] text-neutral-400">Ganti background jadi animasi hujan kode Matrix</span>
+              <span class="text-[9px] text-neutral-400">Animasi hujan kode Matrix (Saved on Refresh)</span>
             </div>
             <button id="btn-toggle-matrix" onclick="toggleMatrixRain()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10">
               OFF
@@ -906,7 +906,7 @@
           <div class="p-3.5 bg-cyan-500/10 border border-cyan-500/30 rounded-2xl flex items-center justify-between">
             <div>
               <span class="text-xs font-extrabold text-cyan-300 uppercase tracking-wider block">❄️ Snow / Winter Effect</span>
-              <span class="text-[9px] text-neutral-400">Tampilkan efek salju lembut berguguran</span>
+              <span class="text-[9px] text-neutral-400">Efek salju lembut berguguran (Saved on Refresh)</span>
             </div>
             <button id="btn-toggle-snow" onclick="toggleSnowEffect()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10">
               OFF
@@ -936,7 +936,7 @@
           </div>
 
           <div class="p-3.5 bg-indigo-500/10 border border-indigo-500/30 rounded-2xl flex flex-col gap-2">
-            <span class="text-xs font-extrabold text-indigo-300 uppercase tracking-wider">🏷️ Title Tag Rafa</span>
+            <span class="text-xs font-extrabold text-indigo-300 uppercase tracking-wider">🏷️ Title Tag Rafa (Global Sync)</span>
             <div class="flex gap-2">
               <button onclick="changeRafaTitle()" class="flex-1 py-1.5 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-200 border border-indigo-500/30 rounded-xl text-[9px] font-bold uppercase tracking-wider transition">
                 Ganti Title
@@ -950,7 +950,7 @@
           <div class="p-3.5 bg-black/60 border border-emerald-500/40 rounded-2xl space-y-2 font-mono">
             <span class="text-xs font-extrabold text-emerald-400 uppercase tracking-wider block">💻 Dev Mini Terminal</span>
             <div id="terminal-logs" class="bg-black/80 text-[10px] text-emerald-400 p-2.5 rounded-xl h-24 overflow-y-auto leading-relaxed border border-emerald-500/20">
-              <div>System initialized. Free Proxy Connected. Type 'help' for commands.</div>
+              <div>System initialized. ImgBB API Connected. Type 'help' for commands.</div>
             </div>
             <form onsubmit="runDevCommand(event)" class="flex gap-2">
               <input type="text" id="terminal-input" placeholder="> ketik perintah..." class="flex-1 bg-black/60 border border-emerald-500/30 rounded-xl px-3 py-1.5 text-[11px] text-emerald-400 focus:outline-none">
@@ -1204,8 +1204,8 @@
     let devPin = localStorage.getItem('rafa_dev_pin') || "2212";
     let isBroadcastActive = false;
     let isMaintenanceActive = localStorage.getItem('sys_maintenance_active') === 'true';
-    let isMatrixActive = false;
-    let isSnowActive = false;
+    let isMatrixActive = localStorage.getItem('sys_matrix_active') === 'true';
+    let isSnowActive = localStorage.getItem('sys_snow_active') === 'true';
     let confettiInterval = null;
     let snowInterval = null;
     let matrixInterval = null;
@@ -1214,7 +1214,6 @@
 
     // ====== MAINTENANCE SYSTEM (GLOBAL VIA FIRESTORE) ======
 
-    // Dipanggil oleh onSnapshot Firestore / fallback lokal
     window.__applyMaintenanceState = function(active) {
       isMaintenanceActive = active;
       localStorage.setItem('sys_maintenance_active', String(active));
@@ -1224,13 +1223,12 @@
     function toggleMaintenanceMode() {
       const next = !isMaintenanceActive;
       if (typeof window.__fsSetMaintenance === 'function') {
-        window.__fsSetMaintenance(next); // tulis ke server -> semua browser ikut
+        window.__fsSetMaintenance(next);
       } else {
-        window.__applyMaintenanceState(next); // fallback kalau modul Firebase belum siap
+        window.__applyMaintenanceState(next);
       }
     }
 
-    // Pintu darurat di layar lock (khusus developer, PIN protected)
     function devUnlockMaintenance() {
       const pin = prompt('Masukkan PIN Developer untuk mematikan maintenance:');
       if (pin === null) return;
@@ -1272,13 +1270,13 @@
         if (!silent) logTerminal('Maintenance mode: OFF');
       }
 
-      // Tombol cepat cuma muncul setelah dev login (PIN benar)
       if (qBtn) qBtn.classList.toggle('hidden', !window.__devAuthed);
     }
 
-    // Inisialisasi status maintenance saat pertama kali dimuat
     document.addEventListener("DOMContentLoaded", () => {
       updateMaintenanceUI(true);
+      if (isMatrixActive) setMatrixState(true);
+      if (isSnowActive) setSnowState(true);
     });
 
     function openDevPortalModal() {
@@ -1324,6 +1322,14 @@
     }
 
     function setThemeAccent(colorName) {
+      if (typeof window.__fsSetThemeAccent === 'function') {
+        window.__fsSetThemeAccent(colorName);
+      } else {
+        applyThemeAccentUI(colorName);
+      }
+    }
+
+    function applyThemeAccentUI(colorName) {
       const colorsMap = {
         cyan: '#0284c7',
         emerald: '#10b981',
@@ -1334,29 +1340,37 @@
       const chosenColor = colorsMap[colorName] || colorsMap.cyan;
       document.documentElement.style.setProperty('--brand-main', chosenColor);
       document.documentElement.style.setProperty('--brand-glow', chosenColor + '66');
-      
-      logTerminal("Theme color set to: " + colorName);
+      logTerminal("Theme color updated: " + colorName);
     }
 
     function toggleMatrixRain() {
+      setMatrixState(!isMatrixActive);
+    }
+
+    function setMatrixState(active) {
       const btn = document.getElementById('btn-toggle-matrix');
       const canvas = document.getElementById('matrix-canvas');
       const webglBg = document.getElementById('webgl-glass-bg');
 
-      isMatrixActive = !isMatrixActive;
+      isMatrixActive = active;
+      localStorage.setItem('sys_matrix_active', String(active));
 
       if (isMatrixActive) {
         canvas.style.display = 'block';
         webglBg.style.display = 'none';
-        btn.innerText = "ON";
-        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+        if (btn) {
+          btn.innerText = "ON";
+          btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+        }
         startMatrixAnimation();
         logTerminal("Matrix Rain: STARTED");
       } else {
         canvas.style.display = 'none';
         webglBg.style.display = 'block';
-        btn.innerText = "OFF";
-        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10";
+        if (btn) {
+          btn.innerText = "OFF";
+          btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10";
+        }
         if (matrixInterval) clearInterval(matrixInterval);
         logTerminal("Matrix Rain: STOPPED");
       }
@@ -1394,19 +1408,29 @@
     }
 
     function toggleSnowEffect() {
+      setSnowState(!isSnowActive);
+    }
+
+    function setSnowState(active) {
       const btn = document.getElementById('btn-toggle-snow');
-      isSnowActive = !isSnowActive;
+      isSnowActive = active;
+      localStorage.setItem('sys_snow_active', String(active));
 
       if (isSnowActive) {
-        btn.innerText = "ON";
-        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/30";
+        if (btn) {
+          btn.innerText = "ON";
+          btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/30";
+        }
         spawnSnowBatch();
-        snowInterval = setInterval(spawnSnowBatch, 1000);
+        if (!snowInterval) snowInterval = setInterval(spawnSnowBatch, 1000);
         logTerminal("Snow effect: ON");
       } else {
-        btn.innerText = "OFF";
-        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10";
+        if (btn) {
+          btn.innerText = "OFF";
+          btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10";
+        }
         if (snowInterval) clearInterval(snowInterval);
+        snowInterval = null;
         logTerminal("Snow effect: OFF");
       }
     }
@@ -1485,15 +1509,22 @@
     function changeRafaTitle() {
       const title = prompt("Masukkan title tag baru untuk kartu Rafa:", "Lead System Dev");
       if (title) {
-        const el = document.getElementById('rafa-custom-title');
-        if (el) el.innerText = title;
-        logTerminal("Title tag updated.");
+        if (typeof window.__fsSetRafaTitle === 'function') {
+          window.__fsSetRafaTitle(title);
+        } else {
+          applyRafaTitleUI(title);
+        }
       }
     }
 
     function resetRafaTitle() {
+      changeRafaTitle();
+    }
+
+    function applyRafaTitleUI(title) {
       const el = document.getElementById('rafa-custom-title');
-      if (el) el.innerText = "Lead System Dev";
+      if (el) el.innerText = title || "Lead System Dev";
+      logTerminal("Rafa title updated.");
     }
 
     function logTerminal(msg) {
@@ -1844,7 +1875,7 @@
     }, 1000);
   </script>
 
-  <!-- FIREBASE & CORS PROXY FREEMIUM INTEGRATION -->
+  <!-- FIREBASE & IMGBB API INTEGRATION -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, doc, collection, addDoc, deleteDoc, query, orderBy, onSnapshot, setDoc, updateDoc, arrayUnion, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -1862,10 +1893,9 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // ====== SINKRONISASI GLOBAL STATUS MAINTENANCE ======
+    // ====== SINKRONISASI GLOBAL (SYSTEM SETTINGS) ======
     const systemSettingsRef = doc(db, "settings", "system");
 
-    // Dipanggil saat dev toggle maintenance (tulis ke server)
     window.__fsSetMaintenance = async (active) => {
       try {
         await setDoc(systemSettingsRef, {
@@ -1880,20 +1910,50 @@
       }
     };
 
-    // Pantau perubahan realtime — semua pengunjung otomatis ikut
+    window.__fsSetThemeAccent = async (colorName) => {
+      try {
+        await setDoc(systemSettingsRef, {
+          themeAccent: colorName,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+        logTerminal("Server: Tema " + colorName + " disebar ke semua user.");
+      } catch (err) {
+        console.error("Gagal update tema di server:", err);
+        applyThemeAccentUI(colorName);
+      }
+    };
+
+    window.__fsSetRafaTitle = async (title) => {
+      try {
+        await setDoc(systemSettingsRef, {
+          rafaTitle: title,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+        logTerminal("Server: Rafa title tag disebar.");
+      } catch (err) {
+        console.error("Gagal update title tag di server:", err);
+        applyRafaTitleUI(title);
+      }
+    };
+
+    // Realtime Listener System Settings
     onSnapshot(systemSettingsRef, (snap) => {
-      const active = snap.exists() ? (snap.data().maintenanceActive === true) : false;
-      window.__applyMaintenanceState(active);
+      if (snap.exists()) {
+        const d = snap.data();
+        window.__applyMaintenanceState(d.maintenanceActive === true);
+        if (d.themeAccent) applyThemeAccentUI(d.themeAccent);
+        if (d.rafaTitle) applyRafaTitleUI(d.rafaTitle);
+      }
     }, (err) => {
-      console.warn("Gagal memantau status maintenance:", err.message);
+      console.warn("Gagal memantau system settings:", err.message);
     });
 
-    const CATBOX_USERHASH = "961239e1a882aa41f147633f6";
+    const IMGBB_API_KEY = "4766a5da311917f59c9657a726a782fc";
     let activeUnsub = null;
     let activeId = null;
     const GIPHY_API_KEY = "5LH1haWcbeynWswBCKF02uErlR0xMZWf";
 
-    // VISITOR COUNTER FIX (Menggunakan sessionStorage agar tidak bertambah saat refresh)
+    // VISITOR COUNTER GUARD (Menggunakan sessionStorage)
     const visitorDocRef = doc(db, "stats", "visitors");
     async function trackVisitor() {
       const hasVisited = sessionStorage.getItem('visited_session');
@@ -2003,28 +2063,41 @@
       });
     });
 
-    // HELPER FUNCTION: UPLOAD KE CATBOX MENGGUNAKAN CORS PROXY GRATIS (ALLORIGINS)
-    async function uploadToCatbox(file) {
-      const formData = new FormData();
-      formData.append("reqtype", "fileupload");
-      formData.append("userhash", CATBOX_USERHASH);
-      formData.append("fileToUpload", file);
+    // UPLOAD IMGBB NATIVE FUNCTION WITH PROGRESS BAR %
+    function uploadImageWithProgress(file, statusEl) {
+      return new Promise((resolve, reject) => {
+        const formData = new FormData();
+        formData.append("image", file);
 
-      const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent("https://catbox.moe/user/api.php");
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`);
 
-      const response = await fetch(proxyUrl, {
-        method: "POST",
-        body: formData
+        xhr.upload.onprogress = (e) => {
+          if (e.lengthComputable && statusEl) {
+            const pct = Math.round((e.loaded / e.total) * 100);
+            statusEl.innerText = `Uploading... ${pct}%`;
+          }
+        };
+
+        xhr.onload = () => {
+          try {
+            const res = JSON.parse(xhr.responseText);
+            if (res.success && res.data?.display_url) {
+              resolve(res.data.display_url);
+            } else {
+              reject(new Error(res.error?.message || "Upload ditolak ImgBB"));
+            }
+          } catch {
+            reject(new Error("Respons server tidak valid"));
+          }
+        };
+        xhr.onerror = () => reject(new Error("Koneksi ke ImgBB gagal"));
+
+        xhr.send(formData);
       });
-
-      const resultUrl = await response.text();
-      if (!resultUrl || !resultUrl.includes("http")) {
-        throw new Error("Catbox upload error: " + resultUrl);
-      }
-      return resultUrl.trim();
     }
 
-    // CMS: UPLOAD BERITA VIA CATBOX
+    // CMS: UPLOAD BERITA VIA IMGBB
     const cmsBeritaForm = document.getElementById('cms-berita-form');
     if (cmsBeritaForm) {
       cmsBeritaForm.addEventListener('submit', async (e) => {
@@ -2037,12 +2110,12 @@
 
         if (!fileInput.files[0] || !titleInput) return;
 
-        btn.innerText = "Uploading via Catbox...";
         btn.disabled = true;
 
         try {
           const file = fileInput.files[0];
-          const downloadUrl = await uploadToCatbox(file);
+          btn.innerText = "Uploading... 0%";
+          const downloadUrl = await uploadImageWithProgress(file, btn);
           const monthYear = new Date().toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
 
           await addDoc(beritaCollection, {
@@ -2054,19 +2127,19 @@
             createdAt: serverTimestamp()
           });
 
-          alert("Berita berhasil di-upload dan dipublikasikan!");
+          alert("Berita berhasil di-upload ke ImgBB & dipublikasikan!");
           cmsBeritaForm.reset();
         } catch (err) {
           console.error(err);
           alert("Gagal upload berita: " + err.message);
         } finally {
-          btn.innerText = "Publish via Catbox → Web";
+          btn.innerText = "Publish via ImgBB → Web";
           btn.disabled = false;
         }
       });
     }
 
-    // CMS: UPLOAD GALERI VIA CATBOX
+    // CMS: UPLOAD GALERI VIA IMGBB
     const cmsGaleriForm = document.getElementById('cms-galeri-form');
     if (cmsGaleriForm) {
       cmsGaleriForm.addEventListener('submit', async (e) => {
@@ -2078,12 +2151,12 @@
 
         if (!fileInput.files[0] || !titleInput) return;
 
-        btn.innerText = "Uploading via Catbox...";
         btn.disabled = true;
 
         try {
           const file = fileInput.files[0];
-          const downloadUrl = await uploadToCatbox(file);
+          btn.innerText = "Uploading... 0%";
+          const downloadUrl = await uploadImageWithProgress(file, btn);
 
           await addDoc(galeriCollection, {
             title: titleInput,
@@ -2092,19 +2165,19 @@
             createdAt: serverTimestamp()
           });
 
-          alert("Foto berhasil ditambahkan ke Galeri!");
+          alert("Foto berhasil ditambahkan ke Galeri via ImgBB!");
           cmsGaleriForm.reset();
         } catch (err) {
           console.error(err);
           alert("Gagal upload foto galeri: " + err.message);
         } finally {
-          btn.innerText = "Tambah Galeri via Catbox → Web";
+          btn.innerText = "Tambah Galeri via ImgBB → Web";
           btn.disabled = false;
         }
       });
     }
 
-    // CMS: KELOLA & HAPUS KONTEN (PENYEMPURNAAN REAKSI TANPA NESTED LISTENERS / MEMORY LEAK)
+    // CMS: KELOLA & HAPUS KONTEN (PENYEMPURNAAN REAKSI TANPA MEMORY LEAK)
     const cmsKelolaList = document.getElementById('cms-kelola-list');
     let cacheBeritaDocs = [];
     let cacheGaleriDocs = [];
