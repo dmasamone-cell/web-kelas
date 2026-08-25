@@ -204,6 +204,12 @@
     <div class="w-16 h-16 rounded-full border-2 border-[#00ff66] flex items-center justify-center text-2xl mb-4 animate-pulse">🔒</div>
     <h1 class="text-2xl sm:text-3xl font-black uppercase tracking-widest text-white mb-2">System Maintenance</h1>
     <p class="text-xs text-neutral-400 max-w-md mb-6 leading-relaxed">Website sedang diuji coba dan dikunci oleh Lead Developer (Rafa). Silakan kembali beberapa saat lagi.</p>
+    
+    <!-- Tombol Khusus Unlock/Matikan Maintenance dari Screen -->
+    <button onclick="toggleMaintenanceMode()" class="px-5 py-2.5 rounded-2xl bg-[#00ff66]/20 text-[#00ff66] border border-[#00ff66]/40 hover:bg-[#00ff66]/30 transition text-xs font-bold uppercase tracking-widest mb-4">
+      🔓 Turn Off Maintenance Mode
+    </button>
+    
     <span class="text-[10px] font-mono border border-[#00ff66]/40 px-3 py-1 rounded-full bg-[#00ff66]/10 text-[#00ff66]">SYS_STATUS: MAINTENANCE_ACTIVE</span>
   </div>
 
@@ -286,6 +292,12 @@
         <svg class="w-3.5 h-3.5 fill-current animate-pulse" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
         <span id="visitor-count-number">...</span>
       </div>
+
+      <!-- Quick Toggle Maintenance Control Button -->
+      <button id="quick-maintenance-toggle" onclick="toggleMaintenanceMode()" class="flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border border-emerald-500/30 text-[10px] font-mono font-bold text-emerald-400 hover:border-emerald-500 transition active:scale-95">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        <span id="quick-maintenance-text">MAINTENANCE: OFF</span>
+      </button>
     </div>
 
     <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 dark:text-white tracking-tight mt-4">Teknik Jaringan Komputer & Telekomunikasi 4</h1>
@@ -856,13 +868,15 @@
             </button>
           </div>
 
+          <!-- Maintenance Control Panel dengan Switch Toggle UI -->
           <div class="p-3.5 bg-red-500/10 border border-red-500/30 rounded-2xl flex items-center justify-between">
             <div>
               <span class="text-xs font-extrabold text-red-300 uppercase tracking-wider block">🚨 System Maintenance Lock</span>
               <span class="text-[9px] text-neutral-400">Kunci seluruh tampilan web untuk publik</span>
             </div>
-            <button id="btn-toggle-maintenance" onclick="toggleMaintenanceMode()" class="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10">
-              OFF
+            <button id="btn-toggle-maintenance" onclick="toggleMaintenanceMode()" class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10 transition-all flex items-center gap-2">
+              <span id="m-indicator" class="w-2 h-2 rounded-full bg-neutral-500"></span>
+              <span id="m-text">OFF</span>
             </button>
           </div>
 
@@ -1188,12 +1202,17 @@
   <script>
     let devPin = localStorage.getItem('rafa_dev_pin') || "2212";
     let isBroadcastActive = false;
-    let isMaintenanceActive = false;
+    let isMaintenanceActive = localStorage.getItem('sys_maintenance_active') === 'true';
     let isMatrixActive = false;
     let isSnowActive = false;
     let confettiInterval = null;
     let snowInterval = null;
     let matrixInterval = null;
+
+    // Inisialisasi status maintenance saat pertama kali dimuat
+    document.addEventListener("DOMContentLoaded", () => {
+      updateMaintenanceUI();
+    });
 
     function openDevPortalModal() {
       const modal = document.getElementById('dev-portal-modal');
@@ -1235,20 +1254,42 @@
       }
     }
 
+    // FUNGSI UTAMA TOGGLE MAINTENANCE ON / OFF
     function toggleMaintenanceMode() {
-      const btn = document.getElementById('btn-toggle-maintenance');
-      const screen = document.getElementById('maintenance-screen');
       isMaintenanceActive = !isMaintenanceActive;
+      localStorage.setItem('sys_maintenance_active', isMaintenanceActive);
+      updateMaintenanceUI();
+    }
+
+    function updateMaintenanceUI() {
+      const btnDev = document.getElementById('btn-toggle-maintenance');
+      const mText = document.getElementById('m-text');
+      const mIndicator = document.getElementById('m-indicator');
+      const screen = document.getElementById('maintenance-screen');
+      const qBtnText = document.getElementById('quick-maintenance-text');
+      const qBtn = document.getElementById('quick-maintenance-toggle');
 
       if (isMaintenanceActive) {
         screen.style.display = 'flex';
-        btn.innerText = "ON";
-        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/30";
+        
+        if (mText) mText.innerText = "ON";
+        if (mIndicator) mIndicator.className = "w-2 h-2 rounded-full bg-red-400 animate-pulse";
+        if (btnDev) btnDev.className = "px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/40 transition-all flex items-center gap-2";
+        
+        if (qBtnText) qBtnText.innerText = "MAINTENANCE: ON";
+        if (qBtn) qBtn.className = "flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border border-red-500/40 text-[10px] font-mono font-bold text-red-400 hover:border-red-500 transition active:scale-95";
+
         logTerminal("Maintenance mode: ACTIVE");
       } else {
         screen.style.display = 'none';
-        btn.innerText = "OFF";
-        btn.className = "px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10";
+        
+        if (mText) mText.innerText = "OFF";
+        if (mIndicator) mIndicator.className = "w-2 h-2 rounded-full bg-neutral-500";
+        if (btnDev) btnDev.className = "px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-white/10 transition-all flex items-center gap-2";
+        
+        if (qBtnText) qBtnText.innerText = "MAINTENANCE: OFF";
+        if (qBtn) qBtn.className = "flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border border-emerald-500/30 text-[10px] font-mono font-bold text-emerald-400 hover:border-emerald-500 transition active:scale-95";
+
         logTerminal("Maintenance mode: OFF");
       }
     }
@@ -1912,7 +1953,6 @@
       formData.append("userhash", CATBOX_USERHASH);
       formData.append("fileToUpload", file);
 
-      // Menggunakan AllOrigins Proxy (100% Gratis, Tanpa Akun, Tanpa API Key)
       const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent("https://catbox.moe/user/api.php");
 
       const response = await fetch(proxyUrl, {
