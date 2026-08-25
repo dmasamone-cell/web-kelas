@@ -83,34 +83,78 @@
       background-color: #030712;
     }
 
+    /* ===== LIQUID GLASS v2 — Apple-style ===== */
     .liquid-glass {
-      background: rgba(255, 255, 255, 0.40);
-      backdrop-filter: blur(28px) saturate(200%);
-      -webkit-backdrop-filter: blur(28px) saturate(200%);
-      border: 1px solid rgba(255, 255, 255, 0.65);
-      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.62) 0%,
+        rgba(255, 255, 255, 0.28) 45%,
+        rgba(255, 255, 255, 0.42) 100%
+      );
+      backdrop-filter: blur(18px) saturate(170%) brightness(1.06);
+      -webkit-backdrop-filter: blur(18px) saturate(170%) brightness(1.06);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.25),
+        inset 0 12px 24px -12px rgba(255, 255, 255, 0.4),
+        0 12px 32px -8px rgba(0, 0, 0, 0.12);
       position: relative;
+      isolation: isolate;
       z-index: 10;
     }
     .dark .liquid-glass {
-      background: rgba(17, 24, 39, 0.55);
-      backdrop-filter: blur(28px) saturate(200%);
-      -webkit-backdrop-filter: blur(28px) saturate(200%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+      background: linear-gradient(
+        135deg,
+        rgba(30, 41, 59, 0.62) 0%,
+        rgba(10, 15, 28, 0.52) 50%,
+        rgba(23, 32, 51, 0.6) 100%
+      );
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.05),
+        0 12px 32px -8px rgba(0, 0, 0, 0.6);
     }
 
+    .liquid-glass::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(
+        115deg,
+        transparent 25%,
+        rgba(255, 255, 255, 0.28) 48%,
+        rgba(255, 255, 255, 0.08) 54%,
+        transparent 72%
+      );
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .liquid-glass:hover::after { opacity: 1; }
+
     .liquid-glass-subtle {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(16px) saturate(160%);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
-      border: 1px solid rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
     }
     .dark .liquid-glass-subtle {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(16px) saturate(160%);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+    }
+
+    /* Lazy Render Section Bawah */
+    #berita, #jadwal, #spin-wheel, #menfess, #galeri, #anggota {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
     }
 
     #page-loader {
@@ -210,7 +254,6 @@
     <p class="text-xs text-neutral-400 max-w-md mb-6 leading-relaxed">Website sedang diuji coba dan dikunci oleh Lead Developer (Rafa). Silakan kembali beberapa saat lagi.</p>
     <span class="text-[10px] font-mono border border-[#00ff66]/40 px-3 py-1 rounded-full bg-[#00ff66]/10 text-[#00ff66]">SYS_STATUS: MAINTENANCE_ACTIVE</span>
 
-    <!-- Akses tersembunyi KHUSUS DEVELOPER (PIN Protected) -->
     <button onclick="devUnlockMaintenance()" class="absolute bottom-4 right-4 text-[9px] font-mono text-neutral-700 hover:text-[#00ff66] transition uppercase tracking-widest">dev access</button>
   </div>
 
@@ -294,7 +337,6 @@
         <span id="visitor-count-number">...</span>
       </div>
 
-      <!-- Quick Toggle Maintenance Control Button (Hidden by default until Dev PIN Authed) -->
       <button id="quick-maintenance-toggle" onclick="toggleMaintenanceMode()" class="hidden flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border border-emerald-500/30 text-[10px] font-mono font-bold text-emerald-400 hover:border-emerald-500 transition active:scale-95">
         <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
         <span id="quick-maintenance-text">MAINTENANCE: OFF</span>
@@ -315,7 +357,7 @@
             <span class="text-xs text-sky-500 group-hover:translate-x-1 transition-transform">→</span>
           </div>
           <div class="w-20 h-20 mx-auto my-4 overflow-hidden rounded-2xl border border-white/40 dark:border-white/20 group-hover:border-sky-500 transition-colors shadow-lg">
-            <img src="https://files.catbox.moe/of3vv5.jpg" alt="Mulyana Taupik, S.Kom." class="w-full h-full object-cover">
+            <img loading="eager" decoding="async" src="https://files.catbox.moe/of3vv5.jpg" alt="Mulyana Taupik, S.Kom." class="w-full h-full object-cover">
           </div>
           <h3 class="text-sm font-extrabold text-neutral-900 dark:text-white text-center tracking-tight group-hover:text-sky-500 transition-colors">Mulyana Taupik, S.Kom.</h3>
           <p class="text-[10px] text-sky-500 font-bold text-center mt-1 uppercase tracking-wider">Wali Kelas</p>
@@ -531,7 +573,7 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
       <div onclick="openDetailModal('siswa-kiya', 'https://files.catbox.moe/t9zhwi.jpg', 'Kiyaarsyad Ganishwara', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/t9zhwi.jpg" alt="Kiyaarsyad Ganishwara" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/t9zhwi.jpg" alt="Kiyaarsyad Ganishwara" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Kiyaarsyad Ganishwara</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -540,7 +582,7 @@
       <div onclick="openDetailModal('siswa-rafa', 'https://files.catbox.moe/lnzqfg.jpg', 'M.Brilliant Rafa Ridhoca', 'Core Developer • System Administrator')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark border border-sky-500/40 hover:border-sky-400 transition-all text-center cursor-pointer active:scale-95 group relative overflow-hidden">
         <span class="absolute top-2 right-2 text-[8px] font-black uppercase tracking-widest text-sky-400 bg-sky-500/20 border border-sky-500/40 px-2 py-0.5 rounded-full animate-pulse">DEV</span>
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2 border-2 border-sky-500/60 group-hover:border-sky-400 transition-colors shadow-lg">
-          <img src="https://files.catbox.moe/lnzqfg.jpg" alt="M.Brilliant Rafa Ridhoca" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/lnzqfg.jpg" alt="M.Brilliant Rafa Ridhoca" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-400 transition-colors">M.Brilliant Rafa Ridhoca</h3>
         <p id="rafa-custom-title" class="text-[9px] text-sky-400 font-extrabold mt-0.5 uppercase tracking-wider">Lead System Dev</p>
@@ -548,7 +590,7 @@
 
       <div onclick="openDetailModal('siswa-gilang', 'https://files.catbox.moe/s2p4xp.jpg', 'M.Gilang Febriyan', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/s2p4xp.jpg" alt="M.Gilang Febriyan" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/s2p4xp.jpg" alt="M.Gilang Febriyan" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">M.Gilang Febriyan</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -556,7 +598,7 @@
 
       <div onclick="openDetailModal('siswa-haris', 'https://files.catbox.moe/4dcf9o.jpg', 'Haris', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/4dcf9o.jpg" alt="Haris" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/4dcf9o.jpg" alt="Haris" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Haris</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -564,7 +606,7 @@
 
       <div onclick="openDetailModal('siswa-wandi', 'https://files.catbox.moe/65aumq.jpg', 'Wandi Sopiandi', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/65aumq.jpg" alt="Wandi Sopiandi" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/65aumq.jpg" alt="Wandi Sopiandi" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Wandi Sopiandi</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -572,7 +614,7 @@
 
       <div onclick="openDetailModal('siswa-alvin', 'https://files.catbox.moe/3p4rc6.jpg', 'Alvin Jaya Sukmana', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/3p4rc6.jpg" alt="Alvin Jaya Sukmana" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/3p4rc6.jpg" alt="Alvin Jaya Sukmana" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Alvin Jaya Sukmana</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -580,7 +622,7 @@
 
       <div onclick="openDetailModal('siswa-fhidel', 'https://files.catbox.moe/d6eugw.jpg', 'Fhidel Favian Rasyad', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/d6eugw.jpg" alt="Fhidel Favian Rasyad" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/d6eugw.jpg" alt="Fhidel Favian Rasyad" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Fhidel Favian Rasyad</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -588,7 +630,7 @@
 
       <div onclick="openDetailModal('siswa-rojul', 'https://files.catbox.moe/0wq9ti.jpg', 'Rojul Drajat', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/0wq9ti.jpg" alt="Rojul Drajat" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/0wq9ti.jpg" alt="Rojul Drajat" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Rojul Drajat</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -596,7 +638,7 @@
 
       <div onclick="openDetailModal('siswa-firli', 'https://files.catbox.moe/tzv0s9.jpg', 'M.Firli Maulana', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/tzv0s9.jpg" alt="M.Firli Maulana" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/tzv0s9.jpg" alt="M.Firli Maulana" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">M.Firli Maulana</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -604,7 +646,7 @@
 
       <div onclick="openDetailModal('siswa-afzal', 'https://files.catbox.moe/x2zp3x.jpg', 'Afzal Bagas Herlambang', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/x2zp3x.jpg" alt="Afzal Bagas Herlambang" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/x2zp3x.jpg" alt="Afzal Bagas Herlambang" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">Afzal Bagas Herlambang</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -612,7 +654,7 @@
 
       <div onclick="openDetailModal('siswa-muhtar', 'https://files.catbox.moe/wadgzt.jpg', 'M.Muhtar Atarid', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/wadgzt.jpg" alt="M.Muhtar Atarid" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/wadgzt.jpg" alt="M.Muhtar Atarid" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">M.Muhtar Atarid</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -620,7 +662,7 @@
 
       <div onclick="openDetailModal('siswa-fadil', 'https://files.catbox.moe/fktblg.jpg', 'M.Fadil Ariandy', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/fktblg.jpg" alt="M.Fadil Ariandy" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/fktblg.jpg" alt="M.Fadil Ariandy" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">M.Fadil Ariandy</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -628,7 +670,7 @@
 
       <div onclick="openDetailModal('siswa-fazry', 'https://files.catbox.moe/4se36g.jpg', 'M. Fazry Pratama', 'Siswa X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-sky-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/4se36g.jpg" alt="M. Fazry Pratama" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/4se36g.jpg" alt="M. Fazry Pratama" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-sky-500 transition-colors">M. Fazry Pratama</h3>
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
@@ -639,7 +681,7 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       <div onclick="openDetailModal('siswi-ainun', 'https://files.catbox.moe/c71at2.jpg', 'Ainun Nisa Dristia Putri', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/c71at2.jpg" alt="Ainun Nisa Dristia Putri" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/c71at2.jpg" alt="Ainun Nisa Dristia Putri" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Ainun Nisa Dristia Putri</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -647,7 +689,7 @@
 
       <div onclick="openDetailModal('siswi-melisa', 'https://files.catbox.moe/jr65v8.jpg', 'Melisa Putri Oktaripana', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/jr65v8.jpg" alt="Melisa Putri Oktaripana" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/jr65v8.jpg" alt="Melisa Putri Oktaripana" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Melisa Putri Oktaripana</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -655,7 +697,7 @@
 
       <div onclick="openDetailModal('siswi-astria', 'https://files.catbox.moe/hzln3i.jpg', 'Astria Felany', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/hzln3i.jpg" alt="Astria Felany" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/hzln3i.jpg" alt="Astria Felany" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Astria Felany</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -663,7 +705,7 @@
 
       <div onclick="openDetailModal('siswi-fitri', 'https://files.catbox.moe/oq3okq.jpg', 'Fitri Aulia', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/oq3okq.jpg" alt="Fitri Aulia" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/oq3okq.jpg" alt="Fitri Aulia" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Fitri Aulia</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -671,7 +713,7 @@
 
       <div onclick="openDetailModal('siswi-sania', 'https://files.catbox.moe/x8np2i.jpg', 'Sania Nur\'aeni Yunengsih', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/x8np2i.jpg" alt="Sania Nur'aeni Yunengsih" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/x8np2i.jpg" alt="Sania Nur'aeni Yunengsih" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Sania Nur'aeni Yunengsih</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -679,7 +721,7 @@
 
       <div onclick="openDetailModal('siswi-sri', 'https://files.catbox.moe/od7jna.jpg', 'Neng Sri Maolidda', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/od7jna.jpg" alt="Neng Sri Maolidda" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/od7jna.jpg" alt="Neng Sri Maolidda" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Neng Sri Maolidda</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -687,7 +729,7 @@
 
       <div onclick="openDetailModal('siswi-adelia-m', 'https://files.catbox.moe/0it3y3.jpg', 'Adelia Meyse', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/0it3y3.jpg" alt="Adelia Meyse" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/0it3y3.jpg" alt="Adelia Meyse" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Adelia Meyse</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -695,7 +737,7 @@
 
       <div onclick="openDetailModal('siswi-dini', 'https://files.catbox.moe/noo9ty.jpg', 'Dini Indriani Kirana', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/noo9ty.jpg" alt="Dini Indriani Kirana" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/noo9ty.jpg" alt="Dini Indriani Kirana" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Dini Indriani Kirana</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -703,7 +745,7 @@
 
       <div onclick="openDetailModal('siswi-rahmi', 'https://files.catbox.moe/wjnpvx.jpg', 'Rahmi Nurul Fauziah', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/wjnpvx.jpg" alt="Rahmi Nurul Fauziah" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/wjnpvx.jpg" alt="Rahmi Nurul Fauziah" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Rahmi Nurul Fauziah</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -711,7 +753,7 @@
 
       <div onclick="openDetailModal('siswi-salwa', 'https://files.catbox.moe/l4zazc.jpg', 'Salwa Maharani', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/l4zazc.jpg" alt="Salwa Maharani" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/l4zazc.jpg" alt="Salwa Maharani" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Salwa Maharani</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -719,7 +761,7 @@
 
       <div onclick="openDetailModal('siswi-alfahra', 'https://files.catbox.moe/cgzrjt.jpg', 'Siti Alfahra Nurrisman', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/cgzrjt.jpg" alt="Siti Alfahra Nurrisman" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/cgzrjt.jpg" alt="Siti Alfahra Nurrisman" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Siti Alfahra Nurrisman</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -727,7 +769,7 @@
 
       <div onclick="openDetailModal('siswi-adelia', 'https://files.catbox.moe/1dz5rx.jpg', 'Adelia', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/1dz5rx.jpg" alt="Adelia" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/1dz5rx.jpg" alt="Adelia" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Adelia</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -735,7 +777,7 @@
 
       <div onclick="openDetailModal('siswi-gisni', 'https://files.catbox.moe/b6zusd.jpg', 'Gisni Nurul Karimah', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/b6zusd.jpg" alt="Gisni Nurul Karimah" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/b6zusd.jpg" alt="Gisni Nurul Karimah" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Gisni Nurul Karimah</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -743,7 +785,7 @@
 
       <div onclick="openDetailModal('siswi-marisyha', 'https://files.catbox.moe/nkm7q7.jpg', 'Marisyha Melati Putri', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/nkm7q7.jpg" alt="Marisyha Melati Putri" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/nkm7q7.jpg" alt="Marisyha Melati Putri" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Marisyha Melati Putri</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -751,7 +793,7 @@
 
       <div onclick="openDetailModal('siswi-husna', 'https://files.catbox.moe/ire5bc.jpg', 'Husna Kholifatul Ulya', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/ire5bc.jpg" alt="Husna Kholifatul Ulya" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/ire5bc.jpg" alt="Husna Kholifatul Ulya" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Husna Kholifatul Ulya</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -759,7 +801,7 @@
 
       <div onclick="openDetailModal('siswi-mulia', 'https://files.catbox.moe/tltzpm.jpg', 'Mulia Dwi Yanti', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/tltzpm.jpg" alt="Mulia Dwi Yanti" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/tltzpm.jpg" alt="Mulia Dwi Yanti" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Mulia Dwi Yanti</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -767,7 +809,7 @@
 
       <div onclick="openDetailModal('siswi-mutiara', 'https://files.catbox.moe/0lseyh.jpg', 'Mutiara Diana Putri', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/0lseyh.jpg" alt="Mutiara Diana Putri" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/0lseyh.jpg" alt="Mutiara Diana Putri" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Mutiara Diana Putri</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -775,7 +817,7 @@
 
       <div onclick="openDetailModal('siswi-aminah', 'https://files.catbox.moe/l0vww1.jpg', 'Siti Aminah', 'Siswi X TJKT 4')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-pink-500/50 transition-all text-center cursor-pointer active:scale-95 group">
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-3 border border-white/40 dark:border-white/10 group-hover:border-pink-500 transition-colors shadow-md">
-          <img src="https://files.catbox.moe/l0vww1.jpg" alt="Siti Aminah" class="w-full h-full object-cover">
+          <img loading="lazy" decoding="async" src="https://files.catbox.moe/l0vww1.jpg" alt="Siti Aminah" class="w-full h-full object-cover">
         </div>
         <h3 class="font-bold text-neutral-900 dark:text-white text-xs truncate group-hover:text-pink-500 transition-colors">Siti Aminah</h3>
         <p class="text-[9px] text-pink-500 font-semibold mt-0.5 uppercase tracking-wider">Siswi</p>
@@ -869,7 +911,6 @@
             </button>
           </div>
 
-          <!-- Maintenance Control Panel dengan Switch Toggle UI -->
           <div class="p-3.5 bg-red-500/10 border border-red-500/30 rounded-2xl flex items-center justify-between">
             <div>
               <span class="text-xs font-extrabold text-red-300 uppercase tracking-wider block">🚨 System Maintenance Lock</span>
@@ -1058,7 +1099,7 @@
     </a>
   </footer>
 
-  <!-- THREE.JS SHADER WEBGL -->
+  <!-- THREE.JS SHADER WEBGL (OPTIMIZED 30FPS + LOW POWER) -->
   <script>
     const glassConfig = {
       refThickness: 20,
@@ -1074,10 +1115,15 @@
     const container = document.getElementById('webgl-glass-bg');
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    
+    const renderer = new THREE.WebGLRenderer({
+      antialias: false,
+      alpha: true,
+      powerPreference: 'low-power'
+    });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     container.appendChild(renderer.domElement);
 
     const vertexShader = `
@@ -1183,19 +1229,31 @@
     camera.position.z = 5;
 
     const clock = new THREE.Clock();
-    function animateWebGL() {
+    const FRAME_MS = 1000 / 30; // 30fps limiter
+    let lastRender = 0;
+
+    function animateWebGL(now) {
       requestAnimationFrame(animateWebGL);
+      if (document.hidden) return;
+      if (now - lastRender < FRAME_MS) return;
+      lastRender = now;
+
       material.uniforms.u_time.value = clock.getElapsedTime();
       mesh.rotation.z = Math.sin(clock.getElapsedTime() * 0.1) * 0.05;
       renderer.render(scene, camera);
     }
-    animateWebGL();
+    requestAnimationFrame(animateWebGL);
 
+    let rzTimer;
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updatePointerMatrix ? camera.updatePointerMatrix() : camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+      clearTimeout(rzTimer);
+      rzTimer = setTimeout(() => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+        if (typeof isMatrixActive !== 'undefined' && isMatrixActive) startMatrixAnimation();
+      }, 150);
     });
   </script>
 
@@ -1212,7 +1270,16 @@
 
     window.__devAuthed = false;
 
-    // ====== MAINTENANCE SYSTEM (GLOBAL VIA FIRESTORE) ======
+    // Pause animasi saat tab di background
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (matrixInterval) { clearInterval(matrixInterval); matrixInterval = null; }
+        if (snowInterval) { clearInterval(snowInterval); snowInterval = null; }
+      } else {
+        if (isMatrixActive && !matrixInterval) startMatrixAnimation();
+        if (isSnowActive && !snowInterval) snowInterval = setInterval(spawnSnowBatch, 1000);
+      }
+    });
 
     window.__applyMaintenanceState = function(active) {
       isMaintenanceActive = active;
@@ -1893,7 +1960,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // ====== SINKRONISASI GLOBAL (SYSTEM SETTINGS) ======
+    // SYSTEM SETTINGS (GLOBAL FIRESTORE SYNC)
     const systemSettingsRef = doc(db, "settings", "system");
 
     window.__fsSetMaintenance = async (active) => {
@@ -1936,7 +2003,6 @@
       }
     };
 
-    // Realtime Listener System Settings
     onSnapshot(systemSettingsRef, (snap) => {
       if (snap.exists()) {
         const d = snap.data();
@@ -1953,7 +2019,7 @@
     let activeId = null;
     const GIPHY_API_KEY = "5LH1haWcbeynWswBCKF02uErlR0xMZWf";
 
-    // VISITOR COUNTER GUARD (Menggunakan sessionStorage)
+    // VISITOR COUNTER GUARD (sessionStorage)
     const visitorDocRef = doc(db, "stats", "visitors");
     async function trackVisitor() {
       const hasVisited = sessionStorage.getItem('visited_session');
@@ -2011,7 +2077,7 @@
         beritaContainer.innerHTML += `
           <div onclick="openDetailModal('${b.id}', '${b.img}', '${escapeHtml(b.title)}', '${escapeHtml(b.cat)} • ${escapeHtml(b.date)}')" class="w-[280px] sm:w-[340px] flex-shrink-0 snap-start liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer group">
             <div class="overflow-hidden rounded-2xl mb-3 aspect-video border border-white/20 dark:border-white/10">
-              <img src="${b.img}" alt="${escapeHtml(b.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <img loading="lazy" decoding="async" src="${b.img}" alt="${escapeHtml(b.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             </div>
             <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">${escapeHtml(b.cat)}</span>
             <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mt-2.5 group-hover:text-sky-500 transition line-clamp-1">${escapeHtml(b.title)}</h3>
@@ -2054,7 +2120,7 @@
         galeriContainer.innerHTML += `
           <div onclick="openDetailModal('${g.id}', '${g.img}', '${escapeHtml(g.title)}', '${escapeHtml(g.desc)}')" class="liquid-glass p-5 rounded-3xl shadow-glass dark:shadow-glass-dark hover:border-sky-500/50 transition-all duration-300 cursor-pointer active:scale-98">
             <div class="overflow-hidden rounded-2xl mb-4 aspect-video border border-white/20 dark:border-white/10">
-              <img src="${g.img}" alt="${escapeHtml(g.title)}" class="w-full h-full object-cover">
+              <img loading="lazy" decoding="async" src="${g.img}" alt="${escapeHtml(g.title)}" class="w-full h-full object-cover">
             </div>
             <h3 class="font-bold text-neutral-900 dark:text-white text-sm">${escapeHtml(g.title)}</h3>
             <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">${escapeHtml(g.desc)}</p>
@@ -2177,7 +2243,7 @@
       });
     }
 
-    // CMS: KELOLA & HAPUS KONTEN (PENYEMPURNAAN REAKSI TANPA MEMORY LEAK)
+    // CMS: KELOLA & HAPUS KONTEN
     const cmsKelolaList = document.getElementById('cms-kelola-list');
     let cacheBeritaDocs = [];
     let cacheGaleriDocs = [];
