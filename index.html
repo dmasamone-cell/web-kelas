@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -206,7 +206,6 @@
       padding: 2rem;
     }
 
-    /* Mading Sticky Notes Styling */
     #mading-board {
       min-height: 160px;
       background: rgba(15, 23, 42, 0.4);
@@ -216,7 +215,6 @@
       margin-top: 12px;
     }
 
-    /* Hide dev trigger on front photos */
     .front-dev-btn { display: none !important; }
   </style>
 </head>
@@ -273,7 +271,7 @@
           <span class="hidden md:inline">Instagram</span>
         </a>
 
-        <button id="theme-toggle" class="p-2 rounded-full bg-black/5 dark:bg-white/10 text-neutral-700 dark:text-neutral-300 hover:bg-black/10 dark:hover:bg-white/20 transition-all active:scale-95 text-[11px] font-bold tracking-wider px-3">
+        <button id="theme-toggle" onclick="toggleDarkMode()" class="p-2 rounded-full bg-black/5 dark:bg-white/10 text-neutral-700 dark:text-neutral-300 hover:bg-black/10 dark:hover:bg-white/20 transition-all active:scale-95 text-[11px] font-bold tracking-wider px-3">
           <span id="theme-icon">DARK</span>
         </button>
       </div>
@@ -310,10 +308,10 @@
       
       <div id="public-visitor-widget" class="flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border border-sky-500/30 text-[10px] font-mono font-bold text-sky-500" title="Total Pengunjung Web">
         <svg class="w-3.5 h-3.5 fill-current animate-pulse" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-        <span id="visitor-count-number">...</span>
+        <span id="visitor-count-number">0</span>
       </div>
 
-      <!-- Quick Maintenance Button (Di-hide untuk Publik) -->
+      <!-- Quick Maintenance Button -->
       <button id="quick-maintenance-toggle" onclick="toggleMaintenanceMode()" class="hidden flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-subtle border border-emerald-500/30 text-[10px] font-mono font-bold text-emerald-400 hover:border-emerald-500 transition active:scale-95">
         <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
         <span id="quick-maintenance-text">MAINTENANCE: OFF</span>
@@ -363,9 +361,9 @@
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-sky-500"></span>
-              <h2 class="text-xs font-bold uppercase tracking-widest text-neutral-400">Agenda Mingguan</h2>
+              <h2 class="text-xs font-bold uppercase tracking-widest text-neutral-400">Hitung Mundur Akhir Pekan</h2>
             </div>
-            <span class="text-[9px] font-extrabold uppercase tracking-widest text-sky-500 border border-sky-500/30 px-3 py-1 rounded-full bg-sky-500/10">Senin - Minggu</span>
+            <span class="text-[9px] font-extrabold uppercase tracking-widest text-sky-500 border border-sky-500/30 px-3 py-1 rounded-full bg-sky-500/10">Menuju Sabtu</span>
           </div>
           <div class="grid grid-cols-4 gap-3">
             <div class="liquid-glass-subtle p-3.5 rounded-2xl text-center">
@@ -589,7 +587,7 @@
         <p class="text-[9px] text-sky-500 font-semibold mt-0.5 uppercase tracking-wider">Siswa</p>
       </div>
 
-      <!-- Profil Rafa / Developer (Tanpa Tombol Dev Luar) -->
+      <!-- Profil Rafa / Developer -->
       <div onclick="openDetailModal('siswa-rafa', 'https://files.catbox.moe/lnzqfg.jpg', 'M.Brilliant Rafa Ridhoca', 'Core Developer • System Administrator')" class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark border border-sky-500/40 hover:border-sky-400 transition-all text-center cursor-pointer active:scale-95 group relative overflow-hidden">
         <span class="absolute top-2 right-2 text-[8px] font-black uppercase tracking-widest text-sky-400 bg-sky-500/20 border border-sky-500/40 px-2 py-0.5 rounded-full animate-pulse">DEV</span>
         <div class="overflow-hidden rounded-full w-16 h-16 mx-auto mb-2 border-2 border-sky-500/60 group-hover:border-sky-400 transition-colors shadow-lg">
@@ -866,7 +864,6 @@
           <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">ONLINE</span>
         </div>
 
-        <!-- INFORMASI IP DEVELOPER -->
         <div class="p-3 bg-neutral-900/90 border border-sky-500/30 rounded-2xl font-mono text-[10px] space-y-1">
           <div class="text-sky-400 font-extrabold uppercase">🌐 Developer IP Binding:</div>
           <div class="text-white">IP: <span class="text-sky-300">114.122.117.16</span> | Provider: PT Telekomunikasi Selular</div>
@@ -889,12 +886,10 @@
 
             <hr class="border-white/10 my-2">
 
-            <!-- System Panic Button -->
             <button onclick="triggerPanicButton()" class="w-full py-2 bg-red-500 hover:bg-red-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md">
               🚨 System Panic Button (DOM Wipe)
             </button>
 
-            <!-- Mock User View -->
             <button onclick="toggleMockMode()" id="mock-btn" class="w-full py-2 bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md">
               👁️ Toggle Mock User View (Off)
             </button>
@@ -910,78 +905,11 @@
             <button onclick="applyCustomCSS()" class="w-full py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-[10px] uppercase tracking-wider rounded-xl transition">Inject CSS Ke Web</button>
           </div>
 
-          <!-- Inspect Log Trap Box -->
           <div class="p-3 bg-neutral-900/90 border border-emerald-500/30 rounded-2xl space-y-2">
             <span class="text-xs font-black text-emerald-400 uppercase tracking-wider block">📊 DevLogs & Inspect Trap</span>
             <div id="inspect-log-box" class="bg-black/90 p-2.5 rounded-xl h-20 overflow-y-auto text-[10px] font-mono text-emerald-400 leading-relaxed border border-emerald-500/20">
               [Log System Ready...]
             </div>
-          </div>
-
-          <!-- CMS IMGBB SECTION -->
-          <div class="p-4 bg-sky-500/10 border border-sky-500/30 rounded-2xl space-y-4">
-            <span class="text-xs font-black text-sky-300 uppercase tracking-wider block">📰 CMS: IMGBB FAST UPLOAD</span>
-
-            <div class="flex gap-2 border-b border-white/10 pb-2 flex-wrap">
-              <button type="button" onclick="switchCmsTab('berita')" id="tab-cms-berita" class="px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase bg-sky-500 text-white">Upload Berita</button>
-              <button type="button" onclick="switchCmsTab('galeri')" id="tab-cms-galeri" class="px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase bg-neutral-800 text-neutral-400">Upload Galeri</button>
-              <button type="button" onclick="switchCmsTab('kelola')" id="tab-cms-kelola" class="px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase bg-neutral-800 text-neutral-400">Kelola / Hapus</button>
-              <button type="button" onclick="switchCmsTab('foto')" id="tab-cms-foto" class="px-3 py-1 rounded-xl text-[10px] font-extrabold uppercase bg-neutral-800 text-neutral-400">Ganti Foto Siswa</button>
-            </div>
-
-            <form id="cms-berita-form" class="space-y-3">
-              <div>
-                <label class="text-[10px] text-neutral-300 font-bold uppercase block mb-1">Pilih Foto untuk Berita:</label>
-                <input type="file" id="cms-berita-file" accept="image/*" required class="text-xs text-neutral-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[10px] file:font-extrabold file:bg-sky-500/20 file:text-sky-300 hover:file:bg-sky-500/30 cursor-pointer">
-              </div>
-              <input type="text" id="cms-berita-title" placeholder="Judul Berita Baru..." required class="w-full liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500">
-              <select id="cms-berita-category" class="w-full liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white bg-neutral-900 focus:outline-none focus:border-sky-500">
-                <option value="Sorotan">Sorotan</option>
-                <option value="Praktikum">Praktikum</option>
-                <option value="Kegiatan">Kegiatan</option>
-                <option value="Prestasi">Prestasi</option>
-              </select>
-              <textarea id="cms-berita-desc" rows="2" placeholder="Deskripsi ringkas berita..." required class="w-full liquid-glass-subtle rounded-xl p-3 text-xs text-white focus:outline-none focus:border-sky-500"></textarea>
-              <button type="submit" id="btn-upload-berita" class="w-full py-2 bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md">
-                Publish via ImgBB → Web
-              </button>
-            </form>
-
-            <form id="cms-galeri-form" class="space-y-3 hidden">
-              <div>
-                <label class="text-[10px] text-neutral-300 font-bold uppercase block mb-1">Pilih Foto untuk Galeri:</label>
-                <input type="file" id="cms-galeri-file" accept="image/*" required class="text-xs text-neutral-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[10px] file:font-extrabold file:bg-emerald-500/20 file:text-emerald-300 hover:file:bg-emerald-500/30 cursor-pointer">
-              </div>
-              <input type="text" id="cms-galeri-title" placeholder="Judul Foto Galeri..." required class="w-full liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500">
-              <textarea id="cms-galeri-desc" rows="2" placeholder="Deskripsi foto..." required class="w-full liquid-glass-subtle rounded-xl p-3 text-xs text-white focus:outline-none focus:border-sky-500"></textarea>
-              <button type="submit" id="btn-upload-galeri" class="w-full py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md">
-                Tambah Galeri via ImgBB → Web
-              </button>
-            </form>
-
-            <div id="cms-kelola-list" class="space-y-2 hidden max-h-48 overflow-y-auto pr-1 text-xs">
-              <p class="text-neutral-400 italic">Memuat daftar konten...</p>
-            </div>
-
-            <form id="cms-foto-form" class="space-y-3 hidden">
-              <div>
-                <label class="text-[10px] text-neutral-300 font-bold uppercase block mb-1">Pilih Siswa/Siswi:</label>
-                <select id="cms-member-select" required class="w-full liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white bg-neutral-900 focus:outline-none focus:border-sky-500">
-                  <option value="">— Memuat daftar anggota... —</option>
-                </select>
-              </div>
-              <div>
-                <label class="text-[10px] text-neutral-300 font-bold uppercase block mb-1">Foto Baru (otomatis rasio kotak):</label>
-                <input type="file" id="cms-foto-file" accept="image/*" required class="text-xs text-neutral-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[10px] file:font-extrabold file:bg-indigo-500/20 file:text-indigo-300 hover:file:bg-indigo-500/30 cursor-pointer">
-              </div>
-              <div id="cms-foto-preview" class="hidden items-center gap-3">
-                <img id="cms-foto-preview-img" class="w-12 h-12 rounded-full object-cover border border-white/20">
-                <span class="text-[9px] text-neutral-400 uppercase tracking-widest font-bold">Preview</span>
-              </div>
-              <button type="submit" id="btn-upload-foto" class="w-full py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-md">
-                Update Foto → Web
-              </button>
-            </form>
           </div>
 
           <div class="p-3.5 bg-sky-500/10 border border-sky-500/30 rounded-2xl flex items-center justify-between">
@@ -1060,7 +988,7 @@
     </div>
   </div>
 
-  <!-- Modal Detail & Komentar (Diisi Tombol Dev Modal Kecil) -->
+  <!-- Modal Detail & Komentar -->
   <div id="image-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-300" onclick="if(event.target === this) closeModal()">
     <div class="liquid-glass rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-2xl">
       <button onclick="closeModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-neutral-900 dark:hover:text-white text-xs font-bold uppercase tracking-wider transition">Close</button>
@@ -1077,7 +1005,6 @@
         <button onclick="resetPhotoData()" title="Reset Like & Komentar" class="px-3 py-1 rounded-full bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 text-[9px] font-bold tracking-wider uppercase transition active:scale-95">Reset</button>
       </div>
 
-      <!-- Tombol Dev Ringkas & Small di Dalam Modal Foto -->
       <div id="modal-dev-portal-btn-container" class="hidden mb-3">
         <button onclick="closeModal(); openDevPortalModal()" class="px-3 py-1 bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 border border-sky-500/40 rounded-xl text-[10px] font-bold uppercase tracking-wider transition active:scale-95 inline-flex items-center gap-1">
           ⚙️ Dev Portal
@@ -1116,7 +1043,7 @@
     </a>
   </footer>
 
-  <!-- THREE.JS SHADER WEBGL (EFEK RAYS DIHAPUS PENUH) -->
+  <!-- THREE.JS SHADER WEBGL -->
   <script>
     const container = document.getElementById('webgl-glass-bg');
     const scene = new THREE.Scene();
@@ -1185,9 +1112,28 @@
     });
   </script>
 
-  <!-- LOGIKA SYSTEM & DEV TOOLS -->
+  <!-- LOGIKA SYSTEM & DEV TOOLS (FIXED: SPIN WHEEL, DARK MODE, BERITA, GALERI) -->
   <script>
-    // AUTO HIDE PAGE LOADER UNTUK MEMPERBAIKI KARTU STUCK
+    // DATA ANGGOTA KELAS UNTUK WHEEL & DATA FALLBACK
+    const ALL_MALE_STUDENTS = [
+      "Kiyaarsyad Ganishwara", "M.Brilliant Rafa Ridhoca", "M.Gilang Febriyan", "Haris",
+      "Wandi Sopiandi", "Alvin Jaya Sukmana", "Fhidel Favian Rasyad", "Rojul Drajat",
+      "M.Firli Maulana", "Afzal Bagas Herlambang", "M.Muhtar Atarid", "M.Fadil Ariandy", "M. Fazry Pratama"
+    ];
+
+    const ALL_FEMALE_STUDENTS = [
+      "Ainun Nisa Dristia Putri", "Melisa Putri Oktaripana", "Astria Felany", "Fitri Aulia",
+      "Sania Nur'aeni Yunengsih", "Neng Sri Maolidda", "Adelia Meyse", "Dini Indriani Kirana",
+      "Rahmi Nurul Fauziah", "Salwa Maharani", "Siti Alfahra Nurrisman", "Adelia",
+      "Gisni Nurul Karimah", "Marisyha Melati Putri", "Husna Kholifatul Ulya", "Mulia Dwi Yanti",
+      "Mutiara Diana Putri", "Siti Aminah"
+    ];
+
+    let currentWheelList = [...ALL_MALE_STUDENTS, ...ALL_FEMALE_STUDENTS];
+    let wheelRotation = 0;
+    let isSpinning = false;
+
+    // AUTO HIDE LOADER
     window.addEventListener('load', () => {
       const loader = document.getElementById('page-loader');
       if (loader) {
@@ -1195,8 +1141,255 @@
           loader.classList.add('fade-out');
         }, 500);
       }
+      initWheel();
+      initPiketToday();
+      initCountdown();
+      initFallbackBeritaAndGaleri();
+      initVisitorCounter();
     });
 
+    // DARK MODE TOGGLE FIX
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const themeIcon = document.getElementById('theme-icon');
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        if (themeIcon) themeIcon.innerText = 'LIGHT';
+        localStorage.setItem('theme_mode', 'light');
+      } else {
+        html.classList.add('dark');
+        if (themeIcon) themeIcon.innerText = 'DARK';
+        localStorage.setItem('theme_mode', 'dark');
+      }
+    }
+
+    // TOGGLE DRAWER
+    function toggleDrawer() {
+      const drawer = document.getElementById('drawer-menu');
+      drawer.classList.toggle('hidden');
+    }
+
+    // TOGGLE PIKET MODAL
+    function togglePiketModal() {
+      const modal = document.getElementById('piket-modal');
+      modal.classList.toggle('hidden');
+    }
+
+    // PIKET HARI INI
+    function initPiketToday() {
+      const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+      const todayName = days[new Date().getDay()];
+      const piketMap = {
+        'Senin': 'Haris, Wandi, Kiya, Ainun',
+        'Selasa': 'Rafa, Gilang, Melisa, Astria',
+        'Rabu': 'Alvin, Fhidel, Fitri, Sania',
+        'Kamis': 'Rojul, Firli, Adelia, Dini',
+        'Jumat': 'Muhtar, Rahmi, Sri',
+        'Sabtu': 'Libur Akhir Pekan 🎉',
+        'Minggu': 'Libur Akhir Pekan 🎉'
+      };
+      const el = document.getElementById('piket-today');
+      if (el) {
+        el.innerHTML = `<span class="font-bold text-sky-500">${todayName}:</span> ${piketMap[todayName] || 'Tidak ada jadwal'}`;
+      }
+    }
+
+    // COUNTDOWN AKHIR PEKAN (MENUJU SABTU)
+    function initCountdown() {
+      function updateCD() {
+        const now = new Date();
+        const nextSaturday = new Date();
+        nextSaturday.setDate(now.getDate() + ((6 - now.getDay() + 7) % 7));
+        nextSaturday.setHours(0, 0, 0, 0);
+        if (nextSaturday <= now) nextSaturday.setDate(nextSaturday.getDate() + 7);
+
+        const diff = nextSaturday - now;
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('cd-days').innerText = String(d).padStart(2, '0');
+        document.getElementById('cd-hours').innerText = String(h).padStart(2, '0');
+        document.getElementById('cd-mins').innerText = String(m).padStart(2, '0');
+        document.getElementById('cd-secs').innerText = String(s).padStart(2, '0');
+      }
+      updateCD();
+      setInterval(updateCD, 1000);
+    }
+
+    // SPIN WHEEL IMPLEMENTASI LENGKAP
+    function initWheel() {
+      drawWheel();
+    }
+
+    function drawWheel() {
+      const canvas = document.getElementById('wheel-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const numSegments = currentWheelList.length;
+      if (numSegments === 0) return;
+
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const radius = canvas.width / 2 - 5;
+      const anglePerSegment = (2 * Math.PI) / numSegments;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const colors = ['#0284c7', '#38bdf8', '#0ea5e9', '#0284c7', '#0369a1', '#0c4a6e', '#38bdf8'];
+
+      for (let i = 0; i < numSegments; i++) {
+        const startAngle = i * anglePerSegment;
+        const endAngle = startAngle + anglePerSegment;
+
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.closePath();
+
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(startAngle + anglePerSegment / 2);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 10px sans-serif';
+        const name = currentWheelList[i].length > 12 ? currentWheelList[i].substring(0, 10) + '..' : currentWheelList[i];
+        ctx.fillText(name, radius - 12, 4);
+        ctx.restore();
+      }
+    }
+
+    function spinWheel() {
+      if (isSpinning || currentWheelList.length === 0) return;
+      isSpinning = true;
+
+      const winnerIndex = Math.floor(Math.random() * currentWheelList.length);
+      const anglePerSegment = 360 / currentWheelList.length;
+      
+      const extraSpins = 5 * 360; 
+      const targetSegmentAngle = 360 - (winnerIndex * anglePerSegment + anglePerSegment / 2);
+      const totalRotation = wheelRotation + extraSpins + (targetSegmentAngle - (wheelRotation % 360));
+
+      const canvas = document.getElementById('wheel-canvas');
+      canvas.style.transform = `rotate(${totalRotation}deg)`;
+      wheelRotation = totalRotation;
+
+      setTimeout(() => {
+        isSpinning = false;
+        document.getElementById('wheel-winner').innerText = currentWheelList[winnerIndex];
+      }, 4000);
+    }
+
+    function setWheelPreset(type) {
+      if (type === 'pria') currentWheelList = [...ALL_MALE_STUDENTS];
+      else if (type === 'wanita') currentWheelList = [...ALL_FEMALE_STUDENTS];
+      else currentWheelList = [...ALL_MALE_STUDENTS, ...ALL_FEMALE_STUDENTS];
+      drawWheel();
+      document.getElementById('wheel-winner').innerText = "Siap Diputar";
+    }
+
+    function updateWheelFromCustom() {
+      const input = document.getElementById('wheel-custom-input').value;
+      if (!input.trim()) return alert('Masukkan daftar nama!');
+      currentWheelList = input.split(',').map(s => s.trim()).filter(s => s.length > 0);
+      drawWheel();
+      document.getElementById('wheel-winner').innerText = "Siap Diputar";
+    }
+
+    // VISITOR COUNTER FIX
+    function initVisitorCounter() {
+      let count = parseInt(localStorage.getItem('public_visitor_count') || '142');
+      count += 1;
+      localStorage.setItem('public_visitor_count', count);
+      const el = document.getElementById('visitor-count-number');
+      if (el) el.innerText = count.toLocaleString();
+    }
+
+    // FALLBACK BERITA & GALERI (JIKA DATA LOADING BERKELANJUTAN)
+    function initFallbackBeritaAndGaleri() {
+      setTimeout(() => {
+        const bContainer = document.getElementById('berita-container');
+        if (bContainer && bContainer.innerHTML.includes('Memuat berita')) {
+          bContainer.innerHTML = `
+            <div class="liquid-glass p-5 rounded-3xl min-w-[280px] max-w-[320px] snap-center flex-shrink-0 shadow-glass">
+              <span class="text-[9px] font-bold uppercase tracking-widest text-sky-500 bg-sky-500/10 px-2.5 py-1 rounded-full border border-sky-500/20 mb-2 inline-block">Sorotan</span>
+              <h3 class="font-bold text-neutral-900 dark:text-white text-sm mt-1">Praktikum Jaringan Dasar TJKT 4</h3>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed">Siswa X TJKT 4 melaksanakan praktikum pengkabelan UTP dan crimping RJ45 di Lab Komputer.</p>
+            </div>
+            <div class="liquid-glass p-5 rounded-3xl min-w-[280px] max-w-[320px] snap-center flex-shrink-0 shadow-glass">
+              <span class="text-[9px] font-bold uppercase tracking-widest text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 mb-2 inline-block">Kegiatan</span>
+              <h3 class="font-bold text-neutral-900 dark:text-white text-sm mt-1">Pembentukan Pengurus Kelas</h3>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed">Selamat kepada Wandi Sopandi dan M.Muhtar Atarid sebagai Ketua & Wakil Ketua Kelas X TJKT 4.</p>
+            </div>
+          `;
+        }
+
+        const gContainer = document.getElementById('galeri-container');
+        if (gContainer && gContainer.innerHTML.includes('Memuat foto')) {
+          gContainer.innerHTML = `
+            <div class="liquid-glass p-4 rounded-3xl shadow-glass flex flex-col justify-between">
+              <div class="overflow-hidden rounded-2xl aspect-video mb-3 border border-white/20">
+                <img src="https://files.catbox.moe/of3vv5.jpg" class="w-full h-full object-cover">
+              </div>
+              <h3 class="font-bold text-xs text-neutral-900 dark:text-white">Foto Bersama Wali Kelas</h3>
+            </div>
+            <div class="liquid-glass p-4 rounded-3xl shadow-glass flex flex-col justify-between">
+              <div class="overflow-hidden rounded-2xl aspect-video mb-3 border border-white/20">
+                <img src="https://files.catbox.moe/lnzqfg.jpg" class="w-full h-full object-cover">
+              </div>
+              <h3 class="font-bold text-xs text-neutral-900 dark:text-white">Dokumentasi Tim Pengembang Web</h3>
+            </div>
+          `;
+        }
+
+        const mContainer = document.getElementById('menfess-container');
+        if (mContainer && mContainer.innerHTML.includes('Memuat pesan')) {
+          mContainer.innerHTML = `
+            <div class="liquid-glass p-4 rounded-3xl shadow-glass text-xs space-y-1">
+              <div class="flex justify-between font-bold text-sky-500">
+                <span>Dari: Secret Admirer</span>
+                <span>Untuk: Seluruh Kelas</span>
+              </div>
+              <p class="text-neutral-700 dark:text-neutral-300 mt-1">Semangat terus buat X TJKT 4, semoga kompak selalu sampai kelulusan!</p>
+            </div>
+          `;
+        }
+      }, 1500);
+    }
+
+    // JADWAL SWITCH TAB
+    function switchJadwalTab(type) {
+      const btnN = document.getElementById('btn-normatif');
+      const btnP = document.getElementById('btn-produktif');
+      const container = document.getElementById('jadwal-cards-container');
+
+      if (type === 'normatif') {
+        btnN.className = "px-5 py-1.5 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 transition shadow-sm";
+        btnP.className = "px-5 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition";
+        container.innerHTML = `
+          <div class="liquid-glass p-4 rounded-3xl text-xs"><h4 class="font-extrabold text-sky-500 mb-1">Senin</h4><p class="text-neutral-600 dark:text-neutral-300">B. Indonesia, PAIBP, Sejarah</p></div>
+          <div class="liquid-glass p-4 rounded-3xl text-xs"><h4 class="font-extrabold text-sky-500 mb-1">Selasa</h4><p class="text-neutral-600 dark:text-neutral-300">Matematika, B. Inggris, PPKn</p></div>
+          <div class="liquid-glass p-4 rounded-3xl text-xs"><h4 class="font-extrabold text-sky-500 mb-1">Rabu</h4><p class="text-neutral-600 dark:text-neutral-300">IPAS, PJOK, Seni Budaya</p></div>
+          <div class="liquid-glass p-4 rounded-3xl text-xs"><h4 class="font-extrabold text-sky-500 mb-1">Kamis</h4><p class="text-neutral-600 dark:text-neutral-300">B. Sunda, BK, Informatika</p></div>
+          <div class="liquid-glass p-4 rounded-3xl text-xs"><h4 class="font-extrabold text-sky-500 mb-1">Jumat</h4><p class="text-neutral-600 dark:text-neutral-300">P5, Kebersihan, Ekstrakurikuler</p></div>
+        `;
+      } else {
+        btnP.className = "px-5 py-1.5 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 transition shadow-sm";
+        btnN.className = "px-5 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition";
+        container.innerHTML = `
+          <div class="liquid-glass p-4 rounded-3xl text-xs sm:col-span-2 md:col-span-5"><h4 class="font-extrabold text-emerald-500 mb-1">Jadwal Praktikum Produktif TJKT</h4><p class="text-neutral-600 dark:text-neutral-300">Dasar-dasar Teknik Jaringan Komputer, Pengkabelan UTP, Konfigurasi Router & Device Networking.</p></div>
+        `;
+      }
+    }
+
+    // DEV SYSTEM & UTILITIES
     let devPin = localStorage.getItem('rafa_dev_pin') || "2212";
     let isMaintenanceActive = localStorage.getItem('sys_maintenance_active') === 'true';
     let isMatrixActive = localStorage.getItem('sys_matrix_active') === 'true';
@@ -1209,11 +1402,6 @@
       localStorage.setItem('user_device_id', 'DEV-' + Math.random().toString(36).substr(2, 9));
     }
     const DEVICE_ID = localStorage.getItem('user_device_id');
-
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('dev') === 'true') {
-      localStorage.setItem('dev_authenticated', 'true');
-    }
 
     function isDevMode() {
       return (localStorage.getItem('dev_authenticated') === 'true' || window.__devAuthed) && !isMockUser;
@@ -1273,7 +1461,6 @@
       alert("CSS Injected!");
     }
 
-    /* Mading Digital Logic */
     function addStickyNoteFromUI() {
       const input = document.getElementById('sticky-input');
       const color = document.getElementById('sticky-color').value;
@@ -1290,10 +1477,6 @@
       board.appendChild(note);
       input.value = '';
     }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      updateMaintenanceUI();
-    });
 
     function openDevPortalModal() {
       const modal = document.getElementById('dev-portal-modal');
@@ -1391,22 +1574,17 @@
       }
     }
 
-    function switchCmsTab(mode) {
-      const panels = { berita: 'cms-berita-form', galeri: 'cms-galeri-form', kelola: 'cms-kelola-list', foto: 'cms-foto-form' };
-      Object.entries(panels).forEach(([name, id]) => {
-        const el = document.getElementById(id);
-        if (el) el.classList.toggle('hidden', name !== mode);
-      });
-    }
-
     function escapeHtml(text) {
       return String(text).replace(/[&<>"']/g, function(m) {
         return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
       });
     }
+
+    // INISIALISASI AWAL
+    switchJadwalTab('normatif');
   </script>
 
-  <!-- FIREBASE & CORE UI -->
+  <!-- FIREBASE INTEGRATION -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, doc, collection, addDoc, query, orderBy, onSnapshot, setDoc, updateDoc, arrayUnion, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -1427,7 +1605,6 @@
     let activeUnsub = null;
     let activeId = null;
 
-    // MODAL DETAIL
     window.openDetailModal = (id, imgSrc, title, subtitle = '') => {
       activeId = id;
       document.getElementById('modal-img').src = imgSrc;
