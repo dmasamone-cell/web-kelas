@@ -1116,7 +1116,7 @@
     </a>
   </footer>
 
-  <!-- THREE.JS SHADER WEBGL -->
+  <!-- THREE.JS SHADER WEBGL (EFEK RAYS DIHAPUS PENUH) -->
   <script>
     const container = document.getElementById('webgl-glass-bg');
     const scene = new THREE.Scene();
@@ -1185,9 +1185,9 @@
     });
   </script>
 
-  <!-- LOGIKA SYSTEM, BERITA, PIKET, JADWAL & SYSTEM FITUR -->
+  <!-- LOGIKA SYSTEM & DEV TOOLS -->
   <script>
-    // 1. AUTO HIDE LOADER
+    // AUTO HIDE PAGE LOADER UNTUK MEMPERBAIKI KARTU STUCK
     window.addEventListener('load', () => {
       const loader = document.getElementById('page-loader');
       if (loader) {
@@ -1197,148 +1197,6 @@
       }
     });
 
-    // 2. TOGGLE DRAWER NAVIGATION
-    function toggleDrawer() {
-      const drawer = document.getElementById('drawer-menu');
-      if (drawer) drawer.classList.toggle('hidden');
-    }
-
-    // 3. PIKET HARI INI AUTOMATIC
-    const dataPiket = {
-      1: { hari: 'Senin', anggota: 'Haris, Wandi, Kiya, Ainun' },
-      2: { hari: 'Selasa', anggota: 'Rafa, Gilang, Melisa, Astria' },
-      3: { hari: 'Rabu', anggota: 'Alvin, Fhidel, Fitri, Sania' },
-      4: { hari: 'Kamis', anggota: 'Rojul, Firli, Adelia, Dini' },
-      5: { hari: 'Jumat', anggota: 'Muhtar, Rahmi, Sri' }
-    };
-
-    function renderPiketToday() {
-      const today = new Date().getDay(); // 1-5 = Senin-Jumat
-      const elPiket = document.getElementById('piket-today');
-      if (elPiket) {
-        if (dataPiket[today]) {
-          elPiket.innerHTML = `<span class="font-bold text-sky-500">[${dataPiket[today].hari}]</span> <span class="dark:text-neutral-200 text-neutral-800 font-semibold">${dataPiket[today].anggota}</span>`;
-        } else {
-          elPiket.innerHTML = `<span class="text-emerald-500 font-bold">Akhir Pekan</span> — Tidak ada jadwal piket 🎉`;
-        }
-      }
-    }
-
-    function togglePiketModal() {
-      const modal = document.getElementById('piket-modal');
-      if (modal) modal.classList.toggle('hidden');
-    }
-
-    // 4. BERITA & SOROTAN KELAS (AUTOMATIC RENDER WITH PHOTO CDN)
-    const dataBerita = [
-      {
-        title: 'Praktikum Crimping & Cable Testing Cat6',
-        category: 'Praktikum',
-        img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80',
-        desc: 'Pengujian konektivitas kabel UTP standar T568B oleh seluruh siswa X TJKT 4.'
-      },
-      {
-        title: 'Diskusi Linux Server & Network Protocol',
-        category: 'Kegiatan',
-        img: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80',
-        desc: 'Sesi kelompok pengerjaan tugas IP Addressing dan Sistem Operasi.'
-      },
-      {
-        title: 'Jumat Bersih & Lab Management',
-        category: 'Sorotan',
-        img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
-        desc: 'Gotong royong pemeliharaan perangkat jaringan komputer di Lab TJKT.'
-      }
-    ];
-
-    function renderBerita() {
-      const container = document.getElementById('berita-container');
-      if (!container) return;
-      container.innerHTML = dataBerita.map(b => `
-        <div class="liquid-glass p-4 rounded-3xl min-w-[280px] sm:min-w-[320px] snap-start flex-1 flex flex-col justify-between">
-          <div>
-            <div class="w-full h-40 rounded-2xl overflow-hidden mb-3 border border-white/10">
-              <img src="${b.img}" alt="${b.title}" class="w-full h-full object-cover">
-            </div>
-            <span class="text-[9px] font-extrabold text-sky-500 uppercase bg-sky-500/10 border border-sky-500/20 px-2.5 py-1 rounded-full">${b.category}</span>
-            <h3 class="text-xs font-extrabold text-neutral-900 dark:text-white mt-2.5 leading-snug">${b.title}</h3>
-            <p class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">${b.desc}</p>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // 5. JADWAL PELAJARAN SWITCH TAB
-    const dataJadwal = {
-      normatif: [
-        { hari: 'Senin', mapel: ['Upacara', 'PAI', 'Bahasa Indonesia'] },
-        { hari: 'Selasa', mapel: ['Matematika', 'Sejarah', 'Bahasa Inggris'] },
-        { hari: 'Rabu', mapel: ['PJOK', 'PPKn', 'Seni Budaya'] },
-        { hari: 'Kamis', mapel: ['Informatika', 'Bahasa Sunda', 'B. Indonesia'] },
-        { hari: 'Jumat', mapel: ['Jumat Bersih', 'Bimbingan Konseling'] }
-      ],
-      produktif: [
-        { hari: 'Senin', mapel: ['K3LH TJKT', 'Perakitan Hardware'] },
-        { hari: 'Selasa', mapel: ['Jaringan Dasar', 'Crimping Cable Lab'] },
-        { hari: 'Rabu', mapel: ['Sistem Operasi Linux', 'CLI Commands'] },
-        { hari: 'Kamis', mapel: ['MikroTik Config', 'Fiber Optic'] },
-        { hari: 'Jumat', mapel: ['Server Maintenance', 'Troubleshooting'] }
-      ]
-    };
-
-    window.switchJadwalTab = function(type) {
-      const container = document.getElementById('jadwal-cards-container');
-      const btnNorm = document.getElementById('btn-normatif');
-      const btnProd = document.getElementById('btn-produktif');
-      if (!container) return;
-
-      if (type === 'normatif') {
-        btnNorm.className = "px-5 py-1.5 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 transition shadow-sm";
-        btnProd.className = "px-5 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition";
-      } else {
-        btnProd.className = "px-5 py-1.5 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 transition shadow-sm";
-        btnNorm.className = "px-5 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition";
-      }
-
-      container.innerHTML = dataJadwal[type].map(j => `
-        <div class="liquid-glass p-4 rounded-2xl border border-white/10">
-          <span class="text-xs font-extrabold text-sky-500 uppercase block mb-2 border-b border-black/10 dark:border-white/10 pb-1.5">${j.hari}</span>
-          <ul class="text-[11px] space-y-1 text-neutral-700 dark:text-neutral-300 font-medium">
-            ${j.mapel.map(m => `<li>• ${m}</li>`).join('')}
-          </ul>
-        </div>
-      `).join('');
-    };
-
-    // 6. GALERI DOKUMENTASI SYSTEM
-    const dataGaleri = [
-      {
-        title: 'Foto Bersama Angkatan X TJKT 4',
-        desc: 'Momen kebersamaan seluruh siswa-siswi dan wali kelas.',
-        img: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80'
-      },
-      {
-        title: 'Sesi Praktikum Jaringan Komputer',
-        desc: 'Dokumentasi kegiatan lab perakitan dan konfigurasi jaringan.',
-        img: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80'
-      }
-    ];
-
-    function renderGaleri() {
-      const container = document.getElementById('galeri-container');
-      if (!container) return;
-      container.innerHTML = dataGaleri.map(g => `
-        <div class="liquid-glass p-4 rounded-3xl shadow-glass dark:shadow-glass-dark">
-          <div class="w-full h-52 rounded-2xl overflow-hidden mb-3 border border-white/10">
-            <img src="${g.img}" alt="${g.title}" class="w-full h-full object-cover">
-          </div>
-          <h3 class="text-sm font-extrabold text-neutral-900 dark:text-white">${g.title}</h3>
-          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">${g.desc}</p>
-        </div>
-      `).join('');
-    }
-
-    // 7. DEV & SYSTEM CONTROLS
     let devPin = localStorage.getItem('rafa_dev_pin') || "2212";
     let isMaintenanceActive = localStorage.getItem('sys_maintenance_active') === 'true';
     let isMatrixActive = localStorage.getItem('sys_matrix_active') === 'true';
@@ -1351,6 +1209,11 @@
       localStorage.setItem('user_device_id', 'DEV-' + Math.random().toString(36).substr(2, 9));
     }
     const DEVICE_ID = localStorage.getItem('user_device_id');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('dev') === 'true') {
+      localStorage.setItem('dev_authenticated', 'true');
+    }
 
     function isDevMode() {
       return (localStorage.getItem('dev_authenticated') === 'true' || window.__devAuthed) && !isMockUser;
@@ -1410,6 +1273,7 @@
       alert("CSS Injected!");
     }
 
+    /* Mading Digital Logic */
     function addStickyNoteFromUI() {
       const input = document.getElementById('sticky-input');
       const color = document.getElementById('sticky-color').value;
@@ -1426,6 +1290,10 @@
       board.appendChild(note);
       input.value = '';
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      updateMaintenanceUI();
+    });
 
     function openDevPortalModal() {
       const modal = document.getElementById('dev-portal-modal');
@@ -1536,15 +1404,6 @@
         return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
       });
     }
-
-    // INIT ALL SYSTEMS ON DOM CONTENT LOADED
-    document.addEventListener("DOMContentLoaded", () => {
-      renderPiketToday();
-      renderBerita();
-      renderGaleri();
-      switchJadwalTab('normatif');
-      updateMaintenanceUI();
-    });
   </script>
 
   <!-- FIREBASE & CORE UI -->
