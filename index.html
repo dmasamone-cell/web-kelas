@@ -1187,6 +1187,16 @@
 
   <!-- LOGIKA SYSTEM & DEV TOOLS -->
   <script>
+    // AUTO HIDE PAGE LOADER UNTUK MEMPERBAIKI KARTU STUCK
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('page-loader');
+      if (loader) {
+        setTimeout(() => {
+          loader.classList.add('fade-out');
+        }, 500);
+      }
+    });
+
     let devPin = localStorage.getItem('rafa_dev_pin') || "2212";
     let isMaintenanceActive = localStorage.getItem('sys_maintenance_active') === 'true';
     let isMatrixActive = localStorage.getItem('sys_matrix_active') === 'true';
