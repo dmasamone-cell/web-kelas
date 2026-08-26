@@ -258,7 +258,6 @@
       padding: 2rem;
     }
 
-    /* Styling Mading Digital Sticky Notes */
     #mading-board {
       min-height: 160px;
       background: rgba(15, 23, 42, 0.4);
@@ -269,7 +268,7 @@
     }
   </style>
 </head>
-<body class="bg-[#f2f2f7] text-neutral-900 font-sans antialiased selection:bg-sky-500/20 dark:bg-[#030712] dark:text-neutral-100 min-h-screen pb-20 glass-canvas transition-colors duration-500">
+<body class="bg-[#f2f27] text-neutral-900 font-sans antialiased selection:bg-sky-500/20 dark:bg-[#030712] dark:text-neutral-100 min-h-screen pb-20 glass-canvas transition-colors duration-500">
 
   <!-- SYSTEM MAINTENANCE LOCK SCREEN -->
   <div id="maintenance-screen">
@@ -887,6 +886,38 @@
       </div>
     </div>
   </section>
+
+  <!-- FLOATING AI ASSISTANT WIDGET -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleAiChat()" id="ai-launcher-btn" class="w-14 h-14 rounded-full bg-sky-500 hover:bg-sky-600 text-white shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-white/30">
+      <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm1-13h-2v6h6v-2h-4z"/></svg>
+    </button>
+
+    <div id="ai-chat-window" class="hidden absolute bottom-16 right-0 w-80 sm:w-96 liquid-glass rounded-3xl shadow-2xl overflow-hidden border border-sky-500/30 flex flex-col h-[450px]">
+      <div class="p-4 bg-sky-500/20 border-b border-white/10 flex justify-between items-center backdrop-blur-md">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
+          <h3 class="font-black text-xs text-neutral-900 dark:text-white uppercase tracking-wider">Asisten Virtual X TJKT 4</h3>
+        </div>
+        <button onclick="toggleAiChat()" class="text-neutral-400 hover:text-white font-bold text-xs">✕</button>
+      </div>
+
+      <div id="ai-messages-container" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs">
+        <div class="bg-neutral-800/20 dark:bg-white/5 p-3 rounded-2xl max-w-[85%] border border-white/10 text-neutral-800 dark:text-neutral-200">
+          Halo! Gw Asisten AI X TJKT 4. Ada yang bisa dibantu soal info kelas, jadwal, atau mau ngobrol?
+        </div>
+      </div>
+
+      <div id="ai-typing-indicator" class="hidden px-4 py-1 text-[10px] text-neutral-400 italic font-mono">
+        AI sedang mengetik...
+      </div>
+
+      <form onsubmit="sendAiMessage(event)" class="p-3 bg-black/10 dark:bg-black/40 border-t border-white/10 flex gap-2">
+        <input type="text" id="ai-input" placeholder="Ketik pesan ke AI..." required class="flex-1 liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-neutral-900 dark:text-white focus:outline-none focus:border-sky-500">
+        <button type="submit" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs rounded-xl transition">Kirim</button>
+      </form>
+    </div>
+  </div>
 
   <!-- MODAL DEV TOOLS & CONTROL PANEL -->
   <div id="dev-portal-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-2xl flex items-center justify-center p-4" onclick="if(event.target === this) closeDevPortalModal()">
@@ -1908,6 +1939,52 @@
         const p = document.getElementById(panelId);
         if (p) p.classList.toggle('hidden', name !== mode);
       });
+    }
+
+    // AI ASSISTANT CLIENT LOGIC
+    function toggleAiChat() {
+      const win = document.getElementById('ai-chat-window');
+      win.classList.toggle('hidden');
+    }
+
+    async function sendAiMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('ai-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('ai-messages-container');
+      container.innerHTML += `
+        <div class="bg-sky-500 text-white p-3 rounded-2xl max-w-[85%] ml-auto shadow-sm">
+          ${escapeHtml(text)}
+        </div>
+      `;
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      const typingIndicator = document.getElementById('ai-typing-indicator');
+      typingIndicator.classList.remove('hidden');
+
+      setTimeout(() => {
+        typingIndicator.classList.add('hidden');
+        let aiReply = "Waduh, mantap banget pertanyaannya! X TJKT 4 emang kelas paling keren di SMK Negeri 1 Pacet. Ada lagi yang mau ditanyain bro?";
+        
+        const lower = text.toLowerCase();
+        if (lower.includes('piket') || lower.includes('jadwal')) {
+          aiReply = "Jadwal piket dan pelajaran lengkapnya udah ada di bagian atas web ini ya bro, tinggal dicek aja!";
+        } else if (lower.includes('rafa') || lower.includes('dev')) {
+          aiReply = "M. Brilliant Rafa Ridhoca itu Lead System Developer web ini. Tekan Ctrl+Shift+K atau klik tombol Dev Portal di kartu profilnya buat akses ruang kontrol rahasia!";
+        } else if (lower.includes('wali kelas')) {
+          aiReply = "Wali kelas X TJKT 4 adalah Bapak Mulyana Taupik, S.Kom. dengan motto MAUNG (Manusia Unggul)!";
+        }
+
+        container.innerHTML += `
+          <div class="bg-neutral-800/25 dark:bg-white/10 p-3 rounded-2xl max-w-[85%] border border-white/10 text-neutral-800 dark:text-neutral-200">
+            ${escapeHtml(aiReply)}
+          </div>
+        `;
+        container.scrollTop = container.scrollHeight;
+      }, 1000);
     }
   </script>
 
