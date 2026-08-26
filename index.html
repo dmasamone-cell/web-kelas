@@ -471,7 +471,7 @@
           <span class="text-[9px] font-bold text-sky-500 uppercase tracking-widest block">Fitur Publik Interaktif</span>
           <h2 class="text-lg font-extrabold text-neutral-900 dark:text-white tracking-tight">📌 Mading Digital Kelas & Guestbook</h2>
         </div>
-        <span class="text-[9px] font-mono text-neutral-400 bg-black/5 dark:bg-white/5 px-3 py-1 rounded-full border border-white/10">DEVICE BOUND</span>
+        <span class="text-[9px] font-mono text-neutral-400 bg-black/5 dark:bg-white/5 px-3 py-1 rounded-full border border-white/10">REAL-TIME SYNC</span>
       </div>
 
       <div class="flex flex-col sm:flex-row gap-2 mb-4">
@@ -904,7 +904,7 @@
 
       <div id="ai-messages-container" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs">
         <div class="bg-neutral-800/20 dark:bg-white/5 p-3 rounded-2xl max-w-[85%] border border-white/10 text-neutral-800 dark:text-neutral-200">
-          Halo! Gw Asisten AI X TJKT 4. Ada yang bisa dibantu soal info kelas, jadwal, atau mau ngobrol?
+          Halo! Gw Asisten AI X TJKT 4 powered by Gemini. Ada yang bisa dibantu soal info kelas, jadwal, atau mau ngobrol?
         </div>
       </div>
 
@@ -1420,7 +1420,7 @@
     let isMaintenanceActive = localStorage.getItem('sys_maintenance_active') === 'true';
     let isMatrixActive = localStorage.getItem('sys_matrix_active') === 'true';
     let isSnowActive = localStorage.getItem('sys_snow_active') === 'true';
-    let maintenanceMessage = "Web sedang dalam perbaikan. Kembali lagi nanti!";
+    let maintenanceMessage = "Website sedang dalam perbaikan. Kembali lagi nanti!";
     let isMockUser = false;
     let confettiInterval = null;
     let snowInterval = null;
@@ -1594,27 +1594,6 @@
         logBox.innerHTML += `<br>[${time}] ⚠️ Inspect Element Detected! Device ID: ${DEVICE_ID}`;
         logBox.scrollTop = logBox.scrollHeight;
       }
-    }
-
-    function addStickyNoteFromUI() {
-      const input = document.getElementById('sticky-input');
-      const colorSelect = document.getElementById('sticky-color');
-      const text = input.value.trim();
-      const color = colorSelect.value;
-
-      if (!text) return alert('Tuliskan sesuatu untuk mading!');
-
-      const board = document.getElementById('mading-board');
-      const note = document.createElement('div');
-      note.className = "p-3 text-black rounded-xl shadow-md w-36 font-sans text-xs border border-black/10 transition-transform hover:scale-105";
-      note.style.backgroundColor = color;
-      note.innerHTML = `
-        <span class="text-[9px] opacity-60 block font-mono">Device: ${DEVICE_ID.slice(-4)}</span>
-        <p class="mt-1 font-semibold break-words">${escapeHtml(text)}</p>
-      `;
-
-      board.appendChild(note);
-      input.value = '';
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -1941,7 +1920,7 @@
       });
     }
 
-    // AI ASSISTANT CLIENT LOGIC
+    // AI ASSISTANT CLIENT LOGIC (Connected to Gemini API)
     function toggleAiChat() {
       const win = document.getElementById('ai-chat-window');
       win.classList.toggle('hidden');
@@ -1965,26 +1944,45 @@
       const typingIndicator = document.getElementById('ai-typing-indicator');
       typingIndicator.classList.remove('hidden');
 
-      setTimeout(() => {
-        typingIndicator.classList.add('hidden');
-        let aiReply = "Waduh, mantap banget pertanyaannya! X TJKT 4 emang kelas paling keren di SMK Negeri 1 Pacet. Ada lagi yang mau ditanyain bro?";
+      try {
+        // Masukkan API Key Gemini Anda di bawah ini
+        const GEMINI_API_KEY = "MASUKKAN_GEMINI_API_KEY_ANDA_DISINI"; 
         
-        const lower = text.toLowerCase();
-        if (lower.includes('piket') || lower.includes('jadwal')) {
-          aiReply = "Jadwal piket dan pelajaran lengkapnya udah ada di bagian atas web ini ya bro, tinggal dicek aja!";
-        } else if (lower.includes('rafa') || lower.includes('dev')) {
-          aiReply = "M. Brilliant Rafa Ridhoca itu Lead System Developer web ini. Tekan Ctrl+Shift+K atau klik tombol Dev Portal di kartu profilnya buat akses ruang kontrol rahasia!";
-        } else if (lower.includes('wali kelas')) {
-          aiReply = "Wali kelas X TJKT 4 adalah Bapak Mulyana Taupik, S.Kom. dengan motto MAUNG (Manusia Unggul)!";
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: `Kamu adalah asisten virtual resmi untuk website kelas X TJKT 4 SMK Negeri 1 Pacet. Jawablah dengan ramah, santai anak SMK, dan gunakan bahasa gaul yang sopan. Pertanyaan user: ${text}`
+              }]
+            }]
+          })
+        });
+
+        const data = await response.json();
+        let aiReply = "Waduh, koneksi AI lagi sibuk nih bro. Coba tanya lagi ya!";
+        
+        if (data.candidates && data.candidates[0].content.parts[0].text) {
+          aiReply = data.candidates[0].content.parts[0].text;
         }
 
+        typingIndicator.classList.add('hidden');
         container.innerHTML += `
           <div class="bg-neutral-800/25 dark:bg-white/10 p-3 rounded-2xl max-w-[85%] border border-white/10 text-neutral-800 dark:text-neutral-200">
             ${escapeHtml(aiReply)}
           </div>
         `;
         container.scrollTop = container.scrollHeight;
-      }, 1000);
+
+      } catch (error) {
+        typingIndicator.classList.add('hidden');
+        container.innerHTML += `
+          <div class="bg-neutral-800/25 dark:bg-white/10 p-3 rounded-2xl max-w-[85%] border border-white/10 text-neutral-800 dark:text-neutral-200">
+            Maaf bro, AI lagi ada gangguan koneksi atau API Key belum dimasukkan dengan benar.
+          </div>
+        `;
+      }
     }
   </script>
 
@@ -2371,6 +2369,59 @@
       });
     }
     trackVisitor();
+
+    // === MADING DIGITAL REAL-TIME FIRESTORE ===
+    const madingCollection = collection(db, "mading_notes");
+    const madingBoard = document.getElementById('mading-board');
+
+    window.addStickyNoteFromUI = async () => {
+      const input = document.getElementById('sticky-input');
+      const colorSelect = document.getElementById('sticky-color');
+      const text = input.value.trim();
+      const color = colorSelect.value;
+
+      if (!text) return alert('Tuliskan sesuatu untuk mading!');
+
+      try {
+        await addDoc(madingCollection, {
+          text: text,
+          color: color,
+          deviceId: DEVICE_ID,
+          createdAt: serverTimestamp()
+        });
+        input.value = '';
+      } catch (err) {
+        alert("Gagal menempel note ke mading: " + err.message);
+      }
+    };
+
+    const qMading = query(madingCollection, orderBy("createdAt", "desc"));
+    onSnapshot(qMading, (snapshot) => {
+      if (!madingBoard) return;
+      
+      if (snapshot.empty) {
+        madingBoard.innerHTML = `
+          <div class="p-3 bg-[#fef08a] text-black rounded-xl shadow-md w-36 font-sans text-xs border border-black/10">
+            <span class="text-[9px] opacity-60 block font-mono">Device: DEMO</span>
+            <p class="mt-1 font-semibold">Selamat datang di Mading Digital X TJKT 4!</p>
+          </div>
+        `;
+        return;
+      }
+
+      madingBoard.innerHTML = '';
+      snapshot.forEach((docSnap) => {
+        const d = docSnap.data();
+        const note = document.createElement('div');
+        note.className = "p-3 text-black rounded-xl shadow-md w-36 font-sans text-xs border border-black/10 transition-transform hover:scale-105";
+        note.style.backgroundColor = d.color || '#fef08a';
+        note.innerHTML = `
+          <span class="text-[9px] opacity-60 block font-mono">ID: ${escapeHtml((d.deviceId || 'DEV').slice(-4))}</span>
+          <p class="mt-1 font-semibold break-words">${escapeHtml(d.text)}</p>
+        `;
+        madingBoard.appendChild(note);
+      });
+    });
 
     // BERITA
     const beritaCollection = collection(db, "news");
