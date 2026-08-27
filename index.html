@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Three.js Library untuk Shader WebGL Liquid Glass -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <script>
@@ -40,6 +39,7 @@
       }
     }
   </script>
+  
   <style id="custom-injected-style">
     :root {
       --brand-main: #0284c7;
@@ -84,7 +84,6 @@
       background-color: #030712;
     }
 
-    /* ===== LIQUID GLASS v3 — Balance Edition ===== */
     .liquid-glass {
       background: linear-gradient(
         160deg,
@@ -893,9 +892,7 @@
       <button onclick="closeDevPortalModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white font-bold text-xs uppercase tracking-wider">Close</button>
 
       <div id="dev-pin-view" class="text-center py-4 space-y-4">
-        <div class="w-12 h-12 rounded-full bg-sky-500/20 border border-sky-500/40 flex items-center justify-center mx-auto text-sky-400 font-black text-lg">
-          🔒
-        </div>
+        <div class="w-12 h-12 rounded-full bg-sky-500/20 border border-sky-500/40 flex items-center justify-center mx-auto text-sky-400 font-black text-lg">🔒</div>
         <div>
           <h3 class="font-black text-white text-base tracking-tight uppercase">Developer Authorization</h3>
           <p class="text-xs text-neutral-400 mt-1">Masukkan PIN Developer untuk membuka ruang kontrol Billy.</p>
@@ -1235,7 +1232,7 @@
 
       <form onsubmit="sendAiMessage(event)" class="p-3 border-t border-white/10 flex gap-2">
         <input type="text" id="ai-input" placeholder="Tanyakan sesuatu..." class="flex-1 liquid-glass-subtle rounded-xl px-3.5 py-2 text-xs text-neutral-900 dark:text-white focus:outline-none focus:border-sky-500">
-        <button type="submit" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-xl text-xs font-bold transition active:scale-95">Send</button>
+        <button type="submit" id="ai-btn-send" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-xl text-xs font-bold transition active:scale-95">Send</button>
       </form>
     </div>
   </div>
@@ -1256,7 +1253,26 @@
     </a>
   </footer>
 
-  <!-- THREE.JS SHADER WEBGL (OPTIMIZED 30FPS + LOW POWER) -->
+  <!-- ============================================ -->
+  <!-- ========== TAWK.TO LIVE CHAT =============== -->
+  <!-- ============================================ -->
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a8f99b4f242a0344a3ce38a/1k10f0r1q';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+
+  <!-- ============================================ -->
+  <!-- ========== THREE.JS SHADER WEBGL =========== -->
+  <!-- ============================================ -->
   <script>
     const glassConfig = {
       refThickness: 20,
@@ -1416,6 +1432,7 @@
 
   <!-- LOGIKA LENGKAP DEV PORTAL & SYSTEM -->
   <script>
+    // ===== VARIABLES =====
     let devPin = localStorage.getItem('rafa_dev_pin') || "2212";
     let isBroadcastActive = false;
     let isMaintenanceActive = localStorage.getItem('sys_maintenance_active') === 'true';
@@ -1921,7 +1938,75 @@
       });
     }
 
-    /
+    // LOGIKA AI ASSISTANT CLIENT (GEMINI API)
+    function toggleAiChat() {
+      const win = document.getElementById('ai-chat-window');
+      win.classList.toggle('hidden');
+    }
+
+    async function sendAiMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('ai-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('ai-messages-container');
+      container.innerHTML += `
+        <div class="bg-sky-500 text-white p-3 rounded-2xl max-w-[85%] ml-auto shadow-sm">
+          ${escapeHtml(text)}
+        </div>
+      `;
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      const typingIndicator = document.getElementById('ai-typing-indicator');
+      typingIndicator.classList.remove('hidden');
+
+      try {
+        const GEMINI_API_KEY = "AQ.Ab8RN6KDnhEyLvuH65paZHRdl8Upw8DeShVxMQdRr97SVH9S_w"; 
+        const MODEL_NAME = "gemini-3.5-flash-lite";
+
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${GEMINI_API_KEY}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: `Kamu adalah asisten virtual resmi untuk website kelas X TJKT 4 SMK Negeri 1 Pacet. Jawablah dengan ramah, santai anak SMK, dan gunakan bahasa gaul yang sopan. Pertanyaan user: ${text}`
+              }]
+            }]
+          })
+        });
+
+        const data = await response.json();
+        let aiReply = "Waduh, koneksi AI lagi sibuk nih bro. Coba tanya lagi ya!";
+        
+        if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
+          aiReply = data.candidates[0].content.parts[0].text;
+        } else if (data.error) {
+          aiReply = "Error dari Google API: " + (data.error.message || "Periksa kembali API Key Anda.");
+        }
+
+        typingIndicator.classList.add('hidden');
+        container.innerHTML += `
+          <div class="bg-neutral-800/25 dark:bg-white/10 p-3 rounded-2xl max-w-[85%] border border-white/10 text-neutral-800 dark:text-neutral-200">
+            ${escapeHtml(aiReply)}
+          </div>
+        `;
+        container.scrollTop = container.scrollHeight;
+
+      } catch (error) {
+        typingIndicator.classList.add('hidden');
+        container.innerHTML += `
+          <div class="bg-neutral-800/25 dark:bg-white/10 p-3 rounded-2xl max-w-[85%] border border-white/10 text-neutral-800 dark:text-neutral-200">
+            Maaf bro, terjadi kesalahan jaringan saat menghubungi server AI.
+          </div>
+        `;
+        container.scrollTop = container.scrollHeight;
+      }
+    }
+  </script>
+
   <!-- UTAMA UI & LOGIKA REGULER -->
   <script>
     function hidePageLoader() {
@@ -1980,7 +2065,7 @@
       produktif: {
         Senin: ["B. Inggris", "DPK 1", "DPK 2"],
         Selasa: ["DPK 1", "Informatika", "DPK 2"],
-        Rabu: ["DPK 2", "B. Inggris", "MTK"],
+        Rabu: ["DPK 1", "B. Inggris", "MTK"],
         Kamis: ["MTK", "DPK 2"],
         Jumat: ["Informatika", "DPK 1"]
       }
@@ -3023,5 +3108,6 @@
       });
     }
   </script>
+
 </body>
 </html>
