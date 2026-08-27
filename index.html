@@ -1190,57 +1190,13 @@
           <p class="text-neutral-400 italic">Belum ada komentar...</p>
         </div>
 
-        <div id="sticker-picker" class="hidden p-3 liquid-glass-subtle rounded-2xl mb-2 space-y-2">
-          <div class="flex gap-2">
-            <input type="text" id="gif-search-input" placeholder="Cari GIF..." class="flex-1 liquid-glass-subtle rounded-xl px-3 py-1.5 text-xs text-neutral-900 dark:text-white focus:outline-none">
-            <button type="button" id="btn-search-gif" class="px-3 py-1.5 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-xl text-xs font-semibold">Cari</button>
-          </div>
-          <div id="gif-results" class="grid grid-cols-4 gap-2 max-h-40 overflow-y-auto pr-1">
-            <p class="col-span-4 text-center text-xs text-neutral-400 py-4">Ketik kata kunci di atas...</p>
-          </div>
-        </div>
-
         <form id="modal-comment-form" class="flex gap-2 pt-1">
-          <button type="button" onclick="toggleStickerPicker()" class="px-3 py-2 liquid-glass-subtle hover:bg-black/10 dark:hover:bg-white/10 text-neutral-800 dark:text-neutral-200 rounded-xl text-xs font-bold transition active:scale-95">GIF</button>
           <input type="text" id="modal-comment-input" placeholder="Tulis komentar..." required class="flex-1 liquid-glass-subtle rounded-xl px-3.5 py-2 text-xs text-neutral-900 dark:text-white focus:outline-none">
           <button type="submit" class="px-4 py-2 bg-neutral-900 dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-100 text-white dark:text-neutral-900 rounded-xl text-xs font-bold transition active:scale-95">Kirim</button>
         </form>
       </div>
     </div>
   </div>
-
-  <!-- FLOATING AI CHATBOT INTERFACE -->
-  <div id="ai-chat-window" class="fixed bottom-20 right-6 z-50 w-80 sm:w-96 hidden">
-    <div class="liquid-glass rounded-3xl shadow-2xl overflow-hidden border border-sky-500/40 flex flex-col h-[450px]">
-      <div class="p-4 bg-sky-500/20 border-b border-white/10 flex justify-between items-center">
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          <h3 class="font-extrabold text-xs uppercase tracking-wider text-neutral-900 dark:text-white">AI Assistant X TJKT 4</h3>
-        </div>
-        <button onclick="toggleAiChat()" class="text-neutral-400 hover:text-white text-xs font-bold">✕</button>
-      </div>
-
-      <div id="ai-messages-container" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs">
-        <div class="bg-neutral-800/25 dark:bg-white/10 p-3 rounded-2xl max-w-[85%] border border-white/10 text-neutral-800 dark:text-neutral-200">
-          Halo! Ada yang bisa saya bantu tentang info kelas X TJKT 4? 🚀
-        </div>
-      </div>
-
-      <div id="ai-typing-indicator" class="hidden px-4 py-1 text-[10px] text-sky-400 italic">
-        AI sedang mengetik...
-      </div>
-
-      <form onsubmit="sendAiMessage(event)" class="p-3 border-t border-white/10 flex gap-2">
-        <input type="text" id="ai-input" placeholder="Tanyakan sesuatu..." class="flex-1 liquid-glass-subtle rounded-xl px-3.5 py-2 text-xs text-neutral-900 dark:text-white focus:outline-none focus:border-sky-500">
-        <button type="submit" id="ai-btn-send" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-xl text-xs font-bold transition active:scale-95">Send</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- BUTTON TRIGGER CHAT AI -->
-  <button onclick="toggleAiChat()" class="fixed bottom-6 right-6 z-40 p-3.5 bg-sky-500 hover:bg-sky-600 text-white rounded-full shadow-2xl transition-all active:scale-95 flex items-center gap-2 text-xs font-bold">
-    💬 <span class="hidden sm:inline">AI Assistant</span>
-  </button>
 
   <!-- Footer -->
   <footer class="max-w-5xl mx-auto px-6 py-8 border-t border-black/5 dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-neutral-400 relative z-10">
@@ -1937,74 +1893,6 @@
         if (p) p.classList.toggle('hidden', name !== mode);
       });
     }
-
-    // LOGIKA AI ASSISTANT CLIENT (GEMINI API)
-    function toggleAiChat() {
-      const win = document.getElementById('ai-chat-window');
-      win.classList.toggle('hidden');
-    }
-
-    async function sendAiMessage(e) {
-      e.preventDefault();
-      const input = document.getElementById('ai-input');
-      const text = input.value.trim();
-      if (!text) return;
-
-      const container = document.getElementById('ai-messages-container');
-      container.innerHTML += `
-        <div class="bg-sky-500 text-white p-3 rounded-2xl max-w-[85%] ml-auto shadow-sm">
-          ${escapeHtml(text)}
-        </div>
-      `;
-      input.value = '';
-      container.scrollTop = container.scrollHeight;
-
-      const typingIndicator = document.getElementById('ai-typing-indicator');
-      typingIndicator.classList.remove('hidden');
-
-      try {
-        const GEMINI_API_KEY = "AQ.Ab8RN6KDnhEyLvuH65paZHRdl8Upw8DeShVxMQdRr97SVH9S_w"; 
-        const MODEL_NAME = "gemini-3.5-flash-lite";
-
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${GEMINI_API_KEY}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [{
-              parts: [{
-                text: `Kamu adalah asisten virtual resmi untuk website kelas X TJKT 4 SMK Negeri 1 Pacet. Jawablah dengan ramah, santai anak SMK, dan gunakan bahasa gaul yang sopan. Pertanyaan user: ${text}`
-              }]
-            }]
-          })
-        });
-
-        const data = await response.json();
-        let aiReply = "Waduh, koneksi AI lagi sibuk nih bro. Coba tanya lagi ya!";
-        
-        if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
-          aiReply = data.candidates[0].content.parts[0].text;
-        } else if (data.error) {
-          aiReply = "Error dari Google API: " + (data.error.message || "Periksa kembali API Key Anda.");
-        }
-
-        typingIndicator.classList.add('hidden');
-        container.innerHTML += `
-          <div class="bg-neutral-800/25 dark:bg-white/10 p-3 rounded-2xl max-w-[85%] border border-white/10 text-neutral-800 dark:text-neutral-200">
-            ${escapeHtml(aiReply)}
-          </div>
-        `;
-        container.scrollTop = container.scrollHeight;
-
-      } catch (error) {
-        typingIndicator.classList.add('hidden');
-        container.innerHTML += `
-          <div class="bg-neutral-800/25 dark:bg-white/10 p-3 rounded-2xl max-w-[85%] border border-white/10 text-neutral-800 dark:text-neutral-200">
-            Maaf bro, terjadi kesalahan jaringan saat menghubungi server AI.
-          </div>
-        `;
-        container.scrollTop = container.scrollHeight;
-      }
-    }
   </script>
 
   <!-- UTAMA UI & LOGIKA REGULER -->
@@ -2368,7 +2256,6 @@
     const IMGBB_API_KEY = "4766a5da311917f59c9657a726a782fc";
     let activeUnsub = null;
     let activeId = null;
-    const GIPHY_API_KEY = "5LH1haWcbeynWswBCKF02uErlR0xMZWf";
 
     const visitorDocRef = doc(db, "stats", "visitors");
     async function trackVisitor() {
@@ -2855,58 +2742,6 @@
       });
     });
 
-    // GIF / STICKER
-    window.toggleStickerPicker = () => {
-      const picker = document.getElementById('sticker-picker');
-      picker.classList.toggle('hidden');
-      if (!picker.classList.contains('hidden')) {
-        const query = document.getElementById('gif-search-input').value.trim();
-        searchGifs(query || 'funny');
-      }
-    };
-
-    window.searchGifs = async (customQuery) => {
-      const input = document.getElementById('gif-search-input');
-      const query = customQuery || input.value.trim() || 'funny';
-      const resultsContainer = document.getElementById('gif-results');
-      resultsContainer.innerHTML = '<p class="col-span-4 text-center text-xs text-neutral-400 py-4">Mencari GIF...</p>';
-
-      try {
-        const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodeURIComponent(query)}&limit=12&rating=g`);
-        const data = await response.json();
-
-        if (data.data && data.data.length > 0) {
-          resultsContainer.innerHTML = '';
-          data.data.forEach(gif => {
-            const gifUrl = gif.images.fixed_height.url;
-            const imgEl = document.createElement('img');
-            imgEl.src = gifUrl;
-            imgEl.referrerPolicy = 'no-referrer';
-            imgEl.className = 'w-full h-16 object-cover rounded-xl cursor-pointer hover:scale-105 transition border border-white/20 dark:border-white/10 bg-neutral-200 dark:bg-neutral-800';
-            imgEl.onclick = () => window.sendSticker(gifUrl);
-            resultsContainer.appendChild(imgEl);
-          });
-        } else {
-          resultsContainer.innerHTML = '<p class="col-span-4 text-center text-xs text-neutral-400 py-4">GIF tidak ditemukan.</p>';
-        }
-      } catch (error) {
-        resultsContainer.innerHTML = '<p class="col-span-4 text-center text-xs text-red-400 py-4">Gagal memuat GIF.</p>';
-      }
-    };
-
-    const btnSearchGif = document.getElementById('btn-search-gif');
-    if (btnSearchGif) btnSearchGif.addEventListener('click', () => searchGifs());
-
-    const inputSearchGif = document.getElementById('gif-search-input');
-    if (inputSearchGif) {
-      inputSearchGif.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          searchGifs();
-        }
-      });
-    }
-
     // MODAL DETAIL & KOMENTAR
     window.openDetailModal = (id, imgSrc, title, subtitle = '') => {
       activeId = id;
@@ -2919,7 +2754,6 @@
       document.getElementById('modal-title').innerText = title;
       document.getElementById('modal-subtitle').innerText = subtitle;
       document.getElementById('image-modal').classList.remove('hidden');
-      document.getElementById('sticker-picker').classList.add('hidden');
 
       const devBtnContainer = document.getElementById('modal-dev-portal-btn-container');
       if (id === 'siswa-rafa') {
@@ -2952,10 +2786,7 @@
           } else {
             container.innerHTML = '';
             comments.forEach(c => {
-              const isMedia = c.type === 'gif' || (c.text && c.text.startsWith('http'));
-              const textContent = isMedia 
-                ? `<img src="${escapeHtml(c.text)}" referrerpolicy="no-referrer" class="max-w-[200px] max-h-40 object-cover rounded-xl mt-1.5 border border-white/20 dark:border-white/10 bg-neutral-200 dark:bg-neutral-800">`
-                : `<span class="text-neutral-600 dark:text-neutral-400 block mt-0.5">${escapeHtml(c.text)}</span>`;
+              const textContent = `<span class="text-neutral-600 dark:text-neutral-400 block mt-0.5">${escapeHtml(c.text)}</span>`;
 
               const userNameLower = (c.user || '').toLowerCase();
               const isDev = userNameLower.includes('billy') || userNameLower.includes('developer') || userNameLower.includes('mulyana') || userNameLower.includes('dev') || userNameLower.includes('rafa');
@@ -2988,37 +2819,11 @@
 
     window.closeModal = () => {
       document.getElementById('image-modal').classList.add('hidden');
-      document.getElementById('sticker-picker').classList.add('hidden');
       if (activeUnsub) {
         activeUnsub();
         activeUnsub = null;
       }
       activeId = null;
-    };
-
-    window.sendSticker = async (gifUrl) => {
-      if (!activeId) return;
-
-      let userName = localStorage.getItem('class_user_name');
-      if (!userName) {
-        userName = prompt("Masukkan nama kamu untuk berkomentar:", "Teman X TJKT 4");
-        if (!userName) userName = "Anonim";
-        localStorage.setItem('class_user_name', userName);
-      }
-
-      const photoRef = doc(db, "photos", activeId);
-      try {
-        await updateDoc(photoRef, {
-          comments: arrayUnion({ user: userName, text: gifUrl, type: 'gif', deviceId: DEVICE_ID })
-        });
-      } catch (err) {
-        await setDoc(photoRef, {
-          likes: 0,
-          comments: [{ user: userName, text: gifUrl, type: 'gif', deviceId: DEVICE_ID }]
-        }, { merge: true });
-      }
-
-      document.getElementById('sticker-picker').classList.add('hidden');
     };
 
     window.resetPhotoData = async () => {
