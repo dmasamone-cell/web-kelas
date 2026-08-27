@@ -1193,7 +1193,7 @@
         <form id="modal-comment-form" class="space-y-2 pt-1">
           <div class="flex gap-2">
             <input type="text" id="modal-comment-input" placeholder="Tulis komentar..." required class="flex-1 liquid-glass-subtle rounded-xl px-3.5 py-2 text-xs text-neutral-900 dark:text-white focus:outline-none">
-            <button type="button" onclick="openGifPickerModal()" class="px-3 py-2 bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 border border-sky-500/30 rounded-xl text-xs font-bold transition active:scale-95" title="Cari GIF / Stiker">🔍 GIF</button>
+            <button type="button" onclick="openGifPickerModal()" class="px-3 py-2 bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 border border-sky-500/30 rounded-xl text-xs font-bold transition active:scale-95" title="Cari GIF Giphy">🔍 GIF</button>
             <button type="submit" class="px-4 py-2 bg-neutral-900 dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-100 text-white dark:text-neutral-900 rounded-xl text-xs font-bold transition active:scale-95">Kirim</button>
           </div>
         </form>
@@ -1201,19 +1201,19 @@
     </div>
   </div>
 
-  <!-- GIF PICKER MODAL (1 TOMBOL PENCARIAN SEMUA GIF) -->
+  <!-- GIPHY PICKER MODAL -->
   <div id="gif-picker-modal" class="fixed inset-0 z-[60] hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4" onclick="if(event.target === this) closeGifPickerModal()">
     <div class="liquid-glass rounded-3xl max-w-md w-full p-5 shadow-2xl relative space-y-4 max-h-[80vh] flex flex-col">
       <div class="flex justify-between items-center">
-        <h3 class="font-extrabold text-white text-xs uppercase tracking-wider">Pilih & Cari GIF / Stiker</h3>
+        <h3 class="font-extrabold text-white text-xs uppercase tracking-wider">Cari & Pilih GIF Giphy</h3>
         <button onclick="closeGifPickerModal()" class="text-neutral-400 hover:text-white text-xs font-bold">Tutup</button>
       </div>
       <div class="flex gap-2">
-        <input type="text" id="gif-search-input" placeholder="Cari apa saja (cth: happy, cat, fire)..." class="flex-1 liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500" onkeypress="if(event.key==='Enter') { event.preventDefault(); searchGifsFromAPI(); }">
-        <button type="button" onclick="searchGifsFromAPI()" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs rounded-xl">Cari</button>
+        <input type="text" id="giphy-search-input" placeholder="Ketik kata kunci (cth: cat, happy, wow)..." class="flex-1 liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500" onkeypress="if(event.key==='Enter') { event.preventDefault(); searchGiphyAPI(); }">
+        <button type="button" onclick="searchGiphyAPI()" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs rounded-xl">Cari</button>
       </div>
-      <div id="gif-results-grid" class="grid grid-cols-2 gap-2 overflow-y-auto max-h-60 pr-1 flex-1">
-        <p class="text-xs text-neutral-400 italic col-span-2 text-center py-6">Ketik kata kunci di atas untuk mencari GIF...</p>
+      <div id="giphy-results-grid" class="grid grid-cols-2 gap-2 overflow-y-auto max-h-60 pr-1 flex-1">
+        <p class="text-xs text-neutral-400 italic col-span-2 text-center py-6">Ketik kata kunci untuk mencari GIF...</p>
       </div>
     </div>
   </div>
@@ -2185,7 +2185,7 @@
     }, 1000);
   </script>
 
-  <!-- FIREBASE & IMGBB API INTEGRATION -->
+  <!-- FIREBASE & GIPHY API INTEGRATION -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, doc, collection, addDoc, deleteDoc, query, orderBy, onSnapshot, setDoc, updateDoc, arrayUnion, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -2257,6 +2257,7 @@
     });
 
     const IMGBB_API_KEY = "4766a5da311917f59c9657a726a782fc";
+    const GIPHY_API_KEY = "dc6zaTOxFJmzC"; // Public standard / Giphy API Key yang terhubung
     let activeUnsub = null;
     let activeId = null;
 
@@ -2745,7 +2746,7 @@
       });
     });
 
-    // MODAL DETAIL & KOMENTAR & GIF PICKER API
+    // MODAL DETAIL & KOMENTAR & GIPHY API PENCARIAN
     window.openDetailModal = (id, imgSrc, title, subtitle = '') => {
       activeId = id;
       
@@ -2833,31 +2834,35 @@
       activeId = null;
     };
 
-    // 1 Tombol Pencarian GIF via Tenor/Giphy Publik
+    // 1 Tombol Pencarian GIF via Giphy API
     window.openGifPickerModal = () => {
       document.getElementById('gif-picker-modal').classList.remove('hidden');
-      searchGifsFromAPI('trending');
+      searchGiphyAPI('trending');
     };
 
     window.closeGifPickerModal = () => {
       document.getElementById('gif-picker-modal').classList.add('hidden');
     };
 
-    window.searchGifsFromAPI = async (queryTerm = null) => {
-      const input = document.getElementById('gif-search-input');
-      const grid = document.getElementById('gif-results-grid');
+    window.searchGiphyAPI = async (queryTerm = null) => {
+      const input = document.getElementById('giphy-search-input');
+      const grid = document.getElementById('giphy-results-grid');
       const q = queryTerm || input.value.trim() || 'happy';
 
-      grid.innerHTML = '<p class="text-xs text-neutral-400 italic col-span-2 text-center py-6">Mencari GIF...</p>';
+      grid.innerHTML = '<p class="text-xs text-neutral-400 italic col-span-2 text-center py-6">Mencari GIF dari Giphy...</p>';
 
       try {
-        const res = await fetch(`https://g.tenor.com/v1/search?q=${encodeURIComponent(q)}&key=LIVDSRZULELA&limit=12`);
+        const endpoint = q === 'trending' 
+          ? `https://api.giphy.com/v1/gifs/trending?api_key=${GIPHY_API_KEY}&limit=12&rating=g`
+          : `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodeURIComponent(q)}&limit=12&rating=g`;
+
+        const res = await fetch(endpoint);
         const data = await res.json();
 
-        if (data.results && data.results.length > 0) {
+        if (data.data && data.data.length > 0) {
           grid.innerHTML = '';
-          data.results.forEach(item => {
-            const gifUrl = item.media[0].gif.url;
+          data.data.forEach(item => {
+            const gifUrl = item.images.fixed_height.url;
             const card = document.createElement('div');
             card.className = "overflow-hidden rounded-xl aspect-video border border-white/20 cursor-pointer hover:border-sky-500 transition";
             card.innerHTML = `<img src="${gifUrl}" class="w-full h-full object-cover" loading="lazy">`;
@@ -2871,24 +2876,8 @@
           grid.innerHTML = '<p class="text-xs text-neutral-400 italic col-span-2 text-center py-6">GIF tidak ditemukan.</p>';
         }
       } catch (err) {
-        // Fallback jika Tenor dibatasi jaringan
-        const fallbackGifs = [
-          "https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif",
-          "https://media.giphy.com/media/l0AMJz95C032l3000/giphy.gif",
-          "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
-          "https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif"
-        ];
-        grid.innerHTML = '';
-        fallbackGifs.forEach(url => {
-          const card = document.createElement('div');
-          card.className = "overflow-hidden rounded-xl aspect-video border border-white/20 cursor-pointer hover:border-sky-500 transition";
-          card.innerHTML = `<img src="${url}" class="w-full h-full object-cover">`;
-          card.onclick = () => {
-            sendGifComment(url);
-            closeGifPickerModal();
-          };
-          grid.appendChild(card);
-        });
+        console.error("Giphy API Error:", err);
+        grid.innerHTML = '<p class="text-xs text-red-400 italic col-span-2 text-center py-6">Gagal memuat Giphy. Periksa koneksi Anda.</p>';
       }
     };
 
