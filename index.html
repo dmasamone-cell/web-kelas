@@ -1128,27 +1128,27 @@
   <div id="piket-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xl flex items-center justify-center p-4" onclick="if(event.target === this) togglePiketModal()">
     <div class="liquid-glass rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
       <button onclick="togglePiketModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-neutral-900 dark:hover:text-white font-bold text-xs uppercase tracking-wider">Close</button>
-      <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mb-5 uppercase tracking-wider">Jadwal Piket Lengkap</h3>
+      <h3 class="font-extrabold text-neutral-900 dark:text-white text-sm mb-5 uppercase tracking-wider">Jadwal Piket Lengkap (X TJKT 4)</h3>
       <div class="space-y-3 text-xs">
         <div class="flex justify-between items-start border-b border-black/5 dark:border-white/5 pb-2">
           <span class="font-bold text-neutral-800 dark:text-neutral-200 min-w-[60px]">Senin</span>
-          <span class="text-neutral-500 dark:text-neutral-400 text-right">Haris, Wandi, Kiya, Ainun</span>
+          <span class="text-neutral-500 dark:text-neutral-400 text-right">wandi, husna, astria, ainun, tiara, dwi, rahmi</span>
         </div>
         <div class="flex justify-between items-start border-b border-black/5 dark:border-white/5 pb-2">
           <span class="font-bold text-neutral-800 dark:text-neutral-200 min-w-[60px]">Selasa</span>
-          <span class="text-neutral-500 dark:text-neutral-400 text-right">Rafa, Gilang, Melisa, Astria</span>
+          <span class="text-neutral-500 dark:text-neutral-400 text-right">fazri, kiya, melisa, sri, sania, brilian, aul</span>
         </div>
         <div class="flex justify-between items-start border-b border-black/5 dark:border-white/5 pb-2">
           <span class="font-bold text-neutral-800 dark:text-neutral-200 min-w-[60px]">Rabu</span>
-          <span class="text-neutral-500 dark:text-neutral-400 text-right">Alvin, Fhidel, Fitri, Sania</span>
+          <span class="text-neutral-500 dark:text-neutral-400 text-right">aminah, deli, salwa, zaky, alpin, fadil</span>
         </div>
         <div class="flex justify-between items-start border-b border-black/5 dark:border-white/5 pb-2">
           <span class="font-bold text-neutral-800 dark:text-neutral-200 min-w-[60px]">Kamis</span>
-          <span class="text-neutral-500 dark:text-neutral-400 text-right">Rojul, Firli, Adelia, Dini</span>
+          <span class="text-neutral-500 dark:text-neutral-400 text-right">fahra, bentar, fhidel, marisa, firli, gilang, roj</span>
         </div>
         <div class="flex justify-between items-start">
           <span class="font-bold text-neutral-800 dark:text-neutral-200 min-w-[60px]">Jumat</span>
-          <span class="text-neutral-500 dark:text-neutral-400 text-right">Muhtar, Rahmi, Sri</span>
+          <span class="text-neutral-500 dark:text-neutral-400 text-right">adelia, afzal, gisni, dini, haris</span>
         </div>
       </div>
     </div>
@@ -1192,17 +1192,28 @@
 
         <form id="modal-comment-form" class="space-y-2 pt-1">
           <div class="flex gap-2">
-            <input type="text" id="modal-comment-input" placeholder="Tulis komentar atau tempel URL GIF..." required class="flex-1 liquid-glass-subtle rounded-xl px-3.5 py-2 text-xs text-neutral-900 dark:text-white focus:outline-none">
+            <input type="text" id="modal-comment-input" placeholder="Tulis komentar..." required class="flex-1 liquid-glass-subtle rounded-xl px-3.5 py-2 text-xs text-neutral-900 dark:text-white focus:outline-none">
+            <button type="button" onclick="openGifPickerModal()" class="px-3 py-2 bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 border border-sky-500/30 rounded-xl text-xs font-bold transition active:scale-95" title="Cari GIF / Stiker">🔍 GIF</button>
             <button type="submit" class="px-4 py-2 bg-neutral-900 dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-100 text-white dark:text-neutral-900 rounded-xl text-xs font-bold transition active:scale-95">Kirim</button>
           </div>
-          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
-            <span class="text-[9px] font-bold text-neutral-400 uppercase tracking-wider flex-shrink-0">Kirim GIF Fast:</span>
-            <button type="button" onclick="sendGifComment('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtYnlvZTVjcnJoc3R2NDY0cnMyeGFsbjh0MWs2bTNoc2dqdnprdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKSjRrfIPjeiVyM/giphy.gif')" class="px-2 py-0.5 rounded-lg bg-black/5 dark:bg-white/10 text-[9px] font-bold text-neutral-600 dark:text-neutral-300 hover:bg-sky-500 hover:text-white transition flex-shrink-0">🔥 Fire</button>
-            <button type="button" onclick="sendGifComment('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z2bzJpZjB3bnE4bW5xdWJqZzJvdnFqN3UxeTNuM2Rvems0ZXBneSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0AMJz95C032l3000/giphy.gif')" class="px-2 py-0.5 rounded-lg bg-black/5 dark:bg-white/10 text-[9px] font-bold text-neutral-600 dark:text-neutral-300 hover:bg-sky-500 hover:text-white transition flex-shrink-0">👍 OK</button>
-            <button type="button" onclick="sendGifComment('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHBsN2tzMGpya3hhYTVtY3Fub2dzbnE3NHRxZjZjcHNmcmRsbmtneSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26ufdipQqU2lhNA4g/giphy.gif')" class="px-2 py-0.5 rounded-lg bg-black/5 dark:bg-white/10 text-[9px] font-bold text-neutral-600 dark:text-neutral-300 hover:bg-sky-500 hover:text-white transition flex-shrink-0">😂 Lol</button>
-            <button type="button" onclick="sendGifComment('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI1OHByNGZlMmQxa3k1cnZ1bnhuZGNwbTN0dnNsbjFxeDNubWZuaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3q2K5jinAlChoCLS/giphy.gif')" class="px-2 py-0.5 rounded-lg bg-black/5 dark:bg-white/10 text-[9px] font-bold text-neutral-600 dark:text-neutral-300 hover:bg-sky-500 hover:text-white transition flex-shrink-0">😮 Wow</button>
-          </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- GIF PICKER MODAL (1 TOMBOL PENCARIAN SEMUA GIF) -->
+  <div id="gif-picker-modal" class="fixed inset-0 z-[60] hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4" onclick="if(event.target === this) closeGifPickerModal()">
+    <div class="liquid-glass rounded-3xl max-w-md w-full p-5 shadow-2xl relative space-y-4 max-h-[80vh] flex flex-col">
+      <div class="flex justify-between items-center">
+        <h3 class="font-extrabold text-white text-xs uppercase tracking-wider">Pilih & Cari GIF / Stiker</h3>
+        <button onclick="closeGifPickerModal()" class="text-neutral-400 hover:text-white text-xs font-bold">Tutup</button>
+      </div>
+      <div class="flex gap-2">
+        <input type="text" id="gif-search-input" placeholder="Cari apa saja (cth: happy, cat, fire)..." class="flex-1 liquid-glass-subtle rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500" onkeypress="if(event.key==='Enter') { event.preventDefault(); searchGifsFromAPI(); }">
+        <button type="button" onclick="searchGifsFromAPI()" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs rounded-xl">Cari</button>
+      </div>
+      <div id="gif-results-grid" class="grid grid-cols-2 gap-2 overflow-y-auto max-h-60 pr-1 flex-1">
+        <p class="text-xs text-neutral-400 italic col-span-2 text-center py-6">Ketik kata kunci di atas untuk mencari GIF...</p>
       </div>
     </div>
   </div>
@@ -1380,7 +1391,6 @@
 
   <!-- LOGIKA LENGKAP DEV PORTAL & SYSTEM -->
   <script>
-    // ===== VARIABLES =====
     let devPin = localStorage.getItem('rafa_dev_pin') || "2212";
     let isBroadcastActive = false;
     let isMaintenanceActive = localStorage.getItem('sys_maintenance_active') === 'true';
@@ -2122,12 +2132,13 @@
       document.getElementById('piket-modal').classList.toggle('hidden');
     }
 
-    const piketSchedule = {
-      1: "Haris, Wandi, Kiya, Ainun",
-      2: "Rafa, Gilang, Melisa, Astria",
-      3: "Alvin, Fhidel, Fitri, Sania",
-      4: "Rojul, Firli, Adelia, Dini",
-      5: "Muhtar, Rahmi, Sri",
+    // Jadwal piket sesuai dengan foto papan fisik (X TJKT 4)
+    const piketScheduleMap = {
+      1: "wandi, husna, astria, ainun, tiara, dwi, rahmi", // Senin
+      2: "fazri, kiya, melisa, sri, sania, brilian, aul", // Selasa
+      3: "aminah, deli, salwa, zaky, alpin, fadil",       // Rabu
+      4: "fahra, bentar, fhidel, marisa, firli, gilang, roj", // Kamis
+      5: "adelia, afzal, gisni, dini, haris",             // Jumat
       0: "Libur Akhir Pekan",
       6: "Libur Akhir Pekan"
     };
@@ -2135,7 +2146,7 @@
     const dayToday = new Date().getDay();
     const piketEl = document.getElementById('piket-today');
     if (piketEl) {
-      const names = piketSchedule[dayToday];
+      const names = piketScheduleMap[dayToday];
       piketEl.innerHTML = `<span class="text-sky-500 font-bold uppercase tracking-wider block mb-0.5">${dayToday === 0 || dayToday === 6 ? 'Akhir Pekan' : 'Hari Ini:'}</span> ${names}`;
     }
 
@@ -2734,7 +2745,7 @@
       });
     });
 
-    // MODAL DETAIL & KOMENTAR (TERMASUK DUKUNGAN GIF)
+    // MODAL DETAIL & KOMENTAR & GIF PICKER API
     window.openDetailModal = (id, imgSrc, title, subtitle = '') => {
       activeId = id;
       
@@ -2778,7 +2789,7 @@
           } else {
             container.innerHTML = '';
             comments.forEach(c => {
-              const isGif = c.type === 'gif' || (c.text && (c.text.startsWith('http://') || c.text.startsWith('https://')) && (c.text.includes('.gif') || c.text.includes('giphy.com')));
+              const isGif = c.type === 'gif' || (c.text && (c.text.startsWith('http://') || c.text.startsWith('https://')) && (c.text.includes('.gif') || c.text.includes('giphy.com') || c.text.includes('tenor.com')));
               
               const textContent = isGif 
                 ? `<div class="mt-1.5 overflow-hidden rounded-xl max-w-[200px] border border-white/20"><img src="${escapeHtml(c.text)}" alt="GIF Stiker" class="w-full h-auto object-cover"></div>`
@@ -2820,6 +2831,65 @@
         activeUnsub = null;
       }
       activeId = null;
+    };
+
+    // 1 Tombol Pencarian GIF via Tenor/Giphy Publik
+    window.openGifPickerModal = () => {
+      document.getElementById('gif-picker-modal').classList.remove('hidden');
+      searchGifsFromAPI('trending');
+    };
+
+    window.closeGifPickerModal = () => {
+      document.getElementById('gif-picker-modal').classList.add('hidden');
+    };
+
+    window.searchGifsFromAPI = async (queryTerm = null) => {
+      const input = document.getElementById('gif-search-input');
+      const grid = document.getElementById('gif-results-grid');
+      const q = queryTerm || input.value.trim() || 'happy';
+
+      grid.innerHTML = '<p class="text-xs text-neutral-400 italic col-span-2 text-center py-6">Mencari GIF...</p>';
+
+      try {
+        const res = await fetch(`https://g.tenor.com/v1/search?q=${encodeURIComponent(q)}&key=LIVDSRZULELA&limit=12`);
+        const data = await res.json();
+
+        if (data.results && data.results.length > 0) {
+          grid.innerHTML = '';
+          data.results.forEach(item => {
+            const gifUrl = item.media[0].gif.url;
+            const card = document.createElement('div');
+            card.className = "overflow-hidden rounded-xl aspect-video border border-white/20 cursor-pointer hover:border-sky-500 transition";
+            card.innerHTML = `<img src="${gifUrl}" class="w-full h-full object-cover" loading="lazy">`;
+            card.onclick = () => {
+              sendGifComment(gifUrl);
+              closeGifPickerModal();
+            };
+            grid.appendChild(card);
+          });
+        } else {
+          grid.innerHTML = '<p class="text-xs text-neutral-400 italic col-span-2 text-center py-6">GIF tidak ditemukan.</p>';
+        }
+      } catch (err) {
+        // Fallback jika Tenor dibatasi jaringan
+        const fallbackGifs = [
+          "https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif",
+          "https://media.giphy.com/media/l0AMJz95C032l3000/giphy.gif",
+          "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
+          "https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif"
+        ];
+        grid.innerHTML = '';
+        fallbackGifs.forEach(url => {
+          const card = document.createElement('div');
+          card.className = "overflow-hidden rounded-xl aspect-video border border-white/20 cursor-pointer hover:border-sky-500 transition";
+          card.innerHTML = `<img src="${url}" class="w-full h-full object-cover">`;
+          card.onclick = () => {
+            sendGifComment(url);
+            closeGifPickerModal();
+          };
+          grid.appendChild(card);
+        });
+      }
     };
 
     window.resetPhotoData = async () => {
@@ -2910,7 +2980,7 @@
           localStorage.setItem('class_user_name', userName);
         }
 
-        const isGifUrl = (val.startsWith('http://') || val.startsWith('https://')) && (val.includes('.gif') || val.includes('giphy.com'));
+        const isGifUrl = (val.startsWith('http://') || val.startsWith('https://')) && (val.includes('.gif') || val.includes('giphy.com') || val.includes('tenor.com'));
         const commentType = isGifUrl ? 'gif' : 'text';
 
         const photoRef = doc(db, "photos", activeId);
